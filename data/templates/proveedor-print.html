@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
+    <link rel="stylesheet" type="text/css" media="screen,print" href="styles/print-single.css" />
+	<title>Proveedor: {$prov.razonsocial}</title>
+</head>
+
+<body>
+
+<h1>Datos del Proveedor</h1>
+    <p>
+        <label>Razón Social:</label>
+        {$prov.razonsocial}
+    </p>
+    <p>
+        <label>Dirección:</label>
+        {$prov.direccion}
+    </p>
+    <p>
+        <label>RUC:</label>
+        {$prov.ruc}
+    </p>
+    <p>
+        <label>Teléfono:</label>
+        {$prov.telefono}
+    </p>
+    <p>
+        <label>Email:</label>
+        {$prov.email}
+    </p>
+    <hr />
+    <p class="nota">Generado por el Sistema de Ordenes de Servicio y Compra. Para uso de la Municipalidad sólamente.</p>
+	<script type="text/javascript">
+    	window.print();
+    </script>
+</body>
+</html>

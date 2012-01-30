@@ -1,0 +1,43 @@
+			<script type="text/javascript" src="{$scriptsurl}common.php?param=lista"></script>
+			<h2>Lista de Requerimientos <span class="options">[<a href="requerimientonew.php" class="goto">Añadir Requerimiento</a>]</span></h2>
+           <table class="tabla">
+           		<thead>
+                	<tr>
+                    	<th>Nro</th>
+                        <th>Fecha</th>
+                        <th>Creado por</th>
+                        {if $loginuser.usertype==1}
+                        <th colspan="4">Acciones</th>
+                        {else}
+                        <th colspan="3">Acciones</th>
+                        {/if}
+                    </tr>
+                </thead>
+                <tbody>
+                	{section name=n loop=$requerimientos}
+                	<tr class="{cycle values="even, odd"}{if $requerimientos[n].status==2} cancelled{/if}">
+	                    <th>{$requerimientos[n].codigo}</th>
+                        <td>{$requerimientos[n].fecha}</td>
+                        <td>{$requerimientos[n].usuario.username}</td>
+                        <th><a href="requerimientonew.php?idreq={$requerimientos[n].idreq}">Ver</a></th>
+                        <th><a href="requerimiento-print.php?idreq={$requerimientos[n].idreq}">Imprimir</a></th>
+                        {if $loginuser.usertype==1}
+                        	<th><a href="cotizacionnew.php?create&amp;idreq={$requerimientos[n].idreq}">Crear Cotización</a></th>
+                            {if $requerimientos[n].status==1}
+                            <th><a href="requerimientonew.php?cancel&amp;idreq={$requerimientos[n].idreq}" class="cancelorder">Cancelar</a></th>
+                            {else}{if $requerimientos[n].status==2}
+                            <th><a href="requerimientonew.php?activate&amp;idreq={$requerimientos[n].idreq}" class="activateorder">Activar</a></th>
+                        			{else}
+                            		{/if}
+                            {/if}
+                        {/if}
+                    </tr>
+                    {sectionelse}
+                    <tr>	
+                    	<td colspan="6">No existen datos.</td>
+                    </tr>
+                    {/section}
+                </tbody>
+           </table>
+           <p class="msg">Las requerimientos <span class="cancelmsg">tachados y con rojo</span> son requerimientos cancelados.</p>
+           {include file="paginator.html"}

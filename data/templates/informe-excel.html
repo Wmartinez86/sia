@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
+    <link rel="stylesheet" type="text/css" media="all" href="{$stylesurl}print-single.css" />
+    <title>Informe</title>
+</head>
+<body>
+<table class="tabla">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Documento</th>
+            <th>Proyecto</th>
+            <th>Proveedor</th>
+            <th>Facturado a</th>
+            <th>Fecha</th>
+            <th>Creado por</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+    	{if $ordenes}
+        {section name=n loop=$ordenes}
+        <tr class="{cycle values="even, odd"}">
+            <th>{$ordenes[n].codigo}</th>
+            <td>{$ordenes[n].doc.nombre}: {$ordenes[n].nrodoc}</td>
+            <td>{$ordenes[n].proyecto.descripcion}</td>
+            <td>{$ordenes[n].proveedor.nombre} RUC: {$ordenes[n].proveedor.ruc}</td>
+            <td>{$ordenes[n].facturarto} RUC: {$ordenes[n].fruc}</td>
+            <td>{$ordenes[n].fecha}</td>
+            <td>{$ordenes[n].usuario.username}</td>
+            <td>{$ordenes[n].stotal|number_format:2:",":"."}</td>
+        </tr>
+        {/section}
+       </tbody>
+         <tfoot>
+        <tr>
+            <th colspan="7" style="text-align: right;">Monto Total S/.</th>
+            <th>{$atotal|number_format:2:",":"."}</th>
+        </tr>
+     </tfoot> 
+        {else}
+        <tr>	
+            <td colspan="8">No existen datos.</td>
+        </tr>
+        {/if}
+   
+</table>
+</body>
+</html>

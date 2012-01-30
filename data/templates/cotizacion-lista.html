@@ -1,0 +1,64 @@
+<script type="text/javascript" src="{$scriptsurl}common.php?param=listacot"></script>
+
+<h2>Lista de Cotizaciones <span class="options">[<a href="cotizacionnew.php" class="goto">Añadir Cotización</a>]</span></h2>
+<table class="tabla">
+  <thead>
+    <tr>
+      <th>Nro</th>
+      <th>Referencia</th>
+      <th>Fecha</th>
+      <th>Autor</th>
+      <th colspan="2">Ver</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  {section name=n loop=$cotizaciones}
+  <tr class="{cycle values="even, odd"}{if $cotizaciones[n].status==2} cancelled{/if}{if $cotizaciones[n].status == 3} crea-orden{/if}">
+    <th>{$cotizaciones[n].codigo}</th>
+    <td> {if $cotizaciones[n].tipocontrata == 'o'}
+      [<abbr title="Orden de Servicio">O/S</abbr>]
+      {else}
+      [<abbr title="Orden de Compra">O/C</abbr>]
+      {/if}
+      {$cotizaciones[n].referencia} </td>
+    <td>{$cotizaciones[n].fecha}</td>
+    <td>{$cotizaciones[n].usuario.username}</td>
+    <th><a href="cotizacionnew.php?idcot={$cotizaciones[n].idcot}">Ver</a></th>
+    <th><a href="cotizacion-print.php?idcot={$cotizaciones[n].idcot}">Imprimir</a></th>
+    <th>
+    	<select name="action[]" class="actions" id="action-{$cotizaciones[n].idcot}">
+        	<option value="--">Escoja una opción</option>
+        	<option value="ecc">Elaborar Cuadro Comparativo</option>
+            {if $cotizaciones[n].status==1}
+            <option value="cancelar">Cancelar</option>
+            {else}{if $cotizaciones[n].status==2}
+            <option value="activar">Activar</option>
+            {else}
+            <option value="imprimir">Imprimir Cuadro Comparativo</option>
+            {if $cotizaciones[n].tipocontrata == 'o'}
+            <option value="os">Elaborar Orden</option>
+            {else}
+            <option value="oc">Elaborar Orden</option>
+            {/if}
+            {/if}
+		    {/if}
+        </select>
+    </th>
+  </tr>
+  {sectionelse}
+  <tr>
+    <td colspan="9">No existen datos.</td>
+  </tr>
+  {/section}
+  </tbody>
+  
+</table>
+<div class="msg">
+    <ul>
+        <li>Las cotizaciones <span class="crea-orden">naranjas</span> son cotizaciones que ya tienen cuadro comparativo.</li>
+        <li>Las cotizaciones <span class="cancelmsg">tachadas y con rojo</span> son cotizaciones canceladas.</li>
+    </ul>
+</div>
+{include file="paginator.html"}

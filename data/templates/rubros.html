@@ -1,0 +1,8 @@
+<select id="idproyecto" name="idproyecto">
+	<option value="-1">Selecciona un proyecto</option>
+	{if $projs}
+    {foreach key=idtipo item=nombre from=$atipos}
+	<option value="{$idtipo}">{$atipos}</option>
+    {/foreach}
+    {/if}
+</select>

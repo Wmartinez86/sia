@@ -1,0 +1,25 @@
+			<script type="text/javascript">
+				$().ready(function() {ldelim}
+					$("#frmlogin").validate();
+					$("#username").focus();
+				{rdelim});
+            </script>
+			<h2>Iniciar su sesión</h2>
+            {if $msg}<div class="msg">{$msg}</div>{/if}
+            <form name="frmlogin" id="frmlogin" action="{$self}" method="post">
+            	<fieldset>
+                	<legend>Ingrese sus datos</legend>
+                    <p>
+                        <label for="username" accesskey="u"><span class="accesskey">U</span>suario:</label>
+                        <input type="text" name="username" id="username" maxlength="100" class="required" title="Ingresa el nombre de usuario" />
+                    </p>
+                    <p>
+                        <label for="pass" accesskey="c"><span class="accesskey">C</span>ontraseña:</label>
+                        <input type="password" name="pwd" id="pass" maxlength="100" class="required" title="Ingresa la contraseña" />
+                    </p>
+                    <p>
+                        <input type="hidden" name="r" id="r" value="{$r}" />
+                    </p>
+                </fieldset>
+                <p class="submit"><input type="submit" name="submit" id="submit" value="Ingresar" /></p>
+            </form>

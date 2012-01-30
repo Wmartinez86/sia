@@ -1,0 +1,97 @@
+			<h2>Requerimiento <span class="options">[<a href="requerimiento-lista.php">Ver Requerimientos</a> | <a href="{$self}">Crear Requerimiento</a> | <a href="informes.php">Generar Informes</a> 
+            {if $req.idreq!=0} | <a href="requerimiento-print.php?idreq={$req.idreq}">Imprimir</a>{/if}]</span></h2>
+            <script type="text/javascript" src="{$scriptsurl}jquery.calculation.min.js"></script>
+            <script type="text/javascript" src="{$scriptsurl}common.php?param=requerimiento"></script>
+            {if $msg}<div class="msg">{$msg}</div>{/if}
+            <div id="tabs">
+            <form name="frmreq" id="frmreq" action="{$self}" method="post">
+                <div id="tabs-1">
+            	<fieldset>
+                	<legend>Datos de la Requerimiento</legend>
+			        <p>
+                    	<label for="codigo">Nro. de Req:</label>
+                        <input type="text" name="codigo" id="codigo" value="{if $req.codigo}{$req.codigo}{else}{$codgen}{/if}" maxlength="10" class="required" readonly="readonly" />
+                    </p>
+                    <p>
+                        <label for="fecha">Fecha:</label>
+                        <input type="text" name="fecha" id="fecha" size="11" value="{if $req.fecha}{$req.fecha}{else}{$smarty.now|date_format:"%d/%m/%Y"}{/if}" class="required" />
+                    </p>
+                </fieldset>
+                </div>
+                                              
+                <div id="tabs-3">
+                <fieldset>
+                	<legend>Detalles del Requerimiento</legend>
+                    <table class="tabla">
+                    	<thead>
+                        	<tr>
+                            	<th colspan="3">Artículos</th>
+                                {if $req.detalle}
+                                <th rowspan="2">Acciones</th>
+                                {/if}
+                            </tr>
+                        	<tr>
+                                <th>Cantidad</th>
+                                <th><abbr title="Unidad de Medida">U. Med.</abbr></th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead>
+                        {if !$req.detalle}
+                        <tbody id="tbody">
+                        	<tr id="firstr">
+                                <td>
+	                            	<input type="text" name="cantidad[]" size="10" maxlength="10" class="number required cantidad" title="*" />
+                                </td>
+                                <td>
+	                            	<input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" />
+                                </td>
+                                <td>
+	                            	<input type="text" name="descripcion[]" maxlength="255" size="97" class="required" title="*" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="aright">
+                        <input type="button" name="clone" id="clone" value="Añadir" />
+                    </p>
+                    {else}
+                    	<tbody id="tbody">
+							{assign var="con" value=0}
+                        	{section name=n loop=$req.detalle}
+                        	<tr id="firstr">
+                                <td><input type="text" name="cantidad[]" size="10" maxlength="10" class="number required cantidad" title="*" value="{$req.detalle[n].cantidad}" /></td>
+                                <td><input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" value="{$req.detalle[n].umedida}" /></td>
+                                <td><input type="text" name="descripcion[]" maxlength="255" size="50" class="required" title="*" value="{$req.detalle[n].descripcion}" /></td>
+                                <td>
+                                	{if !$nodel}
+				                     {if $req.status!=3}
+	                                   <a href="borrar-detalle-requerimiento.php?iddetalle={$req.detalle[n].iddetalle}&amp;idreq={$req.idreq}" class="ddetalle">Borrar</a>
+                                     {else}con C.C.{/if}                                     
+                                    {/if}
+                                    <input type="hidden" name="iddetalle[]" value="{$req.detalle[n].iddetalle}" />
+                                </td>
+                            </tr>
+                            {/section}
+                        </tbody>
+                    </table>
+                    <p class="aright">
+                        <input type="button" name="add" value="Añadir" onclick="location.href='add-item.php?id={$req.idreq}&amp;entity=requerimiento'" />
+                    </p>
+                    {/if}
+                    
+                </fieldset>
+                <p class="submit">
+                    <input type="submit" name="submit" id="submit" value="Guardar" />
+                    {if $req.idreq}
+                    <input type="button" name="createreq" id="createreq" value="Crear Cotización" onclick="location.href = 'cotizacionnew.php?create&amp;idreq={$req.idreq}'" />
+                    {/if}
+                    <input type="hidden" name="idreq" id="idreq" value="{$req.idreq}" />
+                </p>
+                <!--p>
+                    <a href="#tabs-2">&laquo;Anterior</a>
+                </p-->
+                </div>
+                
+                
+           </form>
+           </div>

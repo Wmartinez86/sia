@@ -1,0 +1,42 @@
+			<script type="text/javascript" src="{$scriptsurl}common.php?param=lista"></script>
+			<h2>Lista de Órdenes de Servicio <span class="options">[<a href="orden-servicio.php" class="goto">Añadir Orden de Servicio</a>]</span></h2>
+           <table class="tabla">
+           		<thead>
+                	<tr>
+                    	<th>Código</th>
+                        <th>Referencia</th>
+                        <th>Proyecto</th>
+                        <th>Proveedor</th>
+                        <th>Fecha</th>
+                        <th>Creado por</th>
+                        <th colspan="3">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                	{section name=n loop=$ordenes}
+                	<tr class="{cycle values="even, odd"}{if $ordenes[n].status==2} cancelled{/if}">
+                            <th><abbr title="Orden de Servicio">O/S</abbr> {$ordenes[n].codigo}</th>
+                        <td>{$ordenes[n].doc.nombre}: {$ordenes[n].nrodoc}</td>
+                        <td>{$ordenes[n].proyecto.descripcion}</td>
+                        <td>{$ordenes[n].proveedor.nombre}</td>
+                        <td>{$ordenes[n].fecha}</td>
+                        <td>{$ordenes[n].usuario.username}</td>
+                        <th><a href="orden-servicio.php?idorden={$ordenes[n].idorden}">Ver</a></th>
+                        {if $loginuser.usertype==1}
+                        {if $ordenes[n].status==1}
+                        <th><a href="orden-servicio.php?cancel&amp;idorden={$ordenes[n].idorden}" class="cancelorder">Cancelar Orden</a></th>
+                        {else}
+                        <th><a href="orden-servicio.php?activate&amp;idorden={$ordenes[n].idorden}" class="activateorder">Activar Orden</a></th>
+                        {/if}
+                        {/if}
+                        <th><a href="orden-servicio-print.php?idorden={$ordenes[n].idorden}">Imprimir</a></th>
+                    </tr>
+                    {sectionelse}
+                    <tr>	
+                    	<td colspan="8">No existen datos.</td>
+                    </tr>
+                    {/section}
+                </tbody>
+           </table>
+           <p class="msg">Las ordenes <span class="cancelmsg">tachadas y con rojo</span> son órdenes canceladas.</p>
+           {include file="paginator.html"}

@@ -1,0 +1,45 @@
+.tabla table {
+	padding: 0;
+	margin: 0;
+	font: 11px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+.tabla thead th {
+	color: #4f6b72;
+	border-right: 1px solid #C1DAD7;
+	border-bottom: 1px solid #C1DAD7;
+	border-top: 1px solid #C1DAD7;
+	text-transform: uppercase;
+	text-align: left;
+	padding: 4px 4px 4px 10px;
+	background: #CAE8EA;
+}
+
+.tabla tbody td {
+	border-right: 1px solid #C1DAD7;
+	border-bottom: 1px solid #C1DAD7;
+	background: #fff;
+	padding: 4px 4px 4px 10px;
+	color: #4f6b72;
+	text-align: left;
+}
+
+.tabla tbody th {
+	background: #F5FAFA;
+	color: #797268;
+	border-right: 1px solid #C1DAD7;
+	border-bottom: 1px solid #C1DAD7;
+	padding: 4px 4px 4px 10px;
+	text-align: left;
+}
+
+.tabla tfoot td, .tabla tfoot th {
+	border: 0;
+	text-align: right;
+	background: #FFF;
+	border-right: 1px solid #C1DAD7;
+	border-bottom: 1px solid #C1DAD7;
+	color: #000;
+	}
+
+.tabla .cancelled td, .cancelmsg { color: #933; text-decoration: line-through}

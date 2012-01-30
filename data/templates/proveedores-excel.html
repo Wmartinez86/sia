@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
+    <link rel="stylesheet" type="text/css" media="all" href="{$stylesurl}print-single.css" />
+    <title>Proveedores</title>
+</head>
+<body>
+<table class="tabla">
+    <thead>
+        <tr>
+            <th>Razón Social</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>E-mail</th>
+            <th>RUC</th>
+        </tr>
+    </thead>
+    <tbody>
+        {section name=n loop=$provs}
+        <tr class="{cycle values="even, odd"}">
+            <td>{$provs[n].razonsocial}</td>
+            <td>{$provs[n].direccion}</td>
+            <td>{$provs[n].telefono}</td>
+            <td>{$provs[n].email}</td>
+            <td>{$provs[n].ruc}</td>
+        </tr>
+        {sectionelse}
+        <tr>	
+            <td colspan="5">No existen datos.</td>
+        </tr>
+        {/section}
+    </tbody>
+</table>
+</body>
+</html>

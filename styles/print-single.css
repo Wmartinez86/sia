@@ -1,0 +1,48 @@
+body {
+	font: .8em "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+h1 {
+	font: 2em Georgia, "Times New Roman", Times, serif;
+	border-bottom: 1px solid #666;
+}
+
+label {
+	width: 10em;
+	float: left;
+	font-weight: bold;
+}
+
+hr {
+	border: 1px solid #999;
+	padding: 0;
+}
+
+
+table {
+	padding: 0;
+	margin: 0;
+	border-collapse: collapse;
+}
+
+thead th {
+	border: 1px solid #333;
+	border-collapse: collapse;
+	text-transform: uppercase;
+	text-align: left;
+	padding: 4px 4px 4px 10px;
+	background: #999;
+}
+
+tbody td, tbody th {
+	border: 1px solid #333;
+	border-collapse: collapse;
+	background: #fff;
+	padding: 4px 4px 4px 10px;
+	text-align: left;
+}
+
+.nota {
+	font-style: italic;
+	font-size: .8em;
+}

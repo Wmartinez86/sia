@@ -1,0 +1,184 @@
+			<h2>Cotización <span class="options">[<a href="cotizacion-lista.php">Ver Cotizaciones</a> | <a href="{$self}">Crear Cotizacion</a> | <a href="informes.php">Generar Informes</a> 
+            {if $cot.idcot!=0} | <a href="cuadrocomparativo-print.php?idcot={$cot.idcot}">Imprimir</a>{/if}]</span></h2>
+            <script type="text/javascript" src="{$scriptsurl}jquery.calculation.min.js"></script>
+            <script type="text/javascript" src="{$scriptsurl}common.php?param=cuadrocomparativo"></script>
+            {if $msg}<div class="msg">{$msg}</div>{/if}
+            <div id="tabs">
+            <form name="frmcot" id="frmcot" action="{$self}" method="post">
+                <div id="tabs-1">
+            	<fieldset>
+                	<legend>Datos de la Cotización {$prueba.idprecio}</legend>
+          <p>
+                    	<label for="referencia"><abbr title="Referencia de la Cotizacion">Referencia: </abbr></label>
+                        <input type="text" name="referencia" id="referencia" value="{$cot.referencia}" size="90" class="required" readonly="readonly"/>
+                    </p>
+		        <p>
+                    	<label for="codigo">Nro. de Cotización :</label>
+                        <input type="text" name="codigo" id="codigo" value="{if $cot.codigo}{$cot.codigo}{else}{$codgen}{/if}" maxlength="10" class="required" readonly="readonly"/>
+                    </p>
+                    <p>
+                        <label for="fecha">Fecha:</label>
+                        <input type="text" name="fecha" id="fecha" size="11" value="{if $cot.fecha}{$cot.fecha}{else}{$smarty.now|date_format:"%d/%m/%y"}{/if}" class="required" readonly="readonly"/>
+                    </p>
+                </fieldset>
+                </div>
+				<div id="tabs-3">
+                <fieldset>
+                	<legend>Cuadro Comparativo</legend>
+                    <table class="tabla">
+                    	<thead>
+                        	<tr>
+                            	<th colspan="3">Artículos</th>
+                                <th colspan="2"> 
+                                 <p>
+        	                <span class="nota" id="idprov1"></span>
+	                    	<label for="ruc">RUC:</label>
+    	                	<input type="text" name="oruc1" id="oruc1" maxlength="11" size="11" value="{if $cot.prov1.ruc}{$cot.prov1.ruc}{/if}" />
+
+            		        </p>
+                            </th>
+                                <th colspan="2"> <p>
+        	                <span class="nota" id="idprov2"></span>
+	                    	<label for="ruc">RUC:</label>
+    	                	<input type="text" name="oruc2" id="oruc2" maxlength="11" size="11" value="{if $cot.prov2.ruc}{$cot.prov2.ruc}{/if}" />
+            		        </p></th>
+                                <th colspan="2"> <p>
+        	                <span class="nota" id="idprov3"></span>
+	                    	<label for="ruc">RUC:</label>
+    	                	<input type="text" name="oruc3" id="oruc3" maxlength="11" size="11" value="{if $cot.prov3.ruc.ruc}{$cot.prov3.ruc}{/if}" />
+                            </tr>
+                        	<tr>
+                                <th>Cantidad</th>
+                                <th><abbr title="Unidad de Medida">U. Med.</abbr></th>
+                                <th>Descripción</th>
+                                <th>Unitario</th>
+                                <th>Total</th>
+                                <th>Unitario</th>
+                                <th>Total</th>
+                                <th>Unitario</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        {if !$cot.detalle}
+                        <tbody id="tbody">
+                        	<tr id="firstr">
+                                <td>
+	                            	<input type="text" name="cantidad[]" size="10" maxlength="10" class="number required cantidad" title="*" readonly="readonly"/>                                </td>
+                                <td>
+	                            	<input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" readonly="readonly"/>                                </td>
+                                <td>
+	                            	<input type="text" name="descripcion[]" maxlength="255" size="97" class="required" title="*" readonly="readonly"/>                                </td>
+                                <td>
+	                            	<input type="text" name="precio1[]" size="10" class="required number precio" title="*" />                                </td>
+                                <td><input type="text" name="total_" size="10" readonly="readonly" class="total" /></td>
+                                <td>
+	                            	<input type="text" name="precio2[]" size="10" class="required number precio" title="*" />                                </td>
+                                <td>
+	                            	<input type="text" name="total_" size="10" readonly="readonly" class="total" />                                </td>
+                                <td>
+	                            	<input type="text" name="precio3[]" size="10" class="required number precio" title="*" />                                </td>
+                              <td>
+	                            	<input type="text" name="total_" size="10" readonly="readonly" class="total" />                              </td>
+                          </tr>
+                        </tbody>
+                        <tfoot>
+                        	<tr>
+                            	<th colspan="4">TOTAL:</th>
+                                <td id="grandTotal2"></td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+          <p class="aright">
+                        <input type="button" name="clone" id="clone" value="Añadir" />
+                    </p>
+                    {else}
+                    	<tbody id="tbody">
+							{assign var="con" value=0}
+                        	{section name=n loop=$cot.detalle}
+                        	<tr id="firstr">
+                                <td><input type="text" name="cantidad[]" size="10" maxlength="10" class="number required cantidad" title="*" value="{$cot.detalle[n].cantidad}" readonly="readonly" /></td>
+                                <td><input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" value="{$cot.detalle[n].umedida}" readonly="readonly"/></td>
+                                <td><input type="text" name="descripcion[]" maxlength="255" size="50" class="required" title="*" value="{$cot.detalle[n].descripcion}" readonly="readonly"/></td>
+                                <td><input type="text" name="precio1[]2" size="10" class="required number precio" title="*" value="{$cot.precio1[n].precio}" /></td>
+                              <td><input type="text" name="total_1" size="10" readonly="readonly" class="total" /></td>
+                              	<td><input type="text" name="precio2[]" size="10" class="required number precio" title="*" value="{$cot.precio2[n].precio}" /></td>
+                                <td><input type="text" name="total_2" size="10" readonly="readonly" class="total" /></td>
+                                <td><input type="text" name="precio3[]" size="10" class="required number precio" title="*" value="{$cot.precio3[n].precio}" /></td>
+                                <td><input type="text" name="total_3" size="10" readonly="readonly" class="total" /></td>
+								<td>                                	
+                                   <input type="hidden" name="iddetalle[]" value="{$cot.detalle[n].iddetalle}" />
+                                   <input type="hidden" name="idprecio1[]" value="{$cot.precio1[n].idprecio}" />
+                                   <input type="hidden" name="idprecio2[]" value="{$cot.precio2[n].idprecio}" />
+                                   <input type="hidden" name="idprecio3[]" value="{$cot.precio3[n].idprecio}" />
+                              </td>
+                </tr>
+                            {assign var="dtotal" value=$dtotal+$con+$orden.detalle[n].total}                            
+                            {/section}
+                                                    	
+                        </tbody>
+                        <tfoot>
+                        	<tr>
+                            	<th colspan="4">TOTAL:</th>
+                                <td id="grandTotal1"></td>
+                                <th>TOTAL:</th>
+                                <td id="grandTotal2"></td>
+                                <th>TOTAL:</th>
+                                <td id="grandTotal3"></td>
+                            </tr>
+                            
+                            <tr>
+                                <th colspan="3">Plazo de Entrega :</th>
+                                <td colspan="2"><input type="text" name="plazo1" id="plazo1" value="{if $cot.prov1.plazo}{$cot.prov1.plazo}{else}un día{/if}" maxlength="10" class="required" /></td>
+                                <td colspan="2"><input type="text" name="plazo2" id="plazo2" value="{if $cot.prov2.plazo}{$cot.prov2.plazo}{else}un día{/if}" maxlength="10" class="required" /></td>
+                                <td colspan="2"><input type="text" name="plazo3" id="plazo3" value="{if $cot.prov3.plazo}{$cot.prov3.plazo}{else}un día{/if}" maxlength="10" class="required" /></td>
+                                
+                            </tr>
+							<tr>
+                            	<th colspan="3"> Fecha de Cotizacion :</th>
+                                <td colspan="2"><input type="text" name="fecha1" id="fecha1" size="11" value="{if $cot.prov1.fecha}{$cot.prov1.fecha}{else}{$smarty.now|date_format:"%d/%m/%Y"}{/if}" class="required" /></td>
+                                <td colspan="2"><input type="text" name="fecha2" id="fecha2" size="11" value="{if $cot.prov2.fecha}{$cot.prov2.fecha}{else}{$smarty.now|date_format:"%d/%m/%Y"}{/if}" class="required" /></td>
+                                <td colspan="2"><input type="text" name="fecha3" id="fecha3" size="11" value="{if $cot.prov3.fecha}{$cot.prov3.fecha}{else}{$smarty.now|date_format:"%d/%m/%Y"}{/if}" class="required" /></td>
+                            </tr>                            
+ 							<tr>
+                            	<th colspan="3"> Seleccione Postor Adjudicado :</th>
+                                <td colspan="2"><input type="radio" name="adjudicado" value="1" {if $cuadro.idproveedor==1}checked="checked"{/if} onclick="plop"/></td>
+                                <td colspan="2"><input type="radio" name="adjudicado" value="2" {if $cuadro.idproveedor==2}checked="checked"{/if}/></td>
+                                <td colspan="2"><input type="radio" name="adjudicado" value="3" {if $cuadro.idproveedor==3}checked="checked"{/if}/></td>
+                            </tr>
+                            <tr>
+                            	<th  colspan="3"> Justificacion :</th>
+                                <td  colspan="8">
+                                <textarea name="justificacion" class="required" title="Justificacion de la Buena Pro" cols="100" rows="2">{if $cuadro.justificacion}{$cuadro.justificacion}{else}Se otorga la Buena Pro por ofrecer el Menor Precio y asimismo la entrega en Menor tiempo a comparación de los demás Postores{/if}</textarea>
+                                </td>
+                            </tr>    
+                            <tr>
+                            	<th  colspan="3"> Observaciones :</th>
+                                <td  colspan="8">
+                                <textarea name="observacion" class="required" title="observaciones de la Buena Pro" cols="100" rows="2">{if $cuadro.Observacion}{$cuadro.Observacion}{else}Los demás proveedores cuentan con el material requerido pero ofertando a mayor precio y en un Mayor plazo de entrega{/if}</textarea>
+                                </td>
+                            </tr>    
+                            <tr>
+                            	<th  colspan="3"> Fecha del Cuadro Comparativo:</th>
+                                <td><input type="text" name="fechaO" id="fechaO" size="11" value="{if $cuadro.fecha}{$cuadro.fecha}{else}{$smarty.now|date_format:"%d/%m/%y"}{/if}" class="required" /></td>
+                              <th colspan="2">Firmaran en el Acta :</th>
+                                <td colspan="5"><input type="text" name="cep" id="cep" size="80" value="{if $cuadro.cep}{$cuadro.cep}{else}los miembros integrantes del Comité Especial{/if}" class="required" /></td>
+                            </tr>    
+                        </tfoot>
+                    </table>
+                    {/if}
+                    
+                </fieldset>
+                <p class="submit">
+                  <input type="submit" name="submit" id="submit" value="Guardar" />
+                  <input type="hidden" name="idcot" id="idcot" value="{$cot.idcot}" />
+                  <input type="hidden" name="idcuadro" id="idcuadro" value="{$cuadro.idcuadro}" />
+                  <input type="hidden" name="idprov1" id="idprov1" value="{$cot.prov1.idprov}" />
+                  <input type="hidden" name="idprov2" id="idprov2" value="{$cot.prov2.idprov}" />
+                  <input type="hidden" name="idprov3" id="idprov3" value="{$cot.prov3.idprov}" />
+                </p>
+                </div>
+                
+                
+           </form>
+           </div>
