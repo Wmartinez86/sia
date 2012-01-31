@@ -26,7 +26,8 @@ function get_users () {
 	global $bcdb, $bcrs, $pager;
 	
 	$sql = "SELECT * 
-			FROM $bcdb->usuarios 
+			FROM $bcdb->usuarios
+                        WHERE iduser != 1
 			ORDER BY iduser";
 	$users = ($pager) ? $bcrs->get_results($sql) : $bcdb->get_results($sql);
         

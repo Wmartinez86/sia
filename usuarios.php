@@ -60,7 +60,6 @@ $smarty->assign ('autipos', $autipos);
 	$users = get_users();
 	if($users) {
 		foreach($users as $k=>$user) {
-                        if($user['userid'] == 1) unset($users[$k]);
 			$users[$k]['rango'] = $autipos[$user['usertype']];
 		}
 	}
