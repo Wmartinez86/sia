@@ -1,5 +1,4 @@
 <?php
-//define("BASE_PATH", dirname(__FILE__) . "/");
 define("BASE_PATH", $_SERVER['DOCUMENT_ROOT'] . "/");
 define("INCLUDE_PATH", BASE_PATH . "includes/");
 define("SITES_PATH", BASE_PATH . "sites/");
