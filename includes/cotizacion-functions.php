@@ -80,6 +80,12 @@ function get_detalle_cot($idcot) {
 	return ($detalle) ? $detalle : false;
 }
 
+/**
+ * Borra detalle de una cotización
+ * @param int $iddetalle El id del detalle que se va a borrar
+ * @param int $idcot El id de la cotización a la que pertenece el detalle
+ * @return boolean El resultado de la consulta
+ */
 function borrar_detalle_cotizacion($iddetalle, $idcot) {
 	global $bcdb;
 	return $bcdb->query("DELETE FROM $bcdb->detallecotizacion WHERE idcot = '$idcot' AND iddetalle = '$iddetalle'");
