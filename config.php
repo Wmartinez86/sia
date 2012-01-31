@@ -4,9 +4,10 @@ define("BASE_PATH", $_SERVER['DOCUMENT_ROOT'] . "/");
 define("INCLUDE_PATH", BASE_PATH . "includes/");
 define("SITES_PATH", BASE_PATH . "sites/");
 define("MY_SITE", $_SERVER['SERVER_NAME'] . "/");
+define("CURRENT_SITE", SITES_PATH . MY_SITE);
 
-include_once(SITES_PATH . MY_SITE . "settings.php"); 
-require_once INCLUDE_PATH . 'functions.php';
+include_once(CURRENT_SITE . "settings.php"); 
+require_once(INCLUDE_PATH . "functions.php");
 
 define("BASE_URL", site_url());
 define("IMAGES_URL", BASE_URL . "images/");
