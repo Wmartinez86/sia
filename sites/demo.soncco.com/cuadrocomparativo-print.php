@@ -158,7 +158,7 @@ $yi=0;
 	$pdf->addText($tx+6,$ty+355,$tf,"<b>Fecha: </b><i>".$cuadro['fecha']."</i>");
 	$pdf->addText($tx+6,$ty+340,$tf,"<b>Cotizacion Nro: </b><i>".$cot['codigo']."</i>");
 	$pdf->addText($tx+6,$ty+325,$tf,"<b>Referencia: </b><i>".substr(utf8_decode($cot['referencia']),0,40)."</i>");
-	$pdf->addText($tx+6,$ty+310,$tf,"<b>Cotizaci�n elaborada el: </b><i>".$cot['fecha']."</i>");
+	$pdf->addText($tx+6,$ty+310,$tf,"<b>Cotización elaborada el: </b><i>".$cot['fecha']."</i>");
 	
 	$pdf->addText($tx+256,$ty+358,$tf,"<b>Nombre o Razon Social:</b>");
 	$pdf->addText($tx+286,$ty+325,$tf,"<b>Plazo de Entrega:</b>");

@@ -136,7 +136,7 @@ $yi=0;
 	$pdf->line($x1+15,$y1-15,$x3+15,$y3-15);//H1
 	$pdf->addText($clix,$cliy-14,$cliz,"<b>REFERENCIA :</b>         ".$referencia);
 	$pdf->line($clix+75,$cliy-15,$clix+420,$cliy-15);
-	$pdf->addText($clix,$cliy-28,$cliz,"<b>SE�OR(ES) :</b>");
+	$pdf->addText($clix,$cliy-28,$cliz,"<b>SEÑOR(ES) :</b>");
 	$pdf->line($clix+75,$cliy-30,$clix+420,$cliy-30);
 	$pdf->addText($clix,$cliy-42,$cliz,"<b>DIRECCION :</b>");
 	$pdf->line($clix+75,$cliy-43,$clix+420,$cliy-43);
