@@ -3,7 +3,7 @@
 define("BASE_PATH", $_SERVER['DOCUMENT_ROOT'] . "/");
 define("INCLUDE_PATH", BASE_PATH . "includes/");
 define("SITES_PATH", BASE_PATH . "sites/");
-define("MY_SITE", $_SERVER['SERVER_NAME']);
+define("MY_SITE", $_SERVER['SERVER_NAME'] . "/");
 
 include_once(SITES_PATH . MY_SITE . "settings.php"); 
 require_once INCLUDE_PATH . 'functions.php';
