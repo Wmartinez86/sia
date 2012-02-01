@@ -282,27 +282,6 @@ function activate_req($idreq, $table) {
 	}
 }
 
-function enie($cadena){
-	$cadena = str_replace("ñ","�",$cadena);
-	$cadena = str_replace("Ñ","�",$cadena);
-	$cadena = str_replace("á","�",$cadena);
-	$cadena = str_replace("é","�",$cadena);
-	$cadena = str_replace("í","�",$cadena);
-	$cadena = str_replace("ó","�",$cadena);
-	$cadena = str_replace("ú","�",$cadena);
-	$cadena = str_replace("Á","�",$cadena);
-	$cadena = str_replace("É","�",$cadena);
-	$cadena = str_replace("Í","�",$cadena);
-	$cadena = str_replace("Ó","�",$cadena);
-	$cadena = str_replace("Ú","�",$cadena);
-	$cadena = str_replace("Ø","�",$cadena);
-	$cadena = str_replace("°","�",$cadena);
-//	á   é   í   ó   ú
-//  Õ É Õ Ó Ú
-//  Ø nro °
-	return $cadena;
-}
-
 /* Opciones */
 function get_options() {
     global $bcdb;

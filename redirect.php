@@ -12,6 +12,7 @@
                                          "/requerimientonew.php",
                                          "/requerimiento-print.php",
                                          "/borrar-detalle-requerimiento.php",
+					 "/add-item.php",
 					 "/",
 					 );
 

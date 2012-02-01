@@ -2,7 +2,7 @@
 
 require_once('home.php');
 require_once('redirect.php');
-//$pager = false;
+$pager = true;
 
 if (isset($_REQUEST['iduser'])) { 
     $iduser = $_REQUEST['iduser'];
