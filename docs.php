@@ -5,7 +5,7 @@ require_once('redirect.php');
 $pager = true;
 
 if (isset($_REQUEST['iddoc'])) { 
-    $idcot = $_REQUEST['iddoc'];
+    $iddoc = $_REQUEST['iddoc'];
 } else {
     $iddoc = '0';
 }
