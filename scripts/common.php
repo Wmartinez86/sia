@@ -337,11 +337,23 @@
 <?php
 		break;	
 		case 'cotizacion' :
+                    $idreq = $_GET['idreq'];
 ?>
                 $().ready(function() {
                         $("#frmcot").validate();
+                        
+                    <?php
+                        if (!empty($idreq)) :
+                                $req = get_requerimiento($idreq);
+                                $fecha = strtotime($req["fecha"]);
+                    ?>
+                    $('#fecha').datepicker("option", "minDate", new Date(<?php print $fecha; ?>));
+                    <?php
+                        endif;
+                    ?>
 
                     $('#fecha').datepicker($.datepicker.regional["es"]);
+                    
                     
                     // add
                    $("#clone").click(function(){

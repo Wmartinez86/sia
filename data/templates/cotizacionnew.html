@@ -1,7 +1,7 @@
 			<h2>Cotización <span class="options">[<a href="cotizacion-lista.php">Ver Cotizaciones</a> | <a href="{$self}">Crear Cotizacion</a> | <a href="informes.php">Generar Informes</a> 
             {if $cot.idcot!=0} | <a href="cotizacion-print.php?idcot={$cot.idcot}">Imprimir</a>| <a href="cuadro-comparativo.php?idcot={$cot.idcot}">Cuadro Comparativo</a>{/if}]</span></h2>
             <script type="text/javascript" src="{$scriptsurl}jquery.calculation.min.js"></script>
-            <script type="text/javascript" src="{$scriptsurl}common.php?param=cotizacion"></script>
+            <script type="text/javascript" src="{$scriptsurl}common.php?param=cotizacion&idreq={$req.idreq}"></script>
             {if $msg}<div class="msg">{$msg}</div>{/if}
             <div id="tabs">
             <form name="frmcot" id="frmcot" action="{$self}" method="post">
