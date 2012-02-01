@@ -82,8 +82,10 @@
                 </fieldset>
                 <p class="submit">
                     <input type="submit" name="submit" id="submit" value="Guardar" />
+                    {if $loginuser.usertype==1}
                     {if $req.idreq}
                     <input type="button" name="createreq" id="createreq" value="Crear Cotización" onclick="location.href = 'cotizacionnew.php?create&amp;idreq={$req.idreq}'" />
+                    {/if}
                     {/if}
                     <input type="hidden" name="idreq" id="idreq" value="{$req.idreq}" />
                 </p>
