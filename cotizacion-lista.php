@@ -2,16 +2,48 @@
 
 require_once('home.php');
 require_once('redirect.php');
-$pager = true;
 
-$cotizaciones = get_cotizaciones();
+$cotizaciones = array();
+$projs = get_projs();
+$users = get_users();
 
-if($cotizaciones){
-	$cotizaciones = fill_cots($cotizaciones);
+/* Búsqueda y Filtro */
+if(isset($_GET['submit'])) {
+    $op = htmlspecialchars($_GET['op']);
+    switch($op) {
+        case 'search':
+            if(!is_admin()) {
+                header("location: error.php");
+                exit();
+            }
+            $idproyecto = htmlspecialchars($_GET['idproyecto']);
+            $iduser = htmlspecialchars($_GET['iduser']);
+            $cotizaciones = search_cotizacion($idproyecto, $iduser);
+            
+            $smarty->assign('idproyecto', $idproyecto);
+            $smarty->assign('iduser', $iduser);
+            
+        break;
+        case 'number':
+            $codigo = htmlspecialchars($_GET['codigo']);
+            $cotizaciones = get_cotizaciones_by_codigo($codigo);
+            $smarty->assign('codigo', $codigo);
+        break;
+    }
+} else {
+
+    $pager = true;
+    $cotizaciones = get_cotizaciones();
 }
 
-$smarty->assign ('RESULTS', $bcrs->get_navigation());
+if($cotizaciones){
+     $cotizaciones = fill_cots($cotizaciones);
+}
+
+if($pager) $smarty->assign ('RESULTS', $bcrs->get_navigation());
 $smarty->assign ('cotizaciones', $cotizaciones);
+$smarty->assign ('projs', $projs);
+$smarty->assign ('users', $users);
 $smarty->assign ('section_title', TITLE . ' - Cotizaciones');
 $smarty->assign ('file', 'cotizacion-lista.html');
 $smarty->display ('index.html');

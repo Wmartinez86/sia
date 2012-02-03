@@ -15,6 +15,25 @@ function get_cotizaciones () {
 	return $cotizaciones;
 }
 
+/**
+ * Trae cotizaciones por proyecto
+ * 
+ * @param $idproyecto el id del proyecto
+ * @return array los resultados
+ * 
+ */
+function get_cotizaciones_by_project ($idproyecto) {
+	global $bcdb;	
+	$sql = "SELECT * 
+			FROM $bcdb->cotizacion c
+                        INNER JOIN $bcdb->usuarios u
+                        ON c.createdby = u.iduser
+                        WHERE u.idproyecto = $idproyecto
+			ORDER BY c.idcot DESC";
+	$cotizaciones = $bcdb->get_results($sql);
+	return $cotizaciones;
+}
+
 function save_cotizacion($idcot, $cot_values) {
 	global $bcdb, $msg;
 
@@ -60,6 +79,55 @@ function fill_cot($cot) {
 	$cot['fecha'] = fechita2($cot['fecha']);
 	$cot['usuario'] = get_user($cot['createdby']);
 	return $cot;
+}
+
+/**
+ * Busca cotizaciones
+ * 
+ * @param int $idproyecto el id del proyecto
+ * @param int $iduser el id del usuario 
+ * @return array los resultados
+ */
+function search_cotizacion($idproyecto, $iduser) {
+    $results = array();
+    
+    if(!empty($idproyecto)) {
+        $results = get_cotizaciones_by_project($idproyecto);
+    } else {
+        $results = get_cotizaciones();
+    }
+    
+    if(!empty($iduser)) {
+        if($results) {
+            foreach($results as $k => $r) {
+                if($r['createdby'] != $iduser)
+                    unset($results[$k]);
+            }
+        }
+    }
+    
+    return $results;
+}
+
+/**
+ * Trae requerimientos por código
+ * 
+ * @param $id el código 
+ * @return array los resultados
+ */
+function get_cotizaciones_by_codigo($codigo) {
+    global $bcdb;
+    if(is_admin())
+        $sql = "SELECT * FROM $bcdb->cotizacion
+                            WHERE codigo LIKE '%$codigo%'";
+    else
+        $sql = sprintf("SELECT * FROM $bcdb->cotizacion
+                            WHERE codigo LIKE '%%%s%%' AND createdy = '%s'", 
+                $codigo, 
+                $_SESSION['loginuser']['iduser']);
+    
+    $results = $bcdb->get_results($sql);
+    return $results;
 }
 
 /* DETALLE COTIZACION */
