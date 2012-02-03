@@ -6,11 +6,6 @@ function get_requerimiento ($idreq) {
 	return $bcdb->get_row("SELECT * FROM $bcdb->requerimientos WHERE idreq = '$idreq'");
 }
 
-function get_requerimiento_by_user ($idreq, $iduser) {
-	global $bcdb;
-	return $bcdb->get_row("SELECT * FROM $bcdb->requerimientos WHERE idreq = '$idreq' AND createdby = '$iduser'");
-}
-
 function get_requerimientos () {
 	global $bcdb, $bcrs, $pager;	
 	$sql = "SELECT * 
@@ -20,6 +15,11 @@ function get_requerimientos () {
 	return $requerimientos;
 }
 
+function get_requerimiento_by_user ($idreq, $iduser) {
+	global $bcdb;
+	return $bcdb->get_row("SELECT * FROM $bcdb->requerimientos WHERE idreq = '$idreq' AND createdby = '$iduser'");
+}
+
 function get_requerimientos_by_user ($userid) {
 	global $bcdb, $bcrs, $pager;	
 	$sql = "SELECT * 
@@ -27,6 +27,25 @@ function get_requerimientos_by_user ($userid) {
                         WHERE createdby = '$userid'
 			ORDER BY idreq DESC";
 	$requerimientos = ($pager) ? $bcrs->get_results($sql) : $bcdb->get_results($sql);
+	return $requerimientos;
+}
+
+/**
+ * Trae requerimientos por proyecto
+ * 
+ * @param $idproyecto el id del proyecto
+ * @return array los resultados
+ * 
+ */
+function get_requerimientos_by_project ($idproyecto) {
+	global $bcdb;	
+	$sql = "SELECT * 
+			FROM $bcdb->requerimientos r
+                        INNER JOIN $bcdb->usuarios u
+                        ON r.createdby = u.iduser
+                        WHERE u.idproyecto = $idproyecto
+			ORDER BY idreq DESC";
+	$requerimientos = $bcdb->get_results($sql);
 	return $requerimientos;
 }
 
@@ -80,6 +99,53 @@ function fill_req($req) {
 	$req['fecha'] = fechita2($req['fecha']);
 	$req['usuario'] = get_user($req['createdby']);
 	return $req;
+}
+/**
+ * Busca requerimientos
+ * 
+ * @param int $idproyecto el id del proyecto
+ * @param int $iduser el id del usuario 
+ * @return array los resultados
+ */
+function search_requerimiento($idproyecto, $iduser) {
+    $results = array();
+    
+    if(!empty($idproyecto)) {
+        $results = get_requerimientos_by_project($idproyecto);
+    } else {
+        $results = get_requerimientos();
+    }
+    
+    if(!empty($iduser)) {
+        if($results) {
+            foreach($results as $k => $r) {
+                if($r['createdby'] != $iduser)
+                    unset($results[$k]);
+            }
+        }
+    }
+    return $results;
+}
+
+/**
+ * Trae requerimientos por código
+ * 
+ * @param $id el código 
+ * @return array los resultados
+ */
+function get_requerimientos_by_codigo($codigo) {
+    global $bcdb;
+    if(is_admin())
+        $sql = "SELECT * FROM $bcdb->requerimientos
+                            WHERE codigo LIKE '%$codigo%'";
+    else
+        $sql = sprintf("SELECT * FROM $bcdb->requerimientos
+                            WHERE codigo LIKE '%%%s%%' AND createdy = '%s'", $codigo, $_SESSION['loginuser']['iduser']);
+    
+    echo $sql;
+    
+    $results = $bcdb->get_results($sql);
+    return $results;
 }
 
 /* DETALLE REQUERIMIENTO */

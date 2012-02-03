@@ -30,7 +30,7 @@
                         <input type="hidden" name="idproyecto" id="idproyecto" value="{$user.proyecto.idproyecto}" /-->
                         <select id="idproyecto" name="idproyecto">
                         {section name=n loop=$projs}
-                        <option value="{$projs[n].idproyecto}" {if $projs[n].idproyecto==$user.proyecto.idproyecto}selected="selected"{/if}>{$projs[n].descripcion}</option>
+                        <option value="{$projs[n].idproyecto}" {if $projs[n].idproyecto==$orden.proyecto.idproyecto}selected="selected"{/if}>{$projs[n].descripcion}</option>
                         {/section}
                         </select>
                     </p>

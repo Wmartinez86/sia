@@ -71,9 +71,10 @@ function remove_user ($iduser) {
 	$bcdb->query("DELETE FROM $bcdb->usuarios WHERE iduser = $iduser");
 }
 
-function is_admin ($iduser) {
+function is_admin () {
 	global $bcdb;
-	$a = $bcdb->get_var("SELECT usertype FROM $bcdb->usuarios WHERE iduser = $iduser");
+        $iduser = $_SESSION['loginuser']['iduser'];
+        $a = $bcdb->get_var("SELECT usertype FROM $bcdb->usuarios WHERE iduser = $iduser");
 	return ($a=="1");
 }
 

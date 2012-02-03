@@ -94,3 +94,87 @@ input[readonly="readonly"] {
     padding: 3px 10px;
     font-weight:  bold;
 }
+
+/* Collapse */
+/* Collapse */
+fieldset.collapsible legend {
+	cursor: pointer;
+}
+
+fieldset.collapsible legend:hover {
+	color: #096981;
+}
+
+fieldset.collapsible .collapsible {
+	padding-left: 20px;
+	background: url(../images/collapse.open.png) no-repeat 3px 5px;
+}
+
+fieldset.collapsed .collapsed {
+	padding-left: 20px;
+	background: url(../images/collapse.closed.png) no-repeat 3px 5px;
+}
+
+/* Tabs */
+ul.i-tabs {  
+    margin: 0;  
+    padding: 0;  
+    float: left;  
+    list-style: none;  
+    height: 26px;  
+    border-bottom: 1px solid #a0b9cf;  
+    border-left: 1px solid #a0b9cf !important; 
+    width: 90%;
+}  
+ul.i-tabs li {  
+    float: left;  
+    margin: 0 !important;  
+    padding: 0;  
+    height: 25px;  
+    line-height: 25px;  
+    border: 1px solid #a0b9cf !important;  
+    border-left: none !important;  
+    margin-bottom: -1px;  
+    overflow: hidden;  
+    position: relative;  
+    background: #f6f7f8 !important; 
+    font-size: 90%;
+}  
+ul.i-tabs li a {  
+    text-decoration: none;  
+    color: #2c7ab8;  
+    display: block;  
+    padding: 0 10px;  
+    border: 1px solid #fff;  
+    outline: none;  
+}  
+ul.i-tabs li a:hover {  
+	color: #194c7f;
+}  
+html ul.i-tabs li.active-tab, html ul.i-tabs li.active-tab a:hover  {  
+    background: #fff !important;  
+    border-bottom: 1px solid #fff !important;  
+} 
+
+.i-tab-container {  
+    border: 1px solid #a0b9cf;  
+    border-top: none;  
+    overflow: hidden;  
+    clear: both;  
+    float: left;
+    width: 90%;  
+    background: #fff;  
+    margin-bottom: 10px;
+}
+
+.i-tab-content {  
+    padding: 0px 20px 0 20px;  
+}
+
+
+/* Filtros */
+#filter input[type="button"],
+#filter input[type="submit"] {
+    font-weight:  bold;
+    padding: 2px 5px;
+}
