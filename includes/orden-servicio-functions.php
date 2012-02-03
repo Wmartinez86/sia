@@ -64,6 +64,36 @@ function fill_servicio($orden) {
 	return $orden;
 }
 
+/**
+ * Busca órdenes de servicio
+ * 
+ * @param int $idproyecto el id del proyecto
+ * @param int $iduser el id del usuario 
+ * @return array los resultados
+ */
+function search_orden_servicio($idproyecto, $iduser) {
+    $results = array();
+    
+    if(!empty($idproyecto)) {
+        $results = get_ordenes_by_project($idproyecto, "servicio");
+    } else {
+        $results = get_ordenes_compra();
+    }
+    
+    if(!empty($iduser)) {
+        $final = array();
+        if($results) {
+            foreach($results as $k => $r) {
+                if($r['createdby'] == $iduser)
+                    $final[] = $r;
+            }
+        }
+        $results = $final;
+    }
+    
+    return $results;
+}
+
 
 /* DETALLE ORDEN COMPRA */
 

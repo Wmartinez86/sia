@@ -98,12 +98,14 @@ function search_cotizacion($idproyecto, $iduser) {
     }
     
     if(!empty($iduser)) {
+        $final = array();
         if($results) {
             foreach($results as $k => $r) {
-                if($r['createdby'] != $iduser)
-                    unset($results[$k]);
+                if($r['createdby'] == $iduser)
+                    $final[] = $r;
             }
         }
+        $results = $final;
     }
     
     return $results;
@@ -117,14 +119,8 @@ function search_cotizacion($idproyecto, $iduser) {
  */
 function get_cotizaciones_by_codigo($codigo) {
     global $bcdb;
-    if(is_admin())
-        $sql = "SELECT * FROM $bcdb->cotizacion
-                            WHERE codigo LIKE '%$codigo%'";
-    else
-        $sql = sprintf("SELECT * FROM $bcdb->cotizacion
-                            WHERE codigo LIKE '%%%s%%' AND createdy = '%s'", 
-                $codigo, 
-                $_SESSION['loginuser']['iduser']);
+    $sql = "SELECT * FROM $bcdb->cotizacion
+                        WHERE codigo LIKE '%$codigo%'";
     
     $results = $bcdb->get_results($sql);
     return $results;

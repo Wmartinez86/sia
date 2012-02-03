@@ -58,13 +58,41 @@ function fill_compra($orden) {
 	$orden['doc'] = get_doc($orden['iddoc']);
 	$orden['proyecto'] = get_proj($orden['idproyecto']);
 	$orden['proveedor'] = get_prov($orden['idproveedor']);
-//	$orden['rubro'] = $atipos[$orden['proyecto']['idtipo']];
 	$orden['fuente'] = get_fuente($orden['idfuente']);
-//	$orden['pecosa'] = get_pecosa($orden['idorden']);
 	$orden['detalle'] = get_detalle_compra($orden['idorden']);
 	$orden['fecha'] = fechita2($orden['fecha']);
 	$orden['usuario'] = get_user($orden['createdby']);
 	return $orden;
+}
+
+/**
+ * Busca órdenes de compra
+ * 
+ * @param int $idproyecto el id del proyecto
+ * @param int $iduser el id del usuario 
+ * @return array los resultados
+ */
+function search_orden_compra($idproyecto, $iduser) {
+    $results = array();
+    
+    if(!empty($idproyecto)) {
+        $results = get_ordenes_by_project($idproyecto, "compra");
+    } else {
+        $results = get_ordenes_compra();
+    }
+    
+    if(!empty($iduser)) {
+        $final = array();
+        if($results) {
+            foreach($results as $k => $r) {
+                if($r['createdby'] == $iduser)
+                    $final[] = $r;
+            }
+        }
+        $results = $final;
+    }
+    
+    return $results;
 }
 
 /* PECOSA */

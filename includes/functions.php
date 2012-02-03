@@ -220,6 +220,44 @@ function search_ordenes($params, $table, $f1, $f2) {
 	return $bcdb->get_results($query);
 }
 
+/**
+ * Trae ordenes por código
+ * 
+ * @param int $id el código 
+ * @param string $tipo el tipo de orden
+ * @return array los resultados
+ */
+function get_ordenes_by_codigo($codigo, $tipo) {
+    global $bcdb;
+    $tabla = ($tipo == 'compra') ? $bcdb->ordencompra : $bcdb->ordenservicio ;
+    $sql = "SELECT * FROM $tabla
+                        WHERE codigo LIKE '%$codigo%'";
+    
+    $results = $bcdb->get_results($sql);
+    return $results;
+}
+
+/**
+ * Trae ordenes por proyecto
+ * 
+ * @param int $idproyecto el id del proyecto
+ * @param string $tipo el tipo de orden
+ * @return array los resultados
+ * 
+ */
+function get_ordenes_by_project ($idproyecto, $tipo) {
+	global $bcdb;	
+        $tabla = ($tipo == 'compra') ? $bcdb->ordencompra : $bcdb->ordenservicio ;
+	$sql = "SELECT * 
+			FROM $tabla c
+                        INNER JOIN $bcdb->usuarios u
+                        ON c.createdby = u.iduser
+                        WHERE u.idproyecto = $idproyecto
+			ORDER BY c.idorden DESC";
+	$ordenes = $bcdb->get_results($sql);
+	return $ordenes;
+}
+
 function supertotal($detalle, $field) {
 	$super = 0;
 	if($detalle) {

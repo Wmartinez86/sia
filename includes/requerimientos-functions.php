@@ -117,12 +117,14 @@ function search_requerimiento($idproyecto, $iduser) {
     }
     
     if(!empty($iduser)) {
+        $final = array();
         if($results) {
             foreach($results as $k => $r) {
-                if($r['createdby'] != $iduser)
-                    unset($results[$k]);
+                if($r['createdby'] == $iduser)
+                    $final[] = $r;
             }
         }
+        $results = $final;
     }
     return $results;
 }
