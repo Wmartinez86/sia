@@ -53,7 +53,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 				$detalle_values[$k]['iddetalle'] = $_POST['iddetalle'][$k];
 			}
 			save_requerimiento($idreq, $req_values);
-			save_detalle_req($idreq, $req_values);
+			save_detalle_req($idreq, $detalle_values);
 		}else{
 			$id = save_requerimiento($idreq, $req_values);
 			if($id) {
