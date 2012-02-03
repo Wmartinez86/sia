@@ -142,8 +142,6 @@ function get_requerimientos_by_codigo($codigo) {
         $sql = sprintf("SELECT * FROM $bcdb->requerimientos
                             WHERE codigo LIKE '%%%s%%' AND createdy = '%s'", $codigo, $_SESSION['loginuser']['iduser']);
     
-    echo $sql;
-    
     $results = $bcdb->get_results($sql);
     return $results;
 }
