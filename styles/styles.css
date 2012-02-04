@@ -198,3 +198,11 @@ html ul.i-tabs li.active-tab, html ul.i-tabs li.active-tab a:hover  {
 	text-transform: uppercase;
 	border-bottom: 1px solid #cdcaca;
 }
+
+.group h4 {
+    color: #000;
+}
+
+.group p {
+    margin-left: 5px;
+}
