@@ -77,7 +77,7 @@ function search_orden_servicio($idproyecto, $iduser) {
     if(!empty($idproyecto)) {
         $results = get_ordenes_by_project($idproyecto, "servicio");
     } else {
-        $results = get_ordenes_compra();
+        $results = get_ordenes_servicio();
     }
     
     if(!empty($iduser)) {

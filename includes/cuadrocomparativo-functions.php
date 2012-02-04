@@ -98,7 +98,14 @@ function get_prov_cuadro($idcot, $nprov){
 
 function get_ganador_cuadro($idcot){
 	global $bcdb;
-	return $bcdb->get_var("SELECT b.nprov FROM $bcdb->cuadrocomparativo a,$bcdb->provcotizacion b WHERE a.idcot = '$idcot' AND b.idcot = '$idcot' AND a.idproveedor = b.nprov ");
+        $sql = "SELECT b.nprov
+                FROM $bcdb->cuadrocomparativo a, 
+                $bcdb->provcotizacion b 
+                WHERE a.idcot = '$idcot' 
+                AND b.idcot = '$idcot' 
+                AND a.idproveedor = b.nprov ";
+        echo $sql;
+	return $bcdb->get_var($sql);
 }
 function get_precios($detalle, $nprov){
 	global $bcdb;
