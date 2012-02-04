@@ -5,7 +5,7 @@ require_once('redirect.php');
 
 $ordenes = array();
 $projs = get_projs();
-$users = get_users();
+$users = get_admins();
 
 /* Búsqueda y Filtro */
 if(isset($_GET['submit'])) {

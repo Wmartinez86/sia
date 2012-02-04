@@ -39,6 +39,30 @@ function get_users () {
 	return $users;
 }
 
+/**
+ * Trae todos los administradores
+ * 
+ * @return array Los administradores
+ * 
+ */
+function get_admins () {
+	global $bcdb, $bcrs, $pager;
+	
+	$sql = "SELECT * 
+			FROM $bcdb->usuarios
+			WHERE iduser != 1 
+                        AND usertype = 1
+			ORDER BY iduser";
+	$users = ($pager) ? $bcrs->get_results($sql) : $bcdb->get_results($sql);
+        
+        foreach($users as $k => $user) {
+            $user = user_extra_data($user);
+            $users[$k] = $user;
+        }
+        
+	return $users;
+}
+
 function save_user($iduser, $user_values) {
 	global $bcdb, $msg;
 
