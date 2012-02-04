@@ -47,6 +47,11 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
                 $object['id'] = 'idorden';
                 $object['page'] = 'orden-servicio';
                 break;
+            case 'nea':
+                save_detalle_nea($id, $detalle_values);
+                $object['id'] = 'idnea';
+                $object['page'] = 'almacen';
+                break;
         endswitch;
         
         header("Location: $object[page].php?$object[id]=$id");

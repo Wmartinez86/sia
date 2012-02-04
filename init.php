@@ -27,6 +27,8 @@ $bcdb->preciocotizacion 	= $table_prefix . 'preciocotizacion';
 $bcdb->cuadrocomparativo 	= $table_prefix . 'cuadrocomparativo';
 $bcdb->requerimientos	 	= $table_prefix . 'requerimientos';
 $bcdb->detallerequerimiento	= $table_prefix . 'detallerequerimiento';
+$bcdb->neas             	= $table_prefix . 'neas';
+$bcdb->detallenea       	= $table_prefix . 'detallenea';
 
 include_once(INCLUDE_PATH . 'smarty-instance.php');
 
@@ -49,6 +51,7 @@ include_once(INCLUDE_PATH . 'cotizacion-functions.php');
 include_once(INCLUDE_PATH . 'cuadrocomparativo-functions.php');
 include_once(INCLUDE_PATH . 'requerimientos-functions.php');
 include_once(INCLUDE_PATH . 'area-functions.php');
+include_once(INCLUDE_PATH . 'nea-functions.php');
 
 # Iniciamos
 

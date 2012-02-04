@@ -24,12 +24,19 @@
     <li><a href="requerimiento-lista.php">Requerimiento</a></li>
     <li><a href="cotizacion-lista.php">Cotización</a></li>
     <li><a href="ordenes.php">Ordenes</a></li>
-    <!--li><a href="almacen.php">Almacén</a-->
+    <li><a href="almacen.php">Almacén</a>
     <li><a href="informes.php">Informes</a></li>
     <li><a href="sistema.php">Sistema</a></li>
     {else}
     <li><a href="index.php">Inicio</a></li>
+    {if $loginuser.usertype==2}
     <li><a href="requerimiento.php">Requerimiento</a></li>
+    {/if}
+    
+    {if $loginuser.usertype==3}
+    <li><a href="almacen.php">Almacén</a></li>
+    {/if}
+    
     {/if}
   </ul>
   <div id="logo">

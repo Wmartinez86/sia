@@ -1,10 +1,21 @@
 <h2>Bienvenido {$loginuser.nombres}</h2>
 <p>Ud. tiene disponibles las siguientes opciones:</p>
 <div class="group-container">
+    {if $loginuser.usertype==2}
     <div class="group">
         <h3>Requerimientos</h3>
         <p>Puedes <a href="requerimientonew.php">crear</a> o <a href="requerimiento-lista.php">ver los requerimientos</a> para editarlos, imprimirlos o generar cotizaciones.</p>
     </div>
+    {/if}
+    {if $loginuser.usertype==3}
+    <div class="group">
+        <h3>Notas de Entrada</h3>
+        <h4>Ingresar saldos</h4>
+        <p>Puedes <a href="almacen.php">ingresar productos</a> al almacen</p>
+        <h4>Órdenes de Compra</h4>
+        <p>Puedes ver las <a href="nea-orden.php">órdenes de compra</a> e ingresar bienes desde ahí</p>
+    </div>
+    {/if}
     {if $loginuser.usertype==1}
     <div class="group">
         <h3>Generación de órdenes</h3>
@@ -43,5 +54,10 @@
         <p>Administración de los <a href="usuarios.php">usuarios</a> y sus permisos.</p>
     </div>
     {/if}
-    
+    {if $loginuser.usertype==3}
+    <div class="group">
+        <h3>Vista de Almacén</h3>
+        <p>Puedes <a href="almacen-lista.php">ver y controlar</a> los bienes dentro del almacén.</p>
+    </div>
+    {/if}
 </div>

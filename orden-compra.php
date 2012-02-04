@@ -89,7 +89,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 //	$orden = fill_compra_by_cot(get_cotizacion($idcot));
 
 if(isset($idcot)){
-	$orden = fill_compra_by_cot(get_cotizacion($idcot));
+	$orden = fill_compra_by_cot(get_cotizacion($idcot));        
 	$smarty->assign ('orden', $orden);
 	$smarty->assign ('fcot', true);
 	}

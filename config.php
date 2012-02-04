@@ -28,12 +28,13 @@ $aordenes = array(
 			);
 			
 $atipos = array(
-				'1'=>"Gastos de Inversion",
+				'1'=>"Gastos de Inversión",
 				'2'=>"Gastos Corrientes"
 			);
 			
 $autipos = array(
 				'1'=>"Administrador",
-				'2'=>"Operador"
+				'2'=>"Operador",
+                                '3'=>"Personal de Almacén"
 			);
 ?>

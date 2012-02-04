@@ -14,8 +14,7 @@
         <!--input type="text" name="proyectos" id="proyectos" size="60" value="{$user.proyecto.descripcion}" />
                                 <input type="hidden" name="idproyecto" id="idproyecto" value="{$user.proyecto.idproyecto}" /-->
         <select id="idproyecto" name="idproyecto">
-          <option value="">Cualquier meta
-          </p>
+          <option value="">Cualquier meta</option>
           
                                 {section name=n loop=$projs}
                                 
@@ -24,19 +23,14 @@
                                 {/section}
                                 
         </select>
-        </p>
+                  </p>
         <p>
         <label for="iduser">Usuario:</label>
         <select id="iduser" name="iduser">
-          <option value="">Cualquier usuario
-          </p>
-          
-                                {section name=n loop=$users}
-                                
-          <option value="{$users[n].iduser}" {if $users[n].iduser==$iduser}selected="selected"{/if}>{$users[n].username}</option>
-          
-                                {/section}
-                                
+            <option value="">Cualquier usuario</option>
+        {section name=n loop=$users}
+        <option value="{$users[n].iduser}" {if $users[n].iduser==$iduser}selected="selected"{/if}>{$users[n].username}</option>
+        {/section}
         </select>
         <input type="submit" name="submit" id="submit" value="Buscar" />
         <input type="hidden" name="op" id="op" value="search" />

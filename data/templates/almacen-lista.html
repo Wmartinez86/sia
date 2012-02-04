@@ -1,0 +1,59 @@
+<script type="text/javascript" src="{$scriptsurl}scripts/common.php?param=lista"></script>
+<h2>Productos de Almacén</h2>
+<ul class="i-tabs">
+  <li><a href="#i-admin">Buscar por destino</a></li>
+</ul>
+<div class="i-tab-container">
+  <div id="i-admin" class="i-tab-content">
+    <form name="filter" id="filter" method="GET">
+      <fieldset class="collapsible">
+        <legend>Destino</legend>
+        <p>
+        <label for="idproyecto">Destino:</label>
+        <!--input type="text" name="proyectos" id="proyectos" size="60" value="{$user.proyecto.descripcion}" />
+                                <input type="hidden" name="idproyecto" id="idproyecto" value="{$user.proyecto.idproyecto}" /-->
+        <select id="idproyecto" name="idproyecto">
+          <option value="1">Almacén Central</option>
+            {section name=n loop=$projs}
+            <option value="{$projs[n].idproyecto}" {if $projs[n].idproyecto==$idproyecto}selected="selected"{/if}>sec_func = {$projs[n].sec_func}</option>
+            {/section}
+                                
+        </select>
+        <input type="submit" name="submit" id="submit" value="Buscar" />
+        <input type="hidden" name="op" id="op" value="search" />
+        </p>
+      </fieldset>
+    </form>
+  </div>
+</div>
+<table class="tabla">
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th>Procedencia</th>
+      <th>Fecha</th>
+      <th>Creado por</th>
+      <th colspan="3">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  {section name=n loop=$neas}
+  <tr class="{cycle values="even, odd"}">
+    <th>{$neas[n].codigo}</th>
+    <td>{$neas[n].procedencia}</td>
+    <td>{$neas[n].fecha}</td>
+    <td>{$neas[n].usuario.username}</td>
+    <th><a href="almacen.php?idnea={$neas[n].idnea}">Ver</a></th>
+    <th><a href="nea-print.php?idnea={$neas[n].idnea}">Imprimir</a></th>
+    <th><a href="pecosa-print.php?idnea={$neas[n].idnea}">Imprimir <abbr title="Pedido de Comprobante de Salida">PECOSA</abbr></a></th>
+  </tr>
+  {sectionelse}
+  <tr>
+    <td colspan="7">No existen datos.</td>
+  </tr>
+  {/section}
+  </tbody>
+  
+</table>
+{include file="paginator.html"} 

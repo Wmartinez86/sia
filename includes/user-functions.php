@@ -102,4 +102,11 @@ function is_admin () {
 	return ($a=="1");
 }
 
+function is_almacenero () {
+	global $bcdb;
+        $iduser = $_SESSION['loginuser']['iduser'];
+        $a = $bcdb->get_var("SELECT usertype FROM $bcdb->usuarios WHERE iduser = $iduser");
+	return ($a=="3");
+}
+
 ?>

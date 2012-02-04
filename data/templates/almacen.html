@@ -1,0 +1,123 @@
+<h2>Almacén</h2>
+<script type="text/javascript" src="{$scriptsurl}jquery.calculation.min.js"></script> 
+<script type="text/javascript" src="{$scriptsurl}acciones/almacen.js"></script> 
+{if $msg}
+<div class="msg">{$msg}</div>
+{/if}
+<div id="tabs">
+  <form name="frmalmacen" id="frmorden" action="{$self}" method="post">
+    <div id="tabs-1">
+      <fieldset>
+        <legend>Datos del ingreso</legend>
+        <p>
+          <label for="codigo"><abbr title="Nota de Entrada de Almacén">NEA</abbr> Nro.:</label>
+          <input type="text" name="codigo" id="codigo" value="{if $nea.codigo}{$nea.codigo}{else}{$codgen}{/if}" maxlength="10" class="required" />
+        </p>
+        <p>
+          <label for="procedencia">Procedencia:</label>
+          <input type="text" name="procedencia" id="procedencia" value="{if $nea.procedencia}{$nea.procedencia}{/if}" maxlength="200" size="80" class="required" />
+        </p>
+        <p>
+          <label for="idproyecto">Destino:</label>
+          <select id="idproyecto" name="idproyecto">
+            {section name=n loop=$projs}
+            <option value="{$projs[n].idproyecto}" {if $projs[n].idproyecto==$nea.proyecto.idproyecto}selected="selected"{/if}>{$projs[n].descripcion}</option>
+            {/section}
+          </select>
+        </p>
+        <p>
+          <label for="fecha">Fecha:</label>
+          <input type="text" name="fecha" id="fecha" size="11" value="{if $nea.fecha}{$nea.fecha}{else}{$smarty.now|date_format:"%d/%m/%Y"}{/if}" class="required" />
+        </p>
+        <p>
+          <label for="observaciones">Observaciones:</label><br />
+          <textarea id="observaciones" name="observaciones" cols="80" rows="5">{if $nea.observaciones}{$nea.observaciones|escape:html}{/if}</textarea>
+        </p>
+      </fieldset>
+    </div>
+    <div id="tabs-3">
+      <fieldset>
+        <legend>Detalles de la entrada</legend>
+        <table class="tabla">
+          <thead>
+            <tr>
+              <th colspan="4">Artículos</th>
+              <th colspan="2">Precio</th>
+              {if $nea.detalle}
+              <th rowspan="2">Acciones</th>
+              {/if} </tr>
+            <tr>
+              <th>Código</th>
+              <th>Cantidad</th>
+              <th><abbr title="Unidad de Medida">U. Med.</abbr></th>
+              <th>Descripción</th>
+              <th>Unitario</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          {if !$nea.detalle}
+          <tbody id="tbody">
+            <tr id="firstr">
+              <td><input type="text" name="especifica[]" maxlength="20" class="required" title="*" size="10" /></td>
+              <td><input type="text" name="cantidad[]" size="10" maxlength="10" class="number required cantidad" title="*" /></td>
+              <td><input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" /></td>
+              <td><input type="text" name="descripcion[]" maxlength="255" size="50" class="required" title="*" /></td>
+              <td><input type="text" name="precio[]" size="10" class="required number precio" title="*" /></td>
+              <td><input type="text" name="total_" size="10" readonly="readonly" class="total" /></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th colspan="5">TOTAL:</th>
+              <td id="grandTotal"></td>
+            </tr>
+          </tfoot>
+        </table>
+        <p class="aright">
+          <input type="button" name="clone" id="clone" value="Añadir" />
+        </p>
+        {else}
+        <tbody id="tbody">
+        
+        {assign var="con" value=0}
+        {section name=n loop=$nea.detalle}
+        <tr id="firstr">
+          <td><input type="text" name="especifica[]" maxlength="20" class="required" title="*" size="10" value="{$nea.detalle[n].especifica}" /></td>
+          <td><input type="text" name="cantidad[]" size="10" maxlength="10" class="number required cantidad" title="*" value="{$nea.detalle[n].cantidad}" /></td>
+          <td><input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" value="{$nea.detalle[n].umedida}" /></td>
+          <td><input type="text" name="descripcion[]" maxlength="255" size="50" class="required" title="*" value="{$nea.detalle[n].descripcion|escape:"html"}" /></td>
+          <td><input type="text" name="precio[]" size="10" class="required number precio" title="*" value="{$nea.detalle[n].precio}" /></td>
+          <td><input type="text" name="total_" size="10" readonly="readonly" class="total" value="{$nea.detalle[n].total|number_format:2:",":"."}" /></td>
+          <td> {if !$nodel} <a href="borrar-detalle-compra.php?iddetalle={$nea.detalle[n].iddetalle}&amp;idnea={$nea.idnea}" class="ddetalle">Borrar</a> {/if}
+            <input type="hidden" name="iddetalle[]" value="{$nea.detalle[n].iddetalle}" />
+          </td>
+        </tr>
+        {assign var="dtotal" value=$dtotal+$con+$nea.detalle[n].total}
+        {/section}
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="5">TOTAL:</th>
+            <td id="grandTotal"></td>
+            <td></td>
+          </tr>
+        </tfoot>
+        </table>
+        <p class="aright">
+          {if $fcot}
+          <input type="button" name="clone" id="clone" value="Añadir" />
+          {else}
+          <input type="button" name="add" value="Añadir" onclick="location.href='add-item.php?id={$nea.idnea}&amp;entity=nea'" />
+          {/if} </p>
+        {/if}
+      </fieldset>
+      <p class="submit">
+        <input type="submit" name="submit" id="submit" value="Guardar" />
+        <input type="hidden" name="idnea" id="idnea" value="{$nea.idnea}" />
+      </p>
+      <!--p>
+                    <a href="#tabs-2">&laquo;Anterior</a>
+                </p--> 
+    </div>
+  </form>
+</div>
