@@ -10,7 +10,7 @@
                 	<legend>Datos de la Requerimiento</legend>
 			        <p>
                     	<label for="codigo">Nro. de Req:</label>
-                        <input type="text" name="codigo" id="codigo" value="{if $req.codigo}{$req.codigo}{else}{$codgen}{/if}" maxlength="10" class="required" readonly="readonly" />
+                        <input type="text" name="codigo" id="codigo" value="{if $req.codigo}{$req.codigo|escape:"html"}{else}{$codgen}{/if}" maxlength="10" class="required" readonly="readonly" />
                     </p>
                     <p>
                         <label for="fecha">Fecha:</label>
@@ -61,7 +61,7 @@
                         	<tr id="firstr">
                                 <td><input type="text" name="cantidad[]" size="10" maxlength="10" class="number required cantidad" title="*" value="{$req.detalle[n].cantidad}" /></td>
                                 <td><input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" value="{$req.detalle[n].umedida}" /></td>
-                                <td><input type="text" name="descripcion[]" maxlength="255" size="50" class="required" title="*" value="{$req.detalle[n].descripcion}" /></td>
+                                <td><input type="text" name="descripcion[]" maxlength="255" size="50" class="required" title="*" value="{$req.detalle[n].descripcion|escape:"html"}" /></td>
                                 <td>
                                 	{if !$nodel}
 				                     {if $req.status!=3}

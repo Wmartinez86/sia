@@ -44,7 +44,7 @@
                     </p>
                     <p>
                     	<label for="descripcion">Nombre:</label>
-                        <input type="text" name="descripcion" id="descripcion" maxlength="255" size="80" value="{$proj.descripcion}" class="required" />
+                        <input type="text" name="descripcion" id="descripcion" maxlength="255" size="80" value="{$proj.descripcion|escape:"html"}" class="required" />
                     </p>
                 </fieldset>
                 

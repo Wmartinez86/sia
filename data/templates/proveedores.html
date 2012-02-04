@@ -6,11 +6,11 @@
                 	<legend>Datos del proveedor</legend>
                     <p>
                     	<label for="razonsocial">Razón Social:</label>
-                        <input type="text" name="razonsocial" id="razonsocial" maxlength="255" size="60" value="{$prov.razonsocial}" class="required" title="Ingresa la razón social" /><br />
+                        <input type="text" name="razonsocial" id="razonsocial" maxlength="255" size="60" value="{$prov.razonsocial|escape:"html"}" class="required" title="Ingresa la razón social" /><br />
                     </p>
                     <p>
                     	<label for="direccion">Dirección:</label>
-                        <input type="text" name="direccion" id="direccion" maxlength="255" size="60" value="{$prov.direccion}" class="required" title="Ingresa la dirección del proveedor" />
+                        <input type="text" name="direccion" id="direccion" maxlength="255" size="60" value="{$prov.direccion|escape:"html"}" class="required" title="Ingresa la dirección del proveedor" />
                     </p>
                     <p>
                     	<label for="ruc"><acronym title="Registro Único del Contribuyente">RUC</acronym>:</label>

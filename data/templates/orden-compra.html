@@ -18,7 +18,7 @@
                     </p>
                     <p>
                     	<label for="nrodoc">Referencia:</label>
-                        <input type="text" name="nrodoc" id="nrodoc" value="{$orden.nrodoc}" maxlength="255" size="90" class="required" />
+                        <input type="text" name="nrodoc" id="nrodoc" value="{$orden.nrodoc|escape:"html"}" maxlength="255" size="90" class="required" />
                     </p>
                     <p>
                         <label for="codigo">Código <abbr title="Orden de Compra">O/C</abbr>:</label>
@@ -49,7 +49,7 @@
                     </p>
                     <p>
                     	<label for="facturarto">Facturar a:</label>
-                        <input type="text" name="facturarto" id="facturarto" value="{if $orden.facturarto}{$orden.facturarto}{else}{$log1} {$muni}{/if}" maxlength="255" size="80" class="required" />
+                        <input type="text" name="facturarto" id="facturarto" value="{if $orden.facturarto}{$orden.facturarto|escape:"html"}{else}{$log1} {$muni}{/if}" maxlength="255" size="80" class="required" />
                     </p>
           <p>
                         <label for="fruc"><acronym title="Registro Único del Contribuyente">RUC</acronym>:</label>
@@ -62,7 +62,7 @@
                     </p>
                     <p>
                     	<label for="destino">Destino:</label>
-                        <input type="text" name="destino" id="destino" maxlength="150" size="80" class="required" value="{if $orden.destino}{$orden.destino}{else}Almacén Central{/if}" />
+                        <input type="text" name="destino" id="destino" maxlength="150" size="80" class="required" value="{if $orden.destino}{$orden.destino|escape:"html"}{else}Almacén Central{/if}" />
                     </p>
                 </fieldset>
                 </div>
@@ -131,7 +131,7 @@
                             	<td><input type="text" name="especifica[]" maxlength="20" class="required" title="*" size="10" value="{$orden.detalle[n].especifica}" /></td>
                                 <td><input type="text" name="cantidad[]" size="10" maxlength="10" class="number required cantidad" title="*" value="{$orden.detalle[n].cantidad}" /></td>
                                 <td><input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" value="{$orden.detalle[n].umedida}" /></td>
-                                <td><input type="text" name="descripcion[]" maxlength="255" size="50" class="required" title="*" value="{$orden.detalle[n].descripcion}" /></td>
+                                <td><input type="text" name="descripcion[]" maxlength="255" size="50" class="required" title="*" value="{$orden.detalle[n].descripcion|escape:"html"}" /></td>
                                 <td><input type="text" name="precio[]" size="10" class="required number precio" title="*" value="{$orden.detalle[n].precio}" /></td>
                                 <td><input type="text" name="total_" size="10" readonly="readonly" class="total" value="{$orden.detalle[n].total|number_format:2:",":"."}" /></td>
                                 <td>

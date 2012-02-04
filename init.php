@@ -1,6 +1,7 @@
 <?php
 include_once('config.php');
-include_once(INCLUDE_PATH . 'ez_sql.php');
+include_once(INCLUDE_PATH . 'ez_sql_core.php');
+include_once(INCLUDE_PATH . 'ez_sql_mysql.php');
 include_once(INCLUDE_PATH . 'class.ezpdf.php');
 
 # Tablas
