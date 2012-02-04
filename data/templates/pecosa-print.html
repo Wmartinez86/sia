@@ -1,90 +1,87 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
-    <link rel="stylesheet" type="text/css" media="screen,print" href="styles/print-pecosa.css" />
-	<title>{$section_title}</title>
+<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
+<link rel="stylesheet" type="text/css" media="screen,print" href="styles/print-pecosa.css" />
+<title>{$section_title}</title>
 </head>
 <body>
-    <div id="header">
-    	<h1 ><span>Municipalidad de &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quiñota </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Orden de Compra Nro: {$orden.codigo} </h1>
+<div id="header">
+  <h1 ><span>Municipalidad de &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quiñota </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Orden de Compra Nro: {$orden.codigo} </h1>
 </div>
-    <div id="main">
-    	<div id="dependencia">
-            <h2><span>PEDIDO DE COMPROBANTE DE SALIDA</span></h2>
-            <p><strong>Dependencia del Solicitante:</strong>{$orden.pecosa.dependencia} </p>
-            <div id="solicito">
-                <p><strong>Solicito entregar a:</strong> {$orden.pecosa.entregarto}</p>	
-                <p style="padding-top:0.5em;"><strong>Con destino a:</strong> {$orden.pecosa.destino}</p>	
-            </div>
-            <div id="lugarfecha">
-                <p>Quiñota, {$orden.fecha}</p>	
-            </div>
-		  <div id="codigo">
-           	<strong style="font-size:.00001em">Código de la Dependencia:</strong></div>
-        </div>
-        <div id="detalles">
-        <table class="oneh" align="left">
-            
-            <tbody>
-                {assign var="con" value=0}
-                {assign var="i" value=1}
-                {section name=n loop=$orden.detalle}
-                <tr>
-                	<td width="3%" nowrap="nowrap"><div align="center">{$i}</div></td>
-                    <td width="7%" nowrap="nowrap"><div align="center">{$orden.detalle[n].cantidad}</div></td>
-                    <td width="7%" nowrap="nowrap"><div align="center">{$orden.detalle[n].umedida}</div></td>
-                    <td width="43%" nowrap="nowrap">{$orden.detalle[n].descripcion}</td>
-                    <td width="13%" nowrap="nowrap"><div align="center">{$orden.detalle[n].especifica}</div></td>
-                    <td width="8%" nowrap="nowrap"><div align="center">{$orden.detalle[n].cantidad}</div></td>
-                    <td width="8%" nowrap="nowrap"><div align="center">{$orden.detalle[n].precio|number_format:2:",":"."}</div></td>
-                    <td width="8%" nowrap="nowrap"><div align="right">{$orden.detalle[n].total|number_format:2:",":"."}</div></td>
-                    <td width="3%" nowrap="nowrap"><strong>{$i++}</strong></td>
-                </tr>
-                	{assign var="dtotal" value=$dtotal+$con+$orden.detalle[n].total}
-                {/section}
-                {section name=m loop=$rows}
-                <tr>
-                    <td class="bold">&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td><strong>{$i++}</strong></td>
-                </tr>
-	                
-                {/section}
-			 <tr>
-                    <td class="bold">&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td></td>
-                    <td><div align="right">{$dtotal|number_format:2:",":"."}</div></td>
-                    <td>&nbsp;</td>
-                </tr>
-							 <tr>
-                    <td class="bold">&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td colspan="2"><div align="right" style="font-weight:bold; padding-top:1.6em; margin-right:1em;">{$rowsdif|number_text:false}</div></td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-            </tbody>
-        </table>
-        </div>
-
-		<script type="text/javascript">
+<div id="main">
+  <div id="dependencia">
+    <h2><span>PEDIDO DE COMPROBANTE DE SALIDA</span></h2>
+    <p><strong>Dependencia del Solicitante:</strong>{$orden.pecosa.dependencia} </p>
+    <div id="solicito">
+      <p><strong>Solicito entregar a:</strong> {$orden.pecosa.entregarto}</p>
+      <p style="padding-top:0.5em;"><strong>Con destino a:</strong> {$orden.pecosa.destino}</p>
+    </div>
+    <div id="lugarfecha">
+      <p>Quiñota, {$orden.fecha}</p>
+    </div>
+    <div id="codigo"> <strong style="font-size:.00001em">Código de la Dependencia:</strong></div>
+  </div>
+  <div id="detalles">
+    <table class="oneh" align="left">
+      <tbody>
+      
+      {assign var="con" value=0}
+      {assign var="i" value=1}
+      {section name=n loop=$orden.detalle}
+      <tr>
+        <td width="3%" nowrap="nowrap"><div align="center">{$i}</div></td>
+        <td width="7%" nowrap="nowrap"><div align="center">{$orden.detalle[n].cantidad}</div></td>
+        <td width="7%" nowrap="nowrap"><div align="center">{$orden.detalle[n].umedida}</div></td>
+        <td width="43%" nowrap="nowrap">{$orden.detalle[n].descripcion}</td>
+        <td width="13%" nowrap="nowrap"><div align="center">{$orden.detalle[n].especifica}</div></td>
+        <td width="8%" nowrap="nowrap"><div align="center">{$orden.detalle[n].cantidad}</div></td>
+        <td width="8%" nowrap="nowrap"><div align="center">{$orden.detalle[n].precio|number_format:2:",":"."}</div></td>
+        <td width="8%" nowrap="nowrap"><div align="right">{$orden.detalle[n].total|number_format:2:",":"."}</div></td>
+        <td width="3%" nowrap="nowrap"><strong>{$i++}</strong></td>
+      </tr>
+      {assign var="dtotal" value=$dtotal+$con+$orden.detalle[n].total}
+      {/section}
+      {section name=m loop=$rows}
+      <tr>
+        <td class="bold">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td><strong>{$i++}</strong></td>
+      </tr>
+      {/section}
+      <tr>
+        <td class="bold">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td></td>
+        <td><div align="right">{$dtotal|number_format:2:",":"."}</div></td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="bold">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2"><div align="right" style="font-weight:bold; padding-top:1.6em; margin-right:1em;">{$rowsdif|number_text:false}</div></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+        </tbody>
+      
+    </table>
+  </div>
+  <script type="text/javascript">
 			window.print();
 		</script> 
-    </div>
+</div>
 </body>
-	

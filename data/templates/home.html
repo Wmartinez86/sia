@@ -1,91 +1,47 @@
-			<h2>Bienvenido {$loginuser.nombres}</h2>
-            <p>Ud. tiene disponibles las siguientes opciones:</p>
-            <ul>
-            	<li>Requerimientos
-                	<ul>
-                        <li><a href="requerimientonew.php">Generar Requerimientos</a>
-                          <ul>
-                            <li><a href="requerimiento-lista.php">Ver Requerimientos</a></li>
-                          </ul><br />
-                        </li>
-                    </ul>
-                </li>
-                {if $loginuser.usertype==1}
-                <li>Órdenes
-                	<ul>
-                        <li><a href="orden-compra.php">Generar Órdenes de Compra</a>
-                          <ul>
-                            <li><a href="orden-compra-lista.php">Ver Órdenes de Compra</a></li>
-                          </ul><br />
-                        </li>
-                        <li><a href="orden-servicio.php">Generar Órdenes de Servicio</a>
-                          <ul>
-                            <li><a href="orden-servicio-lista.php">Ver Órdenes de Servicio</a></li>
-                          </ul><br />
-                        </li>
-                        <li><a href="informes.php">Informes</a></li>
-                    </ul>
-                </li>
-            	<li>Cotizaciones
-                	<ul>
-                        <li><a href="cotizacionnew.php">Generar Cotizaci&oacute;n</a>
-                          <ul>
-                            <li><a href="cotizacion-lista.php">Ver Cotizaciones</a></li>
-                          </ul>
-                        </li>
-                    </ul>
-                </li>
-                
-                <li>Proyectos
-                	<ul>
-                        <li><a href="proyectos.php#lista">Ver lista de proyectos</a>
-                          <ul>
-                            <li><a href="proyectos.php#frmproy">Crear un nuevo proyecto</a></li>
-                          </ul>
-                        </li>
-                        <li><a href="proyectos.php?excel">Exportar la lista de proyectos a Excel</a></li>
-                    </ul>
-                </li>
-                 <li>Proveedores
-                	<ul>
-                        <li><a href="proveedores.php#lista">Ver lista de proveedores</a>
-                          <ul>
-                            <li><a href="proveedores.php#frmprov">Crear un nuevo proveedor</a></li>
-                          </ul>
-                        </li>
-                        <li><a href="proveedores.php?excel">Exportar la lista de proveedores a Excel</a></li>
-                    </ul>
-                </li>
-                <li>Sistema
-                	<ul>
-                        <li>Fuentes de financiamiento
-                            <ul>
-                                <li><a href="fuentes.php#lista">Ver lista de fuentes de financiamiento</a>
-                                  <ul>
-                                    <li><a href="fuentes.php#frmfont">Crear una nueva fuente de financiamiento</a></li>
-                                  </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>Documentos de solicitud
-                            <ul>
-                                <li><a href="docs.php#lista">Ver lista de tipos de documento</a>
-                                  <ul>
-                                    <li><a href="docs.php#frmdoc">Crear un nuevo tipo de documento</a></li>
-                                  </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>Usuarios
-                            <ul>
-                                <li><a href="usuarios.php#lista">Ver lista de usuarios</a>
-                                  <ul>
-                                    <li><a href="usuarios.php#frmuser">Crear un nuevo usuario</a></li>
-                                  </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                {/if}
-            </ul>
+<h2>Bienvenido {$loginuser.nombres}</h2>
+<p>Ud. tiene disponibles las siguientes opciones:</p>
+<div class="group-container">
+    <div class="group">
+        <h3>Requerimientos</h3>
+        <p>Puedes <a href="requerimientonew.php">crear</a> o <a href="requerimiento-lista.php">ver los requerimientos</a> para editarlos, imprimirlos o generar cotizaciones.</p>
+    </div>
+    {if $loginuser.usertype==1}
+    <div class="group">
+        <h3>Generación de órdenes</h3>
+        <h4>Órdenes de compra</h4>
+        <p>Puedes <a href="orden-compra.php">Generar Órdenes de Compra</a> o <a href="orden-compra-lista.php">ver el listado</a> para editarlas o imprimirlas</p>
+        <h4>Órdenes de servicio</h4>
+        <p>Puedes <a href="orden-servicio.php">Generar Órdenes de servicio</a> o <a href="orden-servicio-lista.php">ver el listado</a> para editarlas o imprimirlas</p>
+    </div>
+    <div class="group">
+        <h3>Otros</h3>
+        <h4>Fuentes</h4>
+        <p>Administración de las <a href="fuentes.php">fuentes de financiamiento</a>.</p>
+        <h4>Oficinas</h4>
+        <p>Administración de las <a href="fuentes.php">áreas u oficinas</a>.</p>
+        <h4>Documentos</h4>
+        <p>Administración de los <a href="docs.php">documentos relacionados a las órdenes</a>.</p>
+    </div>
+    {/if}
+</div>
+<div class="group-container">
+    {if $loginuser.usertype==1}
+    <div class="group">
+        <h3>Cotizaciones</h3>
+        <p>Puedes <a href="cotizacionnew.php">crear</a> o <a href="cotizacion-lista.php">ver las cotizaciones</a> para editarlas, imprimirlas, generar cuadros comparativos u órdenes.</p>
+    </div>
+    <div class="group">
+        <h3>Proyectos</h3>
+        <p>Puedes ver crear, modificar los <a href="proyectos.php">proyectos</a>.</p>
+    </div>
+    <div class="group">
+        <h3>Proveedores</h3>
+        <p>Puedes ver crear, modificar o buscar información de los <a href="proveedores.php">proveedores</a>.</p>
+    </div>
+    <div class="group">
+        <h3>Usuarios</h3>
+        <p>Administración de los <a href="usuarios.php">usuarios</a> y sus permisos.</p>
+    </div>
+    {/if}
+    
+</div>

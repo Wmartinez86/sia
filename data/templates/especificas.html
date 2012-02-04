@@ -1,46 +1,47 @@
-			<h2>Específicas <span class="options">[<a href="#lista" class="goto">Ver o editar específicas</a> | <a href="#frmespec" class="goto">Añadir Específica</a>]</span></h2>
-            <script type="text/javascript" src="{$scriptsurl}common.php?param=espec"></script>
-            {if $msg}<div class="msg">{$msg}</div>{/if}
-            <form name="frmespec" id="frmespec" action="{$self}" method="post">
-            	<fieldset>
-                	<legend>Datos</legend>
-                    <p>
-                    	<label for="codigo">Código:</label>
-                        <input type="text" name="codigo" id="codigo" maxlength="20" size="20" value="{$especifica.codigo}" class="required" />
-                    </p>
-                    <p>
-                    	<label for="nombre">Nombre:</label>
-                        <input type="text" name="nombre" id="nombre" maxlength="255" size="80" value="{$especifica.nombre}" class="required" />
-                    </p>
-                </fieldset>
-                
-                <p class="submit">
-                	<input type="hidden" name="idespec" id="idespec" value="{$especifica.idespec}" />
-                    <input type="submit" name="submit" id="submit" value="Guardar" />
-                </p>
-                
-           </form>
-           
-           <h2 id="lista">Lista de especificas</h2>
-           <table class="tabla">
-           		<thead>
-                	<tr>
-                    	<th>Código</th>
-                    	<th>Nombre</th>
-                        <th>Acción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                	{section name=n loop=$especificas}
-                	<tr class="{cycle values="even, odd"}">
-                    	<th>{$especificas[n].codigo}</th>
-	                    <td>{$especificas[n].nombre}</td>
-                    	<td><a href="{$self}?idespec={$especificas[n].idespec}">Editar</a></td>
-                    </tr>
-                    {sectionelse}
-                    <tr>	
-                    	<td colspan="3">No existen datos.</td>
-                    </tr>
-                    {/section}
-                </tbody>
-           </table>
+<h2>Específicas <span class="options">[<a href="#lista" class="goto">Ver o editar específicas</a> | <a href="#frmespec" class="goto">Añadir Específica</a>]</span></h2>
+<script type="text/javascript" src="{$scriptsurl}common.php?param=espec"></script> 
+{if $msg}
+<div class="msg">{$msg}</div>
+{/if}
+<form name="frmespec" id="frmespec" action="{$self}" method="post">
+  <fieldset>
+    <legend>Datos</legend>
+    <p>
+      <label for="codigo">Código:</label>
+      <input type="text" name="codigo" id="codigo" maxlength="20" size="20" value="{$especifica.codigo}" class="required" />
+    </p>
+    <p>
+      <label for="nombre">Nombre:</label>
+      <input type="text" name="nombre" id="nombre" maxlength="255" size="80" value="{$especifica.nombre}" class="required" />
+    </p>
+  </fieldset>
+  <p class="submit">
+    <input type="hidden" name="idespec" id="idespec" value="{$especifica.idespec}" />
+    <input type="submit" name="submit" id="submit" value="Guardar" />
+  </p>
+</form>
+<h2 id="lista">Lista de especificas</h2>
+<table class="tabla">
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th>Nombre</th>
+      <th>Acción</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  {section name=n loop=$especificas}
+  <tr class="{cycle values="even, odd"}">
+    <th>{$especificas[n].codigo}</th>
+    <td>{$especificas[n].nombre}</td>
+    <td><a href="{$self}?idespec={$especificas[n].idespec}">Editar</a></td>
+  </tr>
+  {sectionelse}
+  <tr>
+    <td colspan="3">No existen datos.</td>
+  </tr>
+  {/section}
+    </tbody>
+  
+</table>

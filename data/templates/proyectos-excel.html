@@ -1,46 +1,48 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
-    <link rel="stylesheet" type="text/css" media="all" href="{$stylesurl}print-single.css" />
-    <title>Proyectos</title>
+<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
+<link rel="stylesheet" type="text/css" media="all" href="{$stylesurl}print-single.css" />
+<title>Proyectos</title>
 </head>
 <body>
 <table class="tabla">
-    <thead>
-        <tr>
-            <th>sec_func</th>
-            <th>programa</th>
-            <th>prod_pry</th>
-            <th>act_ai_obra</th>
-            <th>funcion</th>
-            <th>division_func</th>
-            <th>grupo_func</th>
-            <th>meta</th>
-            <th>finalidad</th>
-            <th>Nombre</th>
-        </tr>
-    </thead>
-    <tbody>
-        {section name=n loop=$projs}
-        <tr class="{cycle values="even, odd"}">
-            <td>{$projs[n].sec_func}</td>
-            <td>{$projs[n].programa}</td>
-            <td>{$projs[n].prod_pry}</td>
-            <td>{$projs[n].act_ai_obra}</td>
-            <td>{$projs[n].funcion}</td>
-            <td>{$projs[n].division_func}</td>
-            <td>{$projs[n].grupo_func}</td>
-            <td>{$projs[n].meta}</td>
-            <td>{$projs[n].finalidad}</td>
-            <td>{$projs[n].descripcion}</td>
-        </tr>
-        {sectionelse}
-        <tr>	
-            <td colspan="10">No existen datos.</td>
-        </tr>
-        {/section}
+  <thead>
+    <tr>
+      <th>sec_func</th>
+      <th>programa</th>
+      <th>prod_pry</th>
+      <th>act_ai_obra</th>
+      <th>funcion</th>
+      <th>division_func</th>
+      <th>grupo_func</th>
+      <th>meta</th>
+      <th>finalidad</th>
+      <th>Nombre</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  {section name=n loop=$projs}
+  <tr class="{cycle values="even, odd"}">
+    <td>{$projs[n].sec_func}</td>
+    <td>{$projs[n].programa}</td>
+    <td>{$projs[n].prod_pry}</td>
+    <td>{$projs[n].act_ai_obra}</td>
+    <td>{$projs[n].funcion}</td>
+    <td>{$projs[n].division_func}</td>
+    <td>{$projs[n].grupo_func}</td>
+    <td>{$projs[n].meta}</td>
+    <td>{$projs[n].finalidad}</td>
+    <td>{$projs[n].descripcion}</td>
+  </tr>
+  {sectionelse}
+  <tr>
+    <td colspan="10">No existen datos.</td>
+  </tr>
+  {/section}
     </tbody>
+  
 </table>
 </body>
 </html>

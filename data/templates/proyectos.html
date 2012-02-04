@@ -1,90 +1,84 @@
-			<h2>Proyectos <span class="options">[<a href="#lista" class="goto">Ver o editar proyectos</a> | <a href="{$self}" class="goto">Añadir Proyecto</a>]</span></h2>
-            <script type="text/javascript" src="{$scriptsurl}common.php?param=proj&id={$proj.idproyecto}"></script>
-            {if $msg}<div class="msg">{$msg}</div>{/if}
-            <form name="frmproj" id="frmproj" action="{$self}" method="post">
-            	<fieldset>
-                	<legend>Datos del proyecto</legend>
-                    <p>
-                    	<label for="sec_func">Sec_func:</label>
-                        <input type="text" name="sec_func" id="sec_func" maxlength="4" size="4" value="{$proj.sec_func}" class="required number" />
-                    </p>
-                    <p>
-                    	<label for="programa">Programa:</label>
-                        <input type="text" name="programa" id="programa" maxlength="4" size="4" value="{$proj.programa}" class="required number" />
-                    </p>
-                    <p>
-                    	<label for="prod_pry">Prod_pry:</label>
-                        <input type="text" name="prod_pry" id="prod_proy" maxlength="7" size="7" value="{$proj.prod_pry}" class="required number" />
-                    </p>
-                    <p>
-                    	<label for="act_ai_obra">Act_ai_obra:</label>
-                        <input type="text" name="act_ai_obra" id="act_ai_obra" maxlength="7" size="7" value="{$proj.act_ai_obra}" class="required number" />
-                    </p>
-                    
-                    <p>
-                    	<label for="funcion">Función:</label>
-                        <input type="text" name="funcion" id="funcion" maxlength="2" size="2" value="{$proj.funcion}" class="required number" />
-                    </p>
-                    
-                    <p>
-                    	<label for="division_func">División_func:</label>
-                        <input type="text" name="division_func" id="division_func" maxlength="3" size="3" value="{$proj.division_func}" class="required number" />
-                    </p>
-		            <p>
-                    	<label for="grupo_func">Grupo_func:</label>
-                        <input type="text" name="grupo_func" id="grupo_func" maxlength="4" size="4" value="{$proj.grupo_func}" class="required number" />
-                    </p>
-                    <p>
-                    	<label for="meta">Meta:</label>
-                        <input type="text" name="meta" id="meta" maxlength="5" size="5" value="{$proj.meta}" class="required number" />
-                    </p>
-                    <p>
-                    	<label for="finalidad">Finalidad:</label>
-                        <input type="text" name="finalidad" id="finalidad" maxlength="5" size="5" value="{$proj.finalidad}" class="required number" />
-                    </p>
-                    <p>
-                    	<label for="descripcion">Nombre:</label>
-                        <input type="text" name="descripcion" id="descripcion" maxlength="255" size="80" value="{$proj.descripcion|escape:"html"}" class="required" />
-                    </p>
-                </fieldset>
-                
-                <p class="submit">
-                	<input type="hidden" name="idproyecto" id="idproyecto" value="{$proj.idproyecto}" />
-                    <input type="submit" name="submit" id="submit" value="Guardar" />
-                    {if $proj.idproyecto}
-                    <input type="button" name="print" id="print" value="Imprimir" />
-                    {/if}
-                </p>
-                
-           </form>
-           
-           <h2 id="lista">Lista de Proyectos <span class="options">[{if $fidtipo}
-           <a href="{$self}?excel&amp;fidtipo={$fidtipo}">Exportar esta lista a Excel</a>
-           {else}
-           <a href="{$self}?excel">Exportar esta lista a Excel</a>
-           {/if}]</span></h2>
-           <table class="tabla">
-           		<thead>
-                	<tr>
-                            <th>Cadena Funcional</th>
-                            <th>Descripción</th>
-                        </tr>
-                </thead>
-                <tbody>
-                	{section name=n loop=$projs}
-                	<tr class="{cycle values="even, odd"}">
-                    	<th><a href="{$self}?idproyecto={$projs[n].idproyecto}" title="Click para editar">{$projs[n].sec_func}.{$projs[n].programa}.{$projs[n].prod_pry}.{$projs[n].act_ai_obra}.{$projs[n].funcion}.{$projs[n].division_func}.{$projs[n].grupo_func}.{$projs[n].meta}.{$projs[n].finalidad}</a></th>
-                        <td>{$projs[n].descripcion}</td>
-                    </tr>
-                    {sectionelse}
-                    <tr>	
-                    	<td colspan="2">No existen datos.</td>
-                    </tr>
-                    {/section}
-                </tbody>
-           </table>
-           {if $fidtipo}
-            <script type="text/javascript">
+<h2>Proyectos <span class="options">[<a href="#lista" class="goto">Ver o editar proyectos</a> | <a href="{$self}" class="goto">Añadir Proyecto</a>]</span></h2>
+<script type="text/javascript" src="{$scriptsurl}common.php?param=proj&id={$proj.idproyecto}"></script> 
+{if $msg}
+<div class="msg">{$msg}</div>
+{/if}
+<form name="frmproj" id="frmproj" action="{$self}" method="post">
+  <fieldset>
+    <legend>Datos del proyecto</legend>
+    <p>
+      <label for="sec_func">Sec_func:</label>
+      <input type="text" name="sec_func" id="sec_func" maxlength="4" size="4" value="{$proj.sec_func}" class="required number" />
+    </p>
+    <p>
+      <label for="programa">Programa:</label>
+      <input type="text" name="programa" id="programa" maxlength="4" size="4" value="{$proj.programa}" class="required number" />
+    </p>
+    <p>
+      <label for="prod_pry">Prod_pry:</label>
+      <input type="text" name="prod_pry" id="prod_proy" maxlength="7" size="7" value="{$proj.prod_pry}" class="required number" />
+    </p>
+    <p>
+      <label for="act_ai_obra">Act_ai_obra:</label>
+      <input type="text" name="act_ai_obra" id="act_ai_obra" maxlength="7" size="7" value="{$proj.act_ai_obra}" class="required number" />
+    </p>
+    <p>
+      <label for="funcion">Función:</label>
+      <input type="text" name="funcion" id="funcion" maxlength="2" size="2" value="{$proj.funcion}" class="required number" />
+    </p>
+    <p>
+      <label for="division_func">División_func:</label>
+      <input type="text" name="division_func" id="division_func" maxlength="3" size="3" value="{$proj.division_func}" class="required number" />
+    </p>
+    <p>
+      <label for="grupo_func">Grupo_func:</label>
+      <input type="text" name="grupo_func" id="grupo_func" maxlength="4" size="4" value="{$proj.grupo_func}" class="required number" />
+    </p>
+    <p>
+      <label for="meta">Meta:</label>
+      <input type="text" name="meta" id="meta" maxlength="5" size="5" value="{$proj.meta}" class="required number" />
+    </p>
+    <p>
+      <label for="finalidad">Finalidad:</label>
+      <input type="text" name="finalidad" id="finalidad" maxlength="5" size="5" value="{$proj.finalidad}" class="required number" />
+    </p>
+    <p>
+      <label for="descripcion">Nombre:</label>
+      <input type="text" name="descripcion" id="descripcion" maxlength="255" size="80" value="{$proj.descripcion|escape:"html"}" class="required" />
+    </p>
+  </fieldset>
+  <p class="submit">
+    <input type="hidden" name="idproyecto" id="idproyecto" value="{$proj.idproyecto}" />
+    <input type="submit" name="submit" id="submit" value="Guardar" />
+    {if $proj.idproyecto}
+    <input type="button" name="print" id="print" value="Imprimir" />
+    {/if} </p>
+</form>
+<h2 id="lista">Lista de Proyectos <span class="options">[{if $fidtipo} <a href="{$self}?excel&amp;fidtipo={$fidtipo}">Exportar esta lista a Excel</a> {else} <a href="{$self}?excel">Exportar esta lista a Excel</a> {/if}]</span></h2>
+<table class="tabla">
+  <thead>
+    <tr>
+      <th>Cadena Funcional</th>
+      <th>Descripción</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  {section name=n loop=$projs}
+  <tr class="{cycle values="even, odd"}">
+    <th><a href="{$self}?idproyecto={$projs[n].idproyecto}" title="Click para editar">{$projs[n].sec_func}.{$projs[n].programa}.{$projs[n].prod_pry}.{$projs[n].act_ai_obra}.{$projs[n].funcion}.{$projs[n].division_func}.{$projs[n].grupo_func}.{$projs[n].meta}.{$projs[n].finalidad}</a></th>
+    <td>{$projs[n].descripcion}</td>
+  </tr>
+  {sectionelse}
+  <tr>
+    <td colspan="2">No existen datos.</td>
+  </tr>
+  {/section}
+    </tbody>
+  
+</table>
+{if $fidtipo} 
+<script type="text/javascript">
 				location.href = '#lista';
-            </script>
-            {/if}
+            </script> 
+{/if}

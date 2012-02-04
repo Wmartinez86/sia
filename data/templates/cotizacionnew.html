@@ -1,151 +1,131 @@
-			<h2>Cotización <span class="options">[<a href="cotizacion-lista.php">Ver Cotizaciones</a> | <a href="{$self}">Crear Cotizacion</a> | <a href="informes.php">Generar Informes</a> 
-            {if $cot.idcot!=0} | <a href="cotizacion-print.php?idcot={$cot.idcot}">Imprimir</a>| <a href="cuadro-comparativo.php?idcot={$cot.idcot}">Cuadro Comparativo</a>{/if}]</span></h2>
-            <script type="text/javascript" src="{$scriptsurl}jquery.calculation.min.js"></script>
-            <script type="text/javascript" src="{$scriptsurl}common.php?param=cotizacion&idreq={$req.idreq}"></script>
-            {if $msg}<div class="msg">{$msg}</div>{/if}
-            <div id="tabs">
-            <form name="frmcot" id="frmcot" action="{$self}" method="post">
-                <div id="tabs-1">
-            	<fieldset>
-                	<legend>Datos de la Cotización</legend>
-                    <p>
-                    	<label for="referencia"><abbr title="Referencia de la Cotizacion">Referencia: </abbr></label>
-                        {if $nreq2}
-                        <input type="text" name="referencia" id="referencia" value="{$nreq2}" class="required" size="95" readonly="readonly" />
-                        {else}
-                        <input type="text" name="referencia" id="referencia" value="{$cot.referencia|escape:"html"}" class="required" />
-                        {/if}
-                    </p>
-                    <p>
-                    	<label for="codigo">Nro. de Cotización :</label>
-                        <input type="text" name="codigo" id="codigo" value="{if $cot.codigo}{$cot.codigo|escape:"html"}{else}{$codgen}{/if}" maxlength="10" class="required" />
-                    </p>
-                    <p>
-                        <label for="fecha">Fecha:</label>
-                        <input type="text" name="fecha" id="fecha" size="11" value="{if $cot.fecha}{$cot.fecha}{else}{$smarty.now|date_format:"%d/%m/%Y"}{/if}" class="required" />
-                    </p>
-                    <p>
-                    	<label for="tipocontrata">Tipo de <abbr title="Contratación">Contrat.</abbr>:</label>
-                        <select name="tipocontrata" id="tipocontrata">
+<h2>Cotización <span class="options">[<a href="cotizacion-lista.php">Ver Cotizaciones</a> | <a href="{$self}">Crear Cotizacion</a> | <a href="informes.php">Generar Informes</a> {if $cot.idcot!=0} | <a href="cotizacion-print.php?idcot={$cot.idcot}">Imprimir</a>| <a href="cuadro-comparativo.php?idcot={$cot.idcot}">Cuadro Comparativo</a>{/if}]</span></h2>
+<script type="text/javascript" src="{$scriptsurl}jquery.calculation.min.js"></script> 
+<script type="text/javascript" src="{$scriptsurl}common.php?param=cotizacion&idreq={$req.idreq}"></script> 
+{if $msg}
+<div class="msg">{$msg}</div>
+{/if}
+<div id="tabs">
+  <form name="frmcot" id="frmcot" action="{$self}" method="post">
+    <div id="tabs-1">
+      <fieldset>
+        <legend>Datos de la Cotización</legend>
+        <p>
+          <label for="referencia"><abbr title="Referencia de la Cotizacion">Referencia: </abbr></label>
+          {if $nreq2}
+          <input type="text" name="referencia" id="referencia" value="{$nreq2}" class="required" size="95" readonly="readonly" />
+          {else}
+          <input type="text" name="referencia" id="referencia" value="{$cot.referencia|escape:"html"}" class="required" />
+          {/if} </p>
+        <p>
+          <label for="codigo">Nro. de Cotización :</label>
+          <input type="text" name="codigo" id="codigo" value="{if $cot.codigo}{$cot.codigo|escape:"html"}{else}{$codgen}{/if}" maxlength="10" class="required" />
+        </p>
+        <p>
+          <label for="fecha">Fecha:</label>
+          <input type="text" name="fecha" id="fecha" size="11" value="{if $cot.fecha}{$cot.fecha}{else}{$smarty.now|date_format:"%d/%m/%Y"}{/if}" class="required" />
+        </p>
+        <p>
+          <label for="tipocontrata">Tipo de <abbr title="Contratación">Contrat.</abbr>:</label>
+          <select name="tipocontrata" id="tipocontrata">
+            
                             {html_options options=$aordenes}
-                        </select>
-                    </p>
-                </fieldset>
-                </div>
-                                              
-                <div id="tabs-3">
-                <fieldset>
-                	<legend>Detalles de la Cotizacion</legend>
-                        {if !$req.detalle}
-                    <table class="tabla">
-                    	<thead>
-                        	<tr>
-                            	<th colspan="3">Artículos</th>
-                                {if $cot.detalle}
-                                <th rowspan="2">Acciones</th>
-                                {/if}
-                            </tr>
-                        	<tr>
-                                <th>Cantidad</th>
-                                <th><abbr title="Unidad de Medida">U. Med.</abbr></th>
-                                <th>Descripción</th>
-                            </tr>
-                        </thead>
-                        {if !$cot.detalle}
-                        <tbody id="tbody">
-                        	<tr id="firstr">
-                                <td>
-	                            	<input type="text" name="cantidad[]" size="10" maxlength="10" class="number required cantidad" title="*" />
-                                </td>
-                                <td>
-	                            	<input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" />
-                                </td>
-                                <td>
-	                            	<input type="text" name="descripcion[]" maxlength="255" size="97" class="required" title="*" />
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p class="aright">
-                        <input type="button" name="clone" id="clone" value="Añadir" />
-                    </p>
-                    {else}
-                    	<tbody id="tbody">
-				{assign var="con" value=0}
-                        	{section name=n loop=$cot.detalle}
-                        	<tr id="firstr">
-                                <td><input type="text" name="cantidad[]" size="10" maxlength="10" class="number required cantidad" title="*" value="{$cot.detalle[n].cantidad}" /></td>
-                                <td><input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" value="{$cot.detalle[n].umedida}" /></td>
-                                <td><input type="text" name="descripcion[]" maxlength="255" size="50" class="required" title="*" value="{$cot.detalle[n].descripcion|escape:"html"}" /></td>
-                                <td>
-                                	{if !$nodel}
-				                     {if $cot.status!=3}
-	                                   <a href="borrar-detalle-cotizacion.php?iddetalle={$cot.detalle[n].iddetalle}&amp;idcot={$cot.idcot}" class="ddetalle">Borrar</a>
-                                     {else}con C.C.{/if}                                     
-                                    {/if}
-                                    <input type="hidden" name="iddetalle[]" value="{$cot.detalle[n].iddetalle}" />
-                                </td>
-                            </tr>
-                            {/section}
-                        </tbody>
-                    </table>
-                    <p class="aright">
-                        <input type="button" name="add" value="Añadir" onclick="location.href='add-item.php?id={$cot.idcot}&amp;entity=cotizacion'" />
-                    </p>
-                    {/if}
-                    {else}
-                    {* Cuando viene de un requerimiento, es decir cuando existe $idreq *}
-                    
-                    <table class="tabla">
-                    	<thead>
-                        	<tr>
-                            	<th colspan="3">Artículos</th>
-                                <th rowspan="2">Acciones</th>
-                            </tr>
-                        	<tr>
-                                <th>Cantidad</th>
-                                <th><abbr title="Unidad de Medida">U. Med.</abbr></th>
-                                <th>Descripción</th>
-                            </tr>
-                        </thead>
                         
-                    	<tbody id="tbody">
-				{assign var="con" value=0}
-                        	{section name=n loop=$req.detalle}
-                                <tr id="firstr">
-                                    <td><input type="text" name="cantidad[]" size="10" maxlength="10" class="number required cantidad" title="*" value="{$req.detalle[n].cantidad}" /></td>
-                                    <td><input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" value="{$req.detalle[n].umedida}" /></td>
-                                    <td><input type="text" name="descripcion[]" maxlength="255" size="50" class="required" title="*" value="{$req.detalle[n].descripcion|escape:"html"}" /></td>
-                                    <td class="hola">
-                                        {if !$nodel}
-                                            {if $con != 0}
-                                            <a href="#" class="delete" onclick="$(this).parent().parent().remove(); return false;">Quitar</a>
-                                            {/if}
-                                        {/if}
-
-                                    </td>
-                                    {assign var="con" value=$con+1}
-                                </tr>
-                            {/section}
-                        </tbody>
-                    </table>
-                    <p class="aright">
-                        <input type="button" name="clone" id="clone" value="Añadir" />
-                    </p>
-                    
-                    
-                    
-                    {/if}
-                </fieldset>
-                <p class="submit">
-                    <input type="submit" name="submit" id="submit" value="Guardar" />
-                    <input type="hidden" name="idcot" id="idcot" value="{$cot.idcot}" />
-                </p>
-                <!--p>
+          </select>
+        </p>
+      </fieldset>
+    </div>
+    <div id="tabs-3">
+      <fieldset>
+        <legend>Detalles de la Cotizacion</legend>
+        {if !$req.detalle}
+        <table class="tabla">
+          <thead>
+            <tr>
+              <th colspan="3">Artículos</th>
+              {if $cot.detalle}
+              <th rowspan="2">Acciones</th>
+              {/if} </tr>
+            <tr>
+              <th>Cantidad</th>
+              <th><abbr title="Unidad de Medida">U. Med.</abbr></th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          {if !$cot.detalle}
+          <tbody id="tbody">
+            <tr id="firstr">
+              <td><input type="text" name="cantidad[]" size="10" maxlength="10" class="number required cantidad" title="*" /></td>
+              <td><input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" /></td>
+              <td><input type="text" name="descripcion[]" maxlength="255" size="97" class="required" title="*" /></td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="aright">
+          <input type="button" name="clone" id="clone" value="Añadir" />
+        </p>
+        {else}
+        <tbody id="tbody">
+        
+        {assign var="con" value=0}
+        {section name=n loop=$cot.detalle}
+        <tr id="firstr">
+          <td><input type="text" name="cantidad[]" size="10" maxlength="10" class="number required cantidad" title="*" value="{$cot.detalle[n].cantidad}" /></td>
+          <td><input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" value="{$cot.detalle[n].umedida}" /></td>
+          <td><input type="text" name="descripcion[]" maxlength="255" size="50" class="required" title="*" value="{$cot.detalle[n].descripcion|escape:"html"}" /></td>
+          <td> {if !$nodel}
+            {if $cot.status!=3} <a href="borrar-detalle-cotizacion.php?iddetalle={$cot.detalle[n].iddetalle}&amp;idcot={$cot.idcot}" class="ddetalle">Borrar</a> {else}con C.C.{/if}                                     
+            {/if}
+            <input type="hidden" name="iddetalle[]" value="{$cot.detalle[n].iddetalle}" /></td>
+        </tr>
+        {/section}
+        </tbody>
+        </table>
+        <p class="aright">
+          <input type="button" name="add" value="Añadir" onclick="location.href='add-item.php?id={$cot.idcot}&amp;entity=cotizacion'" />
+        </p>
+        {/if}
+        {else}
+        {* Cuando viene de un requerimiento, es decir cuando existe $idreq *}
+        <table class="tabla">
+          <thead>
+            <tr>
+              <th colspan="3">Artículos</th>
+              <th rowspan="2">Acciones</th>
+            </tr>
+            <tr>
+              <th>Cantidad</th>
+              <th><abbr title="Unidad de Medida">U. Med.</abbr></th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+          
+          {assign var="con" value=0}
+          {section name=n loop=$req.detalle}
+          <tr id="firstr">
+            <td><input type="text" name="cantidad[]" size="10" maxlength="10" class="number required cantidad" title="*" value="{$req.detalle[n].cantidad}" /></td>
+            <td><input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" value="{$req.detalle[n].umedida}" /></td>
+            <td><input type="text" name="descripcion[]" maxlength="255" size="50" class="required" title="*" value="{$req.detalle[n].descripcion|escape:"html"}" /></td>
+            <td class="hola"> {if !$nodel}
+              {if $con != 0} <a href="#" class="delete" onclick="$(this).parent().parent().remove(); return false;">Quitar</a> {/if}
+              {/if} </td>
+            {assign var="con" value=$con+1} </tr>
+          {/section}
+            </tbody>
+          
+        </table>
+        <p class="aright">
+          <input type="button" name="clone" id="clone" value="Añadir" />
+        </p>
+        {/if}
+      </fieldset>
+      <p class="submit">
+        <input type="submit" name="submit" id="submit" value="Guardar" />
+        <input type="hidden" name="idcot" id="idcot" value="{$cot.idcot}" />
+      </p>
+      <!--p>
                     <a href="#tabs-2">&laquo;Anterior</a>
-                </p-->
-                </div>
-                
-                
-           </form>
-           </div>
+                </p--> 
+    </div>
+  </form>
+</div>

@@ -1,71 +1,67 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
-    <link rel="stylesheet" type="text/css" media="screen" href="{$stylesurl}styles.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="{$stylesurl}theme/ui.all.css" />
-    <script type="text/javascript" src="{$scriptsurl}jquery.js"></script>
-    <script type="text/javascript" src="{$scriptsurl}jquery.ui.all.js"></script>
-    <script type="text/javascript" src="{$scriptsurl}jquery.validate.js"></script>
-    <script type="text/javascript" src="{$scriptsurl}es.js"></script>
-	<title>{$section_title}</title>
+<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
+<link rel="stylesheet" type="text/css" media="screen" href="{$stylesurl}styles.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="{$stylesurl}theme/ui.all.css" />
+<script type="text/javascript" src="{$scriptsurl}jquery.js"></script>
+<script type="text/javascript" src="{$scriptsurl}jquery.ui.all.js"></script>
+<script type="text/javascript" src="{$scriptsurl}jquery.validate.js"></script>
+<script type="text/javascript" src="{$scriptsurl}es.js"></script>
+<title>{$section_title}</title>
 </head>
 <body>
-	<div class="wrap background">
-		<div id="loginbox">
-        	{if !$loginuser || $file=="logout.html"}
-			<script type="text/javascript">
+<div class="wrap background">
+  <div id="loginbox"> {if !$loginuser || $file=="logout.html"} 
+    <script type="text/javascript">
 				window.close();
-            </script>
-            {else}
-            Usuario: {$loginuser.username} | <a href="logout.php">Salir</a>
-            {/if}
-		</div>
-		<ul id="menu">
-          	</ul>
-		<div class="clear"></div>
-		
-		<div id="left">
-        	<h2>Proveedores <span class="options">[<a href="#" class="goto" onclick="window.close();window.opener.oruc.focus();">Cerrar</a>]</span></h2>
-            <script type="text/javascript" src="{$scriptsurl}common.php?param=prov&id={$prov.idproveedor}"></script>
-            {if $msg}<div class="msg">{$msg}</div>{/if}
-            <form name="frmprov" id="frmprov" action="{$self}" method="post">
-            	<fieldset>
-                	<legend>Datos del proveedor</legend>
-                    <p>
-                    	<label for="razonsocial">Razón Social:</label>
-                        <input type="text" name="razonsocial" id="razonsocial" maxlength="255" size="60" value="{$prov.razonsocial}" class="required" title="Ingresa la razón social" /><br />
-                    </p>
-                    <p>
-                    	<label for="direccion">Dirección:</label>
-                        <input type="text" name="direccion" id="direccion" maxlength="255" size="60" value="{$prov.direccion}" class="required" title="Ingresa la dirección del proveedor" />
-                    </p>
-                    <p>
-                    	<label for="ruc"><acronym title="Registro Único del Contribuyente">RUC</acronym>:</label>
-                        <input type="text" name="ruc" id="ruc" maxlength="11" value="{$prov.ruc}" class="number required" minlenght="1" {if $prov.ruc!=""}readonly="readonly"{/if} />
-                    </p>
-                    <p>
-                    	<label for="telefono">Teléfono:</label>
-                        <input type="text" name="telefono" id="telefono" maxlength="100" value="{$prov.telefono}" title="Ingresa el teléfono" />
-                    </p>
-                    <p>
-                    	<label for="email">Email:</label>
-                        <input type="text" name="email" id="email" maxlength="100" size="40" value="{$prov.email}" class="email" title="Ingresa un email correcto" />
-                    </p>
-                </fieldset>
-                
-                <p class="submit">
-                	<input type="hidden" name="idproveedor" id="idproveedor" value="{$prov.idproveedor}" />
-                    <input type="hidden" name="popup" id="popup" value="{$popup}" />
-                    <input type="submit" name="submit" id="submit" value="Guardar" />
-                    <input type="button" name="cerrar" id="cerrar" value="Cerrar" onclick="window.close();window.opener.oruc.focus();" />
-                    {if $prov.idproveedor}
-                    <input type="button" name="print" id="print" value="Imprimir" />
-                    {/if}
-                </p>
-                
-           </form>
-		</div>
-	</div>
+            </script> 
+    {else}
+    Usuario: {$loginuser.username} | <a href="logout.php">Salir</a> {/if} </div>
+  <ul id="menu">
+  </ul>
+  <div class="clear"></div>
+  <div id="left">
+    <h2>Proveedores <span class="options">[<a href="#" class="goto" onclick="window.close();window.opener.oruc.focus();">Cerrar</a>]</span></h2>
+    <script type="text/javascript" src="{$scriptsurl}common.php?param=prov&id={$prov.idproveedor}"></script> 
+    {if $msg}
+    <div class="msg">{$msg}</div>
+    {/if}
+    <form name="frmprov" id="frmprov" action="{$self}" method="post">
+      <fieldset>
+        <legend>Datos del proveedor</legend>
+        <p>
+          <label for="razonsocial">Razón Social:</label>
+          <input type="text" name="razonsocial" id="razonsocial" maxlength="255" size="60" value="{$prov.razonsocial}" class="required" title="Ingresa la razón social" />
+          <br />
+        </p>
+        <p>
+          <label for="direccion">Dirección:</label>
+          <input type="text" name="direccion" id="direccion" maxlength="255" size="60" value="{$prov.direccion}" class="required" title="Ingresa la dirección del proveedor" />
+        </p>
+        <p>
+          <label for="ruc"><acronym title="Registro Único del Contribuyente">RUC</acronym>:</label>
+          <input type="text" name="ruc" id="ruc" maxlength="11" value="{$prov.ruc}" class="number required" minlenght="1" {if $prov.ruc!=""}readonly="readonly"{/if} />
+        </p>
+        <p>
+          <label for="telefono">Teléfono:</label>
+          <input type="text" name="telefono" id="telefono" maxlength="100" value="{$prov.telefono}" title="Ingresa el teléfono" />
+        </p>
+        <p>
+          <label for="email">Email:</label>
+          <input type="text" name="email" id="email" maxlength="100" size="40" value="{$prov.email}" class="email" title="Ingresa un email correcto" />
+        </p>
+      </fieldset>
+      <p class="submit">
+        <input type="hidden" name="idproveedor" id="idproveedor" value="{$prov.idproveedor}" />
+        <input type="hidden" name="popup" id="popup" value="{$popup}" />
+        <input type="submit" name="submit" id="submit" value="Guardar" />
+        <input type="button" name="cerrar" id="cerrar" value="Cerrar" onclick="window.close();window.opener.oruc.focus();" />
+        {if $prov.idproveedor}
+        <input type="button" name="print" id="print" value="Imprimir" />
+        {/if} </p>
+    </form>
+  </div>
+</div>
 </body>
 </html>

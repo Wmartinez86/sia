@@ -1,39 +1,41 @@
-            <h2>Opciones</h2>
-            <script type="text/javascript" src="{$scriptsurl}common.php?param=opciones"></script>
-            {if $msg}<div class="msg">{$msg}</div>{/if}
-            <form name="frmoptions" id="frmoptions" action="{$self}" method="post">
-            	<fieldset>
-                    <legend>Opciones generales del Sistema</legend>
-                    <p>
-                    	<label for="tipo_entidad">Tipo de Entidad:</label>
-                        <input type="text" name="tipo_entidad" id="tipo_entidad" size="70" value="{$options.tipo_entidad}" class="required" title="Ingresa el nombre de la entidad" /><br />
-                        <span class="nota">El tipo de la entidad, por ejem: "Municipalidad Distrital de"</span>
-                    </p>
-                    <p>
-                    	<label for="nombre_entidad">Entidad:</label>
-                        <input type="text" name="nombre_entidad" id="nombre_entidad" size="70" value="{$options.nombre_entidad}" class="required" title="Ingresa el tipo de entidad" /><br />
-                        <span class="nota">El nombre de la entidad, por ejem: "Cusco"</span>
-                    </p>
-                    <p>
-                    	<label for="ubicacion">Ubicación:</label>
-                        <input type="text" name="ubicacion" id="ubicacion" size="50" value="{$options.ubicacion}" class="required" title="Ingresa la ubicación" /><br />
-                        <span class="nota">Dónde está ubicado, por ejem: "Calca - Cusco"</span>
-                    </p>
-                    <p>
-                        <label for="ruc_entidad"><abbr title="Registro Único del Contribuyente">RUC</abbr>:</label>
-                        <input type="text" name="ruc_entidad" id="ruc_sistema" size="11" maxlength="11" value="{$options.ruc_entidad}" class="required number" title="Ingresa el RUC" /><br />
-                        <span class="nota">El RUC de la entidad.</span>
-                    </p>
-                    <p>
-                    	<label for="logo">Logo:</label>
-                        <input type="radio" name="logo" id="logo1" value="1" {if $options.logo == 1}checked="checked" {/if}/> <label for="logo1" class="nolab">Si</label>
-                        <input type="radio" name="logo" id="logo2" value="0" {if $options.logo == 0}checked="checked" {/if}/> <label for="logo2" class="nolab">No</label><br />
-                        <span class="nota">Indica si las impresiones mostrar&aacute;n un logo o no.</span>
-                    </p>
-                </fieldset>
-                
-                <p class="submit">
-                    <input type="submit" name="submit" id="submit" value="Guardar" />
-                </p>
-                
-           </form>
+<h2>Opciones</h2>
+<script type="text/javascript" src="{$scriptsurl}common.php?param=opciones"></script> 
+{if $msg}
+<div class="msg">{$msg}</div>
+{/if}
+<form name="frmoptions" id="frmoptions" action="{$self}" method="post">
+  <fieldset>
+    <legend>Opciones generales del Sistema</legend>
+    <p>
+      <label for="tipo_entidad">Tipo de Entidad:</label>
+      <input type="text" name="tipo_entidad" id="tipo_entidad" size="70" value="{$options.tipo_entidad}" class="required" title="Ingresa el nombre de la entidad" />
+      <br />
+      <span class="nota">El tipo de la entidad, por ejem: "Municipalidad Distrital de"</span> </p>
+    <p>
+      <label for="nombre_entidad">Entidad:</label>
+      <input type="text" name="nombre_entidad" id="nombre_entidad" size="70" value="{$options.nombre_entidad}" class="required" title="Ingresa el tipo de entidad" />
+      <br />
+      <span class="nota">El nombre de la entidad, por ejem: "Cusco"</span> </p>
+    <p>
+      <label for="ubicacion">Ubicación:</label>
+      <input type="text" name="ubicacion" id="ubicacion" size="50" value="{$options.ubicacion}" class="required" title="Ingresa la ubicación" />
+      <br />
+      <span class="nota">Dónde está ubicado, por ejem: "Calca - Cusco"</span> </p>
+    <p>
+      <label for="ruc_entidad"><abbr title="Registro Único del Contribuyente">RUC</abbr>:</label>
+      <input type="text" name="ruc_entidad" id="ruc_sistema" size="11" maxlength="11" value="{$options.ruc_entidad}" class="required number" title="Ingresa el RUC" />
+      <br />
+      <span class="nota">El RUC de la entidad.</span> </p>
+    <p>
+      <label for="logo">Logo:</label>
+      <input type="radio" name="logo" id="logo1" value="1" {if $options.logo == 1}checked="checked" {/if}/>
+      <label for="logo1" class="nolab">Si</label>
+      <input type="radio" name="logo" id="logo2" value="0" {if $options.logo == 0}checked="checked" {/if}/>
+      <label for="logo2" class="nolab">No</label>
+      <br />
+      <span class="nota">Indica si las impresiones mostrar&aacute;n un logo o no.</span> </p>
+  </fieldset>
+  <p class="submit">
+    <input type="submit" name="submit" id="submit" value="Guardar" />
+  </p>
+</form>

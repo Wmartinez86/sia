@@ -1,61 +1,68 @@
 <script type="text/javascript" src="{$scriptsurl}common.php?param=listacot"></script>
-
 <h2>Lista de Cotizaciones <span class="options">[<a href="cotizacionnew.php" class="goto">Añadir Cotización</a>]</span></h2>
-
-<ul class="i-tabs"> 
-    <li><a href="#i-admin">Buscar por datos</a></li>
-    <li><a href="#i-numero">Buscar por número</a></li> 
+<ul class="i-tabs">
+  <li><a href="#i-admin">Buscar por datos</a></li>
+  <li><a href="#i-numero">Buscar por número</a></li>
 </ul>
 <div class="i-tab-container">
-    <div id="i-admin" class="i-tab-content">
-        <form name="filter" id="filter" method="GET">
-            <fieldset class="collapsible">
-                <legend>Por datos</legend>
-                <p>
-                    <label for="idproyecto">Meta:</label>
-                    <!--input type="text" name="proyectos" id="proyectos" size="60" value="{$user.proyecto.descripcion}" />
+  <div id="i-admin" class="i-tab-content">
+    <form name="filter" id="filter" method="GET">
+      <fieldset class="collapsible">
+        <legend>Por datos</legend>
+        <p>
+        <label for="idproyecto">Meta:</label>
+        <!--input type="text" name="proyectos" id="proyectos" size="60" value="{$user.proyecto.descripcion}" />
                     <input type="hidden" name="idproyecto" id="idproyecto" value="{$user.proyecto.idproyecto}" /-->
-                    <select id="idproyecto" name="idproyecto">
-                    <option value="">Cualquier meta</p>
+        <select id="idproyecto" name="idproyecto">
+          <option value="">Cualquier meta
+          </p>
+          
                     {section name=n loop=$projs}
-                    <option value="{$projs[n].idproyecto}" {if $projs[n].idproyecto==$idproyecto}selected="selected"{/if}>sec_func = {$projs[n].sec_func}</option>
+                    
+          <option value="{$projs[n].idproyecto}" {if $projs[n].idproyecto==$idproyecto}selected="selected"{/if}>sec_func = {$projs[n].sec_func}</option>
+          
                     {/section}
-                    </select>
-                </p>
-                <p>
-                    <label for="iduser">Usuario:</label>
-                    <select id="iduser" name="iduser">
-                    <option value="">Cualquier usuario</p>
+                    
+        </select>
+        </p>
+        <p>
+        <label for="iduser">Usuario:</label>
+        <select id="iduser" name="iduser">
+          <option value="">Cualquier usuario
+          </p>
+          
                     {section name=n loop=$users}
-                    <option value="{$users[n].iduser}" {if $users[n].iduser==$iduser}selected="selected"{/if}>{$users[n].username}</option>
+                    
+          <option value="{$users[n].iduser}" {if $users[n].iduser==$iduser}selected="selected"{/if}>{$users[n].username}</option>
+          
                     {/section}
-                    </select>
-                    <input type="submit" name="submit" id="submit" value="Buscar" />
-                    <input type="hidden" name="op" id="op" value="search" />
-                </p>
-            </fieldset>
-        </form>
-    </div>
-    <div id="i-numero" class="i-tab-content">
-        <form name="filter" id="filter" method="GET">
-            <fieldset class="collapsible">
-                <legend>Por código</legend>
-                <p>
-                    <label for="codigo">Código:</label>
-                    <input type="text" name="codigo" id="codigo" size="10" value="{$codigo}" />
-                    <input type="submit" name="submit" id="submit" value="Buscar" />
-                    <input type="hidden" name="op" id="op" value="number" />
-                </p>
-            </fieldset>
-        </form>
-    </div>
+                    
+        </select>
+        <input type="submit" name="submit" id="submit" value="Buscar" />
+        <input type="hidden" name="op" id="op" value="search" />
+        </p>
+      </fieldset>
+    </form>
+  </div>
+  <div id="i-numero" class="i-tab-content">
+    <form name="filter" id="filter" method="GET">
+      <fieldset class="collapsible">
+        <legend>Por código</legend>
+        <p>
+          <label for="codigo">Código:</label>
+          <input type="text" name="codigo" id="codigo" size="10" value="{$codigo}" />
+          <input type="submit" name="submit" id="submit" value="Buscar" />
+          <input type="hidden" name="op" id="op" value="number" />
+        </p>
+      </fieldset>
+    </form>
+  </div>
 </div>
-
-
 <table class="tabla">
   <thead>
     <tr>
       <th>Nro</th>
+      <th>Tipo</th>
       <th>Referencia</th>
       <th>Fecha</th>
       <th>Autor</th>
@@ -66,50 +73,63 @@
   <tbody>
   
   {section name=n loop=$cotizaciones}
-  <tr class="{cycle values="even, odd"}{if $cotizaciones[n].status==2} cancelled{/if}{if $cotizaciones[n].status == 3} crea-orden{/if}">
+    <tr class="{cycle values="even, odd"}{if $cotizaciones[n].status==2} cancelled{/if}{if $cotizaciones[n].status == 3} crea-orden{/if}">
+  
+  
     <th>{$cotizaciones[n].codigo}</th>
-    <td> {if $cotizaciones[n].tipocontrata == 'o'}
-      [<abbr title="Orden de Servicio">O/S</abbr>]
+    <td>{if $cotizaciones[n].tipocontrata == 'o'}
+      Servicios
       {else}
-      [<abbr title="Orden de Compra">O/C</abbr>]
-      {/if}
-      {$cotizaciones[n].referencia} </td>
+      Bienes
+      {/if}</td>
+    <td>{$cotizaciones[n].referencia} </td>
     <td>{$cotizaciones[n].fecha}</td>
     <td>{$cotizaciones[n].usuario.username}</td>
     <th><a href="cotizacionnew.php?idcot={$cotizaciones[n].idcot}">Ver</a></th>
     <th><a href="cotizacion-print.php?idcot={$cotizaciones[n].idcot}">Imprimir</a></th>
-    <th>
-    	<select name="action[]" class="actions" id="action-{$cotizaciones[n].idcot}">
-        	<option value="--">Escoja una opción</option>
-        	<option value="ecc">Elaborar Cuadro Comparativo</option>
+    <th> <select name="action[]" class="actions" id="action-{$cotizaciones[n].idcot}">
+        <option value="--">Escoja una opción</option>
+        <option value="ecc">Elaborar Cuadro Comparativo</option>
+        
             {if $cotizaciones[n].status==1}
-            <option value="cancelar">Cancelar</option>
+            
+        <option value="cancelar">Cancelar</option>
+        
             {else}{if $cotizaciones[n].status==2}
-            <option value="activar">Activar</option>
+            
+        <option value="activar">Activar</option>
+        
             {else}
-            <option value="imprimir">Imprimir Cuadro Comparativo</option>
+            
+        <option value="imprimir">Imprimir Cuadro Comparativo</option>
+        
             {if $cotizaciones[n].tipocontrata == 'o'}
-            <option value="os">Elaborar Orden</option>
+            
+        <option value="os">Elaborar Orden</option>
+        
             {else}
-            <option value="oc">Elaborar Orden</option>
+            
+        <option value="oc">Elaborar Orden</option>
+        
             {/if}
             {/if}
 		    {/if}
-        </select>
+        
+      </select>
     </th>
   </tr>
   {sectionelse}
   <tr>
-    <td colspan="9">No existen datos.</td>
+    <td colspan="10">No existen datos.</td>
   </tr>
   {/section}
-  </tbody>
+    </tbody>
   
 </table>
 <div class="msg">
-    <ul>
-        <li>Las cotizaciones <span class="crea-orden">naranjas</span> son cotizaciones que ya tienen cuadro comparativo.</li>
-        <li>Las cotizaciones <span class="cancelmsg">tachadas y con rojo</span> son cotizaciones canceladas.</li>
-    </ul>
+  <ul>
+    <li>Las cotizaciones <span class="crea-orden">naranjas</span> son cotizaciones que ya tienen cuadro comparativo.</li>
+    <li>Las cotizaciones <span class="cancelmsg">tachadas y con rojo</span> son cotizaciones canceladas.</li>
+  </ul>
 </div>
 {include file="paginator.html"}

@@ -1,12 +1,13 @@
-			<h2>Requerimiento</h2>
-            <p>Las siguientes acciones están disponibles:</p>
-            <ul>
-            	<li><a href="requerimientonew.php#frmreq">Crear Requerimiento</a>
-            	  <ul>
-            	    <li><a href="requerimiento-lista.php">Ver Requerimientos</a></li>
-          	    </ul><br />
-            	</li>
-                {if $loginuser.usertype==1}
-                <li><a href="informes.php#lista">Generar informes</a></li>
-                {/if}
-            </ul>
+<h2>Requerimiento</h2>
+<p>Las siguientes acciones están disponibles:</p>
+<ul>
+  <li><a href="requerimientonew.php#frmreq">Crear Requerimiento</a>
+    <ul>
+      <li><a href="requerimiento-lista.php">Ver Requerimientos</a></li>
+    </ul>
+    <br />
+  </li>
+  {if $loginuser.usertype==1}
+  <li><a href="informes.php#lista">Generar informes</a></li>
+  {/if}
+</ul>

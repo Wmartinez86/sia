@@ -30,21 +30,15 @@
           <thead>
             <tr>
               <th colspan="3">Artículos</th>
-              <th colspan="2">
-                <label for="ruc">RUC:</label>
+              <th colspan="2"> <label for="ruc">RUC:</label>
                 <input type="text" name="oruc1" id="oruc1" maxlength="11" size="11" value="{if $cot.prov1.ruc}{$cot.prov1.ruc}{/if}" tabindex="1" />
-                <span class="nota" id="idprov1"></span>
-              </th>
-              <th colspan="2">
-                <label for="ruc">RUC:</label>
+                <span class="nota" id="idprov1"></span> </th>
+              <th colspan="2"> <label for="ruc">RUC:</label>
                 <input type="text" name="oruc2" id="oruc2" maxlength="11" size="11" value="{if $cot.prov2.ruc}{$cot.prov2.ruc}{/if}" tabindex="2" />
-                <span class="nota" id="idprov2"></span>
-              </th>
-              <th colspan="2">
-                <label for="ruc">RUC:</label>
+                <span class="nota" id="idprov2"></span> </th>
+              <th colspan="2"> <label for="ruc">RUC:</label>
                 <input type="text" name="oruc3" id="oruc3" maxlength="11" size="11" value="{if $cot.prov3.ruc.ruc}{$cot.prov3.ruc}{/if}" tabindex="3" />
-                <span class="nota" id="idprov3"></span>
-              </th>
+                <span class="nota" id="idprov3"></span> </th>
             </tr>
             <tr>
               <th>Cantidad</th>
@@ -90,9 +84,11 @@
         {assign var="tab" value=4}
         {section name=n loop=$cot.detalle}
         <tr id="firstr">
-          <td><input type="hidden" name="cantidad[]" value="{$cot.detalle[n].cantidad}" />{$cot.detalle[n].cantidad}</td>
+          <td><input type="hidden" name="cantidad[]" value="{$cot.detalle[n].cantidad}" />
+            {$cot.detalle[n].cantidad}</td>
           <td><input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" value="{$cot.detalle[n].umedida}" readonly="readonly"/></td>
-          <td><input type="hidden" name="descripcion[]" value="{$cot.detalle[n].descripcion|escape:html}" />{$cot.detalle[n].descripcion|escape:html}</td>
+          <td><input type="hidden" name="descripcion[]" value="{$cot.detalle[n].descripcion|escape:html}" />
+            {$cot.detalle[n].descripcion|escape:html}</td>
           <td><input type="text" name="precio1[]2" size="10" class="required number precio" title="*" value="{$cot.precio1[n].precio}" tabindex="{$tab}" /></td>
           <td><input type="text" name="total_1" size="10" readonly="readonly" class="total" /></td>
           {assign var="tab2" value=$tab+$numres}
@@ -154,13 +150,12 @@
           </div>
         </div>
         <div class="group-container">
-        <div class="group">
+          <div class="group">
             <h3>Observaciones:</h3>
             <p>
               <textarea  tabindex="608" name="observacion" class="required" title="observaciones de la Buena Pro" cols="48" rows="5">{if $cuadro.Observacion}{$cuadro.Observacion}{else}Los demás proveedores cuentan con el material requerido pero ofertando a mayor precio y en un Mayor plazo de entrega{/if}</textarea>
             </p>
           </div>
-          
           <div class="group">
             <h3>Firmarán en el Acta:</h3>
             <p>

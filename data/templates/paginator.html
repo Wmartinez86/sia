@@ -1,13 +1,11 @@
 {if $RESULTS.first_page || $RESULTS.last_page}
 <div class="paginator">
-	<p>
-	<strong>Página</strong>: {$RESULTS.current_page} de {$RESULTS.num_pages}
-	({$RESULTS.num_records} items)
-	{$RESULTS.first_page}
-	{$RESULTS.prev}
-	{$RESULTS.nav}
-	{$RESULTS.next}
-	{$RESULTS.last_page}
-	</p>
+  <p> <strong>Página</strong>: {$RESULTS.current_page} de {$RESULTS.num_pages}
+    ({$RESULTS.num_records} items)
+    {$RESULTS.first_page}
+    {$RESULTS.prev}
+    {$RESULTS.nav}
+    {$RESULTS.next}
+    {$RESULTS.last_page} </p>
 </div>
-{/if}
+{/if} 

@@ -1,95 +1,104 @@
-            <script type="text/javascript" src="{$scriptsurl}scripts/common.php?param=lista"></script>
-            <h2>Lista de Órdenes de Compra <span class="options">[<a href="orden-compra.php" class="goto">Añadir Orden de Compra</a>]</span></h2>
-            
-            <ul class="i-tabs"> 
-                <li><a href="#i-admin">Buscar por datos</a></li>
-                <li><a href="#i-numero">Buscar por código</a></li> 
-            </ul>
-            <div class="i-tab-container">
-                <div id="i-admin" class="i-tab-content">
-                    <form name="filter" id="filter" method="GET">
-                        <fieldset class="collapsible">
-                            <legend>Por datos</legend>
-                            <p>
-                                <label for="idproyecto">Meta:</label>
-                                <!--input type="text" name="proyectos" id="proyectos" size="60" value="{$user.proyecto.descripcion}" />
+<script type="text/javascript" src="{$scriptsurl}scripts/common.php?param=lista"></script>
+<h2>Lista de Órdenes de Compra <span class="options">[<a href="orden-compra.php" class="goto">Añadir Orden de Compra</a>]</span></h2>
+<ul class="i-tabs">
+  <li><a href="#i-admin">Buscar por datos</a></li>
+  <li><a href="#i-numero">Buscar por código</a></li>
+</ul>
+<div class="i-tab-container">
+  <div id="i-admin" class="i-tab-content">
+    <form name="filter" id="filter" method="GET">
+      <fieldset class="collapsible">
+        <legend>Por datos</legend>
+        <p>
+        <label for="idproyecto">Meta:</label>
+        <!--input type="text" name="proyectos" id="proyectos" size="60" value="{$user.proyecto.descripcion}" />
                                 <input type="hidden" name="idproyecto" id="idproyecto" value="{$user.proyecto.idproyecto}" /-->
-                                <select id="idproyecto" name="idproyecto">
-                                <option value="">Cualquier meta</p>
+        <select id="idproyecto" name="idproyecto">
+          <option value="">Cualquier meta
+          </p>
+          
                                 {section name=n loop=$projs}
-                                <option value="{$projs[n].idproyecto}" {if $projs[n].idproyecto==$idproyecto}selected="selected"{/if}>sec_func = {$projs[n].sec_func}</option>
+                                
+          <option value="{$projs[n].idproyecto}" {if $projs[n].idproyecto==$idproyecto}selected="selected"{/if}>sec_func = {$projs[n].sec_func}</option>
+          
                                 {/section}
-                                </select>
-                            </p>
-                            <p>
-                                <label for="iduser">Usuario:</label>
-                                <select id="iduser" name="iduser">
-                                <option value="">Cualquier usuario</p>
+                                
+        </select>
+        </p>
+        <p>
+        <label for="iduser">Usuario:</label>
+        <select id="iduser" name="iduser">
+          <option value="">Cualquier usuario
+          </p>
+          
                                 {section name=n loop=$users}
-                                <option value="{$users[n].iduser}" {if $users[n].iduser==$iduser}selected="selected"{/if}>{$users[n].username}</option>
+                                
+          <option value="{$users[n].iduser}" {if $users[n].iduser==$iduser}selected="selected"{/if}>{$users[n].username}</option>
+          
                                 {/section}
-                                </select>
-                                <input type="submit" name="submit" id="submit" value="Buscar" />
-                                <input type="hidden" name="op" id="op" value="search" />
-                            </p>
-                        </fieldset>
-                    </form>
-                </div>
-                <div id="i-numero" class="i-tab-content">
-                    <form name="filter" id="filter" method="GET">
-                        <fieldset class="collapsible">
-                            <legend>Por código</legend>
-                            <p>
-                                <label for="codigo">Código:</label>
-                                <input type="text" name="codigo" id="codigo" size="10" value="{$codigo}" />
-                                <input type="submit" name="submit" id="submit" value="Buscar" /><br />
-                                <span class="">Sólo escribir el número de la orden, no el prefijo O/C u O/S</span>
-                                <input type="hidden" name="op" id="op" value="number" />
-                            </p>
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-            
-            
-           <table class="tabla">
-           		<thead>
-                	<tr>
-                    	<th>Código</th>
-                        <th>Referencia</th>
-                        <th>Proyecto</th>
-                        <th>Proveedor</th>
-                        <th>Fecha</th>
-                        <th>Creado por</th>
-                        <th colspan="3">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                	{section name=n loop=$ordenes}
-                	<tr class="{cycle values="even, odd"}{if $ordenes[n].status==2} cancelled{/if}">
-	                <th><abbr title="Orden de Compra">O/C</abbr>{$ordenes[n].codigo}</th>
-                        <td>{$ordenes[n].doc.nombre}: {$ordenes[n].nrodoc}</td>
-                        <td>{$ordenes[n].proyecto.descripcion}</td>
-                        <td>{$ordenes[n].proveedor.razonsocial}</td>
-                        <td>{$ordenes[n].fecha}</td>
-                        <td>{$ordenes[n].usuario.username}</td>
-                        <th><a href="orden-compra.php?idorden={$ordenes[n].idorden}">Ver</a></th>
-                        {if $loginuser.usertype==1}
-                        {if $ordenes[n].status==1}
-                        <th><a href="orden-compra.php?cancel&amp;idorden={$ordenes[n].idorden}" class="cancelorder">Cancelar Orden</a></th>
-                        {else}
-                        <th><a href="orden-compra.php?activate&amp;idorden={$ordenes[n].idorden}" class="activateorder">Activar Orden</a></th>
-                        {/if}
-                        {/if}
-                        <th><a href="orden-compra-print.php?idorden={$ordenes[n].idorden}">Imprimir</a></th>
-                    </tr>
-                    {sectionelse}
-                    <tr>	
-                    	<td colspan="8">No existen datos.</td>
-                    </tr>
-                    {/section}
-                </tbody>
-           </table>
-           <p class="msg">Las ordenes <span class="cancelmsg">tachadas y con rojo</span> son órdenes canceladas.</p>
-           {include file="paginator.html"}
-           
+                                
+        </select>
+        <input type="submit" name="submit" id="submit" value="Buscar" />
+        <input type="hidden" name="op" id="op" value="search" />
+        </p>
+      </fieldset>
+    </form>
+  </div>
+  <div id="i-numero" class="i-tab-content">
+    <form name="filter" id="filter" method="GET">
+      <fieldset class="collapsible">
+        <legend>Por código</legend>
+        <p>
+          <label for="codigo">Código:</label>
+          <input type="text" name="codigo" id="codigo" size="10" value="{$codigo}" />
+          <input type="submit" name="submit" id="submit" value="Buscar" />
+          <br />
+          <span class="">Sólo escribir el número de la orden, no el prefijo O/C u O/S</span>
+          <input type="hidden" name="op" id="op" value="number" />
+        </p>
+      </fieldset>
+    </form>
+  </div>
+</div>
+<table class="tabla">
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th>Referencia</th>
+      <th>Proyecto</th>
+      <th>Proveedor</th>
+      <th>Fecha</th>
+      <th>Creado por</th>
+      <th colspan="3">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  {section name=n loop=$ordenes}
+  <tr class="{cycle values="even, odd"}{if $ordenes[n].status==2} cancelled{/if}">
+    <th><abbr title="Orden de Compra">O/C</abbr>{$ordenes[n].codigo}</th>
+    <td>{$ordenes[n].doc.nombre}: {$ordenes[n].nrodoc}</td>
+    <td>{$ordenes[n].proyecto.descripcion}</td>
+    <td>{$ordenes[n].proveedor.razonsocial}</td>
+    <td>{$ordenes[n].fecha}</td>
+    <td>{$ordenes[n].usuario.username}</td>
+    <th><a href="orden-compra.php?idorden={$ordenes[n].idorden}">Ver</a></th>
+    {if $loginuser.usertype==1}
+    {if $ordenes[n].status==1}
+    <th><a href="orden-compra.php?cancel&amp;idorden={$ordenes[n].idorden}" class="cancelorder">Cancelar Orden</a></th>
+    {else}
+    <th><a href="orden-compra.php?activate&amp;idorden={$ordenes[n].idorden}" class="activateorder">Activar Orden</a></th>
+    {/if}
+    {/if}
+    <th><a href="orden-compra-print.php?idorden={$ordenes[n].idorden}">Imprimir</a></th>
+  </tr>
+  {sectionelse}
+  <tr>
+    <td colspan="8">No existen datos.</td>
+  </tr>
+  {/section}
+  </tbody>
+  
+</table>
+<p class="msg">Las ordenes <span class="cancelmsg">tachadas y con rojo</span> son órdenes canceladas.</p>
+{include file="paginator.html"} 

@@ -1,65 +1,65 @@
-			<h2>Proveedores <span class="options">[<a href="#lista" class="goto">Ver o editar proveedores</a> | <a href="{$self}" class="goto">Añadir Proveedor</a>]</span></h2>
-            <script type="text/javascript" src="{$scriptsurl}common.php?param=prov&id={$prov.idproveedor}"></script>
-            {if $msg}<div class="msg">{$msg}</div>{/if}
-            <form name="frmprov" id="frmprov" action="{$self}" method="post">
-            	<fieldset>
-                	<legend>Datos del proveedor</legend>
-                    <p>
-                    	<label for="razonsocial">Razón Social:</label>
-                        <input type="text" name="razonsocial" id="razonsocial" maxlength="255" size="60" value="{$prov.razonsocial|escape:"html"}" class="required" title="Ingresa la razón social" /><br />
-                    </p>
-                    <p>
-                    	<label for="direccion">Dirección:</label>
-                        <input type="text" name="direccion" id="direccion" maxlength="255" size="60" value="{$prov.direccion|escape:"html"}" class="required" title="Ingresa la dirección del proveedor" />
-                    </p>
-                    <p>
-                    	<label for="ruc"><acronym title="Registro Único del Contribuyente">RUC</acronym>:</label>
-                        <input type="text" name="ruc" id="ruc" maxlength="11" value="{$prov.ruc}" class="number required" minlenght="1" {if $prov.ruc!=""}readonly="readonly"{/if} />
-                    </p>
-                    <p>
-                    	<label for="telefono">Teléfono:</label>
-                        <input type="text" name="telefono" id="telefono" maxlength="100" value="{$prov.telefono}" title="Ingresa el teléfono" />
-                    </p>
-                    <p>
-                    	<label for="email">Email:</label>
-                        <input type="text" name="email" id="email" maxlength="100" size="40" value="{$prov.email}" class="email" title="Ingresa un email correcto" />
-                    </p>
-                </fieldset>
-                
-                <p class="submit">
-                	<input type="hidden" name="idproveedor" id="idproveedor" value="{$prov.idproveedor}" />
-                    <input type="submit" name="submit" id="submit" value="Guardar" />
-                    {if $prov.idproveedor}
-                    <input type="button" name="print" id="print" value="Imprimir" />
-                    {/if}
-                </p>
-                
-           </form>
-           
-           <h2 id="lista">Lista de Proveedores <span class="options">[<a href="{$self}?excel">Exportar esta lista a Excel</a>]</span></h2>
-           
-           <table class="tabla">
-           		<thead>
-                	<tr>
-                        <th>Razón Social</th>
-                        <th>Dirección</th>
-                        <th>Teléfono</th>
-                        <th>RUC</th>
-                    </tr>
-                </thead>
-                <tbody>
-                	{section name=n loop=$provs}
-                    <tr class="{cycle values="even, odd"}">
-                        <td><a href="{$self}?idproveedor={$provs[n].idproveedor}" title="Click para editar">{$provs[n].razonsocial}</a></td>
-                        <td>{$provs[n].direccion}</td>
-                        <td>{$provs[n].telefono}</td>
-                        <td>{$provs[n].ruc}</td>
-                    </tr>
-                    {sectionelse}
-                    <tr>	
-                    	<td colspan="4">No existen datos.</td>
-                    </tr>
-                    {/section}
-                </tbody>
-           </table>
-           {include file="paginator.html"}
+<h2>Proveedores <span class="options">[<a href="#lista" class="goto">Ver o editar proveedores</a> | <a href="{$self}" class="goto">Añadir Proveedor</a>]</span></h2>
+<script type="text/javascript" src="{$scriptsurl}common.php?param=prov&id={$prov.idproveedor}"></script> 
+{if $msg}
+<div class="msg">{$msg}</div>
+{/if}
+<form name="frmprov" id="frmprov" action="{$self}" method="post">
+  <fieldset>
+    <legend>Datos del proveedor</legend>
+    <p>
+      <label for="razonsocial">Razón Social:</label>
+      <input type="text" name="razonsocial" id="razonsocial" maxlength="255" size="60" value="{$prov.razonsocial|escape:"html"}" class="required" title="Ingresa la razón social" />
+      <br />
+    </p>
+    <p>
+      <label for="direccion">Dirección:</label>
+      <input type="text" name="direccion" id="direccion" maxlength="255" size="60" value="{$prov.direccion|escape:"html"}" class="required" title="Ingresa la dirección del proveedor" />
+    </p>
+    <p>
+      <label for="ruc"><acronym title="Registro Único del Contribuyente">RUC</acronym>:</label>
+      <input type="text" name="ruc" id="ruc" maxlength="11" value="{$prov.ruc}" class="number required" minlenght="1" {if $prov.ruc!=""}readonly="readonly"{/if} />
+    </p>
+    <p>
+      <label for="telefono">Teléfono:</label>
+      <input type="text" name="telefono" id="telefono" maxlength="100" value="{$prov.telefono}" title="Ingresa el teléfono" />
+    </p>
+    <p>
+      <label for="email">Email:</label>
+      <input type="text" name="email" id="email" maxlength="100" size="40" value="{$prov.email}" class="email" title="Ingresa un email correcto" />
+    </p>
+  </fieldset>
+  <p class="submit">
+    <input type="hidden" name="idproveedor" id="idproveedor" value="{$prov.idproveedor}" />
+    <input type="submit" name="submit" id="submit" value="Guardar" />
+    {if $prov.idproveedor}
+    <input type="button" name="print" id="print" value="Imprimir" />
+    {/if} </p>
+</form>
+<h2 id="lista">Lista de Proveedores <span class="options">[<a href="{$self}?excel">Exportar esta lista a Excel</a>]</span></h2>
+<table class="tabla">
+  <thead>
+    <tr>
+      <th>Razón Social</th>
+      <th>Dirección</th>
+      <th>Teléfono</th>
+      <th>RUC</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  {section name=n loop=$provs}
+  <tr class="{cycle values="even, odd"}">
+    <td><a href="{$self}?idproveedor={$provs[n].idproveedor}" title="Click para editar">{$provs[n].razonsocial}</a></td>
+    <td>{$provs[n].direccion}</td>
+    <td>{$provs[n].telefono}</td>
+    <td>{$provs[n].ruc}</td>
+  </tr>
+  {sectionelse}
+  <tr>
+    <td colspan="4">No existen datos.</td>
+  </tr>
+  {/section}
+    </tbody>
+  
+</table>
+{include file="paginator.html"}

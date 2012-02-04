@@ -165,7 +165,7 @@ function fill_servicio_by_cot($orden) { //referencia
 	global $bcdb, $atipos;
 	$orden['nrodoc']=$orden['referencia'];
 	$orden['codigo']=null;	
-	$orden['proveedor']=get_prov(get_ganador_cuadro($orden['idcot']));	
+	$orden['proveedor']=get_prov(get_ganador_ruc($orden['idcot']));	
 	$orden['detalle'] = get_detalle_cot($orden['idcot']);//cantidad 	umedida 	descripcion 	precio
 	$orden['detalle'] = get_precios2($orden['detalle'], get_ganador_cuadro($orden['idcot']));
  	$orden['fecha'] = fechita2($orden['fecha']);

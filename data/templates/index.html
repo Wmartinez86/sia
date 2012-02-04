@@ -1,68 +1,56 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
-    <meta http-equiv="content-language" content="es">
-    <link rel="stylesheet" type="text/css" media="screen" href="{$stylesurl}styles.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="{$stylesurl}redmond/ui.css" />
-    <link rel="shortcut icon" href="favicon.ico" />
-    <script type="text/javascript" src="{$scriptsurl}jquery.js"></script>
-    <script type="text/javascript" src="{$scriptsurl}jquery.ui.all.js"></script>
-    <script type="text/javascript" src="{$scriptsurl}jquery.validate.js"></script>
-    <script type="text/javascript" src="{$scriptsurl}jquery.collapsible.js"></script>
-    <script type="text/javascript" src="{$scriptsurl}tabs.js"></script>
-    <script type="text/javascript" src="{$scriptsurl}es.js"></script>
-    <title>{$section_title}</title>
+<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
+<meta http-equiv="content-language" content="es">
+<link rel="stylesheet" type="text/css" media="screen" href="{$stylesurl}styles.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="{$stylesurl}redmond/ui.css" />
+<link rel="shortcut icon" href="favicon.ico" />
+<script type="text/javascript" src="{$scriptsurl}jquery.js"></script>
+<script type="text/javascript" src="{$scriptsurl}jquery.ui.all.js"></script>
+<script type="text/javascript" src="{$scriptsurl}jquery.validate.js"></script>
+<script type="text/javascript" src="{$scriptsurl}jquery.collapsible.js"></script>
+<script type="text/javascript" src="{$scriptsurl}tabs.js"></script>
+<script type="text/javascript" src="{$scriptsurl}es.js"></script>
+<title>{$section_title}</title>
 </head>
 <body>
-	<div class="wrap background">
-		<div id="loginbox">
-        	{if !$loginuser || $file=="logout.html"}
-			<a href="login.php">Iniciar Sesión</a>
-            {else}
-            Usuario: {$loginuser.username} | <a href="logout.php">Salir</a>
-            {/if}
-		</div>
-		<ul id="menu">
-                    {if $loginuser.usertype==1}
-                    <li><a href="index.php">Inicio</a></li>
-                    <li><a href="requerimiento-lista.php">Requerimiento</a></li>
-                    <li><a href="cotizacion-lista.php">Cotización</a></li>
-                    <li><a href="ordenes.php">Ordenes</a></li>
-                    <li><a href="informes.php">Informes</a></li>
-                    <li><a href="proyectos.php">Proyectos</a></li>
-                    <li><a href="proveedores.php">Proveedores</a></li>
-                    <li><a href="sistema.php">Sistema</a></li>
-                    {else}
-                    <li><a href="index.php">Inicio</a></li>
-                    <li><a href="requerimiento.php">Requerimiento</a></li>
-                    {/if}
-		</ul>
-
-		<div id="logo">
-			<h1><a href="index.php">{$log1} {$muni}</a></h1>
-			<h2 id="slogan">Sistema de Órdenes de Compra y Órdenes de Servicio</h2>
-		</div>
-
-		<div class="clear"></div>
-
-		<div id="left">
-        	{if $file!=""}
-				{include file=$file}
-            {else}
-            	{include file="home.html"}
-            {/if}
-		</div>
-	</div>
-
-	<div id="promo">
-		<div class="wrap">
-			<div id="footer">
-				<p>Copyright &copy; 2012 &minus; <a href="{$pgmuni}">{$log1} {$muni}</a></p>
-                <!--p>Soporte Tecnico &minus; <a href="mailto:jonas.coaquira@gmail.com">Jonas Valentin Coaquira Mamani &lt;jonas.coaquira@gmail.com&gt;</a>.</p-->
-			</div>
-		</div>
-	</div>
-
+<div class="wrap background">
+  <div id="loginbox"> {if !$loginuser || $file=="logout.html"} <a href="login.php">Iniciar Sesión</a> {else}
+    Usuario: {$loginuser.username} | <a href="logout.php">Salir</a> {/if} </div>
+  <ul id="menu">
+    {if $loginuser.usertype==1}
+    <li><a href="index.php">Inicio</a></li>
+    <li><a href="requerimiento-lista.php">Requerimiento</a></li>
+    <li><a href="cotizacion-lista.php">Cotización</a></li>
+    <li><a href="ordenes.php">Ordenes</a></li>
+    <li><a href="informes.php">Informes</a></li>
+    <li><a href="proyectos.php">Proyectos</a></li>
+    <li><a href="proveedores.php">Proveedores</a></li>
+    <li><a href="sistema.php">Sistema</a></li>
+    {else}
+    <li><a href="index.php">Inicio</a></li>
+    <li><a href="requerimiento.php">Requerimiento</a></li>
+    {/if}
+  </ul>
+  <div id="logo">
+    <h1><a href="index.php">{$log1} {$muni}</a></h1>
+    <h2 id="slogan">Sistema de Órdenes de Compra y Órdenes de Servicio</h2>
+  </div>
+  <div class="clear"></div>
+  <div id="left"> {if $file!=""}
+    {include file=$file}
+    {else}
+    {include file="home.html"}
+    {/if} </div>
+</div>
+<div id="promo">
+  <div class="wrap">
+    <div id="footer">
+      <p>Copyright &copy; 2012 &minus; <a href="{$pgmuni}">{$log1} {$muni}</a></p>
+      <!--p>Soporte Tecnico &minus; <a href="mailto:jonas.coaquira@gmail.com">Jonas Valentin Coaquira Mamani &lt;jonas.coaquira@gmail.com&gt;</a>.</p--> 
+    </div>
+  </div>
+</div>
 </body>
 </html>

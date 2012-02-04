@@ -1,42 +1,36 @@
-			<h2>Añadir Item</h2>
-            <script type="text/javascript" src="{$scriptsurl}jquery.calculation.min.js"></script>
-            <script type="text/javascript" src="{$scriptsurl}common.php?param=additem"></script>
-            {if $msg}<div class="msg">{$msg}</div>{/if}
-            <div id="tabs">
-            <form name="frmadditem" id="frmadditem" action="{$self}" method="post">
-                <div id="tabs-3">
-                <fieldset>
-                	<legend>Detalles</legend>
-                    <table class="tabla">
-                    	<thead>
-                        	<tr>
-                                <th>Cantidad</th>
-                                <th><abbr title="Unidad de Medida">U. Med.</abbr></th>
-                                <th>Descripción</th>
-                            </tr>
-                        </thead>
-                  <tbody id="tbody">
-                        	<tr id="first">
-                                <td>
-	                            	<input type="text" name="cantidad[]" size="10" maxlength="10" class="number required cantidad" title="*" />
-                                </td>
-                                <td>
-	                            	<input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" />
-                                </td>
-                                <td>
-	                            	<input type="text" name="descripcion[]" maxlength="255" size="97" class="required" title="*" />
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </fieldset>
-                <p class="submit">
-                    <input type="submit" name="submit" id="submit" value="Guardar" />
-                    <input type="hidden" name="id" id="id" value="{$id}" />
-                    <input type="hidden" name="entity" id="entity" value="{$entity}" />
-                </p>
-                </div>
-                
-                
-           </form>
-           </div>
+<h2>Añadir Item</h2>
+<script type="text/javascript" src="{$scriptsurl}jquery.calculation.min.js"></script> 
+<script type="text/javascript" src="{$scriptsurl}common.php?param=additem"></script> 
+{if $msg}
+<div class="msg">{$msg}</div>
+{/if}
+<div id="tabs">
+  <form name="frmadditem" id="frmadditem" action="{$self}" method="post">
+    <div id="tabs-3">
+      <fieldset>
+        <legend>Detalles</legend>
+        <table class="tabla">
+          <thead>
+            <tr>
+              <th>Cantidad</th>
+              <th><abbr title="Unidad de Medida">U. Med.</abbr></th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+            <tr id="first">
+              <td><input type="text" name="cantidad[]" size="10" maxlength="10" class="number required cantidad" title="*" /></td>
+              <td><input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" /></td>
+              <td><input type="text" name="descripcion[]" maxlength="255" size="97" class="required" title="*" /></td>
+            </tr>
+          </tbody>
+        </table>
+      </fieldset>
+      <p class="submit">
+        <input type="submit" name="submit" id="submit" value="Guardar" />
+        <input type="hidden" name="id" id="id" value="{$id}" />
+        <input type="hidden" name="entity" id="entity" value="{$entity}" />
+      </p>
+    </div>
+  </form>
+</div>
