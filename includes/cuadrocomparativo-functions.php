@@ -104,9 +104,19 @@ function get_ganador_cuadro($idcot){
                 WHERE a.idcot = '$idcot' 
                 AND b.idcot = '$idcot' 
                 AND a.idproveedor = b.nprov ";
-        echo $sql;
 	return $bcdb->get_var($sql);
 }
+function get_ganador_ruc($idcot){
+	global $bcdb;
+        $sql = "SELECT b.idproveedor
+                FROM $bcdb->cuadrocomparativo a, 
+                $bcdb->provcotizacion b 
+                WHERE a.idcot = '$idcot' 
+                AND b.idcot = '$idcot' 
+                AND a.idproveedor = b.nprov ";
+	return $bcdb->get_var($sql);
+}
+
 function get_precios($detalle, $nprov){
 	global $bcdb;
 	foreach($detalle as $k => $v) {
@@ -144,7 +154,7 @@ function fill_compra_by_cot($orden) { //referencia
 	global $bcdb, $atipos;
 	$orden['nrodoc']=$orden['referencia'];
 	$orden['codigo']=null;	
-	$orden['proveedor'] = get_prov(get_ganador_cuadro($orden['idcot']));	
+	$orden['proveedor'] = get_prov(get_ganador_ruc($orden['idcot']));	      
 	$orden['detalle'] = get_detalle_cot($orden['idcot']);//cantidad 	umedida 	descripcion 	precio
 	$orden['detalle'] = get_precios2($orden['detalle'], get_ganador_cuadro($orden['idcot']));
  	$orden['fecha'] = fechita2($orden['fecha']);

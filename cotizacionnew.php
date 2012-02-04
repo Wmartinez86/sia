@@ -86,7 +86,7 @@ if(isset($idreq)){
 		$smarty->assign ('nodel', true);
 	}
         
-        $nreq2 = " 000".$req['codigo']."-2012-".$req['usuario']['area']['abreviatura'];
+        $nreq2 = "Req. 000".$req['codigo']."-2012-".$req['usuario']['area']['abreviatura'];
         $proj = get_proj($req['usuario']['proyecto']['idproyecto']);
         $nreq2 .= "/".$proj['descripcion'];
         $smarty->assign('nreq2', $nreq2);

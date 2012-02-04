@@ -113,6 +113,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 if($idcot){ 
 	$cot = fill_cot_cuadro(get_cotizacion($idcot));
 	$smarty->assign ('cot', $cot);
+        $smarty->assign ('numres', count($cot['detalle']));
 	if(count($cot['detalle'])==1) {
 		$smarty->assign ('nodel', true);
 	}

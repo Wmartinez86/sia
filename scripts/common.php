@@ -82,7 +82,7 @@
                                         {
                                             idproyecto: "<?php print $proj['idproyecto']; ?>",
                                             sec_func: "<?php print $proj['sec_func']; ?>",
-                                            descripcion: "<?php print $proj['descripcion']; ?>",
+                                            descripcion: "<?php print htmlentities($proj['descripcion']); ?>",
                                         },
                                         <?php 
                                             endforeach;
@@ -271,7 +271,7 @@
                     {
                         idproyecto: "<?php print $proj['idproyecto']; ?>",
                         sec_func: "<?php print $proj['sec_func']; ?>",
-                        descripcion: "<?php print $proj['descripcion']; ?>",
+                        descripcion: "<?php print htmlentities($proj['descripcion']) ?>",
                     },
                     <?php 
                         endforeach;

@@ -12,8 +12,7 @@ legend {color: #2585ba; font: 120% "Trebuchet MS", Arial, Helvetica, sans-serif;
 label {width: 120px; float: left; color: #424242;}
 abbr, acronym { border-bottom: 1px dotted #4d4d4d; cursor: help;}
 .clear { clear: both; }
-.wrap { margin: 0 auto; width: 900px; }
-.background { background: url(../images/bg.jpg) no-repeat left 42px;}
+.wrap { margin: 0 auto; width: 90%; }
 /*
 #search  { float: right; margin: 9px 0 0; width: 205submitpx; }
 	input.field { float: left; background: #808080; color: #ccc; padding: 4px; border: 0; margin: 0 5px 0 0; width: 170px; font: .8em "Trebuchet MS", Arial, Sans-Serif; }
@@ -96,7 +95,6 @@ input[readonly="readonly"] {
 }
 
 /* Collapse */
-/* Collapse */
 fieldset.collapsible legend {
 	cursor: pointer;
 }
@@ -177,4 +175,26 @@ html ul.i-tabs li.active-tab, html ul.i-tabs li.active-tab a:hover  {
 #filter input[type="submit"] {
     font-weight:  bold;
     padding: 2px 5px;
+}
+
+/* Groups */
+.group-container {
+	width: 48%;
+	float: left;
+}
+
+.group {
+	border: 1px solid #cdcaca;
+	background: #F8F8F8;
+	margin: 4px 10px;
+	padding: 4px 10px;
+}
+
+.group h3 {
+	font-weight: bold;
+	color: #000;
+	padding: 3px 0;
+	margin-bottom: 10px;
+	text-transform: uppercase;
+	border-bottom: 1px solid #cdcaca;
 }

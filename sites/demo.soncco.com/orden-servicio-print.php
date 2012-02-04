@@ -220,7 +220,7 @@ $pdf->line(13,120,582,120);//H1
 $pdf->line(310,200,310,120);//V1
 $pdf->line(168,187,168,120);//V1
 //Titulos Autorizacion
-$pdf->addText(95,190,$zin,"<b>AUTORIZACION DE COMPRA</b>");
+$pdf->addText(95,190,$zin,"<b>AUTORIZACION DE SERVICIO</b>");
 $pdf->addText(385,190,$zin,"<b>DISTRIBUCION CONTABLE</b>");
 $pdf->addText(45,125,7,"GERENTE MUNICIPAL");
 $pdf->addText(30,133,6,"....................................................................");
