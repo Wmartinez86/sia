@@ -44,7 +44,11 @@ $().ready(function () {
 
     // add
     $("#clone").click(function () {
-        $("#firstr").clone(true).appendTo(("#tbody"));
+        //$("#firstr").clone(true).appendTo(("#tbody"));
+        newTr = $("#firstr").clone(true);
+        newTr.attr('id', "tr" + Math.random());
+        newTr.appendTo('#tbody');
+        
         $("[name^=total_]").calc("qty * price", {
             qty: $("input[name^=cantidad]"),
             price: $("[name^=precio]")

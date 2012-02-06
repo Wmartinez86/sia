@@ -1,4 +1,4 @@
-<h2>Almacén</h2>
+<h2>Pedidos de Comprobante de salida</h2>
 <script type="text/javascript" src="{$scriptsurl}jquery.calculation.min.js"></script> 
 <script type="text/javascript" src="{$scriptsurl}acciones/almacen.js"></script> 
 {if $msg}
@@ -10,42 +10,24 @@
       <fieldset>
         <legend>Datos del ingreso</legend>
         <p>
-          <label for="codigo"><abbr title="Nota de Entrada de Almacén">NEA</abbr> Nro.:</label>
-          <input type="text" name="codigo" id="codigo" value="{if $nea.codigo}{$nea.codigo}{else}{$codgen}{/if}" maxlength="10" class="required" />
+          <label for="codigo"><abbr title="PECOSA">PECOSA</abbr> Nro.:</label>
+          <input type="text" name="codigo" id="codigo" value="{if $pecosa.codigo}{$pecosa.codigo}{else}{$codgen}{/if}" maxlength="10" class="required" />
         </p>
         <p>
-          <label for="procedencia">Procedencia:</label>
-          <input type="text" name="procedencia" id="procedencia" value="{if $nea.procedencia}{$nea.procedencia}{/if}{if $fromorden}{$myproc}{/if}" maxlength="200" size="80" class="required" {if $fromorden}readonly="readonly"{/if} />
-          <input type="hidden" name="idorden" id="idorden" value="{if $orden}{$orden.idorden}{else}0{/if}" />
+          <label for="dependencia">Dependencia:</label>
+          <input type="text" name="dependencia" id="dependencia" value="{if $pecosa.dependencia}{$pecosa.dependencia}{/if}" maxlength="200" size="80" class="required" />
         </p>
-        {if !$fromorden}
         <p>
-          <label for="idproyecto">Destino:</label>
-          <select id="idproyecto" name="idproyecto">
-            
-            {section name=n loop=$projs}
-            
-            <option value="{$projs[n].idproyecto}" {if $projs[n].idproyecto==$nea.proyecto.idproyecto}selected="selected"{/if}>{$projs[n].descripcion}</option>
-            
-            {/section}
-          
-          </select>
+          <label for="entregar">Entregar a:</label>
+          <input type="text" name="entregar" id="entregar" value="{if $pecosa.entregar}{$pecosa.entregar}{/if}" maxlength="200" size="80" class="required" />
         </p>
-        {else}
         <p>
-          <label for="idproyecto">Destino:</label>
-          <strong>sec_func={$orden.proyecto.sec_func}</strong> - {$orden.proyecto.descripcion}
-          <input type="hidden" name="idproyecto" id="idproyecto" value="{$orden.proyecto.idproyecto}" />
+          <label for="destino">Destino:</label>
+          <input type="text" name="destino" id="destino" value="{if $pecosa.destino}{$pecosa.destino}{/if}" maxlength="200" size="80" class="required" />
         </p>
-        {/if}
         <p>
           <label for="fecha">Fecha:</label>
-          <input type="text" name="fecha" id="fecha" size="11" value="{if $nea.fecha}{$nea.fecha}{else}{$smarty.now|date_format:"%d/%m/%Y"}{/if}" class="required" />
-        </p>
-        <p>
-          <label for="observaciones">Observaciones:</label>
-          <br />
-          <textarea id="observaciones" name="observaciones" cols="80" rows="5">{if $nea.observaciones}{$nea.observaciones|escape:html}{/if}{if $fromorden}Ingresando bienes desde la {$myproc}{/if}</textarea>
+          <input type="text" name="fecha" id="fecha" size="11" value="{if $pecosa.fecha}{$pecosa.fecha}{else}{$smarty.now|date_format:"%d/%m/%Y"}{/if}" class="required" />
         </p>
       </fieldset>
     </div>
@@ -87,9 +69,6 @@
             </tr>
           </tfoot>
         </table>
-        <p class="aright">
-          <input type="button" name="clone" id="clone" value="Añadir" />
-        </p>
         {else}
         <tbody id="tbody">
         
@@ -118,14 +97,12 @@
           </tr>
         </tfoot>
         </table>
-        <p class="aright"> {if !$fromorden}
-          <input type="button" name="add" value="Añadir" onclick="location.href='add-item.php?id={$nea.idnea}&amp;entity=almacen'" />
-          {/if} </p>
         {/if}
       </fieldset>
       <p class="submit">
         <input type="submit" name="submit" id="submit" value="Guardar" />
         <input type="hidden" name="idnea" id="idnea" value="{$nea.idnea}" />
+        <input type="hidden" name="idpecosa" id="idpecosa" value="{$pecosa.idpecosa}" />
       </p>
       <!--p>
                     <a href="#tabs-2">&laquo;Anterior</a>

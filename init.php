@@ -29,6 +29,8 @@ $bcdb->requerimientos	 	= $table_prefix . 'requerimientos';
 $bcdb->detallerequerimiento	= $table_prefix . 'detallerequerimiento';
 $bcdb->neas             	= $table_prefix . 'neas';
 $bcdb->detallenea       	= $table_prefix . 'detallenea';
+$bcdb->pecosa             	= $table_prefix . 'pecosa';
+$bcdb->detallepecosa       	= $table_prefix . 'detallepecosa';
 
 include_once(INCLUDE_PATH . 'smarty-instance.php');
 
@@ -52,6 +54,7 @@ include_once(INCLUDE_PATH . 'cuadrocomparativo-functions.php');
 include_once(INCLUDE_PATH . 'requerimientos-functions.php');
 include_once(INCLUDE_PATH . 'area-functions.php');
 include_once(INCLUDE_PATH . 'nea-functions.php');
+include_once(INCLUDE_PATH . 'pecosa-functions.php');
 
 # Iniciamos
 

@@ -12,13 +12,9 @@
         <p>
           <label for="iddoc">Tipo Ref:</label>
           <select id="iddoc" name="iddoc">
-            
-                            {section name=n loop=$docs}
-                            
+            {section name=n loop=$docs}
             <option value="{$docs[n].iddoc}" {if $docs[n].iddoc==$orden.doc.iddoc}selected="selected"{/if}>{$docs[n].nombre}</option>
-            
-                            {/section}
-                        
+            {/section}
           </select>
         </p>
         <p>
@@ -34,25 +30,25 @@
           <!--input type="text" name="proyectos" id="proyectos" size="60" value="{$user.proyecto.descripcion}" />
                         <input type="hidden" name="idproyecto" id="idproyecto" value="{$user.proyecto.idproyecto}" /-->
           <select id="idproyecto" name="idproyecto">
-            
-                        {section name=n loop=$projs}
-                        
-            <option value="{$projs[n].idproyecto}" {if $projs[n].idproyecto==$orden.proyecto.idproyecto}selected="selected"{/if}>{$projs[n].descripcion}</option>
-            
-                        {/section}
-                        
+        {section name=n loop=$projs}
+        <option value="{$projs[n].idproyecto}" {if $projs[n].idproyecto==$orden.proyecto.idproyecto}selected="selected"{/if}>{$projs[n].descripcion}</option>
+        {/section}
           </select>
         </p>
         <p>
           <label for="idfuente">Fuente:</label>
           <select id="idfuente" name="idfuente">
             
+            
                             {section name=n loop=$fuentes}
                             
+            
             <option value="{$fuentes[n].idfuente}" {if $fuentes[n].idfuente==$orden.fuente.idfuente}selected="selected"{/if}>{$fuentes[n].nombre}</option>
+            
             
                             {/section}
                         
+          
           </select>
         </p>
         <p>

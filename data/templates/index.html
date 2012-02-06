@@ -24,7 +24,9 @@
     <li><a href="requerimiento-lista.php">Requerimiento</a></li>
     <li><a href="cotizacion-lista.php">Cotización</a></li>
     <li><a href="ordenes.php">Ordenes</a></li>
+    {if $loginuser.iduser == 1}
     <li><a href="almacen.php">Almacén</a>
+    {/if}
     <li><a href="informes.php">Informes</a></li>
     <li><a href="sistema.php">Sistema</a></li>
     {else}
@@ -41,7 +43,7 @@
   </ul>
   <div id="logo">
     <h1><a href="index.php">{$log1} {$muni}</a></h1>
-    <h2 id="slogan">Sistema de Órdenes de Compra y Órdenes de Servicio</h2>
+    <h2 id="slogan">Sistema Electrónico de Adquisiciones y Contrataciones</h2>
   </div>
   <div class="clear"></div>
   <div id="left"> {if $file!=""}

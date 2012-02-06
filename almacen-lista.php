@@ -12,10 +12,6 @@ if(isset($_GET['submit'])) {
     $op = htmlspecialchars($_GET['op']);
     switch($op) {
         case 'search':
-            if(!is_admin()) {
-                header("location: error.php");
-                exit();
-            }
             $idproyecto = htmlspecialchars($_GET['idproyecto']);
             $neas = get_neas_by_destino($idproyecto);
             $smarty->assign('iduser', $iduser);

@@ -5,7 +5,7 @@
 </ul>
 <div class="i-tab-container">
   <div id="i-admin" class="i-tab-content">
-    <form name="filter" id="filter" method="GET">
+      <form name="filter" id="filter" method="GET" action="nea-ordenx.php">
       <fieldset class="collapsible">
         <legend>Destino</legend>
         <p>
@@ -46,7 +46,7 @@
     <td>{$neas[n].usuario.username}</td>
     <th><a href="almacen.php?idnea={$neas[n].idnea}">Ver</a></th>
     <th><a href="nea-print.php?idnea={$neas[n].idnea}">Imprimir</a></th>
-    <th><a href="pecosa-print.php?idnea={$neas[n].idnea}">Imprimir <abbr title="Pedido de Comprobante de Salida">PECOSA</abbr></a></th>
+    <th><a href="pecosa.php?idnea={$neas[n].idnea}">Generar <abbr title="Pedido de Comprobante de Salida">PECOSA</abbr></a></th>
   </tr>
   {sectionelse}
   <tr>

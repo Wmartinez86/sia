@@ -28,6 +28,7 @@ $almacen = array(
     "/add-item.php",
     "/almacen-lista.php",
     "/pecosa-print.php",
+    "/pecosa.php",
 );
 
 if(!isset($session_active)) {

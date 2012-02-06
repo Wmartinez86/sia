@@ -8,15 +8,15 @@ $ordenes = array();
 $projs = get_projs();
 $users = get_admins();
 
+if (isset($_REQUEST['idorden'])) { 
+    $idorden = $_REQUEST['idorden'];
+} 
+
 /* Búsqueda y Filtro */
 if(isset($_GET['submit'])) {
     $op = htmlspecialchars($_GET['op']);
     switch($op) {
         case 'search':
-            if(!is_admin()) {
-                header("location: error.php");
-                exit();
-            }
             $idproyecto = htmlspecialchars($_GET['idproyecto']);
             $iduser = "";
             $ordenes = search_orden_compra($idproyecto, $iduser);

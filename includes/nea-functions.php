@@ -19,7 +19,7 @@ function save_nea ($idnea, $nea_values) {
 	global $bcdb, $msg;
 
 	if ($bcdb->get_var("SELECT count(codigo) FROM $bcdb->neas WHERE idnea != '$idnea' AND codigo = '$nea_values[codigo]'") ) {
-		$msg .= " Ya existe otra orden con el mismo c&oacute;digo.";
+		$msg .= " Ya existe otra NEA con el mismo c&oacute;digo.";
 		return false;
 	}
 	
@@ -69,6 +69,14 @@ function fill_nea($nea) {
 	$nea['fecha'] = fechita2($nea['fecha']);
 	$nea['usuario'] = get_user($nea['createdby']);
 	return $nea;
+}
+
+function fill_nea_by_orden($orden) {
+	$orden['detalle'] = get_detalle_compra($orden['idorden']);
+	//$orden['detalle'] = get_precios2($orden['detalle'], get_ganador_cuadro($orden['idcot']));
+ 	unset($orden['fecha']);
+        unset($orden['codigo']);
+	return $orden;
 }
 
 function get_detalle_nea($idnea) {

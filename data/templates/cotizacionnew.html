@@ -17,7 +17,7 @@
           <input type="text" name="referencia" id="referencia" value="{$cot.referencia|escape:"html"}" class="required" />
           {/if} </p>
         <p>
-          <label for="codigo">Nro. de Cotización :</label>
+          <label for="codigo">Nro. de Cotización:</label>
           <input type="text" name="codigo" id="codigo" value="{if $cot.codigo}{$cot.codigo|escape:"html"}{else}{$codgen}{/if}" maxlength="10" class="required" />
         </p>
         <p>
@@ -27,9 +27,7 @@
         <p>
           <label for="tipocontrata">Tipo de <abbr title="Contratación">Contrat.</abbr>:</label>
           <select name="tipocontrata" id="tipocontrata">
-            
-                            {html_options options=$aordenes}
-                        
+            {html_options options=$aordenes}
           </select>
         </p>
       </fieldset>

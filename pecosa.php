@@ -9,22 +9,30 @@ if (isset($_REQUEST['idnea'])) {
     $idnea = '0';
 }
 
+if (isset($_REQUEST['idpecosa'])) { 
+    $idpecosa = $_REQUEST['idpecosa'];
+} else {
+    $idpecosa = '0';
+}
+
 if ( $_SERVER['REQUEST_METHOD'] == 'POST') {
 	if ( validate_required(array(
 		'C&oacute;digo' => $_POST['codigo'],
-		'Procedencia' => $_POST['procedencia'],
+		'Dependencia' => $_POST['dependencia'],
+		'Entregar a' => $_POST['entregar'],
+		'Destino' => $_POST['destino'],
 		'Fecha' => $_POST['fecha'],
 		))) {
 		
-		$nea_values = array(
+		$pecosa_values = array(
 			'codigo' => $_POST['codigo'],
-                        'procedencia' => $_POST['procedencia'],
-                        'destino' => ($_POST['idproyecto']),
-                        'idorden' => ($_POST['idorden']),
-                        'observaciones' => ($_POST['observaciones']),
+                        'dependencia' => $_POST['dependencia'],
+                        'destino' => ($_POST['destino']),
+                        'entregar' => ($_POST['entregar']),
 			'fecha' => fechita($_POST['fecha']),
 			'createdby' => $_SESSION['loginuser']['iduser']
 		);
+                
 
 		$detalle_values = array();
 		if($_POST['especifica']) {
@@ -37,31 +45,38 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST') {
 			}
 		}
 		
-		$nea_values = array_map('strip_tags', $nea_values);
+		$pecosa_values = array_map('strip_tags', $pecosa_values);
 		
-		if(isset($_POST['iddetalle'])) {
+		if(isset($_POST['iddetalle']) && $idpecosa != 0) {
 			foreach($_POST['iddetalle'] as $k=>$v) {
-				$nea_values[$k]['iddetalle'] = $_POST['iddetalle'][$k];
+				$pecosa_values[$k]['iddetalle'] = $_POST['iddetalle'][$k];
 			}
-			save_nea($idnea, $nea_values);
-			save_detalle_nea($idnea, $detalle_values);
+			save_pecosa($idpecosa, $pecosa_values);
+			save_detalle_pecosa($idpecosa, $detalle_values);
 		}else{
-			$id = save_nea($idnea, $nea_values);
+			$id = save_pecosa($idpecosa, $pecosa_values);
 			if($id) {
-				save_detalle_nea($id, $detalle_values);
+				save_detalle_pecosa($id, $detalle_values);
 			}
 		}
 	} 
-	$idnea = 0;
+	$idpecosa = 0;
 }
 
-$projs = get_projs();
-$codgen = generate_code($bcdb->neas);
+$codgen = generate_code($bcdb->pecosa);
 
 if($idnea){ 
 	$nea = fill_nea(get_nea($idnea));
 	$smarty->assign ('nea', $nea);
 	if(count($nea['detalle'])==1) {
+		$smarty->assign ('nodel', true);
+	}
+}
+
+if($idpecosa){ 
+	$pecosa = fill_pecosa(get_pecosa($idpecosa));
+	$smarty->assign ('pecosa', $pecosa);
+	if(count($pecosa['detalle'])==1) {
 		$smarty->assign ('nodel', true);
 	}
 }
@@ -74,17 +89,11 @@ if(isset($idorden)){
 	$nea = fill_nea_by_orden($orden);
 	$smarty->assign ('nea', $nea);
         $smarty->assign ('orden', $orden);
-	$smarty->assign ('fromorden', true);
-        
-        $myproc = sprintf("Orden de Compra Nro %s", $orden['idorden']);
-        $smarty->assign('myproc', $myproc);
 }
 	
-$smarty->assign ('projs', $projs);
 $smarty->assign ('codgen', $codgen);
-
-$smarty->assign ('section_title', TITLE . ' - Almacén');
-$smarty->assign ('file', 'almacen.html');
+$smarty->assign ('section_title', TITLE . ' - PECOSA');
+$smarty->assign ('file', 'pecosa.html');
 $smarty->display ('index.html');
 
 ?>
