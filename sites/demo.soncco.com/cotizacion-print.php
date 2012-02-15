@@ -33,11 +33,12 @@ $anio=strftime('%Y',$fecha);
 $ncot=" <i>".$cot['codigo']."</i>";
 $referencia=" <i>".substr(utf8_decode($cot['referencia']),0,90)."</i>";
 //Datos de Tabla
-$tdet = array('cant'=>'','und'=>'','detalle'=>'','punit'=>'','ptotal'=>'');
+$tdet = array('cant'=>'','und'=>'','detalle'=>'','punit'=>'','marca'=>'','ptotal'=>'');
 $opdet = array('showHeadings'=>0,'shaded'=>0,'showLines'=>2,'xPos'=>25,'xOrientation' =>'right','width'=>569,'fontSize'=>8,'cols' => array(
-	'cant'=>array('justification'=>'center','width'=>59),
-	'und'=>array('justification'=>'center','width'=>74),
+	'cant'=>array('justification'=>'center','width'=>40),
+	'und'=>array('justification'=>'center','width'=>40),
 	'detalle'=>array('justification'=>'left','width'=>292),
+	'marca'=>array('justification'=>'right','width'=>53),
 	'punit'=>array('justification'=>'right','width'=>55),
 	'ptotal'=>array('justification'=>'right','width'=>75)),
 	'innerLineThickness'=>0.005,
@@ -78,7 +79,7 @@ $yi=0;
 			$punit="";		
 			$ptotal="";
 			$inde=$inde+1;
-			$datadet[$yi] = array('cant'=>$cant,'und'=>$und,'detalle'=>$detalle,'punit'=>$punit,'ptotal'=>$ptotal);
+			$datadet[$yi] = array('cant'=>$cant,'und'=>$und,'detalle'=>$detalle,'marca'=>"",'punit'=>$punit,'ptotal'=>$ptotal);
 		}
 	//lineas
 	
@@ -153,9 +154,10 @@ $yi=0;
 	$z=9;
 	$pdf->addText(245,$y+17,$z,"<b>ARTICULOS</b>");
 	$pdf->addText(500,$y+17,$z,"<b>PRECIO</b>");
-	$pdf->addText($x+9,$y,$z,"<b>Cant.</b>");
-	$pdf->addText($x+70,$y,$z,"<b>U.Med</b>");
-	$pdf->addText($x+230,$y,$z,utf8_decode("<b>Descripción</b>"));
+	$pdf->addText($x,$y,$z,"<b>Cant.</b>");
+	$pdf->addText($x+35,$y,$z,"<b>U.Med</b>");
+	$pdf->addText($x+220,$y,$z,utf8_decode("<b>Descripción</b>"));
+	$pdf->addText($x+375,$y,$z,"<b>Marca</b>");
 	$pdf->addText($x+425,$y,$z,"<b>Unitario</b>");
 	$pdf->addText($x+495,$y,$z,"<b>TOTAL</b>");
 		//Curvas - Cuerpo
@@ -169,9 +171,10 @@ $yi=0;
 	$pdf->line($x1+15,$y1-15,$x3+15,$y3-15);//H1
 	$pdf->line(20,655,575,655);//H1
 	$pdf->line(20,640,575,640);//H1
-	$pdf->line(79,655,79,165);//V1
-	$pdf->line(153,655,153,165);//V1
-	$pdf->line(445,675,445,165);//V1
+	$pdf->line(60,655,60,165);//V1
+	$pdf->line(100,655,100,165);//V1
+	$pdf->line(392,655,392,165);//V1
+	$pdf->line(447,675,447,165);//V1
 	$pdf->line(500,655,500,165);//V1
 	
 		//Cuerpo

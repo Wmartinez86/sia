@@ -113,12 +113,21 @@ $yi=0;
 				}
 			}
 			$inde=$inde+1;			
+			
 			$datadet[$xi][] = array('items'=>$items,'cant'=>$cant,'und'=>$und,'detalle'=>utf8_decode($detalle),
 					'punit1'=>$punit1,'ptotal1'=>$ptotal1,
 					'punit2'=>$punit2,'ptotal2'=>$ptotal2,
 					'punit3'=>$punit3,'ptotal3'=>$ptotal3);
 		}
-		
+			if ($inde>$rowsdif-1){
+					$total1=number_format($total1, 2, ".", ",");
+					$total2=number_format($total2, 2, ".", ",");
+					$total3=number_format($total3, 2, ".", ",");
+				$datadet[$xi][] = array('items'=>"",'cant'=>"",'und'=>"",'detalle'=>"",
+					'punit1'=>"<b>TOTAL</b>",'ptotal1'=>$total1,
+					'punit2'=>"<b>TOTAL</b>",'ptotal2'=>$total2,
+					'punit3'=>"<b>TOTAL</b>",'ptotal3'=>$total3);
+		}
 		$newdata = $datadet[$xi];
 	//HOJAS	
 	$clix=256;
@@ -257,8 +266,11 @@ $yi=0;
 	$pdf->addText($dpx+276,$dpy+39,$df,$p3[0]);
 	$pdf->addText($dpx+276,$dpy+27,$df,$p3[1]);
 	$pdf->addText($dpx+276,$dpy+15,$df,$p3[2]);
+	
 		$pdf->ezSetDy(-212);
 		$pdf->ezTable($newdata,$tdet,'',$opdet);	
+	$pdf->setStrokeColor(0,0,0);
+	$pdf->setLineStyle(0.5);
 
 
 	if ($inde>$rowsdif-1){
