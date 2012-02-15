@@ -126,7 +126,7 @@
           <td><textarea name="descripcion[]" rows="5" cols="40">{$orden.detalle[n].descripcion|escape:"html"}</textarea></td>
           <td><input type="text" name="precio[]" size="10" class="required number precio" title="*" value="{$orden.detalle[n].precio}" /></td>
           <td><input type="text" name="total_" size="10" readonly="readonly" class="total" value="{$orden.detalle[n].total|number_format:2:",":"."}" /></td>
-          <td> {if !$nodel} <a href="borrar-detalle-compra.php?iddetalle={$orden.detalle[n].iddetalle}&amp;idorden={$orden.idorden}" class="ddetalle">Borrar</a> {/if}			                                                         
+          <td> {if !$nodel} <a href="borrar-detalle-servicio.php?iddetalle={$orden.detalle[n].iddetalle}&amp;idorden={$orden.idorden}" class="ddetalle">Borrar</a> {/if}			                                                         
             {if !$fcot}
             <input type="hidden" name="iddetalle[]" value="{$orden.detalle[n].iddetalle}" />
             {/if} </td>
