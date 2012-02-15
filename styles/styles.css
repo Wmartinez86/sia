@@ -11,6 +11,7 @@ fieldset {background: #f9fcfe; border: 1px solid #bdd9ea; padding: 5px 10px; mar
 legend {color: #2585ba; font: 120% "Trebuchet MS", Arial, Helvetica, sans-serif; padding: 0 4px;}
 label {width: 120px; float: left; color: #424242;}
 abbr, acronym { border-bottom: 1px dotted #4d4d4d; cursor: help;}
+textarea {font: 100%/1.5em Arial, sans-serif;}
 .clear { clear: both; }
 .wrap { margin: 0 auto; width: 90%; }
 /*

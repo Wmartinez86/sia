@@ -6,12 +6,23 @@ function get_orden_compra ($idorden) {
 	return $bcdb->get_row("SELECT * FROM $bcdb->ordencompra WHERE idorden = '$idorden'");
 }
 
-function get_ordenes_compra () {
+/**
+ * Devuelve las órdenes de compra
+ * 
+ * @global Object $bcdb El objeto Base de Datos
+ * @global Object $bcrs El objeto Paginador
+ * @global boolean $pager Identifica si el resultado volverá paginado o no
+ * @param mixed $active Si no es nula, devuelve sólo las órdenes activas
+ * @return array $ordencompras Los resultados 
+ */
+function get_ordenes_compra ($active = null) {
 	global $bcdb, $bcrs, $pager;
 	
 	$sql = "SELECT * 
-			FROM $bcdb->ordencompra 
-			ORDER BY idorden DESC";
+			FROM $bcdb->ordencompra ";
+        $sql .= (!is_null($active)) ? "WHERE status = 1" : "";
+        $sql .= " ORDER BY idorden DESC";
+        
 	$ordencompras = ($pager) ? $bcrs->get_results($sql) : $bcdb->get_results($sql);
 	return $ordencompras;
 }

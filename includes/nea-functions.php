@@ -73,7 +73,6 @@ function fill_nea($nea) {
 
 function fill_nea_by_orden($orden) {
 	$orden['detalle'] = get_detalle_compra($orden['idorden']);
-	//$orden['detalle'] = get_precios2($orden['detalle'], get_ganador_cuadro($orden['idcot']));
  	unset($orden['fecha']);
         unset($orden['codigo']);
 	return $orden;

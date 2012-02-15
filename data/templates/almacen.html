@@ -21,15 +21,8 @@
         {if !$fromorden}
         <p>
           <label for="idproyecto">Destino:</label>
-          <select id="idproyecto" name="idproyecto">
-            
-            {section name=n loop=$projs}
-            
-            <option value="{$projs[n].idproyecto}" {if $projs[n].idproyecto==$nea.proyecto.idproyecto}selected="selected"{/if}>{$projs[n].descripcion}</option>
-            
-            {/section}
-          
-          </select>
+          <strong>Almacén Central</strong>
+          <input type="hidden" name="idproyecto" id="idproyecto" value="1" />
         </p>
         {else}
         <p>
@@ -92,19 +85,18 @@
         </p>
         {else}
         <tbody id="tbody">
-        
         {assign var="con" value=0}
         {section name=n loop=$nea.detalle}
         <tr id="firstr">
-          <td><input type="text" name="especifica[]" maxlength="20" class="required" title="*" size="10" value="{$nea.detalle[n].especifica}" /></td>
-          <td><input type="text" name="cantidad[]" size="10" maxlength="10" class="number required cantidad" title="*" value="{$nea.detalle[n].cantidad}" /></td>
-          <td><input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" value="{$nea.detalle[n].umedida}" /></td>
-          <td><input type="text" name="descripcion[]" maxlength="255" size="50" class="required" title="*" value="{$nea.detalle[n].descripcion|escape:"html"}" /></td>
-          <td><input type="text" name="precio[]" size="10" class="required number precio" title="*" value="{$nea.detalle[n].precio}" /></td>
+          <td><input type="text" name="especifica[]" maxlength="20" class="required" title="*" size="10" value="{$nea.detalle[n].especifica}" {if $fromorden || $nea.destino != 1}readonly="readonly" {/if}/></td>
+          <td><input type="text" name="cantidad[]" size="10" maxlength="10" class="number required cantidad" title="*" value="{$nea.detalle[n].cantidad}" {if $fromorden || $nea.destino != 1}readonly="readonly" {/if}/></td>
+          <td><input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" value="{$nea.detalle[n].umedida}" {if $fromorden || $nea.destino != 1}readonly="readonly" {/if}/></td>
+          <td><input type="text" name="descripcion[]" maxlength="255" size="50" class="required" title="*" value="{$nea.detalle[n].descripcion|escape:"html"}" {if $fromorden || $nea.destino != 1}readonly="readonly" {/if}/></td>
+          <td><input type="text" name="precio[]" size="10" class="required number precio" title="*" value="{$nea.detalle[n].precio}" {if $fromorden || $nea.destino != 1}readonly="readonly" {/if}/></td>
           <td><input type="text" name="total_" size="10" readonly="readonly" class="total" value="{$nea.detalle[n].total|number_format:2:",":"."}" /></td>
           <td> {if !$fromorden} <!--a href="borrar-detalle-nea.php?iddetalle={$nea.detalle[n].iddetalle}&amp;idnea={$nea.idnea}" class="ddetalle">Borrar</a--> {/if}			                                                         
             {if !$fromorden}
-            <input type="hidden" name="iddetalle[]" value="{$orden.detalle[n].iddetalle}" />
+            <input type="hidden" name="iddetalle[]" value="{$nea.detalle[n].iddetalle}" />
             {/if} </td>
         </tr>
         {assign var="dtotal" value=$dtotal+$con+$orden.detalle[n].total}
@@ -118,7 +110,7 @@
           </tr>
         </tfoot>
         </table>
-        <p class="aright"> {if !$fromorden}
+        <p class="aright"> {if !$fromorden && $nea.destino == 1}
           <input type="button" name="add" value="Añadir" onclick="location.href='add-item.php?id={$nea.idnea}&amp;entity=almacen'" />
           {/if} </p>
         {/if}

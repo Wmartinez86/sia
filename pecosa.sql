@@ -13,7 +13,7 @@ CREATE TABLE  `o_detallepecosa` (
  `iddetalle` INT( 4 ) NOT NULL AUTO_INCREMENT COMMENT  'El id del detalle',
  `idpecosa` INT( 4 ) NOT NULL COMMENT  'El id de la PECOSA al que pertenece el detalle',
  `especifica` VARCHAR( 20 ) NOT NULL COMMENT  'Específica del Detalle',
- `cantidad` FLOAT NOT NULL COMMENT  'Cantidad',
+ `cantidad` NUMERIC NOT NULL COMMENT  'Cantidad',
  `umedida` VARCHAR( 10 ) NOT NULL COMMENT  'Unidad de medida',
  `descripcion` VARCHAR( 255 ) NOT NULL COMMENT  'La descripción del bien',
  `precio` FLOAT NOT NULL COMMENT  'El precio del bien',

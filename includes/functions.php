@@ -231,7 +231,7 @@ function get_ordenes_by_codigo($codigo, $tipo) {
     global $bcdb;
     $tabla = ($tipo == 'compra') ? $bcdb->ordencompra : $bcdb->ordenservicio ;
     $sql = "SELECT * FROM $tabla
-                        WHERE codigo LIKE '%$codigo%'";
+                        WHERE codigo LIKE '%$codigo%' WHERE status = 1";
     
     $results = $bcdb->get_results($sql);
     return $results;
@@ -241,7 +241,7 @@ function get_ordenes_by_codigo($codigo, $tipo) {
  * Trae ordenes por proyecto
  * 
  * @param int $idproyecto el id del proyecto
- * @param string $tipo el tipo de orden
+ * @param string $tipo el tipo de orden@
  * @return array los resultados
  * 
  */
@@ -342,6 +342,19 @@ function get_option($option) {
 function save_option($option, $description) {
     global $bcdb;
     return $bcdb->query("UPDATE $bcdb->opciones SET descripcion = '$description' WHERE nombre = '$option'");
+}
+
+/**
+ *  ¿Quiéres hacer Debug?
+ */
+function d() {
+    include_once(INCLUDE_PATH . "krumo/class.krumo.php");
+    
+    $_ = func_get_args();
+    call_user_func_array(
+        array('krumo', 'dump'), $_
+    );
+    die();
 }
 
 ?>

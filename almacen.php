@@ -3,11 +3,8 @@
 require_once('home.php');
 require_once('redirect.php');
 
-if (isset($_REQUEST['idnea'])) { 
-    $idnea = $_REQUEST['idnea'];
-} else {
-    $idnea = '0';
-}
+$idnea = isset($_REQUEST['idnea']) ? $_REQUEST['idnea'] : 0;
+$idorden = isset($_REQUEST['idorden']) ? $_REQUEST['idorden'] : 0;
 
 if ( $_SERVER['REQUEST_METHOD'] == 'POST') {
 	if ( validate_required(array(
@@ -25,8 +22,11 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST') {
 			'fecha' => fechita($_POST['fecha']),
 			'createdby' => $_SESSION['loginuser']['iduser']
 		);
+                
 
 		$detalle_values = array();
+                
+                
 		if($_POST['especifica']) {
 			foreach($_POST['especifica'] as $k=>$v) {
 				$detalle_values[$k]['especifica'] = $_POST['especifica'][$k];
@@ -36,13 +36,14 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST') {
 				$detalle_values[$k]['precio'] = $_POST['precio'][$k];
 			}
 		}
-		
+                
 		$nea_values = array_map('strip_tags', $nea_values);
-		
+                
 		if(isset($_POST['iddetalle'])) {
 			foreach($_POST['iddetalle'] as $k=>$v) {
-				$nea_values[$k]['iddetalle'] = $_POST['iddetalle'][$k];
+				$detalle_values[$k]['iddetalle'] = $_POST['iddetalle'][$k];
 			}
+                        
 			save_nea($idnea, $nea_values);
 			save_detalle_nea($idnea, $detalle_values);
 		}else{
@@ -53,12 +54,12 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST') {
 		}
 	} 
 	$idnea = 0;
+        $idorden = 0;
 }
 
-$projs = get_projs();
 $codgen = generate_code($bcdb->neas);
 
-if($idnea){ 
+if($idnea) { 
 	$nea = fill_nea(get_nea($idnea));
 	$smarty->assign ('nea', $nea);
 	if(count($nea['detalle'])==1) {
@@ -69,7 +70,7 @@ if($idnea){
 /**
  * Si se va a crear desde una orden de compra
  */
-if(isset($idorden)){ 
+if($idorden){ 
         $orden = fill_compra(get_orden_compra($idorden));
 	$nea = fill_nea_by_orden($orden);
 	$smarty->assign ('nea', $nea);
@@ -79,8 +80,7 @@ if(isset($idorden)){
         $myproc = sprintf("Orden de Compra Nro %s", $orden['idorden']);
         $smarty->assign('myproc', $myproc);
 }
-	
-$smarty->assign ('projs', $projs);
+
 $smarty->assign ('codgen', $codgen);
 
 $smarty->assign ('section_title', TITLE . ' - Almacén');

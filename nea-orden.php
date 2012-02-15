@@ -33,7 +33,7 @@ if(isset($_GET['submit'])) {
     }
 } else {
     $pager = true;
-    $ordenes = get_ordenes_compra();
+    $ordenes = get_ordenes_compra("activas");
 }
 
 if($ordenes){
