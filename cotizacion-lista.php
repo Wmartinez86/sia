@@ -29,6 +29,11 @@ if(isset($_GET['submit'])) {
             $cotizaciones = get_cotizaciones_by_codigo($codigo);
             $smarty->assign('codigo', $codigo);
         break;
+        case 'referencia':
+            $referencia = htmlspecialchars($_GET['referencia']);
+            $cotizaciones = get_cotizaciones_by_referencia($referencia);
+            $smarty->assign('referencia', $referencia);
+        break;
     }
 } else {
 

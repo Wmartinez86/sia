@@ -3,6 +3,7 @@
 <ul class="i-tabs">
   <li><a href="#i-admin">Buscar por datos</a></li>
   <li><a href="#i-numero">Buscar por número</a></li>
+  <li><a href="#i-referencia">Buscar por referencia</a></li>
 </ul>
 <div class="i-tab-container">
   <div id="i-admin" class="i-tab-content">
@@ -53,6 +54,19 @@
           <input type="text" name="codigo" id="codigo" size="10" value="{$codigo}" />
           <input type="submit" name="submit" id="submit" value="Buscar" />
           <input type="hidden" name="op" id="op" value="number" />
+        </p>
+      </fieldset>
+    </form>
+  </div>
+  <div id="i-referencia" class="i-tab-content">
+    <form name="filter" id="filter" method="GET">
+      <fieldset class="collapsible">
+        <legend>Por referencia</legend>
+        <p>
+          <label for="referencia">Referencia:</label>
+          <input type="text" name="referencia" id="codigo" size="50" value="{$referencia}" />
+          <input type="submit" name="submit" id="submit" value="Buscar" />
+          <input type="hidden" name="op" id="op" value="referencia" />
         </p>
       </fieldset>
     </form>

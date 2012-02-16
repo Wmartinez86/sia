@@ -126,6 +126,21 @@ function get_cotizaciones_by_codigo($codigo) {
     return $results;
 }
 
+/**
+ * Trae requerimientos por referencia
+ * 
+ * @param $referencia Texto a buscar
+ * @return array los resultados
+ */
+function get_cotizaciones_by_referencia($referencia) {
+    global $bcdb;
+    $sql = "SELECT * FROM $bcdb->cotizacion
+                        WHERE referencia LIKE '%$referencia%'";
+    
+    $results = $bcdb->get_results($sql);
+    return $results;
+}
+
 /* DETALLE COTIZACION */
 
 function save_detalle_cot($idcot, $detalle_values) {
