@@ -1,4 +1,4 @@
-$().ready(function () {
+$(document).ready(function () {
     $("#frmalmacen").validate();
 
     simg = '<img src="/images/loading.gif" alt="Buscando proveedor" />';

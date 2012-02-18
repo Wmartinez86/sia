@@ -45,7 +45,7 @@ function update_001() {
 function update_002() {
     global $bcdb;
     $sql = "
-        CREATE TABLE `o_detallealmacen` (
+        CREATE TABLE IF NOT EXISTS `o_detallealmacen` (
             `iddetalle` int(4) NOT NULL auto_increment COMMENT 'El id del detalle',
             `idennea` int(4) NOT NULL COMMENT 'El id del detalle relacionado en la tabla detallenea',
             `idorden` int(4) NOT NULL COMMENT 'El id de la Orden al que pertenece el producto',

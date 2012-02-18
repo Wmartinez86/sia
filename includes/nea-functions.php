@@ -115,4 +115,42 @@ function borrar_detalle_nea($iddetalle, $idnea) {
 	return $bcdb->query("DELETE FROM $bcdb->detallenea WHERE idnea = '$idnea' AND iddetalle = '$iddetalle'");
 }
 
+
+/**
+ * Productos de ALMACÉN 
+ */
+
+/**
+ * Trae productos por proyecto
+ * @param int $idproyecto el id del proyecto
+ */
+function get_productos_by_proyecto($idproyecto) {
+    global $bcdb;
+    
+    $productos = array();
+    $ordenes = get_ordenes_by_project($idproyecto, "compra");
+    
+    foreach($ordenes as $k => $orden) {
+        $productos[] = get_productos_by_orden($orden['idorden']);
+    }
+    d($productos);
+    return $productos;
+}
+
+function get_productos_by_orden($idorden) {
+    global $bcdb;
+    
+    $sql = sprintf("SELECT * FROM %s a
+            INNER JOIN %s n
+            ON a.idennea = n.iddetalle
+            WHERE a.idorden = %s;", $bcdb->detallealmacen, $bcdb->detallenea, $idorden);
+    print $sql;
+
+    $results = $bcdb->get_results($sql);
+}
+
+function get_productos_by_codigo() {
+    
+}
+
 ?>
