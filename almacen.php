@@ -75,7 +75,12 @@ if($idnea) {
  * Si se va a crear desde una orden de compra
  */
 if($idorden){ 
-        $orden = fill_compra(get_orden_compra($idorden));
+        $orden = get_orden_compra($idorden);
+        
+        if(!$orden) error ();
+        if($orden['status'] == ORDEN_CONGELADA) error();
+        
+        $orden = fill_compra($orden);
 	$nea = fill_nea_by_orden($orden);
 	$smarty->assign ('nea', $nea);
         $smarty->assign ('orden', $orden);
