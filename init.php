@@ -31,6 +31,7 @@ $bcdb->neas             	= $table_prefix . 'neas';
 $bcdb->detallenea       	= $table_prefix . 'detallenea';
 $bcdb->pecosa             	= $table_prefix . 'pecosa';
 $bcdb->detallepecosa       	= $table_prefix . 'detallepecosa';
+$bcdb->detallealmacen       	= $table_prefix . 'detallealmacen';
 
 include_once(INCLUDE_PATH . 'smarty-instance.php');
 

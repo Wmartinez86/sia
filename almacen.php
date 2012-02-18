@@ -47,8 +47,10 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST') {
 			save_nea($idnea, $nea_values);
 			save_detalle_nea($idnea, $detalle_values);
 		}else{
+                        // Guarda la NEA
 			$id = save_nea($idnea, $nea_values);
 			if($id) {
+                                // Guarda los detalles de la NEA
 				save_detalle_nea($id, $detalle_values);
 			}
                         

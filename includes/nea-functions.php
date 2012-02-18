@@ -41,14 +41,34 @@ function save_nea ($idnea, $nea_values) {
 	return false;
 }
 
+/**
+ * Guarda detalles de la entrada y el almacen
+ * 
+ * @param type $idnea La entrada a la que pertenecen los detalles
+ * @param type $detalle_values Los detalles
+ */
 function save_detalle_nea($idnea, $detalle_values) {
 	global $bcdb, $msg;
 	foreach($detalle_values as $k => $v) {
+            
+                // Ingresamos al detalle de la Entrada
 		$detalle_values[$k]['idnea'] = $idnea;
 		$query = insert_update_query($bcdb->detallenea, $detalle_values[$k]);
 		$bcdb->query($query);
-		$msg = "Se guardaron los detalles de la NEA.";
+                
+                // Ingresamos al Almacen
+                $nea = get_nea($idnea);
+                $idennea = $bcdb->insert_id;
+                
+                $almacen_values[$k]['idennea'] = $idennea;
+                $almacen_values[$k]['idorden'] = $nea['idorden'];
+                $almacen_values[$k]['cantidad'] = $detalle_values[$k]['cantidad'];
+                
+                $query = insert_update_query($bcdb->detallealmacen, $almacen_values[$k]);
+                $bcdb->query($query);
+                
 	}
+        $msg = "Se guardaron los detalles de la NEA.";
 }
 
 function remove_nea ($idnea) {
@@ -94,6 +114,5 @@ function borrar_detalle_nea($iddetalle, $idnea) {
 	global $bcdb;
 	return $bcdb->query("DELETE FROM $bcdb->detallenea WHERE idnea = '$idnea' AND iddetalle = '$iddetalle'");
 }
-
 
 ?>

@@ -19,3 +19,4 @@ CREATE TABLE  `o_detallepecosa` (
  `precio` FLOAT NOT NULL COMMENT  'El precio del bien',
 PRIMARY KEY (  `iddetalle` )
 ) ENGINE = MYISAM DEFAULT CHARSET = utf8 AUTO_INCREMENT =1 COMMENT  'Guarda detalles de las PECOSAS';
+

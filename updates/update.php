@@ -39,6 +39,26 @@ function update_001() {
     $bcdb->show_errors = false;
 }
 
-//update_001();
+/**
+ * Crea la tabla de Almacen con los productos que se tienen, 17 Feb 2012
+ */
+function update_002() {
+    global $bcdb;
+    $sql = "
+        CREATE TABLE `o_detallealmacen` (
+            `iddetalle` int(4) NOT NULL auto_increment COMMENT 'El id del detalle',
+            `idennea` int(4) NOT NULL COMMENT 'El id del detalle relacionado en la tabla detallenea',
+            `idorden` int(4) NOT NULL COMMENT 'El id de la Orden al que pertenece el producto',
+            `cantidad` decimal(10,2) NOT NULL default '0.00' COMMENT 'La cantidad original',
+            `cuantosalio` decimal(10,2) NOT NULL default '0.00' COMMENT 'Cuanto sale del almacen',
+            PRIMARY KEY  (`iddetalle`)
+        ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='Guarda los productos que estan en el almacen';
+        ";
+    $bcdb->show_errors = true;
+    $bcdb->query($sql);
+    $bcdb->show_errors = true;
+}
+
+update_002();
 
 ?>
