@@ -76,10 +76,15 @@
     <td>{$ordenes[n].proveedor.razonsocial}</td>
     <td>{$ordenes[n].fecha}</td>
     <td>{$ordenes[n].usuario.username}</td>
+    {if $ordenes[n].status == 3}
+    <th colspan="2">Ingresado a Almacén</th>
+    {else}
     <th><a href="orden-compra.php?idorden={$ordenes[n].idorden}">Ver</a></th>
+    {/if}
     {if $loginuser.usertype==1}
     {if $ordenes[n].status==1}
     <th><a href="orden-compra.php?cancel&amp;idorden={$ordenes[n].idorden}" class="cancelorder">Cancelar Orden</a></th>
+    {elseif $ordenes[n].status == 3}
     {else}
     <th><a href="orden-compra.php?activate&amp;idorden={$ordenes[n].idorden}" class="activateorder">Activar Orden</a></th>
     {/if}

@@ -95,13 +95,20 @@ if(isset($idcot)){
 	}
 
 if($idorden){ 
-	$orden = fill_compra(get_orden_compra($idorden));
+        $orden = get_orden_compra($idorden);
+        
+        if(!$orden)  error();
+        
+	$orden = fill_compra($orden);
+        if($orden['status'] == ORDEN_CONGELADA) {
+            error();
+        }
 	$smarty->assign ('orden', $orden);
 	if(count($orden['detalle'])==1) {
 		$smarty->assign ('nodel', true);
 	}
 }
-	
+
 $smarty->assign ('atipos', $atipos);
 $smarty->assign ('projs', $projs);
 $smarty->assign ('provs', $provs);

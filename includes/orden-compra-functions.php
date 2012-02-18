@@ -1,9 +1,16 @@
 <?php
 
 /* Ordenes Compra */
+/**
+ * Trae una orden de compra
+ * 
+ * @param type $idorden el id de la orden
+ * @return mixed si existe devuelve la orden, sino false
+ */
 function get_orden_compra ($idorden) {
 	global $bcdb;
-	return $bcdb->get_row("SELECT * FROM $bcdb->ordencompra WHERE idorden = '$idorden'");
+        $orden = $bcdb->get_row("SELECT * FROM $bcdb->ordencompra WHERE idorden = '$idorden'");
+	return ($orden) ? $orden : false;
 }
 
 /**

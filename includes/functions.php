@@ -354,4 +354,12 @@ function d() {
     die();
 }
 
+/**
+ * Manda a la página de error 
+ */
+function error() {
+    header("Location: error.php");
+    exit();
+}
+
 ?>

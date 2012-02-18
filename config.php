@@ -18,6 +18,11 @@ define("forma",true);
 define("CHARSET", "utf-8");
 define("NUM_ITEMS", 15);
 
+// Estados de orden
+define('ORDEN_ACTIVA', 1);
+define('ORDEN_CANCELADA', 2);
+define('ORDEN_CONGELADA', 3);
+
 error_reporting(E_ALL);
 
 setlocale(LC_TIME, 'esp_PER');
