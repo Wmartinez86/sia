@@ -249,11 +249,8 @@ function get_ordenes_by_project ($idproyecto, $tipo) {
 	global $bcdb;	
         $tabla = ($tipo == 'compra') ? $bcdb->ordencompra : $bcdb->ordenservicio ;
 	$sql = "SELECT * 
-			FROM $tabla c
-                        INNER JOIN $bcdb->usuarios u
-                        ON c.createdby = u.iduser
-                        WHERE u.idproyecto = $idproyecto
-			ORDER BY c.idorden DESC";
+			FROM $tabla WHERE idproyecto = $idproyecto
+			ORDER BY idorden DESC";
 	$ordenes = $bcdb->get_results($sql);
 	return $ordenes;
 }

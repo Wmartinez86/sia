@@ -51,6 +51,10 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST') {
 			if($id) {
 				save_detalle_nea($id, $detalle_values);
 			}
+                        
+                        if($nea_values['idorden'] != 0) {
+                            freeze_orden($nea_values['idorden']);
+                        }
 		}
 	} 
 	$idnea = 0;

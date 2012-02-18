@@ -138,5 +138,17 @@ function borrar_detalle_compra($iddetalle, $idorden) {
 	return $bcdb->query("DELETE FROM $bcdb->detalleordencompra WHERE idorden = '$idorden' AND iddetalle = '$iddetalle'");
 }
 
+/**
+ * Congela una orden para que ya no pueda ser editada
+ * además indica que la orden ya ha sido ingresada al almacén
+ * 
+ * @param type $idorden la Orden
+ * @return mixed éxito
+ */
+function freeze_orden($idorden) {
+	global $bcdb;
+	return $bcdb->query("UPDATE $bcdb->ordencompra SET status = 3 WHERE idorden = $idorden");
+}
+
 
 ?>

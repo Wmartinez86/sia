@@ -39,6 +39,6 @@ function update_001() {
     $bcdb->show_errors = false;
 }
 
-update_001();
+//update_001();
 
 ?>

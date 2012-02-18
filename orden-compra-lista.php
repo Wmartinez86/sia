@@ -31,6 +31,8 @@ if(isset($_GET['submit'])) {
             $smarty->assign('codigo', $codigo);
         break;
     }
+    
+    //d($ordenes);
 } else {
     $pager = true;
     $ordenes = get_ordenes_compra();
