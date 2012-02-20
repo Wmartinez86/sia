@@ -40,7 +40,7 @@ if (!isset($_GET['print'])) :
                                 'grupo_func' => (string)$_POST['grupo_func'],
                                 'meta' => (string)$_POST['meta'],
                                 'finalidad' => (string)$_POST['finalidad'],
-                                'descripcion' => ucwords($_POST['descripcion']),
+                                'descripcion' => ucwords(mb_strtolower($_POST['descripcion'], 'UTF-8')),
 			);
 			
 			$proj_values = array_map('strip_tags', $proj_values);
