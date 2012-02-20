@@ -19,7 +19,7 @@ if(isset($_GET['submit'])) {
         case 'search':
             $idproyecto = htmlspecialchars($_GET['idproyecto']);
             $iduser = "";
-            $ordenes = search_orden_compra($idproyecto, $iduser);
+            $ordenes = search_orden_compra($idproyecto, $iduser, "activos");
             
             $smarty->assign('idproyecto', $idproyecto);
             $smarty->assign('iduser', $iduser);

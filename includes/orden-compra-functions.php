@@ -90,11 +90,11 @@ function fill_compra($orden) {
  * @param int $iduser el id del usuario 
  * @return array los resultados
  */
-function search_orden_compra($idproyecto, $iduser) {
+function search_orden_compra($idproyecto, $iduser, $activos = null) {
     $results = array();
     
     if(!empty($idproyecto)) {
-        $results = get_ordenes_by_project($idproyecto, "compra");
+        $results = get_ordenes_by_project($idproyecto, "compra", $activos);
     } else {
         $results = get_ordenes_compra();
     }

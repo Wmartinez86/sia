@@ -241,16 +241,18 @@ function get_ordenes_by_codigo($codigo, $tipo) {
  * Trae ordenes por proyecto
  * 
  * @param int $idproyecto el id del proyecto
- * @param string $tipo el tipo de orden@
+ * @param string $tipo el tipo de orden
+ * @param string $activos, solo debería mostrar activos
  * @return array los resultados
  * 
  */
-function get_ordenes_by_project ($idproyecto, $tipo) {
+function get_ordenes_by_project ($idproyecto, $tipo, $activos = NULL) {
 	global $bcdb;	
         $tabla = ($tipo == 'compra') ? $bcdb->ordencompra : $bcdb->ordenservicio ;
 	$sql = "SELECT * 
-			FROM $tabla WHERE idproyecto = $idproyecto
-			ORDER BY idorden DESC";
+			FROM $tabla WHERE idproyecto = $idproyecto";
+        $sql .= (!is_null($activos)) ? " AND status = '1' " : "";
+        $sql .= " ORDER BY idorden DESC";
 	$ordenes = $bcdb->get_results($sql);
 	return $ordenes;
 }

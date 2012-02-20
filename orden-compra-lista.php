@@ -20,7 +20,7 @@ if(isset($_GET['submit'])) {
             $idproyecto = htmlspecialchars($_GET['idproyecto']);
             $iduser = htmlspecialchars($_GET['iduser']);
             $ordenes = search_orden_compra($idproyecto, $iduser);
-            
+
             $smarty->assign('idproyecto', $idproyecto);
             $smarty->assign('iduser', $iduser);
             

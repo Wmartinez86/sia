@@ -11,7 +11,12 @@ if(isset($_GET['submit'])) {
     switch($op) {
         case 'proyecto':
             $idproyecto = htmlspecialchars($_GET['idproyecto']);
-            $productos = get_productos_by_proyecto($idproyecto);
+            if($idproyecto == 1) {
+                $productos = get_productos_almacen();
+            }else {
+                $productos = get_productos_by_proyecto($idproyecto);
+            }
+            
             $smarty->assign('idproyecto', $idproyecto);
         break;
         case 'number':

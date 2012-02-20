@@ -122,21 +122,35 @@ function borrar_detalle_nea($iddetalle, $idnea) {
 
 /**
  * Trae productos por proyecto
+ * 
  * @param int $idproyecto el id del proyecto
  */
 function get_productos_by_proyecto($idproyecto) {
-    global $bcdb;
-    
+    $results = array();
     $productos = array();
     $ordenes = get_ordenes_by_project($idproyecto, "compra");
     
     foreach($ordenes as $k => $orden) {
-        $productos[] = get_productos_by_orden($orden['idorden']);
+        $detalles = get_productos_by_orden($orden['idorden']);
+        if($detalles) $results[] = $detalles;
     }
-    d($productos);
-    return $productos;
+
+    foreach($results as $k => $grupo) {
+        foreach($grupo as $j => $producto) {
+            $productos[] = $producto;
+        }
+    } 
+
+    return $productos;  
+    
 }
 
+/**
+ * Retorna productos del almacen que han entrado de acuerdo al id de una orden de compra
+ * 
+ * @param int $idorden el id de la orden
+ * @return mixed los productos o false si no existen
+ */
 function get_productos_by_orden($idorden) {
     global $bcdb;
     
@@ -144,13 +158,50 @@ function get_productos_by_orden($idorden) {
             INNER JOIN %s n
             ON a.idennea = n.iddetalle
             WHERE a.idorden = %s;", $bcdb->detallealmacen, $bcdb->detallenea, $idorden);
-    print $sql;
 
     $results = $bcdb->get_results($sql);
+    return ($results) ? $results : false;
 }
 
-function get_productos_by_codigo() {
+/**
+ * Retorna productos del almacen que han entrado de acuerdo al codigo de una orden de compra
+ * 
+ * @param string $codigo el codigo de la orden
+ * @return mixed los productos o false si no existen
+ */
+function get_productos_by_codigo($codigo) {
+    global $bcdb;
     
+    $sql = sprintf("SELECT a.*, n.*, c.status FROM %s a
+                    INNER JOIN %s n
+                    ON a.idennea = n.iddetalle
+                    INNER JOIN %s nea
+                    ON n.idnea = nea.idnea
+                    INNER JOIN %s c
+                    ON nea.idorden = c.idorden
+                    WHERE c.codigo = '%s'", $bcdb->detallealmacen, 
+                                                $bcdb->detallenea, 
+                                                $bcdb->neas, 
+                                                $bcdb->ordencompra,
+                                                $codigo);
+    
+    $results = $bcdb->get_results($sql);
+    return ($results) ? $results : false;
+}
+
+/**
+ * 
+ */
+function get_productos_almacen() {
+   global $bcdb;
+   
+   $sql = sprintf("SELECT * FROM %s a
+            INNER JOIN %s n
+            ON a.idennea = n.iddetalle
+            WHERE a.idorden = 0;", $bcdb->detallealmacen, $bcdb->detallenea);
+
+    $results = $bcdb->get_results($sql);
+    return ($results) ? $results : false;
 }
 
 ?>
