@@ -9,7 +9,7 @@ $postback = isset($_POST['username']);
 $location = !empty($_REQUEST['r']) ? clean_html($_REQUEST['r']) : BASE_URL;
 
 if($postback){			
-	$user = get_user_by_username($_POST['username']);			
+	$user = get_user_by_username($_POST['username']);
 	if ( $user ) :
 		if( $user['pwd'] == md5($_POST['pwd']) ) :
 			session_regenerate_id();

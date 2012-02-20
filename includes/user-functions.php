@@ -18,8 +18,7 @@ function user_extra_data($user) {
 function get_user_by_username($username) {
 	global $bcdb;
 	$user = $bcdb->get_row("SELECT * FROM $bcdb->usuarios WHERE username = '$username'");
-        $user = user_extra_data($user);
-        return $user;
+        return ($user) ? user_extra_data($user) : false;
 }
 
 function get_users () {
