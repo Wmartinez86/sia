@@ -80,7 +80,7 @@
     <th>{$requerimientos[n].codigo}</th>
     <td>{$requerimientos[n].fecha}</td>
     <td>{$requerimientos[n].usuario.username}</td>
-    <th><a href="requerimientonew.php?idreq={$requerimientos[n].idreq}">Ver</a></th>
+    <th><a href="requerimientonew.php?idreq={$requerimientos[n].idreq}">Modificar</a></th>
     <th><a href="requerimiento-print.php?idreq={$requerimientos[n].idreq}">Imprimir</a></th>
     {if $loginuser.usertype==1}
     <th><a href="cotizacionnew.php?create&amp;idreq={$requerimientos[n].idreq}">Crear Cotización</a></th>

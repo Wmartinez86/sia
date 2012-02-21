@@ -1,0 +1,26 @@
+<script type="text/javascript" src="{$scriptsurl}acciones/salida.js"></script>
+<h2>Confirmar</h2>
+<form name="frmproductos" id="frmproductos" action="almacen-confirmar.php" method="POST">
+<table class="tabla">
+  <thead>
+    <th>Disponible</th>
+    <th>U. Med.</th>
+    <th>Descripción</th>
+    <th>Salida</th>
+    <th>Nuevo Saldo</th>
+  </thead>
+  <tbody>
+  {section name=n loop=$productos}
+  <tr class="{cycle values="even,odd"}">
+      <td>{$productos[n].producto.saldo}</td>
+      <td>{$productos[n].producto.umedida}</td>
+      <td>{$productos[n].producto.descripcion}</td>
+      <td>{$productos[n].producto.salida}</td>
+      <th>{$productos[n].producto.nuevosaldo}</th>
+  </tr>
+  {/section}
+  </tbody>
+</table>
+<p class="submit"><input type="submit" id="submitprod" value="Retirar productos" /></p>
+<input type="hidden" value="confirm" name="op" id="op" />
+</form>

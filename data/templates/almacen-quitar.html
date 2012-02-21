@@ -1,4 +1,4 @@
-<script type="text/javascript" src="{$scriptsurl}acciones/almacen.js"></script>
+<script type="text/javascript" src="{$scriptsurl}acciones/salida.js"></script>
 <h2>Quitar productos del almacén</h2>
 <ul class="i-tabs">
   <li><a href="#i-proyecto">Origen</a></li>
@@ -42,6 +42,8 @@
   </div>
 </div>
 {if $productos}
+<form name="frmproductos" id="frmproductos" action="almacen-confirmar.php" method="POST">
+{/if}
 <table class="tabla">
   <thead>
     <th></th>
@@ -51,14 +53,13 @@
     <th>Salida</th>
   </thead>
   <tbody>
-  
   {section name=n loop=$productos}
   <tr class="{cycle values="even,odd"}">
-      <th><input type="checkbox" name="choose" id="choose{$productos[n].iddetalle}" /></th>
-      <td>{$productos[n].cantidad}</td>
+      <th><input type="checkbox" name="detalles[]" id="choose-{$productos[n].iddetalle}" value="{$productos[n].iddetalle}" /></th>
+      <td>{$productos[n].saldo}<input type="hidden" value="{$productos[n].saldo}" name="saldo[]" id="saldo-{$productos[n].iddetalle}" /></td>
       <td>{$productos[n].umedida}</td>
       <td>{$productos[n].descripcion}</td>
-      <td><input type="text" name="cuanto[]" id="cuanto{$productos[n].iddetalle}" size="3" /></td>
+      <td><input type="text" name="salidas[]" id="salida-{$productos[n].iddetalle}" size="5" disabled="disabled" class="required number" title="Ingresa una cantidad" /></td>
   </tr>
   {sectionelse}
   <tr>
@@ -67,4 +68,8 @@
   {/section}
   </tbody>
 </table>
+{if $productos}
+<p class="submit"><input type="submit" id="submitprod" value="Retirar productos" /></p>
+<input type="hidden" value="confirm" name="op" id="op" />
+</form>
 {/if}

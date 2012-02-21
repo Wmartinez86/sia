@@ -34,11 +34,11 @@ table.tabla  {
 }
 
 .tabla tbody tr.odd th {
-    background: #e9f0f7 !important;
+    background: #e9f0f7;
 }
 
 .tabla tbody tr.odd td {
-    background: #F5FAFA !important;
+    background: #F5FAFA;
 }
 
 .tabla tbody tr:hover td,
@@ -47,6 +47,13 @@ table.tabla  {
     color: #627751 !important;
     border-right: 1px solid #cbe4ae;
     border-bottom: 1px solid #cbe4ae;
+}
+
+.checkedvalue {
+    background: #FFC !important;
+    color: #666648 !important;
+    border-right: 1px solid #e8e8b1 !important;
+    border-bottom: 1px solid #e8e8b1 !important;
 }
 
 .tabla tfoot td, .tabla tfoot th {

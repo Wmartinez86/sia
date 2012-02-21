@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    
+    // Crear NEAS
+    
     $("#frmalmacen").validate();
 
     simg = '<img src="/images/loading.gif" alt="Buscando proveedor" />';

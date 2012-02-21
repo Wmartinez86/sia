@@ -154,7 +154,11 @@ function get_productos_by_proyecto($idproyecto) {
 function get_productos_by_orden($idorden) {
     global $bcdb;
     
-    $sql = sprintf("SELECT * FROM %s a
+    $sql = sprintf("SELECT
+            a.*,
+            n.descripcion,
+            n.umedida
+            FROM %s a
             INNER JOIN %s n
             ON a.idennea = n.iddetalle
             WHERE a.idorden = %s;", $bcdb->detallealmacen, $bcdb->detallenea, $idorden);
@@ -172,7 +176,12 @@ function get_productos_by_orden($idorden) {
 function get_productos_by_codigo($codigo) {
     global $bcdb;
     
-    $sql = sprintf("SELECT a.*, n.*, c.status FROM %s a
+    $sql = sprintf("SELECT 
+                    a.*, 
+                    n.descripcion, 
+                    n.umedida,
+                    c.status 
+                    FROM %s a
                     INNER JOIN %s n
                     ON a.idennea = n.iddetalle
                     INNER JOIN %s nea
@@ -190,18 +199,62 @@ function get_productos_by_codigo($codigo) {
 }
 
 /**
- * 
+ * Trae productos del almacen
+ * @return 
+ *  Los productos, caso contrario es FALSE
  */
 function get_productos_almacen() {
    global $bcdb;
    
-   $sql = sprintf("SELECT * FROM %s a
+   $sql = sprintf("SELECT 
+            a.*,            
+            n.descripcion,
+            n.umedida
+            FROM %s a
             INNER JOIN %s n
             ON a.idennea = n.iddetalle
             WHERE a.idorden = 0;", $bcdb->detallealmacen, $bcdb->detallenea);
-
+   
     $results = $bcdb->get_results($sql);
     return ($results) ? $results : false;
+}
+
+/**
+ * Retorna un producto que está en el almacen
+ *
+ * @param int $iddetalle el id del producto
+ * @return 
+ *  mixed El producto, sino FALSE
+ */
+function get_producto($iddetalle) {
+    global $bcdb;
+    
+    $sql = sprintf("SELECT 
+            a.*,            
+            n.descripcion,
+            n.umedida
+            FROM %s a
+            INNER JOIN %s n
+            ON a.idennea = n.iddetalle
+            WHERE a.iddetalle = %s;", $bcdb->detallealmacen, $bcdb->detallenea, $iddetalle);
+   
+    $producto = $bcdb->get_row($sql);
+    if($producto) {
+        $producto['saldo'] = get_saldo($producto);
+        return $producto;
+    } else {
+        return false;
+    }
+}
+
+/**
+ * Retorna el saldo de un determinado producto
+ * @param array $producto el producto
+ * @return 
+ *  float El Saldo
+ */
+function get_saldo($producto) {
+    return $producto['cantidad']-$producto['cuantosalio'];
 }
 
 ?>

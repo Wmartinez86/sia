@@ -30,6 +30,7 @@ $almacen = array(
     "/pecosa-print.php",
     "/pecosa.php",
     "/almacen-quitar.php",
+    "/almacen-confirmar.php",
 );
 
 if(!isset($session_active)) {

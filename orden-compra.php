@@ -32,8 +32,6 @@ $fuentes = get_fuentes();
 $docs = get_docs();
 $especs = get_especificas();
 
-$codgen = generate_code($bcdb->ordencompra);
-
 if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 	if ( validate_required(array(
 		'Nro. Referencia' => $_POST['nrodoc'], 
@@ -85,11 +83,12 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 	} 
 	$idorden = 0;
 }
-
+$codgen = generate_code($bcdb->ordencompra);
 //	$orden = fill_compra_by_cot(get_cotizacion($idcot));
 
 if(isset($idcot)){
-	$orden = fill_compra_by_cot(get_cotizacion($idcot));        
+	$orden = fill_compra_by_cot(get_cotizacion($idcot));
+        $orden['fecha']=NULL;
 	$smarty->assign ('orden', $orden);
 	$smarty->assign ('fcot', true);
 	}

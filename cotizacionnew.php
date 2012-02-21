@@ -26,7 +26,6 @@ if(isset($_GET['activate'])) {
 	exit();
 }
 
-$codgen = generate_code($bcdb->cotizacion);
 
 if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 	if ( validate_required(array(
@@ -46,7 +45,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 			foreach($_POST['cantidad'] as $k=>$v) {
 				$detalle_values[$k]['cantidad'] = $_POST['cantidad'][$k];
 				$detalle_values[$k]['umedida'] = $_POST['umedida'][$k];
-				$detalle_values[$k]['descripcion'] = $_POST['descripcion'][$k];
+				$detalle_values[$k]['descripcion'] = ucwords(mb_strtolower($_POST['descripcion'][$k], 'UTF-8'));
 			}
 		}
 		
@@ -70,7 +69,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 	} 
 	$idcot = 0;
 }
-
+$codgen = generate_code($bcdb->cotizacion);
 if($idcot){ 
 	$cot = fill_cot(get_cotizacion($idcot));
 	$smarty->assign ('cot', $cot);

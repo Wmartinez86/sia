@@ -13,7 +13,7 @@ if(isset($_GET['submit'])) {
             $idproyecto = htmlspecialchars($_GET['idproyecto']);
             if($idproyecto == 1) {
                 $productos = get_productos_almacen();
-            }else {
+            } else {
                 $productos = get_productos_by_proyecto($idproyecto);
             }
             
@@ -24,6 +24,13 @@ if(isset($_GET['submit'])) {
             $productos = get_productos_by_codigo($codigo);
             $smarty->assign('codigo', $codigo);
         break;
+    }
+}
+
+// Si existen productos
+if(count($productos) > 0) {
+    foreach($productos as $k => $producto) {
+        $productos[$k]['saldo'] = get_saldo($producto);
     }
 }
 

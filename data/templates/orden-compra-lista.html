@@ -79,7 +79,7 @@
     {if $ordenes[n].status == 3}
     <th colspan="2">Ingresado a Almacén</th>
     {else}
-    <th><a href="orden-compra.php?idorden={$ordenes[n].idorden}">Ver</a></th>
+    <th><a href="orden-compra.php?idorden={$ordenes[n].idorden}">Modificar</a></th>
     {/if}
     {if $loginuser.usertype==1}
     {if $ordenes[n].status==1}
