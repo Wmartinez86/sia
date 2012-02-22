@@ -101,16 +101,18 @@ function get_productos_by_proyecto($idproyecto) {
     $productos = array();
     $ordenes = get_ordenes_by_project($idproyecto, "compra");
     
-    foreach($ordenes as $k => $orden) {
-        $detalles = get_productos_by_orden($orden['idorden']);
-        if($detalles) $results[] = $detalles;
-    }
-
-    foreach($results as $k => $grupo) {
-        foreach($grupo as $j => $producto) {
-            $productos[] = $producto;
+    if($ordenes) {
+        foreach($ordenes as $k => $orden) {
+            $detalles = get_productos_by_orden($orden['idorden']);
+            if($detalles) $results[] = $detalles;
         }
-    } 
+
+        foreach($results as $k => $grupo) {
+            foreach($grupo as $j => $producto) {
+                $productos[] = $producto;
+            }
+        } 
+    }
 
     return $productos;  
     
