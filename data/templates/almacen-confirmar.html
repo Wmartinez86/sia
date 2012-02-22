@@ -1,6 +1,34 @@
 <script type="text/javascript" src="{$scriptsurl}acciones/salida.js"></script>
-<h2>Confirmar</h2>
-<form name="frmproductos" id="frmproductos" action="almacen-confirmar.php" method="POST">
+<h2>Salida de productos</h2>
+{if $msg}
+<div class="msg">{$msg}</div>
+{/if}
+<form name="frmproductos" id="frmproductos" action="{$self}" method="POST">
+  <fieldset>
+    <legend>Datos de la salida</legend>
+    <p>
+        <label for="codigo">Código:</label>
+        <input type="text" name="codigo" id="codigo" value="{$codgen}" maxlength="10" class="required" />
+    </p>
+    <p>
+      <label for="dependencia">Dependencia:</label>
+      <input type="text" name="dependencia" id="dependencia" maxlength="150" size="45" class="required" />
+    </p>
+    <p>
+      <label for="entregar">Entregar a:</label>
+      <input type="text" name="entregar" id="entregar" maxlength="150" size="45" class="required" />
+    </p>
+    <p>
+      <label for="destino">Destino:</label>
+      <input type="text" name="destino" id="destino" maxlength="225" size="50" class="required" value="{if $proj}{$proj.descripcion}{/if}" />
+    </p>
+    <p>
+        <label for="fecha">Fecha:</label>
+        <input type="text" name="fecha" id="fecha" size="11" value="{$smarty.now|date_format:"%d/%m/%Y"}" class="required" />
+    </p>
+  </fieldset>
+
+<h2>Productos que saldrán</h2>
 <table class="tabla">
   <thead>
     <th>Disponible</th>
@@ -16,11 +44,18 @@
       <td>{$productos[n].producto.umedida}</td>
       <td>{$productos[n].producto.descripcion}</td>
       <td>{$productos[n].producto.salida}</td>
-      <th>{$productos[n].producto.nuevosaldo}</th>
+      <th>
+          {$productos[n].producto.nuevosaldo}
+          <input type="hidden" name="detalles[]" id="choose-{$productos[n].producto.iddetalle}" value="{$productos[n].producto.iddetalle}" />
+          <input type="hidden" name="salidas[]" id="salida-{$productos[n].producto.iddetalle}" value="{$productos[n].producto.salida}" />
+      </th>
   </tr>
   {/section}
   </tbody>
 </table>
-<p class="submit"><input type="submit" id="submitprod" value="Retirar productos" /></p>
-<input type="hidden" value="confirm" name="op" id="op" />
+<p class="submit">
+    <input type="submit" id="submitprod" value="Retirar productos" />
+    <input type="button" id="cancel" value="Cancelar" onclick="location.href= 'almacen-quitar.php'" />
+    <input type="hidden" name="op" id="op" value="save" />
+</p>
 </form>

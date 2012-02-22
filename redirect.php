@@ -28,7 +28,7 @@ $almacen = array(
     "/add-item.php",
     "/almacen-lista.php",
     "/pecosa-print.php",
-    "/pecosa.php",
+    "/pecosa-lista.php",
     "/almacen-quitar.php",
     "/almacen-confirmar.php",
 );

@@ -33,7 +33,7 @@
       <th>Procedencia</th>
       <th>Fecha</th>
       <th>Creado por</th>
-      <th colspan="3">Acciones</th>
+      <th colspan="2">Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -46,11 +46,10 @@
     <td>{$neas[n].usuario.username}</td>
     <th><a href="almacen.php?idnea={$neas[n].idnea}">Modificar</a></th>
     <th><a href="nea-print.php?idnea={$neas[n].idnea}">Imprimir</a></th>
-    <th><a href="pecosa.php?idnea={$neas[n].idnea}">Generar <abbr title="Pedido de Comprobante de Salida">PECOSA</abbr></a></th>
   </tr>
   {sectionelse}
   <tr>
-    <td colspan="7">No existen datos.</td>
+    <td colspan="6">No existen datos.</td>
   </tr>
   {/section}
   </tbody>

@@ -56,9 +56,36 @@ function update_002() {
         ";
     $bcdb->show_errors = true;
     $bcdb->query($sql);
+    $bcdb->show_errors = false;
+}
+
+/**
+ * Cambia la estructura de las tablas PECOSA
+ */
+function update_003() {
+    global $bcdb;
     $bcdb->show_errors = true;
+    
+    $sql = "ALTER TABLE  `o_pecosa` DROP  `idnea";
+    $bcdb->query($sql);
+    
+    $sql = "ALTER TABLE  `o_pecosa` ADD  `codigo` VARCHAR( 10 ) NOT NULL AFTER  `idpecosa` ;";
+    $bcdb->query($sql);
+    
+    $sql = "ALTER TABLE `o_detallenea`
+            DROP `especifica`,
+            DROP `umedida`,
+            DROP `descripcion`,
+            DROP `precio`;";
+    $bcdb->query($sql);
+    
+    $sql = "ALTER TABLE  `o_detallepecosa` ADD  `idenalmacen` INT( 4 ) NOT NULL AFTER  `iddetalle` ;";
+    $bcdb->query($sql);
+    
+    $bcdb->show_errors = false;
 }
 
 update_002();
+update_003();
 
 ?>

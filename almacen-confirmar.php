@@ -10,7 +10,6 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
         switch($op) {
             case "confirm":
                 
-                $productos = array();
                 $detalles = $_POST['detalles'];
                 $salidas = $_POST['salidas'];
                 
@@ -20,14 +19,50 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
                     $productos[$k]['producto']['nuevosaldo'] = $productos[$k]['producto']['saldo']-$productos[$k]['producto']['salida'];
                 }
                 
-                //d($productos);                
+                // Orden Random
+                $ranorden = $productos[0]['producto']['idorden'];
+                
+                if($ranorden) {
+                    $orden = get_orden_compra($ranorden);
+                    $proj = get_proj($orden['idproyecto']);
+                    $smarty->assign('proj', $proj);
+                }
                 break;
             case "save":
+                
+                $detalles = $_POST['detalles'];
+                $salidas = $_POST['salidas'];
+                
+                $pecosa_values = array(
+			'codigo' => $_POST['codigo'],
+			'dependencia' => $_POST['dependencia'],
+			'entregar' => $_POST['entregar'],
+			'destino' => $_POST['destino'],
+			'fecha' => fechita($_POST['fecha']),
+			'createdby' => $_SESSION['loginuser']['iduser']
+		);
+                
+                $pecosa_values = array_map('strip_tags', $pecosa_values);
+                
+                $id = save_pecosa(0, $pecosa_values);
+                
+                $total = count($detalles);
+                
+                for($i = 0; $i < $total; $i++) {
+                    save_detalle_salida($id, $detalles[$i], $salidas[$i]);
+                }
+                
+                $msg = "La salida fue registrada";
+                safe_redirect("pecosa-lista.php");
+
                 break;
             default:
                 error();
         }
 }
+
+$codgen = generate_code($bcdb->pecosa);
+$smarty->assign ('codgen', $codgen);
 
 $smarty->assign ('productos', $productos);
 $smarty->assign ('section_title', TITLE . ' - Productos');
