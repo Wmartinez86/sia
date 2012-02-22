@@ -28,7 +28,8 @@ if(isset($_GET['submit'])) {
 }
 
 // Si existen productos
-if(count($productos) > 0) {
+if($productos) {
+    
     foreach($productos as $k => $producto) {
         $productos[$k]['saldo'] = get_saldo($producto);
     }
