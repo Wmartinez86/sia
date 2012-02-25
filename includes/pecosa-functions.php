@@ -269,6 +269,7 @@ function get_producto($iddetalle) {
     $producto = $bcdb->get_row($sql);
     if($producto) {
         $producto['saldo'] = get_saldo($producto);
+        $producto['orden'] = get_orden_compra($producto['idorden']);
         return $producto;
     } else {
         return false;

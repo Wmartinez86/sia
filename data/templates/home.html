@@ -27,11 +27,13 @@
     {/if}
     {if $loginuser.usertype==3 || $loginuser.iduser == 1}
     <div class="group">
-        <h3>Notas de Entrada</h3>
-        <h4>Ingresar saldos</h4>
-        <p>Puedes <a href="almacen.php">ingresar productos</a> al almacen</p>
-        <h4>Órdenes de Compra</h4>
-        <p>Puedes ver las <a href="nea-orden.php">órdenes de compra</a> e ingresar bienes desde ahí</p>
+        <h3>Ingresos</h3>
+        <h4>Por órdenes de compra</h4>
+        <p>Puedes ver las <a href="nea-orden.php">órdenes de compra</a> e ingresar productos.</p>
+        <h4>Ingreso de productos</h4>
+        <p>Puedes <a href="almacen.php">ingresar productos</a> de saldos u otros.</p>
+        <h4>Ingresos</h4>
+        <p>Puedes ver <a href="almacen-lista.php">ver y controlar</a> los bienes dentro del almacén.</p>
     </div>
     {/if}
 </div>
@@ -56,13 +58,11 @@
     {/if}
     {if $loginuser.usertype==3 || $loginuser.iduser == 1}
     <div class="group">
-        <h3>Almacén</h3>
-        <h4>Vista del almacén</h4>
-        <p>Puedes <a href="almacen-lista.php">ver y controlar</a> los bienes dentro del almacén.</p>
-        <h4>Quitar productos</h4>
-        <p>Puedes <a href="almacen-quitar.php">sacar productos del almacén</a>.</p>
-        <h4>Reportes e impresión</h4>
-        <p>Puedes <a href="pecosa-lista.php">ver los todas las salidas</a>.</p>
+        <h3>Salidas</h3>
+        <h4>Pedidos de Comprobante de Salidas</h4>
+        <p>Puedes <a href="pecosa-lista.php">ver los la relación de <acronym title="Pedido de Comprobante de Salida">PECOSA</acronym>S</a>.</p>
+        <h4>Generar <acronym title="Pedido de Comprobante de Salida">PECOSA</acronym>s</h4>
+        <p>Puedes <a href="almacen-quitar.php">generar Pedidos de Comprobante de Salidas</a>.</p>
     </div>
     {/if}
 </div>
