@@ -256,9 +256,11 @@ function get_producto($iddetalle) {
     global $bcdb;
     
     $sql = sprintf("SELECT 
-            a.*,            
+            a.*,          
+            n.especifica,
+            n.umedida,
             n.descripcion,
-            n.umedida
+            n.precio
             FROM %s a
             INNER JOIN %s n
             ON a.idennea = n.iddetalle
