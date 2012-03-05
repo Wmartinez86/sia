@@ -231,8 +231,8 @@ function get_ordenes_by_codigo($codigo, $tipo) {
     global $bcdb;
     $tabla = ($tipo == 'compra') ? $bcdb->ordencompra : $bcdb->ordenservicio ;
     $sql = "SELECT * FROM $tabla
-                        WHERE codigo LIKE '%$codigo%' WHERE status = 1";
-    
+                        WHERE codigo LIKE '%$codigo%'";
+
     $results = $bcdb->get_results($sql);
     return $results;
 }
@@ -255,6 +255,42 @@ function get_ordenes_by_project ($idproyecto, $tipo, $activos = NULL) {
         $sql .= " ORDER BY idorden DESC";
 	$ordenes = $bcdb->get_results($sql);
 	return $ordenes;
+}
+
+/**
+ * Trae ordenes por nombre de proveedor
+ * 
+ * @param string $nombre el nombre del proveedor
+ * @return array los resultados
+ */
+function get_ordenes_by_nombre_prov($nombre) {
+    global $bcdb;
+    $sql = sprintf("SELECT c.*
+                        FROM %s c
+                        INNER JOIN %s p
+                        ON c.idproveedor = p.idproveedor
+                        WHERE p.razonsocial LIKE '%%%s%%'", $bcdb->ordencompra, $bcdb->proveedores, $nombre);
+    
+    $results = $bcdb->get_results($sql);
+    return $results;
+}
+
+/**
+ * Trae ordenes por ruc de proveedor
+ * 
+ * @param string $ruc el ruc
+ * @return array los resultados
+ */
+function get_ordenes_by_ruc_prov($ruc) {
+    global $bcdb;
+    $sql = sprintf("SELECT c.*
+                        FROM %s c
+                        INNER JOIN %s p
+                        ON c.idproveedor = p.idproveedor
+                        WHERE p.ruc = '%s'", $bcdb->ordencompra, $bcdb->proveedores, $ruc);
+    
+    $results = $bcdb->get_results($sql);
+    return $results;
 }
 
 function supertotal($detalle, $field) {

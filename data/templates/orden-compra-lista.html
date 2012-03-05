@@ -3,6 +3,8 @@
 <ul class="i-tabs">
   <li><a href="#i-admin">Buscar por datos</a></li>
   <li><a href="#i-numero">Buscar por código</a></li>
+  <li><a href="#i-prov">Buscar por nombre proveedor</a></li>
+  <li><a href="#i-ruc">Buscar por RUC proveedor</a></li>
 </ul>
 <div class="i-tab-container">
   <div id="i-admin" class="i-tab-content">
@@ -53,6 +55,34 @@
       </fieldset>
     </form>
   </div>
+    <div id="i-prov" class="i-tab-content">
+    <form name="filter" id="filter" method="GET">
+      <fieldset class="collapsible">
+        <legend>Por Proveedor</legend>
+        <p>
+          <label for="nombre">Nombre:</label>
+          <input type="text" name="nombre" id="codigo" size="30" value="{$nombre}" />
+          <input type="submit" name="submit" id="submit" value="Buscar" />
+          <br />
+          <input type="hidden" name="op" id="op" value="proveedor" />
+        </p>
+      </fieldset>
+    </form>
+  </div>
+    <div id="i-ruc" class="i-tab-content">
+    <form name="filter" id="filter" method="GET">
+      <fieldset class="collapsible">
+        <legend>Por RUC</legend>
+        <p>
+          <label for="ruc">RUC:</label>
+          <input type="text" name="ruc" id="codigo" size="30" value="{$ruc}" />
+          <input type="submit" name="submit" id="submit" value="Buscar" />
+          <br />
+          <input type="hidden" name="op" id="op" value="ruc" />
+        </p>
+      </fieldset>
+    </form>
+  </div>
 </div>
 <table class="tabla">
   <thead>
@@ -61,6 +91,7 @@
       <th>Referencia</th>
       <th>Proyecto</th>
       <th>Proveedor</th>
+      <th>Monto</th>
       <th>Fecha</th>
       <th>Creado por</th>
       <th colspan="3">Acciones</th>
@@ -74,6 +105,7 @@
     <td>{$ordenes[n].doc.nombre}: {$ordenes[n].nrodoc}</td>
     <td>{$ordenes[n].proyecto.descripcion}</td>
     <td>{$ordenes[n].proveedor.razonsocial}</td>
+    <td>S/. {$ordenes[n].stotal|number_format:2:",":"."}</td>
     <td>{$ordenes[n].fecha}</td>
     <td>{$ordenes[n].usuario.username}</td>
     {if $ordenes[n].status == 3}

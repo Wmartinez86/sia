@@ -1,0 +1,25 @@
+en requerimeinto
+    * indicar si ya se realizo cotizacion (nro)
+en cotizacion
+    * indicar si ya se realizo orden de compra (nro)
+en Cuadro comparativo
+    * Creacion de Campo Marca
+en orden de compra
+    * imprimir mas de una orden
+    * auto completar producto
+    * Ver detalle 
+    * lista de productos por meta
+    * lista de productos por fuente
+en orden de Servicio
+    * imprimir mas de una orden
+    * Ver detalle 
+    * busqueda por nombre
+    * busqueda por Ruc
+en almacen
+    * liberar orden de Compra
+    * imprimir mas de una nea
+    * imprimir mas de una pecosa
+Proveedor
+    * busqueda de proveedor para modificar
+Producto
+    * crear tabla Producto 

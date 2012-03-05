@@ -14,7 +14,6 @@ if($postback) {
 	$fecha1 = $_GET['fecha1'];
 	$fecha2 = $_GET['fecha2'];
 	$ruc = (strlen($_GET['ruc'])>0) ? $_GET['ruc'] : '';
-	
 	$search_values = array(
 			'iddoc' => $_GET['iddoc'],
 			'idproyecto' => $_GET['idproyecto'],
@@ -64,6 +63,7 @@ if($postback) {
 		die($xls);
 	}
 }
+//d($ordenes);
 $smarty->assign ('status', $status);
 
 $projs = get_projs();

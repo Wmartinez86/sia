@@ -48,7 +48,7 @@
       <th>Referencia</th>
       <th>Proyecto</th>
       <th>Fecha</th>
-      <th>Acciones</th>
+      <th colspan="2">Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -59,6 +59,7 @@
     <td>{$ordenes[n].doc.nombre}: {$ordenes[n].nrodoc}</td>
     <td>{$ordenes[n].proyecto.descripcion}</td>
     <td>{$ordenes[n].fecha}</td>
+    <th style="text-wrap: avoid;"><a href="orden-compra-print.php?idorden={$ordenes[n].idorden}">Imprimir</a></th>
     <th style="text-wrap: avoid;"><a href="almacen.php?idorden={$ordenes[n].idorden}">Ingresar al almacén</a></th>
   </tr>
   {sectionelse}

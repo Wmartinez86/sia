@@ -46,13 +46,15 @@
             
       </select>
       <label for="fecha1" class="nolab">De:</label>
-      <input type="text" name="fecha1" id="fecha1" size="11" value="{if $fecha1}{$fecha1}{else}{$smarty.now|date_format:"%d/%m/%Y"}{/if}" class="required" />
+      <input type="text" name="fecha1" id="fecha1" size="11" value="{if $fecha1}{$fecha1}{else}{"01/01/2012"}{/if}" class="required" />
       <label for="fecha2" class="nolab">Hasta:</label>
       <input type="text" name="fecha2" id="fecha2" size="11" value="{if $fecha2}{$fecha2}{else}{$smarty.now|date_format:"%d/%m/%Y"}{/if}" class="required" />
     </p>
     <p>
       <label for="ruc" class="nolab"><acronym title="Registro Único del Contribuyente">RUC</acronym> del Proveedor:</label>
       <input type="text" name="ruc" id="ruc" size="20" maxlength="11" value="{if $ruc}{$ruc}{/if}" />
+    </p>  
+    <p>  
       <label for="status" class="nolab">Estado de la Orden:</label>
       <select id="status" name="status">
         <option value="0" {if $status==0}selected="selected"{/if}>Cualquier estado</option>
@@ -91,7 +93,7 @@
     <th>{$ordenes[n].codigo}</th>
     <td>{$ordenes[n].doc.nombre}: {$ordenes[n].nrodoc}</td>
     <td>{$ordenes[n].proyecto.descripcion}</td>
-    <td>{$ordenes[n].proveedor.nombre}</td>
+    <td>{$ordenes[n].proveedor.razonsocial}</td>
     <td>{$ordenes[n].fecha}</td>
     <td>{$ordenes[n].usuario.username}</td>
     <td>{$ordenes[n].stotal|number_format:2:",":"."}</td>

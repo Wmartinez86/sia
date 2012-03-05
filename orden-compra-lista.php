@@ -30,6 +30,16 @@ if(isset($_GET['submit'])) {
             $ordenes = get_ordenes_by_codigo($codigo, 'compra');
             $smarty->assign('codigo', $codigo);
         break;
+        case 'proveedor':
+            $nombre = htmlspecialchars($_GET['nombre']);
+            $ordenes = get_ordenes_by_nombre_prov($nombre);
+            $smarty->assign('nombre', $nombre);
+        break;
+        case 'ruc':
+            $ruc = htmlspecialchars($_GET['ruc']);
+            $ordenes = get_ordenes_by_ruc_prov($ruc);
+            $smarty->assign('ruc', $ruc);
+        break;
     }
     
     //d($ordenes);
@@ -40,8 +50,14 @@ if(isset($_GET['submit'])) {
 
 if($ordenes){
 	$ordenes = fill_compras($ordenes);
+        $atotal = 0;
+		$field = 'total';
+		foreach($ordenes as $k=>$v) {
+			$ordenes[$k]['stotal'] = supertotal($v['detalle'], $field);
+		}
 }
 
+//d($ordenes);
 if($pager) $smarty->assign ('RESULTS', $bcrs->get_navigation());
 $smarty->assign ('ordenes', $ordenes);
 $smarty->assign ('projs', $projs);
