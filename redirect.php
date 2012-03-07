@@ -27,6 +27,7 @@ $almacen = array(
     "/nea-orden.php",
     "/add-item.php",
     "/almacen-lista.php",
+    "/pecosa.php",
     "/pecosa-print.php",
     "/pecosa-lista.php",
     "/almacen-quitar.php",

@@ -1,3 +1,6 @@
+{if $msg}
+<div class="msg">{$msg}</div>
+{/if}
 <h2>Salidas</h2>
 <table class="tabla">
   <thead>
@@ -8,7 +11,7 @@
       <th>Destino</th>
       <th>Fecha</th>
       <th>Creado por</th>
-      <th>Acciones</th>
+      <th colspan="2">Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -21,6 +24,7 @@
     <td>{$pecosas[n].destino}</td>
     <td>{$pecosas[n].fecha}</td>
     <td>{$pecosas[n].usuario.username}</td>
+    <th><a href="pecosa.php?idpecosa={$pecosas[n].idpecosa}">Modificar</a></th>
     <th><a href="pecosa-print.php?idpecosa={$pecosas[n].idpecosa}">Imprimir</a></th>
   </tr>
   {sectionelse}

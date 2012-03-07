@@ -11,7 +11,7 @@
         <legend>Datos del ingreso</legend>
         <p>
           <label for="codigo"><abbr title="PECOSA">PECOSA</abbr> Nro.:</label>
-          <input type="text" name="codigo" id="codigo" value="{if $pecosa.codigo}{$pecosa.codigo}{else}{$codgen}{/if}" maxlength="10" class="required" />
+          <input type="text" name="codigo" id="codigo" value="{$pecosa.codigo}" maxlength="10" class="required" readonly="readonly" />
         </p>
         <p>
           <label for="dependencia">Dependencia:</label>
@@ -39,74 +39,43 @@
             <tr>
               <th colspan="4">Artículos</th>
               <th colspan="2">Precio</th>
-              {if $nea.detalle}
-              <th rowspan="2">Acciones</th>
-              {/if} </tr>
+            </tr>
             <tr>
               <th>Código</th>
-              <th>Cantidad</th>
+              <th>Cantidad que salió</th>
               <th><abbr title="Unidad de Medida">U. Med.</abbr></th>
               <th>Descripción</th>
               <th>Unitario</th>
               <th>Total</th>
             </tr>
           </thead>
-          {if !$nea.detalle}
-          <tbody id="tbody">
-            <tr id="firstr">
-              <td><input type="text" name="especifica[]" maxlength="20" class="required" title="*" size="10" /></td>
-              <td><input type="text" name="cantidad[]" size="10" maxlength="10" class="number required cantidad" title="*" /></td>
-              <td><input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" /></td>
-              <td><input type="text" name="descripcion[]" maxlength="255" size="50" class="required" title="*" /></td>
-              <td><input type="text" name="precio[]" size="10" class="required number precio" title="*" /></td>
-              <td><input type="text" name="total_" size="10" readonly="readonly" class="total" /></td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <th colspan="5">TOTAL:</th>
-              <td id="grandTotal"></td>
-            </tr>
-          </tfoot>
-        </table>
-        {else}
         <tbody id="tbody">
-        
-        {assign var="con" value=0}
-        {section name=n loop=$nea.detalle}
+        {assign var="dtotal" value=0}
+        {section name=n loop=$pecosa.detalle}
         <tr id="firstr">
-          <td><input type="text" name="especifica[]" maxlength="20" class="required" title="*" size="10" value="{$nea.detalle[n].especifica}" /></td>
-          <td><input type="text" name="cantidad[]" size="10" maxlength="10" class="number required cantidad" title="*" value="{$nea.detalle[n].cantidad}" /></td>
-          <td><input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" value="{$nea.detalle[n].umedida}" /></td>
-          <td><input type="text" name="descripcion[]" maxlength="255" size="50" class="required" title="*" value="{$nea.detalle[n].descripcion|escape:"html"}" /></td>
-          <td><input type="text" name="precio[]" size="10" class="required number precio" title="*" value="{$nea.detalle[n].precio}" /></td>
-          <td><input type="text" name="total_" size="10" readonly="readonly" class="total" value="{$nea.detalle[n].total|number_format:2:",":"."}" /></td>
-          <td> {if !$fromorden} <!--a href="borrar-detalle-nea.php?iddetalle={$nea.detalle[n].iddetalle}&amp;idnea={$nea.idnea}" class="ddetalle">Borrar</a--> {/if}			                                                         
-            {if !$fromorden}
-            <input type="hidden" name="iddetalle[]" value="{$orden.detalle[n].iddetalle}" />
-            {/if} </td>
+          {assign var="total" value=$pecosa.detalle[n].cantidad*$pecosa.detalle[n].producto.precio}
+          <td style="width: 100px;">{$pecosa.detalle[n].producto.especifica}</td>
+          <td>{$pecosa.detalle[n].cantidad}</td>
+          <td>{$pecosa.detalle[n].producto.umedida}</td>
+          <td>{$pecosa.detalle[n].producto.descripcion|escape:"html"}</td>
+          <td>{$pecosa.detalle[n].producto.precio}</td>
+          <td>{$total|number_format:2:",":"."}</td>
         </tr>
-        {assign var="dtotal" value=$dtotal+$con+$orden.detalle[n].total}
+        {assign var="dtotal" value=$dtotal+$total}
         {/section}
         </tbody>
         <tfoot>
           <tr>
             <th colspan="5">TOTAL:</th>
-            <td id="grandTotal"></td>
-            <td></td>
+            <td id="grandTotal2">{$dtotal|number_format:2:",":"."}</td>
           </tr>
         </tfoot>
         </table>
-        {/if}
       </fieldset>
       <p class="submit">
         <input type="submit" name="submit" id="submit" value="Guardar" />
-        <input type="hidden" name="idnea" id="idnea" value="{$nea.idnea}" />
         <input type="hidden" name="idpecosa" id="idpecosa" value="{$pecosa.idpecosa}" />
       </p>
-      <!--p>
-                    <a href="#tabs-2">&laquo;Anterior</a>
-                </p--> 
     </div>
   </form>
 </div>
