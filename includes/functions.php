@@ -263,14 +263,15 @@ function get_ordenes_by_project ($idproyecto, $tipo, $activos = NULL) {
  * @param string $nombre el nombre del proveedor
  * @return array los resultados
  */
-function get_ordenes_by_nombre_prov($nombre) {
+function get_ordenes_by_nombre_prov($nombre, $tipo) {
     global $bcdb;
+    $tabla = ($tipo == 'compra') ? $bcdb->ordencompra : $bcdb->ordenservicio ;
     $sql = sprintf("SELECT c.*
                         FROM %s c
                         INNER JOIN %s p
                         ON c.idproveedor = p.idproveedor
-                        WHERE p.razonsocial LIKE '%%%s%%'", $bcdb->ordencompra, $bcdb->proveedores, $nombre);
-    
+                        WHERE p.razonsocial LIKE '%%%s%%'", $tabla, $bcdb->proveedores, $nombre);
+
     $results = $bcdb->get_results($sql);
     return $results;
 }
@@ -281,14 +282,14 @@ function get_ordenes_by_nombre_prov($nombre) {
  * @param string $ruc el ruc
  * @return array los resultados
  */
-function get_ordenes_by_ruc_prov($ruc) {
+function get_ordenes_by_ruc_prov($ruc, $tipo) {
     global $bcdb;
+    $tabla = ($tipo == 'compra') ? $bcdb->ordencompra : $bcdb->ordenservicio ;
     $sql = sprintf("SELECT c.*
                         FROM %s c
                         INNER JOIN %s p
                         ON c.idproveedor = p.idproveedor
-                        WHERE p.ruc = '%s'", $bcdb->ordencompra, $bcdb->proveedores, $ruc);
-    
+                        WHERE p.ruc = '%s'", $tabla, $bcdb->proveedores, $ruc);
     $results = $bcdb->get_results($sql);
     return $results;
 }

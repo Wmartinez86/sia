@@ -29,6 +29,16 @@ if(isset($_GET['submit'])) {
             $ordenes = get_ordenes_by_codigo($codigo, 'servicio');
             $smarty->assign('codigo', $codigo);
         break;
+        case 'proveedor':
+            $nombre = htmlspecialchars($_GET['nombre']);
+            $ordenes = get_ordenes_by_nombre_prov($nombre, 'servicio');
+            $smarty->assign('nombre', $nombre);
+        break;
+        case 'ruc':
+            $ruc = htmlspecialchars($_GET['ruc']);
+            $ordenes = get_ordenes_by_ruc_prov($ruc, 'servicio');
+            $smarty->assign('ruc', $ruc);
+        break;
     }
 } else {
     $pager = true;

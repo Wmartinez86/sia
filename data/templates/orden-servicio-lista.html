@@ -3,6 +3,8 @@
 <ul class="i-tabs">
   <li><a href="#i-admin">Buscar por datos</a></li>
   <li><a href="#i-numero">Buscar por código</a></li>
+  <li><a href="#i-prov">Buscar por nombre proveedor</a></li>
+  <li><a href="#i-ruc">Buscar por RUC proveedor</a></li>
 </ul>
 <div class="i-tab-container">
   <div id="i-admin" class="i-tab-content">
@@ -50,6 +52,34 @@
           <br />
           <span class="">Sólo escribir el número de la orden, no el prefijo O/C u O/S</span>
           <input type="hidden" name="op" id="op" value="number" />
+        </p>
+      </fieldset>
+    </form>
+  </div>
+    <div id="i-prov" class="i-tab-content">
+    <form name="filter" id="filter" method="GET">
+      <fieldset class="collapsible">
+        <legend>Por Proveedor</legend>
+        <p>
+          <label for="nombre">Nombre:</label>
+          <input type="text" name="nombre" id="codigo" size="30" value="{$nombre}" />
+          <input type="submit" name="submit" id="submit" value="Buscar" />
+          <br />
+          <input type="hidden" name="op" id="op" value="proveedor" />
+        </p>
+      </fieldset>
+    </form>
+  </div>
+    <div id="i-ruc" class="i-tab-content">
+    <form name="filter" id="filter" method="GET">
+      <fieldset class="collapsible">
+        <legend>Por RUC</legend>
+        <p>
+          <label for="ruc">RUC:</label>
+          <input type="text" name="ruc" id="codigo" size="30" value="{$ruc}" />
+          <input type="submit" name="submit" id="submit" value="Buscar" />
+          <br />
+          <input type="hidden" name="op" id="op" value="ruc" />
         </p>
       </fieldset>
     </form>

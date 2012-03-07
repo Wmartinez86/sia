@@ -32,12 +32,12 @@ if(isset($_GET['submit'])) {
         break;
         case 'proveedor':
             $nombre = htmlspecialchars($_GET['nombre']);
-            $ordenes = get_ordenes_by_nombre_prov($nombre);
+            $ordenes = get_ordenes_by_nombre_prov($nombre, 'compra');
             $smarty->assign('nombre', $nombre);
         break;
         case 'ruc':
             $ruc = htmlspecialchars($_GET['ruc']);
-            $ordenes = get_ordenes_by_ruc_prov($ruc);
+            $ordenes = get_ordenes_by_ruc_prov($ruc, 'compra');
             $smarty->assign('ruc', $ruc);
         break;
     }
