@@ -9,7 +9,7 @@ table.tabla  {
 	border-right: 1px solid #C1DAD7;
 	border-bottom: 1px solid #C1DAD7;
 	border-top: 1px solid #C1DAD7;
-	text-transform: uppercase;
+	/*text-transform: uppercase;*/
 	text-align: left;
 	padding: 4px 4px 4px 10px;
 	background: #CAE8EA;
@@ -66,3 +66,17 @@ table.tabla  {
 	}
 
 .tabla .cancelled td, .cancelmsg { color: #933; text-decoration: line-through}
+
+/* Hijos */
+.tabla-child {
+    display: none;
+}
+
+.show-branch {
+    cursor: pointer;
+    background: url(../images/icon-more.png) no-repeat center !important;
+    width: 20px;
+}
+.tabla tbody tr:hover th.show-branch {
+    background: url(../images/icon-more.png) no-repeat center !important;
+}

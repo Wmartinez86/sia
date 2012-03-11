@@ -13,8 +13,6 @@ en orden de compra
 en orden de Servicio
     * imprimir mas de una orden
     * Ver detalle 
-    * busqueda por nombre
-    * busqueda por Ruc
 en almacen
     * liberar orden de Compra
     * imprimir mas de una nea
@@ -26,3 +24,7 @@ Producto
     * crear tabla Producto 
 Salidas
     * Seleccionar todos los productos
+Otros
+    * Doble Meta
+Cotización
+    * Cotización por Mail

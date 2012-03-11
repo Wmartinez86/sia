@@ -57,7 +57,7 @@ if($ordenes){
 		}
 }
 
-//d($ordenes);
+//d($ordenes[0]['detalle']);
 if($pager) $smarty->assign ('RESULTS', $bcrs->get_navigation());
 $smarty->assign ('ordenes', $ordenes);
 $smarty->assign ('projs', $projs);

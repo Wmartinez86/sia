@@ -1,4 +1,4 @@
-<script type="text/javascript" src="{$scriptsurl}scripts/common.php?param=lista"></script>
+<script type="text/javascript" src="{$scriptsurl}acciones/lista-detalle.js"></script>
 <h2>Lista de Órdenes de Compra <span class="options">[<a href="orden-compra.php" class="goto">Añadir Orden de Compra</a>]</span></h2>
 <ul class="i-tabs">
   <li><a href="#i-admin">Buscar por datos</a></li>
@@ -87,6 +87,7 @@
 <table class="tabla">
   <thead>
     <tr>
+      <th></th>
       <th>Código</th>
       <th>Referencia</th>
       <th>Proyecto</th>
@@ -101,6 +102,7 @@
   
   {section name=n loop=$ordenes}
   <tr class="{cycle values="even, odd"}{if $ordenes[n].status==2} cancelled{/if}">
+    <th class="show-branch"></th>
     <th><abbr title="Orden de Compra">O/C</abbr>{$ordenes[n].codigo}</th>
     <td>{$ordenes[n].doc.nombre}: {$ordenes[n].nrodoc}</td>
     <td>{$ordenes[n].proyecto.descripcion}</td>
@@ -122,6 +124,32 @@
     {/if}
     {/if}
     <th><a href="orden-compra-print.php?idorden={$ordenes[n].idorden}">Imprimir</a></th>
+  </tr>
+  <tr class="tabla-child">
+      <th class="branch"></th>
+      <td colspan="10">
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>Cantidad</th>
+                        <th><abbr title="Unidad de Medida">U. Med.</abbr></th>
+                        <th>Descripción</th>
+                        <th>Unitario</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                    {section name=d loop=$ordenes[n].detalle}
+                    <tr>
+                        <td>{$ordenes[n].detalle[d].cantidad}</td>
+                        <td>{$ordenes[n].detalle[d].umedida}</td>
+                        <td>{$ordenes[n].detalle[d].descripcion|escape:"html"}</td>
+                        <td>{$ordenes[n].detalle[d].precio}</td>
+                    </tr>
+                    {/section}
+                </tbody>
+                </tfoot>
+            </table>
+      </td>
   </tr>
   {sectionelse}
   <tr>
