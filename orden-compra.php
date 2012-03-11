@@ -38,7 +38,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 		'C&oacute;digo O/C' => $_POST['codigo'],
 		'RUC Proveedor' => $_POST['oruc'],
 		'Facturar a' => $_POST['facturarto'],
-		'RUC del que se va a facturar' => $_POST['fruc'],
+		'RUC del proveedor' => get_idprov_by_ruc($_POST['fruc']),
 		'Destino' => $_POST['destino']))) {
 		
 		$orden_values = array(

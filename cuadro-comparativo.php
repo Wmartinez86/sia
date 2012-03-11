@@ -27,9 +27,9 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 		'Fecha del Cuadro' => $_POST['fechaO'], 
 		'Fecha del Cotizacion' => $_POST['fecha'], 
 		'Quienes Firmaran el Acta' => $_POST['cep'], 
-		'RUC del 1er Postor' => $_POST['oruc1'],
-		'RUC del 2do Postor' => $_POST['oruc2'],
-		'RUC del 3er Postor' => $_POST['oruc3'],		
+		'RUC del 1er Postor' => get_idprov_by_ruc($_POST['oruc1']),
+		'RUC del 2do Postor' => get_idprov_by_ruc($_POST['oruc2']),
+		'RUC del 3er Postor' => get_idprov_by_ruc($_POST['oruc3']),		
 		'Plazo de Entrega del 1er Postor' => $_POST['plazo1'],
 		'Plazo de Entrega del 2do Postor' => $_POST['plazo2'],
 		'Plazo de Entrega del 3er Postor' => $_POST['plazo3'])))

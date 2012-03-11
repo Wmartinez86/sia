@@ -89,7 +89,7 @@
           <td><input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" value="{$cot.detalle[n].umedida}" readonly="readonly"/></td>
           <td><input type="hidden" name="descripcion[]" value="{$cot.detalle[n].descripcion|escape:html}" />
             {$cot.detalle[n].descripcion|escape:html}</td>
-          <td><input type="text" name="precio1[]2" size="10" class="required number precio" title="*" value="{$cot.precio1[n].precio}" tabindex="{$tab}" /></td>
+          <td><input type="text" name="precio1[]" size="10" class="required number precio" title="*" value="{$cot.precio1[n].precio}" tabindex="{$tab}" /></td>
           <td><input type="text" name="total_1" size="10" readonly="readonly" class="total" /></td>
           {assign var="tab2" value=$tab+$numres}
           <td><input type="text" name="precio2[]" size="10" class="required number precio" title="*" value="{$cot.precio2[n].precio}" tabindex="{$tab2}" /></td>
@@ -129,9 +129,9 @@
           </tr>
           <tr>
             <th colspan="3"> Seleccione Postor Adjudicado :</th>
-            <td colspan="2"><input type="radio" name="adjudicado" value="1" {if $cuadro.idproveedor==1}checked="checked"{/if} onclick="plop"/></td>
-            <td colspan="2"><input type="radio" name="adjudicado" value="2" {if $cuadro.idproveedor==2}checked="checked"{/if}/></td>
-            <td colspan="2"><input type="radio" name="adjudicado" value="3" {if $cuadro.idproveedor==3}checked="checked"{/if}/></td>
+            <td colspan="2"><input type="radio" name="adjudicado" value="1" {if $cuadro.idproveedor==1}checked="checked"{/if} id="adj1" /><label for="adj1" class="nolab">Adjudicar</label></td>
+            <td colspan="2"><input type="radio" name="adjudicado" value="2" {if $cuadro.idproveedor==2}checked="checked"{/if} id="adj2" /><label for="adj2" class="nolab">Adjudicar</label></td>
+            <td colspan="2"><input type="radio" name="adjudicado" value="3" {if $cuadro.idproveedor==3}checked="checked"{/if} id="adj3" /><label for="adj3" class="nolab">Adjudicar</label></td>
           </tr>
         </tfoot>
         </table>
