@@ -1,41 +1,79 @@
-<h2>Proveedores <span class="options">[<a href="#lista" class="goto">Ver o editar proveedores</a> | <a href="{$self}" class="goto">Añadir Proveedor</a>]</span></h2>
+<h2>Proveedores <span class="options">[<a href="proveedores.php" class="goto">Ver todos</a>]</span></h2>
 <script type="text/javascript" src="{$scriptsurl}common.php?param=prov&id={$prov.idproveedor}"></script> 
 {if $msg}
 <div class="msg">{$msg}</div>
 {/if}
-<form name="frmprov" id="frmprov" action="{$self}" method="post">
-  <fieldset>
-    <legend>Datos del proveedor</legend>
-    <p>
-      <label for="razonsocial">Razón Social:</label>
-      <input type="text" name="razonsocial" id="razonsocial" maxlength="255" size="60" value="{$prov.razonsocial|escape:"html"}" class="required" title="Ingresa la razón social" />
-      <br />
-    </p>
-    <p>
-      <label for="direccion">Dirección:</label>
-      <input type="text" name="direccion" id="direccion" maxlength="255" size="60" value="{$prov.direccion|escape:"html"}" class="required" title="Ingresa la dirección del proveedor" />
-    </p>
-    <p>
-      <label for="ruc"><acronym title="Registro Único del Contribuyente">RUC</acronym>:</label>
-      <input type="text" name="ruc" id="ruc" maxlength="11" value="{$prov.ruc}" class="number required" minlenght="1" {if $prov.ruc!=""}readonly="readonly"{/if} />
-    </p>
-    <p>
-      <label for="telefono">Teléfono:</label>
-      <input type="text" name="telefono" id="telefono" maxlength="100" value="{$prov.telefono}" title="Ingresa el teléfono" />
-    </p>
-    <p>
-      <label for="email">Email:</label>
-      <input type="text" name="email" id="email" maxlength="100" size="40" value="{$prov.email}" class="email" title="Ingresa un email correcto" />
-    </p>
-  </fieldset>
-  <p class="submit">
-    <input type="hidden" name="idproveedor" id="idproveedor" value="{$prov.idproveedor}" />
-    <input type="submit" name="submit" id="submit" value="Guardar" />
-    {if $prov.idproveedor}
-    <input type="button" name="print" id="print" value="Imprimir" />
-    {/if} </p>
-</form>
-<h2 id="lista">Lista de Proveedores <span class="options">[<a href="{$self}?excel">Exportar esta lista a Excel</a>]</span></h2>
+<ul class="i-tabs">
+  <li><a href="#i-nuevo">Nuevo Proveedor</a></li>
+  <li><a href="#i-ruc">Buscar por ruc</a></li>
+  <li><a href="#i-prov">Buscar por nombre proveedor</a></li>
+</ul>
+<div class="i-tab-container">
+  <div id="i-nuevo" class="i-tab-content">
+        <form name="frmprov" id="frmprov" action="{$self}" method="post">
+          <fieldset>
+            <legend>Datos del proveedor</legend>
+            <p>
+              <label for="razonsocial">Razón Social:</label>
+              <input type="text" name="razonsocial" id="razonsocial" maxlength="255" size="60" value="{$prov.razonsocial|escape:"html"}" class="required" title="Ingresa la razón social" />
+              <br />
+            </p>
+            <p>
+              <label for="direccion">Dirección:</label>
+              <input type="text" name="direccion" id="direccion" maxlength="255" size="60" value="{$prov.direccion|escape:"html"}" class="required" title="Ingresa la dirección del proveedor" />
+            </p>
+            <p>
+              <label for="ruc"><acronym title="Registro Único del Contribuyente">RUC</acronym>:</label>
+              <input type="text" name="ruc" id="ruc" maxlength="11" value="{$prov.ruc}" class="number required" minlenght="1" {if $prov.ruc!=""}readonly="readonly"{/if} />
+            </p>
+            <p>
+              <label for="telefono">Teléfono:</label>
+              <input type="text" name="telefono" id="telefono" maxlength="100" value="{$prov.telefono}" title="Ingresa el teléfono" />
+            </p>
+            <p>
+              <label for="email">Email:</label>
+              <input type="text" name="email" id="email" maxlength="100" size="40" value="{$prov.email}" class="email" title="Ingresa un email correcto" />
+            </p>
+          </fieldset>
+          <p class="submit">
+            <input type="hidden" name="idproveedor" id="idproveedor" value="{$prov.idproveedor}" />
+            <input type="submit" name="submit" id="submit" value="Guardar" />
+            {if $prov.idproveedor}
+            <input type="button" name="print" id="print" value="Imprimir" />
+            {/if} </p>
+        </form>
+	</div>
+  <div id="i-ruc" class="i-tab-content">
+      <form name="filter" id="filter" method="GET">
+      <fieldset class="collapsible">
+        <legend>Por Registro unico del contribuyente</legend>
+        <p>
+          <label for="ruc">RUC:</label>
+          <input type="text" name="ruc" id="ruc" maxlength="11" size="11" value="{$ruc}" />
+          <input type="submit" name="submit" id="submit" value="Buscar" />
+          <br />
+          <span class="">Escriba el numero de Ruc del Proveedor</span>
+          <input type="hidden" name="op" id="op" value="number" />
+        </p>
+      </fieldset>
+    </form>
+  </div>
+  <div id="i-prov" class="i-tab-content">
+    <form name="filter" id="filter" method="GET">
+      <fieldset class="collapsible">
+        <legend>Por Proveedor</legend>
+        <p>
+          <label for="nombre">Nombre:</label>
+          <input type="text" name="nombre" id="codigo" size="30" value="{$nombre}" />
+          <input type="submit" name="submit" id="submit" value="Buscar" />
+          <br />
+          <input type="hidden" name="op" id="op" value="proveedor" />
+        </p>
+      </fieldset>
+    </form>
+</div>    
+</div>
+
 <table class="tabla">
   <thead>
     <tr>

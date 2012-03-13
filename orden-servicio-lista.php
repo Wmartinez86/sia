@@ -9,6 +9,7 @@ $users = get_admins();
 
 /* Búsqueda y Filtro */
 if(isset($_GET['submit'])) {
+    $smarty->assign('buscado', "buscado");    
     $op = htmlspecialchars($_GET['op']);
     switch($op) {
         case 'search':

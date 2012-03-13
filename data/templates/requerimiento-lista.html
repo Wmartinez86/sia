@@ -1,5 +1,5 @@
-<script type="text/javascript" src="{$scriptsurl}common.php?param=lista"></script>
-<h2>Lista de Requerimientos <span class="options">[<a href="requerimientonew.php" class="goto">Añadir Requerimiento</a>]</span></h2>
+<script type="text/javascript" src="{$scriptsurl}acciones/lista-detalle.js"></script>
+<h2>Lista de Requerimientos <span class="options">[<a href="requerimientonew.php" class="goto">Añadir Requerimiento</a>{if $buscado=="buscado" } | <a href="requerimiento-lista.php" class="goto">Ver Todos</a>{/if}]</span></h2>
 <ul class="i-tabs">
   {if $loginuser.usertype==1}
   <li><a href="#i-admin">Buscar por datos</a></li>
@@ -21,7 +21,7 @@
           
                                 {section name=n loop=$projs}
                                 
-          <option value="{$projs[n].idproyecto}" {if $projs[n].idproyecto==$idproyecto}selected="selected"{/if}>sec_func = {$projs[n].sec_func}</option>
+          <option value="{$projs[n].idproyecto}" {if $projs[n].idproyecto==$idproyecto}selected="selected"{/if}>{$projs[n].descripcion} </option>
           
                                 {/section}
                                 
@@ -64,9 +64,12 @@
 <table class="tabla">
   <thead>
     <tr>
+	  <th></th>
       <th>Nro</th>
       <th>Fecha</th>
       <th>Creado por</th>
+      <th>Oficina/Area</th>
+      <th>Proyecto</th>
       {if $loginuser.usertype==1}
       <th colspan="4">Acciones</th>
       {else}
@@ -77,9 +80,12 @@
   
   {section name=n loop=$requerimientos}
   <tr class="{cycle values="even, odd"}{if $requerimientos[n].status==2} cancelled{/if}">
-    <th>{$requerimientos[n].codigo}</th>
+    <th class="show-branch"></th>
+    <th>{$requerimientos[n].codigo} / {$requerimientos[n].usuario.area.abreviatura}</th>
     <td>{$requerimientos[n].fecha}</td>
-    <td>{$requerimientos[n].usuario.username}</td>
+    <td>{$requerimientos[n].usuario.nombres}</td>
+    <td>{$requerimientos[n].usuario.area.nombre}</td>
+    <td>sec_fun={$requerimientos[n].usuario.proyecto.sec_func} | {$requerimientos[n].usuario.proyecto.descripcion}</td>
     <th><a href="requerimientonew.php?idreq={$requerimientos[n].idreq}">Modificar</a></th>
     <th><a href="requerimiento-print.php?idreq={$requerimientos[n].idreq}">Imprimir</a></th>
     {if $loginuser.usertype==1}
@@ -92,6 +98,31 @@
     {/if}
     {/if}
     {/if} </tr>
+    
+  <tr class="tabla-child">
+      <th class="branch"></th>
+      <td colspan="9">
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>Cantidad</th>
+                        <th><abbr title="Unidad de Medida">U. Med.</abbr></th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                    {section name=d loop=$requerimientos[n].detalle}
+                    <tr>
+                        <td>{$requerimientos[n].detalle[d].cantidad}</td>
+                        <td>{$requerimientos[n].detalle[d].umedida}</td>
+                        <td>{$requerimientos[n].detalle[d].descripcion|escape:"html"}</td>
+                    </tr>
+                    {/section}
+                </tbody>
+                </tfoot>
+            </table>
+      </td>
+  </tr>   
   {sectionelse}
   <tr>
     <td colspan="6">No existen datos.</td>

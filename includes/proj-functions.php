@@ -18,8 +18,13 @@ function get_projs () {
 	$proyectos = ($pager) ? $bcrs->get_results($sql) : $bcdb->get_results($sql);
 	foreach($proyectos as $k => $v) {
             $proyectos[$k]['descripcion'] = "sec_func=" . $v['sec_func'] . " " . substr($v['descripcion'], 0, 90);
+            $proyectos[$k]['cadena'] = cadena_funcional($v);
         }
 	return $proyectos;
+}
+
+function cadena_funcional($proyecto) {
+    return "$proyecto[sec_func].$proyecto[programa].$proyecto[prod_pry].$proyecto[act_ai_obra].$proyecto[funcion].$proyecto[division_func].$proyecto[grupo_func].$proyecto[meta].$proyecto[finalidad]";
 }
 
 function save_proj($idproyecto, $proj_values) {

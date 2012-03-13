@@ -3,30 +3,30 @@ en requerimeinto
 en cotizacion
     * indicar si ya se realizo orden de compra (nro)
 en Cuadro comparativo
-    * Creacion de Campo Marca
+    - Creacion de Campo Marca
     * Cotizaciones por 2 y 1
 en orden de compra
-    * imprimir mas de una orden
+    - imprimir mas de una orden
     * auto completar producto
     x Ver detalle 
     * lista de productos por meta
     * lista de productos por fuente
 en orden de Servicio
-    * imprimir mas de una orden
+    - imprimir mas de una orden
     x Ver detalle
 en almacen
-    * liberar orden de Compra
-    * imprimir mas de una nea
-    * imprimir mas de una pecosa
+    - liberar orden de Compra
+    - imprimir mas de una nea
+    - imprimir mas de una pecosa
 Proveedor
     * busqueda de proveedor para modificar
-    * Consulta de RUC SUNAT
+    - Consulta de RUC SUNAT
 Producto
     * crear tabla Producto 
 Salidas
     * Seleccionar todos los productos
 Otros
     * Doble Meta
-    * Links a OSCE y a SEACE
+    - Links a OSCE y a SEACE
 Cotización
     * Cotización por Mail

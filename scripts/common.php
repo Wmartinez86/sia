@@ -75,40 +75,8 @@
 ?>
 				$().ready(function() {
 					$("#frmuser").validate();
-                                        var projects = [
-                                        <?php 
-                                            foreach($projs as $k => $proj) :
-                                        ?>
-                                        {
-                                            idproyecto: "<?php print $proj['idproyecto']; ?>",
-                                            sec_func: "<?php print $proj['sec_func']; ?>",
-                                            descripcion: "<?php print htmlentities($proj['descripcion']); ?>",
-                                        },
-                                        <?php 
-                                            endforeach;
-                                        ?>
-                                        ];
-                                        
-                                        $( "#proyectos" ).autocomplete({
-                                                minLength: 0,
-                                                source: projects,
-                                                focus: function( event, ui ) {
-                                                        $( "#project" ).val( ui.item.descripcion );
-                                                        return false;
-                                                },
-                                                select: function( event, ui ) {
-                                                        $( "#proyectos" ).val( ui.item.descripcion );
-                                                        $( "#idproyecto" ).val( ui.item.idproyecto );
-                                                        return false;
-                                                }
-                                        })
-                                        .data( "autocomplete" )._renderItem = function( ul, item ) {
-                                                return $( "<li></li>" )
-                                                        .data( "item.autocomplete", item )
-                                                        .append( "<a><strong>sec_func = " + item.sec_func + "</strong> " + item.descripcion + "</a>" )
-                                                        .appendTo( ul );
-                                        };
-				})
+
+				});
 <?php
 		break;
 		case 'espec' :
@@ -262,41 +230,6 @@
                     $(".ddetalle").click(function(){
                     	return window.confirm('¿Está seguro de eliminar este item?');
                     });
-                    
-                    
-                    var projects = [
-                    <?php 
-                        foreach($projs as $k => $proj) :
-                    ?>
-                    {
-                        idproyecto: "<?php print $proj['idproyecto']; ?>",
-                        sec_func: "<?php print $proj['sec_func']; ?>",
-                        descripcion: "<?php print htmlentities($proj['descripcion']) ?>",
-                    },
-                    <?php 
-                        endforeach;
-                    ?>
-                    ];
-
-                    $( "#proyectos" ).autocomplete({
-                            minLength: 0,
-                            source: projects,
-                            focus: function( event, ui ) {
-                                    $( "#project" ).val( ui.item.descripcion );
-                                    return false;
-                            },
-                            select: function( event, ui ) {
-                                    $( "#proyectos" ).val( ui.item.descripcion );
-                                    $( "#idproyecto" ).val( ui.item.idproyecto );
-                                    return false;
-                            }
-                    })
-                    .data( "autocomplete" )._renderItem = function( ul, item ) {
-                            return $( "<li></li>" )
-                                    .data( "item.autocomplete", item )
-                                    .append( "<a><strong>sec_func = " + item.sec_func + "</strong> " + item.descripcion + "</a>" )
-                                    .appendTo( ul );
-                    };
 			
 				});
 

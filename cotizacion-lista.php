@@ -9,6 +9,7 @@ $users = get_users();
 
 /* Búsqueda y Filtro */
 if(isset($_GET['submit'])) {
+    $smarty->assign('buscado', "buscado");     
     $op = htmlspecialchars($_GET['op']);
     switch($op) {
         case 'search':
@@ -44,7 +45,7 @@ if(isset($_GET['submit'])) {
 if($cotizaciones){
      $cotizaciones = fill_cots($cotizaciones);
 }
-
+//d($referencia);
 if($pager) $smarty->assign ('RESULTS', $bcrs->get_navigation());
 $smarty->assign ('cotizaciones', $cotizaciones);
 $smarty->assign ('projs', $projs);

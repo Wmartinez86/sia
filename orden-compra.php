@@ -108,6 +108,8 @@ if($idorden){
 	}
 }
 
+$especial = (isset($_GET['especial'])) ? $_GET['especial'] : false;
+
 $smarty->assign ('atipos', $atipos);
 $smarty->assign ('projs', $projs);
 $smarty->assign ('provs', $provs);
@@ -115,9 +117,13 @@ $smarty->assign ('fuentes', $fuentes);
 $smarty->assign ('docs', $docs);
 $smarty->assign ('especs', $especs);
 $smarty->assign ('codgen', $codgen);
+$smarty->assign ('especial', $especial);
 
 $smarty->assign ('section_title', TITLE . ' - &Oacute;rdenes de Compra');
-$smarty->assign ('file', 'orden-compra.html');
+if($especial == 1)
+    $smarty->assign ('file', 'orden-compra-especial.html');
+else
+    $smarty->assign ('file', 'orden-compra.html');
 $smarty->display ('index.html');
 
 ?>

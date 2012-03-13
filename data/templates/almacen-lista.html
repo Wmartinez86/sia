@@ -1,4 +1,4 @@
-<script type="text/javascript" src="{$scriptsurl}scripts/common.php?param=lista"></script>
+<script type="text/javascript" src="{$scriptsurl}acciones/lista-detalle.js"></script>
 <h2>Notas de Entrada de Almacén  <span class="options">[<a href="nea-orden.php">Ingresar productos por orden de compra</a> | <a href="almacen.php">Ingresar productos</a>]</span></h2>
 <ul class="i-tabs">
   <li><a href="#i-admin">Buscar por destino</a></li>
@@ -29,6 +29,7 @@
 <table class="tabla">
   <thead>
     <tr>
+      <th></th>	
       <th>Código</th>
       <th>Procedencia</th>
       <th>Fecha</th>
@@ -40,6 +41,7 @@
   
   {section name=n loop=$neas}
   <tr class="{cycle values="even, odd"}">
+    <th class="show-branch"></th>
     <th>{$neas[n].codigo}</th>
     <td>{$neas[n].procedencia}</td>
     <td>{$neas[n].fecha}</td>
@@ -47,6 +49,30 @@
     <th><a href="almacen.php?idnea={$neas[n].idnea}">Modificar</a></th>
     <th><a href="nea-print.php?idnea={$neas[n].idnea}">Imprimir</a></th>
   </tr>
+   <tr class="tabla-child">
+      <th class="branch"></th>
+      <td colspan="6">
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>Cantidad</th>
+                        <th><abbr title="Unidad de Medida">U. Med.</abbr></th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                    {section name=d loop=$neas[n].detalle}
+                    <tr>
+                        <td>{$neas[n].detalle[d].cantidad}</td>
+                        <td>{$neas[n].detalle[d].umedida}</td>
+                        <td>{$neas[n].detalle[d].descripcion|escape:"html"}</td>
+                    </tr>
+                    {/section}
+                </tbody>
+                </tfoot>
+            </table>
+      </td>
+  </tr> 
   {sectionelse}
   <tr>
     <td colspan="6">No existen datos.</td>

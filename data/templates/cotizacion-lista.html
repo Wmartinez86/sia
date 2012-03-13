@@ -1,5 +1,5 @@
-<script type="text/javascript" src="{$scriptsurl}common.php?param=listacot"></script>
-<h2>Lista de Cotizaciones <span class="options">[<a href="cotizacionnew.php" class="goto">Añadir Cotización</a>]</span></h2>
+<script type="text/javascript" src="{$scriptsurl}acciones/lista-detalle.js"></script>
+<h2>Lista de Cotizaciones <span class="options">[<a href="cotizacionnew.php" class="goto">Añadir Cotización</a>{if $buscado=="buscado" } | <a href="cotizacion-lista.php" class="goto">Ver Todos</a>{/if}]</span></h2>
 <ul class="i-tabs">
   <li><a href="#i-admin">Buscar por datos</a></li>
   <li><a href="#i-numero">Buscar por número</a></li>
@@ -75,6 +75,7 @@
 <table class="tabla">
   <thead>
     <tr>
+      <th></th>	
       <th>Nro</th>
       <th>Tipo</th>
       <th>Referencia</th>
@@ -89,7 +90,7 @@
   {section name=n loop=$cotizaciones}
     <tr class="{cycle values="even, odd"}{if $cotizaciones[n].status==2} cancelled{/if}{if $cotizaciones[n].status == 3} crea-orden{/if}">
   
-  
+  <th class="show-branch"></th>
     <th>{$cotizaciones[n].codigo}</th>
     <td>{if $cotizaciones[n].tipocontrata == 'o'}
       Servicios
@@ -132,6 +133,30 @@
       </select>
     </th>
   </tr>
+    <tr class="tabla-child">
+      <th class="branch"></th>
+      <td colspan="9">
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>Cantidad</th>
+                        <th><abbr title="Unidad de Medida">U. Med.</abbr></th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                    {section name=d loop=$cotizaciones[n].detalle}
+                    <tr>
+                        <td>{$cotizaciones[n].detalle[d].cantidad}</td>
+                        <td>{$cotizaciones[n].detalle[d].umedida}</td>
+                        <td>{$cotizaciones[n].detalle[d].descripcion|escape:"html"}</td>
+                    </tr>
+                    {/section}
+                </tbody>
+                </tfoot>
+            </table>
+      </td>
+  </tr>   
   {sectionelse}
   <tr>
     <td colspan="10">No existen datos.</td>

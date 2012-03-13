@@ -54,14 +54,153 @@ if($postback) {
 	$smarty->assign ('orden', $orden);
 	
 	if(isset($_GET['excel'])) {
-		header ("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT-5");
-		header ("Cache-Control: no-cache, must-revalidate");
-		header ("Pragma: no-cache");
-		header ("Content-type: application/x-msexcel");
-		header ("Content-Disposition: attachment; filename=informe.xls" );
-		$xls = $smarty->fetch ('informe-excel.html');
-		die($xls);
-	}
+            
+            require_once(INCLUDE_PATH . 'phpexcel/Classes/PHPExcel.php');
+            
+            $objPHPExcel = new PHPExcel();
+
+            $objPHPExcel->getProperties()->setCreator("CDTI")
+                                                                    ->setLastModifiedBy("CDTI")
+                                                                    ->setTitle("Informe de Órdenes")
+                                                                    ->setSubject("Informe de Órdenes")
+                                                                    ->setDescription("Lista de órdenes")
+                                                                    ->setKeywords("cdti informe")
+                                                                    ->setCategory("cdti");
+
+            // Set default font
+            $objPHPExcel->getDefaultStyle()->getFont()->setName('Arial');
+            $objPHPExcel->getDefaultStyle()->getFont()->setSize(10);
+
+            // Add some data, resembling some different data types
+            //Cabeceras
+            $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Código');
+            $objPHPExcel->getActiveSheet()->setCellValue('B1', 'Documento');
+            $objPHPExcel->getActiveSheet()->setCellValue('C1', 'Sec Func');
+            $objPHPExcel->getActiveSheet()->setCellValue('D1', 'Proyecto');
+            $objPHPExcel->getActiveSheet()->setCellValue('E1', 'Proveedor');
+            $objPHPExcel->getActiveSheet()->setCellValue('F1', 'RUC Proveedor');
+            $objPHPExcel->getActiveSheet()->setCellValue('G1', 'Facturado a');
+            $objPHPExcel->getActiveSheet()->setCellValue('H1', 'Fecha');
+            $objPHPExcel->getActiveSheet()->setCellValue('I1', 'Creado por');
+            $objPHPExcel->getActiveSheet()->setCellValue('J1', 'Total');
+            
+            
+            $counter = 2;
+            if($ordenes) {
+                foreach($ordenes as $k => $orden) {
+                    $objPHPExcel->getActiveSheet()->setCellValue(sprintf('A%s', $counter), $orden['codigo']);
+                    $objPHPExcel->getActiveSheet()->setCellValue(sprintf('B%s', $counter), $orden['doc']['nombre'] . ": " . $orden['nrodoc']);
+                    $objPHPExcel->getActiveSheet()->setCellValue(sprintf('C%s', $counter), sprintf("%s", $orden['proyecto']['sec_func']));
+                    $objPHPExcel->getActiveSheet()->setCellValue(sprintf('D%s', $counter), $orden['proyecto']['descripcion']);
+                    $objPHPExcel->getActiveSheet()->setCellValue(sprintf('E%s', $counter), $orden['proveedor']['razonsocial']);
+                    $objPHPExcel->getActiveSheet()->setCellValue(sprintf('F%s', $counter), $orden['proveedor']['ruc']);
+                    $objPHPExcel->getActiveSheet()->setCellValue(sprintf('G%s', $counter), $orden['facturarto']);
+                    $objPHPExcel->getActiveSheet()->setCellValue(sprintf('H%s', $counter), $orden['fecha']);
+                    $objPHPExcel->getActiveSheet()->setCellValue(sprintf('I%s', $counter), $orden['usuario']['username']);
+                    $objPHPExcel->getActiveSheet()->setCellValue(sprintf('J%s', $counter), $orden['stotal']);
+                    $counter++;
+                }
+            }
+            
+            // Cabeceras negrita
+            $objPHPExcel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
+            $objPHPExcel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
+            $objPHPExcel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
+            $objPHPExcel->getActiveSheet()->getStyle('D1')->getFont()->setBold(true);
+            $objPHPExcel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
+            $objPHPExcel->getActiveSheet()->getStyle('F1')->getFont()->setBold(true);
+            $objPHPExcel->getActiveSheet()->getStyle('G1')->getFont()->setBold(true);
+            $objPHPExcel->getActiveSheet()->getStyle('H1')->getFont()->setBold(true);
+            $objPHPExcel->getActiveSheet()->getStyle('I1')->getFont()->setBold(true);
+            $objPHPExcel->getActiveSheet()->getStyle('J1')->getFont()->setBold(true);
+            
+            $objPHPExcel->getActiveSheet()->setAutoFilter(sprintf('A1:J%s', $counter));	// Always include the complete filter range!
+
+            // Rename sheet
+            $objPHPExcel->getActiveSheet()->setTitle('Ordenes');
+
+            // Set active sheet index to the first sheet, so Excel opens this as the first sheet
+            $objPHPExcel->setActiveSheetIndex(0);
+
+
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment;filename="informe' . time() .'.xlsx"');
+            header('Cache-Control: max-age=0');
+
+            $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+            $objWriter->save('php://output');
+            exit;
+            
+	} elseif(isset($_GET['excelproductos'])) {
+            
+            require_once(INCLUDE_PATH . 'phpexcel/Classes/PHPExcel.php');
+            
+            $objPHPExcel = new PHPExcel();
+
+            $objPHPExcel->getProperties()->setCreator("CDTI")
+                                                                    ->setLastModifiedBy("CDTI")
+                                                                    ->setTitle("Informe de Órdenes")
+                                                                    ->setSubject("Informe de Órdenes")
+                                                                    ->setDescription("Lista de productos por ordenes")
+                                                                    ->setKeywords("cdti informe")
+                                                                    ->setCategory("cdti");
+
+            // Set default font
+            $objPHPExcel->getDefaultStyle()->getFont()->setName('Arial');
+            $objPHPExcel->getDefaultStyle()->getFont()->setSize(10);
+
+            // Add some data, resembling some different data types
+            //Cabeceras
+            $objPHPExcel->getActiveSheet()->setCellValue('A1', 'cadena');
+            $objPHPExcel->getActiveSheet()->setCellValue('B1', 'sec_func');
+            $objPHPExcel->getActiveSheet()->setCellValue('C1', 'meta');
+            $objPHPExcel->getActiveSheet()->setCellValue('D1', 'codigo_orden');
+            $objPHPExcel->getActiveSheet()->setCellValue('E1', 'especifica');
+            $objPHPExcel->getActiveSheet()->setCellValue('F1', 'cantidad');
+            $objPHPExcel->getActiveSheet()->setCellValue('G1', 'descripcion');
+            $objPHPExcel->getActiveSheet()->setCellValue('H1', 'precio_unitario');
+            
+            
+            $counter = 2;
+            if($ordenes) {
+                foreach($ordenes as $k => $orden) {
+                    $sec_func = $orden['proyecto']['sec_func'];
+                    $cadena = cadena_funcional($orden['proyecto']);
+                    $meta = $orden['proyecto']['descripcion'];
+                    $codigo = $orden['codigo'];
+                    foreach($orden['detalle'] as $j => $detalle) {
+                        $objPHPExcel->getActiveSheet()->setCellValue(sprintf('A%s', $counter), $cadena);
+                        $objPHPExcel->getActiveSheet()->setCellValue(sprintf('B%s', $counter), $sec_func);
+                        $objPHPExcel->getActiveSheet()->setCellValue(sprintf('C%s', $counter), $meta);
+                        $objPHPExcel->getActiveSheet()->setCellValue(sprintf('D%s', $counter), $codigo);
+                        $objPHPExcel->getActiveSheet()->setCellValue(sprintf('E%s', $counter), $detalle['especifica']);
+                        $objPHPExcel->getActiveSheet()->setCellValue(sprintf('F%s', $counter), $detalle['cantidad']);
+                        $objPHPExcel->getActiveSheet()->setCellValue(sprintf('G%s', $counter), $detalle['descripcion']);
+                        $objPHPExcel->getActiveSheet()->setCellValue(sprintf('H%s', $counter), $detalle['precio']);
+                    }
+                    $counter++;
+                }
+            }
+            
+            // Filtro
+            $objPHPExcel->getActiveSheet()->setAutoFilter(sprintf('A1:H%s', $counter));	// Always include the complete filter range!
+
+            // Rename sheet
+            $objPHPExcel->getActiveSheet()->setTitle('Ordenes');
+
+            // Set active sheet index to the first sheet, so Excel opens this as the first sheet
+            $objPHPExcel->setActiveSheetIndex(0);
+
+
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment;filename="productos' . time() .'.xlsx"');
+            header('Cache-Control: max-age=0');
+
+            $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+            $objWriter->save('php://output');
+            exit;
+            
+        }
 }
 //d($ordenes);
 $smarty->assign ('status', $status);

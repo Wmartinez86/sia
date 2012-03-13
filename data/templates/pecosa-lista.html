@@ -1,3 +1,4 @@
+<script type="text/javascript" src="{$scriptsurl}acciones/lista-detalle.js"></script>
 {if $msg}
 <div class="msg">{$msg}</div>
 {/if}
@@ -5,6 +6,7 @@
 <table class="tabla">
   <thead>
     <tr>
+      <th></th>	
       <th>Código</th>
       <th>Dependencia</th>
       <th>Entregado a</th>
@@ -18,6 +20,7 @@
   
   {section name=n loop=$pecosas}
   <tr class="{cycle values="even,odd"}">
+    <th class="show-branch"></th>
     <th>{$pecosas[n].codigo}</th>
     <td>{$pecosas[n].dependencia}</td>
     <td>{$pecosas[n].entregar}</td>
@@ -26,6 +29,32 @@
     <td>{$pecosas[n].usuario.username}</td>
     <th><a href="pecosa.php?idpecosa={$pecosas[n].idpecosa}">Modificar</a></th>
     <th><a href="pecosa-print.php?idpecosa={$pecosas[n].idpecosa}">Imprimir</a></th>
+  </tr>
+   <tr class="tabla-child">
+      <th class="branch"></th>
+      <td colspan="8">
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>Cantidad</th>
+                        <th><abbr title="Unidad de Medida">U. Med.</abbr></th>
+                        <th>Descripción</th>
+                        <th>precio</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                    {section name=d loop=$pecosas[n].detalle}
+                    <tr>
+                        <td>{$pecosas[n].detalle[d].cantidad}</td>
+                        <td>{$pecosas[n].detalle[d].producto.umedida}</td>
+                        <td>{$pecosas[n].detalle[d].producto.descripcion|escape:"html"}</td>
+                        <td>{$pecosas[n].detalle[d].producto.precio}</td>
+                    </tr>
+                    {/section}
+                </tbody>
+                </tfoot>
+            </table>
+      </td>
   </tr>
   {sectionelse}
   <tr>

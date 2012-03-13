@@ -12,7 +12,7 @@ if($pecosas){
     $pecosas = fill_pecosas($pecosas);
 }
 
-
+//d($pecosas);
 if($pager) $smarty->assign ('RESULTS', $bcrs->get_navigation());
 $smarty->assign ('pecosas', $pecosas);
 $smarty->assign ('msg', $msg);

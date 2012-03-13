@@ -9,6 +9,7 @@ $users = get_users();
 
 /* Búsqueda y Filtro */
 if(isset($_GET['submit'])) {
+    $smarty->assign('buscado', "buscado");     
     $op = htmlspecialchars($_GET['op']);
     switch($op) {
         case 'search':
@@ -47,7 +48,7 @@ if($requerimientos){
 }
 
 if($pager) $smarty->assign ('RESULTS', $bcrs->get_navigation());
-
+//d($requerimientos);
 $smarty->assign ('requerimientos', $requerimientos);
 $smarty->assign ('projs', $projs);
 $smarty->assign ('users', $users);

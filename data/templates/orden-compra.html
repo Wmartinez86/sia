@@ -31,24 +31,16 @@
                         <input type="hidden" name="idproyecto" id="idproyecto" value="{$user.proyecto.idproyecto}" /-->
           <select id="idproyecto" name="idproyecto">
         {section name=n loop=$projs}
-        <option value="{$projs[n].idproyecto}" {if $projs[n].idproyecto==$orden.proyecto.idproyecto}selected="selected"{/if}>{$projs[n].descripcion}</option>
+            <option value="{$projs[n].idproyecto}" {if $projs[n].idproyecto==$orden.proyecto.idproyecto}selected="selected"{/if}>{$projs[n].descripcion}</option>
         {/section}
           </select>
         </p>
         <p>
           <label for="idfuente">Fuente:</label>
           <select id="idfuente" name="idfuente">
-            
-            
                             {section name=n loop=$fuentes}
-                            
-            
             <option value="{$fuentes[n].idfuente}" {if $fuentes[n].idfuente==$orden.fuente.idfuente}selected="selected"{/if}>{$fuentes[n].nombre}</option>
-            
-            
                             {/section}
-                        
-          
           </select>
         </p>
         <p>
@@ -153,9 +145,6 @@
         <input type="submit" name="submit" id="submit" value="Guardar" />
         <input type="hidden" name="idorden" id="idorden" value="{$orden.idorden}" />
       </p>
-      <!--p>
-                    <a href="#tabs-2">&laquo;Anterior</a>
-                </p--> 
     </div>
   </form>
 </div>

@@ -68,7 +68,10 @@
   </p>
 </form>
 {if $postback}
-<h2>Resultados de la búsqueda <span class="options">[<a href="{$self}?excel&amp;orden={$orden}&amp;idproyecto={$idproyecto}&amp;iddoc={$iddoc}&amp;idfuente={$idfuente}&amp;fecha1={$fecha1}&amp;fecha2={$fecha2}&amp;ruc={$ruc}&amp;status={$status}&amp;submit=Buscar">Exportar los resultados a Excel</a>]</span></h2>
+<h2>Resultados de la búsqueda <span class="options">
+        [<a href="{$self}?excel&amp;orden={$orden}&amp;idproyecto={$idproyecto}&amp;iddoc={$iddoc}&amp;idfuente={$idfuente}&amp;fecha1={$fecha1}&amp;fecha2={$fecha2}&amp;ruc={$ruc}&amp;status={$status}&amp;submit=Buscar">Exportar los resultados a Excel</a> |
+        <a href="{$self}?excelproductos&amp;orden={$orden}&amp;idproyecto={$idproyecto}&amp;iddoc={$iddoc}&amp;idfuente={$idfuente}&amp;fecha1={$fecha1}&amp;fecha2={$fecha2}&amp;ruc={$ruc}&amp;status={$status}&amp;submit=Buscar">Exportar los productos a Excel</a>]
+    </span></h2>
 <table class="tabla">
   <thead>
     <tr>
@@ -100,7 +103,6 @@
     {if $orden=="ordencompra"}
     <th><a href="orden-compra.php?idorden={$ordenes[n].idorden}">Ver</a></th>
     <th><a href="orden-compra-print.php?idorden={$ordenes[n].idorden}">Imprimir</a></th>
-    <th><a href="pecosa-print.php?idorden={$ordenes[n].idorden}">Imprimir PECOSA</a></th>
     {else}
     <th><a href="orden-servicio.php?idorden={$ordenes[n].idorden}">Ver</a></th>
     <th><a href="orden-servicio-print.php?idorden={$ordenes[n].idorden}">Imprimir</a></th>

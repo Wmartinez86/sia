@@ -57,5 +57,21 @@ function remove_prov ($idproveedor) {
 	global $bcdb;
 	$bcdb->query("DELETE FROM $bcdb->proveedores WHERE idproveedor = $idproveedor");
 }
+function get_proveedor_by_ruc_prov($ruc) {
+	global $bcdb;
+        $sql = sprintf("SELECT *
+                        FROM %s 
+                        WHERE ruc LIKE '%%%s%%'", $bcdb->proveedores, $ruc);
+        $proveedores = $bcdb->get_results($sql);
+	return $proveedores;
+}
+function get_proveedor_by_nombre_prov($nombre) {
+	global $bcdb;
+        $sql = sprintf("SELECT *
+                        FROM %s 
+                        WHERE razonsocial LIKE '%%%s%%'", $bcdb->proveedores, $nombre);
+        $proveedores = $bcdb->get_results($sql);
+	return $proveedores;
+}
 
 ?>
