@@ -826,7 +826,7 @@
     break;
     case 'listacot' :
 ?>
-    $().ready(function() {
+    $(document).ready(function() {
             
         $('.actions').bind('change', function() {
             iditem = $(this).attr('id').split('-')[1];
