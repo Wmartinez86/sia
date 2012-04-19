@@ -117,7 +117,12 @@
     <th><a href="orden-servicio.php?activate&amp;idorden={$ordenes[n].idorden}" class="activateorder">Activar Orden</a></th>
     {/if}
     {/if}
-    <th><a href="orden-servicio-print.php?idorden={$ordenes[n].idorden}">Imprimir</a></th>
+    <th>
+        <a href="orden-servicio-print.php?idorden={$ordenes[n].idorden}">Imprimir</a>
+        {if $memo}
+        | <a href="memo-servicio-print.php?idorden={$ordenes[n].idorden}" title="Imprimir Memorandum">Imp. Mem.</a>
+        {/if}
+    </th>
   </tr>
   <tr class="tabla-child">
       <th class="branch"></th>

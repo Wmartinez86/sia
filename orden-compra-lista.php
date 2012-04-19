@@ -65,6 +65,7 @@ $smarty->assign ('projs', $projs);
 $smarty->assign ('users', $users);
 $smarty->assign ('section_title', TITLE . ' - &Oacute;rdenes de Compra');
 $smarty->assign ('file', 'orden-compra-lista.html');
+if((stristr(MY_SITE, 'carhuayo'))) $smarty->assign('memo', TRUE); 
 $smarty->display ('index.html');
 
 ?>

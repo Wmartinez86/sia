@@ -3,7 +3,7 @@
 require_once('home.php');
 require_once('redirect.php');
 //$pager = true;
-$status = 1;
+$status = 0;
 $postback = isset($_GET['orden']);
 if($postback) {
 	$orden = $_GET['orden'];

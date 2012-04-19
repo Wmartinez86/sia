@@ -56,6 +56,7 @@ $smarty->assign ('projs', $projs);
 $smarty->assign ('users', $users);
 $smarty->assign ('section_title', TITLE . ' - &Oacute;rdenes de Servicio');
 $smarty->assign ('file', 'orden-servicio-lista.html');
+if((stristr(MY_SITE, 'carhuayo'))) $smarty->assign('memo', TRUE);
 $smarty->display ('index.html');
 
 ?>

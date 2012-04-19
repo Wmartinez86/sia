@@ -88,7 +88,7 @@ if($idorden){
         $smarty->assign ('orden', $orden);
 	$smarty->assign ('fromorden', true);
         
-        $myproc = sprintf("Orden de Compra Nro %s", $orden['idorden']);
+        $myproc = sprintf("Orden de Compra Nro %s", $orden['codigo']);
         $smarty->assign('myproc', $myproc);
 }
 
