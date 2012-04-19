@@ -136,18 +136,18 @@ function validate_required($values) {
 }
 
 function fechita($fecha) {
-	$f = split("/", $fecha);
+	$f = explode("/", $fecha);
 	return $f[2] . "-" . $f[1] . "-" . $f[0];
 }
 
 
 function fechita2($fecha) {
-	$f = split("-", $fecha);
+	$f = explode("-", $fecha);
 	return $f[2] . "/" . $f[1] . "/" . $f[0];
 }
 
 function fechita3($fecha) {
-	$f = split("-", $fecha);
+	$f = explode("-", $fecha);
 	$mes=' ';
 	switch ($f[1]) {
 		case 1:

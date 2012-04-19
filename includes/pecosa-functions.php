@@ -88,6 +88,131 @@ function get_detalle_pecosa($idpecosa) {
 }
 
 /**
+ * Busca pecosas por proyecto
+ * 
+ * @param int $idproyecto el id del proyecto.
+ * @return boolean 
+ */
+function get_pecosas_by_proj ($idproyecto) {
+    global $bcdb;
+    $pecosas = array();
+
+    $sql = sprintf("SELECT distinct(p.idpecosa)
+            FROM %s p 
+            INNER JOIN %s dp 
+            ON p.idpecosa = dp.idpecosa
+            INNER JOIN %s da
+            ON dp.idenalmacen = da.iddetalle
+            INNER JOIN %s oc
+            ON da.idorden = oc.idorden
+            WHERE oc.idproyecto = '%s'", 
+            $bcdb->pecosa, 
+            $bcdb->detallepecosa, 
+            $bcdb->detallealmacen, 
+            $bcdb->ordencompra, $idproyecto);
+    
+    $results = $bcdb->get_results($sql);
+    
+    if($results) {
+        foreach ($results as $k => $pecosa) {
+            $pecosas[] = get_pecosa($pecosa['idpecosa']);
+        }
+        return $pecosas;
+    } else {
+        return false;
+    }
+}
+
+/**
+ * Busca pecosas por código
+ *
+ * @param string $codigo el código.
+ * @return boolean 
+ */
+function get_pecosas_by_codigo ($codigo) {
+    global $bcdb;
+
+    $sql = sprintf("SELECT * FROM %s WHERE codigo LIKE '%%%s%%'", $bcdb->pecosa, $codigo);
+    $results = $bcdb->get_results($sql);
+
+    if($results) {
+        return $results;
+    } else {
+        return false;
+    }    
+}
+
+/**
+ * Busca pecosas por datos del proveedor.
+ * 
+ * @param string $dato lo que se va a buscar.
+ * @param string $campo el campo.
+ * @return boolean 
+ */
+function get_pecosas_by_prov ($dato, $campo) {
+    global $bcdb;
+    $pecosas = array();
+
+    $sql = sprintf("SELECT distinct(p.idpecosa)
+            FROM %s p 
+            INNER JOIN %s dp 
+            ON p.idpecosa = dp.idpecosa
+            INNER JOIN %s da
+            ON dp.idenalmacen = da.iddetalle
+            INNER JOIN %s oc
+            ON da.idorden = oc.idorden
+            INNER JOIN %s pr
+            ON oc.idproveedor = pr.idproveedor
+            WHERE pr.%s LIKE '%%%s%%'", 
+            $bcdb->pecosa, 
+            $bcdb->detallepecosa, 
+            $bcdb->detallealmacen, 
+            $bcdb->ordencompra, 
+            $bcdb->proveedores, $campo, $dato);
+
+    $results = $bcdb->get_results($sql);
+    
+    if($results) {
+        foreach ($results as $k => $pecosa) {
+            $pecosas[] = get_pecosa($pecosa['idpecosa']);
+        }
+        return $pecosas;
+    } else {
+        return false;
+    }
+}
+
+function get_pecosas_by_producto ($producto) {
+    global $bcdb;
+    $pecosas = array();
+
+    $sql = sprintf("SELECT distinct(p.idpecosa)
+                    FROM %s p 
+                    INNER JOIN %s dp 
+                    ON p.idpecosa = dp.idpecosa
+                    INNER JOIN %s da
+                    ON dp.idenalmacen = da.iddetalle
+                    INNER JOIN %s dn
+                    ON da.idennea = dn.iddetalle
+                    WHERE dn.descripcion LIKE '%%%s%%'", 
+            $bcdb->pecosa, 
+            $bcdb->detallepecosa, 
+            $bcdb->detallealmacen, 
+            $bcdb->detallenea, $producto);
+ 
+    $results = $bcdb->get_results($sql);
+    
+    if($results) {
+        foreach ($results as $k => $pecosa) {
+            $pecosas[] = get_pecosa($pecosa['idpecosa']);
+        }
+        return $pecosas;
+    } else {
+        return false;
+    }
+}
+
+/**
  * Productos de ALMACÉN 
  */
 

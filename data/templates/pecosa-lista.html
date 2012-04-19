@@ -3,6 +3,93 @@
 <div class="msg">{$msg}</div>
 {/if}
 <h2>Salidas</h2>
+<ul class="i-tabs">
+  <li><a href="#i-admin">Buscar por datos</a></li>
+  <li><a href="#i-numero">Buscar por código</a></li>
+  <li><a href="#i-prov">Buscar por nombre proveedor</a></li>
+  <li><a href="#i-ruc">Buscar por RUC proveedor</a></li>
+  <li><a href="#i-prod">Buscar por producto</a></li>
+</ul>
+<div class="i-tab-container">
+  <div id="i-admin" class="i-tab-content">
+    <form name="filter" id="filter" method="GET">
+      <fieldset class="collapsible">
+        <legend>Por datos</legend>
+        <p>
+        <label for="idproyecto">Meta:</label>
+        <!--input type="text" name="proyectos" id="proyectos" size="60" value="{$user.proyecto.descripcion}" />
+                                <input type="hidden" name="idproyecto" id="idproyecto" value="{$user.proyecto.idproyecto}" /-->
+        <select id="idproyecto" name="idproyecto">
+          <option value="">Cualquier meta</option>
+          {section name=n loop=$projs}
+          <option value="{$projs[n].idproyecto}" {if $projs[n].idproyecto==$idproyecto}selected="selected"{/if}>sec_func = {$projs[n].sec_func}</option>
+          {/section}
+        </select>
+        </p>
+        <p>
+        <input type="submit" name="submit" id="submit" value="Buscar" />
+        <input type="hidden" name="op" id="op" value="search" />
+        </p>
+      </fieldset>
+    </form>
+  </div>
+  <div id="i-numero" class="i-tab-content">
+    <form name="filter" id="filter" method="GET">
+      <fieldset class="collapsible">
+        <legend>Por código</legend>
+        <p>
+          <label for="codigo">Código:</label>
+          <input type="text" name="codigo" id="codigo" size="10" value="{$codigo}" />
+          <input type="submit" name="submit" id="submit" value="Buscar" />
+          <br />
+          <input type="hidden" name="op" id="op" value="number" />
+        </p>
+      </fieldset>
+    </form>
+  </div>
+    <div id="i-prov" class="i-tab-content">
+    <form name="filter" id="filter" method="GET">
+      <fieldset class="collapsible">
+        <legend>Por Proveedor</legend>
+        <p>
+          <label for="nombre">Nombre:</label>
+          <input type="text" name="nombre" id="nombre" size="30" value="{$nombre}" />
+          <input type="submit" name="submit" id="submit" value="Buscar" />
+          <br />
+          <input type="hidden" name="op" id="op" value="proveedor" />
+        </p>
+      </fieldset>
+    </form>
+  </div>
+    <div id="i-ruc" class="i-tab-content">
+    <form name="filter" id="filter" method="GET">
+      <fieldset class="collapsible">
+        <legend>Por RUC</legend>
+        <p>
+          <label for="ruc">RUC:</label>
+          <input type="text" name="ruc" id="ruc" size="30" value="{$ruc}" />
+          <input type="submit" name="submit" id="submit" value="Buscar" />
+          <br />
+          <input type="hidden" name="op" id="op" value="ruc" />
+        </p>
+      </fieldset>
+    </form>
+  </div>
+    <div id="i-prod" class="i-tab-content">
+    <form name="filter" id="filter" method="GET">
+      <fieldset class="collapsible">
+        <legend>Por Producto</legend>
+        <p>
+          <label for="producto">Producto:</label>
+          <input type="text" name="producto" id="producto" size="50" value="{$producto}" />
+          <input type="submit" name="submit" id="submit" value="Buscar" />
+          <br />
+          <input type="hidden" name="op" id="op" value="producto" />
+        </p>
+      </fieldset>
+    </form>
+  </div>
+</div>
 <table class="tabla">
   <thead>
     <tr>
