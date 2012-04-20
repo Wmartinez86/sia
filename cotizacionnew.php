@@ -57,11 +57,9 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 			}
 			save_cotizacion($idcot, $cot_values);
 			save_detalle_cot($idcot, $detalle_values);
-//			save_pecosa($idorden, $pecosa_values);
 		}else{
 			$id = save_cotizacion($idcot, $cot_values);
 			if($id) {
-//				save_pecosa($id, $pecosa_values);
 				save_detalle_cot($id, $detalle_values);
 			}
 		}

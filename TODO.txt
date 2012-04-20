@@ -30,3 +30,12 @@ Otros
     - Links a OSCE y a SEACE
 Cotización
     * Cotización por Mail
+
+
+CREATE TABLE o_referencia(
+	idref INT(4) NOT NULL auto_increment,
+	entidad ENUM('req', 'cot', 'orc', 'ors', 'alm') NOT NULL DEFAULT 'req',
+	idorigen INT(4) NOT NULL,
+	iddestino INT(4) NOT NULL,
+	PRIMARY KEY(idref)
+);

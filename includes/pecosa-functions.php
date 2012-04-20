@@ -50,9 +50,36 @@ function save_detalle_pecosa($idpecosa, $detalle_values) {
 	}
 }
 
-function remove_pecosa ($idpecosa) {
+function anular_pecosa ($idpecosa) {
 	global $bcdb;
-	$bcdb->query("DELETE FROM $bcdb->pecosa WHERE idpecosa = $idpecosa");
+	
+  $sql = sprintf("SELECT * FROM %s WHERE idpecosa = '%s'",
+          $bcdb->detallepecosa,
+          $idpecosa);
+  
+  $detallespecosa = $bcdb->get_results($sql);
+  
+  foreach($detallespecosa as $k => $detalle) {
+    $idenalmacen = $detalle['idenalmacen'];
+    
+    // Devolvemos los productos al almacén
+    $bcdb->query(sprintf("UPDATE %s SET cuantosalio = 0 WHERE iddetalle = '%s'", 
+            $bcdb->detallealmacen, 
+            $idenalmacen)
+            );
+    
+    // Borramos el detalle procesado en la PECOSA
+    $bcdb->query(sprintf("DELETE FROM %s WHERE iddetalle = '%s'", 
+            $bcdb->detallepecosa,
+            $detalle['iddetalle'])
+            );
+  }
+  
+  // Borramos la PECOSA
+  $bcdb->query(sprintf("DELETE FROM %s WHERE idpecosa = '%s'", 
+          $bcdb->pecosa, 
+          $idpecosa)
+          );
 }
 
 function fill_pecosas($pecosas) {

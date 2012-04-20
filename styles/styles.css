@@ -207,3 +207,8 @@ html ul.i-tabs li.active-tab, html ul.i-tabs li.active-tab a:hover  {
 .group p {
     margin-left: 5px;
 }
+
+.cancel-button {
+  color: red;
+  font-weight: bold;
+}

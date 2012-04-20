@@ -67,5 +67,13 @@ $(document).ready(function () {
     $(".ddetalle").click(function () {
         return window.confirm('¿Está seguro de eliminar este item?');
     });
+    
+    $("#anular-pecosa").click(function () {
+        var anular = window.confirm('CUIDADO: ¿Está seguro de eliminar esta PECOSA?');
+        if (anular) {
+          var pecosa = $('#idpecosa');
+          location.href = 'pecosa.php?action=anular&idpecosa=' + pecosa.val();
+        }
+    });
 
 });

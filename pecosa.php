@@ -9,6 +9,12 @@ if (isset($_REQUEST['idpecosa'])) {
     $idpecosa = '0';
 }
 
+if(isset($_GET['action']) && ($_GET['action'] == 'anular')) {
+  anular_pecosa($idpecosa);
+  header("Location: pecosa-lista.php");
+  exit();
+}
+
 if ( $_SERVER['REQUEST_METHOD'] == 'POST') {
 	if ( validate_required(array(
 		'C&oacute;digo' => $_POST['codigo'],
