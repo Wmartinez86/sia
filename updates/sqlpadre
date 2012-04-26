@@ -1,0 +1,13 @@
+CREATE TABLE `o_ordencomprapadre` (
+  `idorden` int(4) NOT NULL auto_increment,
+  `codigo` varchar(10) NOT NULL,
+  `idproveedor` int(4) NOT NULL,
+  `facturarto` varchar(255) NOT NULL,
+  `fruc` varchar(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `createdby` int(3) NOT NULL,
+  `destino` varchar(150) NOT NULL,
+  `status` int(1) NOT NULL default '1',
+  PRIMARY KEY  (`idorden`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+ALTER TABLE  `o_ordencompra` ADD  `idpadre` INT( 4 ) NOT NULL DEFAULT  '0';
