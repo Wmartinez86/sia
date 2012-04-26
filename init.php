@@ -17,6 +17,7 @@ $bcdb->proveedores 		= $table_prefix . 'proveedores';
 $bcdb->documentos 		= $table_prefix . 'documentos';
 $bcdb->especificas 		= $table_prefix . 'especificas';
 $bcdb->ordencompra 		= $table_prefix . 'ordencompra';
+$bcdb->ordencomprapadre       	= $table_prefix . 'ordencomprapadre';
 $bcdb->detalleordencompra       = $table_prefix . 'detalleordencompra';
 $bcdb->ordenservicio            = $table_prefix . 'ordenservicio';
 $bcdb->detalleordenservicio     = $table_prefix . 'detalleordenservicio';

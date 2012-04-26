@@ -1,0 +1,26 @@
+<script type="text/javascript" src="{$scriptsurl}acciones/lista-detalle.js"></script>
+<h2>Órden de Compra {$orden.codigo}</h2>
+<table class="tabla">
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th>Referencia</th>
+      <th>Proyecto</th>
+      <th>Monto</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  {section name=n loop=$ordenes}
+  <tr class="{cycle values="even, odd"}{if $ordenes[n].status==2} cancelled{/if}">
+		   
+  </tr>
+  {sectionelse}
+  <tr>
+    <td colspan="8">No existen datos.</td>
+  </tr>
+  {/section}
+  </tbody>
+  
+</table>

@@ -158,4 +158,42 @@ function freeze_orden($idorden) {
 }
 
 
+/**
+ * Funciones para órdenes padre
+ *
+ */
+ 
+function save_orden_comprapadre($idorden, $orden_values) {
+	global $bcdb, $msg;
+
+	if ($bcdb->get_var("SELECT count(codigo) FROM $bcdb->ordencompra WHERE idorden != '$idorden' AND codigo = '$orden_values[codigo]'") ) {
+		$msg .= " Ya existe otra orden con el mismo c&oacute;digo.";
+		return false;
+	}
+	
+		$orden_values['idorden'] = $idorden;
+	
+	if ( ($query = insert_update_query($bcdb->ordencomprapadre, $orden_values)) &&
+		$bcdb->query($query) ) {
+		
+		if (empty($idorden))	
+			$idorden = $bcdb->insert_id;
+		
+		$msg = "Los datos han sido guardados satisfactoriamente.";
+		
+		return $idorden;
+	}else {
+		
+	}
+	$msg .= " No se hicieron cambios en los datos de la orden.";
+	return false;
+}
+
+function get_orden_comprapadre ($idorden) {
+	global $bcdb;
+        $orden = $bcdb->get_row("SELECT * FROM $bcdb->ordencomprapadre WHERE idorden = '$idorden'");
+	return ($orden) ? $orden : false;
+}
+
+
 ?>
