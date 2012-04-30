@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="content-language" content="es">
+<link rel="stylesheet" type="text/css" media="screen" href="{$stylesurl}styles.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="{$stylesurl}redmond/ui.css" />
+<link rel="shortcut icon" href="favicon.ico" />
+<script type="text/javascript" src="{$scriptsurl}jquery.js"></script>
+<script type="text/javascript" src="{$scriptsurl}jquery.ui.all.js"></script>
+<script type="text/javascript" src="{$scriptsurl}jquery.validate.js"></script>
+<script type="text/javascript" src="{$scriptsurl}jquery.collapsible.js"></script>
+<script type="text/javascript" src="{$scriptsurl}tabs.js"></script>
+<script type="text/javascript" src="{$scriptsurl}es.js"></script>
+<title>{$section_title}</title>
+</head>
+<body>
+<div class="wrap background">
+<ul id="menu">
+  </ul>
+  <div class="clear"></div>
+  <div id="left">
+      <h2>Órdenes de Compra</h2>
+        <script type="text/javascript" src="{$scriptsurl}jquery.calculation.min.js"></script> 
+        <script type="text/javascript" src="{$scriptsurl}common.php?param=ordencompra"></script> 
+        {if $msg}
+        <div class="msg">{$msg}</div>
+        {/if}
+        <div id="tabs">
+        <form name="frmorden" id="frmorden" action="{$self}" method="post">
+            <div id="tabs-1">
+            <fieldset>
+                <legend>Datos de la Orden de Compra</legend>
+                <p>
+                <label for="iddoc">Tipo Ref:</label>
+                <select id="iddoc" name="iddoc">
+                    {section name=n loop=$docs}
+                    <option value="{$docs[n].iddoc}" {if $docs[n].iddoc==$orden.doc.iddoc}selected="selected"{/if}>{$docs[n].nombre}</option>
+                    {/section}
+                </select>
+                </p>
+                <p>
+                <label for="nrodoc">Referencia:</label>
+                <input type="text" name="nrodoc" id="nrodoc" value="{$orden.nrodoc|escape:"html"}" maxlength="255" size="90" class="required" />
+                </p>
+                <p>
+                <label for="codigo">Código <abbr title="Orden de Compra">O/C</abbr>:</label>
+                <input type="text" name="codigo" id="codigo" value="{if $orden.codigo}{$orden.codigo}{else}{$codgen}{/if}" maxlength="10" class="required" />
+                </p>
+                <p>
+                <label for="idproyecto">Proyecto:</label>
+                <!--input type="text" name="proyectos" id="proyectos" size="60" value="{$user.proyecto.descripcion}" />
+                                <input type="hidden" name="idproyecto" id="idproyecto" value="{$user.proyecto.idproyecto}" /-->
+                <select id="idproyecto" name="idproyecto">
+                {section name=n loop=$projs}
+                    <option value="{$projs[n].idproyecto}" {if $projs[n].idproyecto==$orden.proyecto.idproyecto}selected="selected"{/if}>{$projs[n].descripcion}</option>
+                {/section}
+                </select>
+                </p>
+                <p>
+                <label for="idfuente">Fuente:</label>
+                <select id="idfuente" name="idfuente">
+                                    {section name=n loop=$fuentes}
+                    <option value="{$fuentes[n].idfuente}" {if $fuentes[n].idfuente==$orden.fuente.idfuente}selected="selected"{/if}>{$fuentes[n].nombre}</option>
+                                    {/section}
+                </select>
+                </p>
+                <p>
+                <label for="ruc">Proveedor:</label>
+                <input type="hidden" name="oruc" id="oruc"  value="{$padre.proveedor.ruc}" />
+                {$padre.proveedor.razonsocial} {$padre.proveedor.ruc}</p>
+                <p>
+                <label for="facturarto">Facturar a:</label>
+                {$padre.facturarto}
+                <input type="hidden" name="facturarto" id="facturarto" value="{$padre.facturarto|escape:"html"}" />
+                </p>
+                <p>
+                <label for="fruc"><acronym title="Registro Único del Contribuyente">RUC</acronym>:</label>
+                <input type="hidden" name="fruc" id="fruc" value="{$padre.fruc}" />
+                {$padre.fruc}
+                </p>
+                <p>
+                <label for="fecha">Fecha:</label>
+                <input type="hidden" name="fecha" id="fecha" value="{$padre.fecha}" />
+                {$padre.fecha}
+                </p>
+                <p>
+                <label for="destino">Destino:</label>
+                <input type="hidden" name="destino" id="destino" value="{$padre.destino|escape:"html"}" />
+                {$padre.destino}
+                </p>
+            </fieldset>
+            </div>
+            <div id="tabs-3">
+            <fieldset>
+                <legend>Detalles de la orden</legend>
+                <table class="tabla">
+                <thead>
+                    <tr>
+                    <th colspan="4">Artículos</th>
+                    <th colspan="2">Precio</th>
+                    {if $orden.detalle}
+                    <th rowspan="2">Acciones</th>
+                    {/if} </tr>
+                    <tr>
+                    <th>Código</th>
+                    <th>Cantidad</th>
+                    <th><abbr title="Unidad de Medida">U. Med.</abbr></th>
+                    <th>Descripción</th>
+                    <th>Unitario</th>
+                    <th>Total</th>
+                    </tr>
+                </thead>
+                {if !$orden.detalle}
+                <tbody id="tbody">
+                    <tr id="firstr">
+                    <td><input type="text" name="especifica[]" maxlength="20" class="required" title="*" size="10" /></td>
+                    <td><input type="text" name="cantidad[]" size="10" maxlength="10" class="number required cantidad" title="*" /></td>
+                    <td><input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" /></td>
+                    <td><input type="text" name="descripcion[]" maxlength="255" size="50" class="required" title="*" /></td>
+                    <td><input type="text" name="precio[]" size="10" class="required number precio" title="*" /></td>
+                    <td><input type="text" name="total_" size="10" readonly="readonly" class="total" /></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                    <th colspan="5">TOTAL:</th>
+                    <td id="grandTotal"></td>
+                    </tr>
+                </tfoot>
+                </table>
+                <p class="aright">
+                <input type="button" name="clone" id="clone" value="Añadir" />
+                </p>
+                {else}
+                <tbody id="tbody">
+
+                {assign var="con" value=0}
+                {section name=n loop=$orden.detalle}
+                <tr id="firstr">
+                <td><input type="text" name="especifica[]" maxlength="20" class="required" title="*" size="10" value="{$orden.detalle[n].especifica}" /></td>
+                <td><input type="text" name="cantidad[]" size="10" maxlength="10" class="number required cantidad" title="*" value="{$orden.detalle[n].cantidad}" /></td>
+                <td><input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" value="{$orden.detalle[n].umedida}" /></td>
+                <td><input type="text" name="descripcion[]" maxlength="255" size="50" class="required" title="*" value="{$orden.detalle[n].descripcion|escape:"html"}" /></td>
+                <td><input type="text" name="precio[]" size="10" class="required number precio" title="*" value="{$orden.detalle[n].precio}" /></td>
+                <td><input type="text" name="total_" size="10" readonly="readonly" class="total" value="{$orden.detalle[n].total|number_format:2:",":"."}" /></td>
+                <td> {if !$nodel} <a href="borrar-detalle-compra.php?iddetalle={$orden.detalle[n].iddetalle}&amp;idorden={$orden.idorden}" class="ddetalle">Borrar</a> {/if}			                                                         
+                    {if !$fcot}
+                    <input type="hidden" name="iddetalle[]" value="{$orden.detalle[n].iddetalle}" />
+                    {/if} </td>
+                </tr>
+                {assign var="dtotal" value=$dtotal+$con+$orden.detalle[n].total}
+                {/section}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="5">TOTAL:</th>
+                    <td id="grandTotal"></td>
+                    <td></td>
+                </tr>
+                </tfoot>
+                </table>
+                <p class="aright"> {if $fcot}
+                <input type="button" name="clone" id="clone" value="Añadir" />
+                {else}
+                <input type="button" name="add" value="Añadir" onclick="location.href='add-item.php?id={$orden.idorden}&amp;entity=compra'" />
+                {/if} </p>
+                {/if}
+            </fieldset>
+            <p class="submit">
+                <input type="submit" name="submit" id="submit" value="Guardar" />
+                <input type="hidden" name="idorden" id="idorden" value="{$orden.idorden}" />
+            </p>
+            </div>
+        </form>
+        </div>
+  </div>
+</div>
+
+</body>
+</html>

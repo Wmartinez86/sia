@@ -195,5 +195,12 @@ function get_orden_comprapadre ($idorden) {
 	return ($orden) ? $orden : false;
 }
 
+function fill_comprapadre($padre) {
+	$padre['proveedor'] = get_prov($padre['idproveedor']);
+	$padre['detalle'] = get_detalle_compra($padre['idorden']);
+	$padre['fecha'] = fechita2($padre['fecha']);
+	$padre['usuario'] = get_user($padre['createdby']);
+	return $padre;
+}
 
 ?>
