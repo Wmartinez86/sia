@@ -195,11 +195,31 @@ function get_orden_comprapadre ($idorden) {
 	return ($orden) ? $orden : false;
 }
 
+function get_ordenes_compra_hijos ($idpadre, $active = null) {
+	global $bcdb;
+	
+	$sql = "SELECT * FROM $bcdb->ordencompra WHERE idpadre = '$idpadre' ";
+        $sql .= (!is_null($active)) ? "AND status = 1" : "";
+        $sql .= " ORDER BY idorden DESC";
+        
+	$ordencompras = $bcdb->get_results($sql);
+        
+        if($ordencompras) {
+            foreach($ordencompras as $k => $orden) {
+                $ordencompras[$k] = fill_compra($orden);
+            }
+            
+            return $ordencompras;
+        }
+	return false;
+}
+
 function fill_comprapadre($padre) {
 	$padre['proveedor'] = get_prov($padre['idproveedor']);
 	$padre['detalle'] = get_detalle_compra($padre['idorden']);
 	$padre['fecha'] = fechita2($padre['fecha']);
 	$padre['usuario'] = get_user($padre['createdby']);
+        $padre['hijos'] = get_ordenes_compra_hijos($padre['idorden']);
 	return $padre;
 }
 

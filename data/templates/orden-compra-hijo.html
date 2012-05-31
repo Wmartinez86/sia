@@ -45,7 +45,7 @@
                 </p>
                 <p>
                 <label for="codigo">Código <abbr title="Orden de Compra">O/C</abbr>:</label>
-                <input type="text" name="codigo" id="codigo" value="{if $orden.codigo}{$orden.codigo}{else}{$codgen}{/if}" maxlength="10" class="required" />
+                <input type="text" name="codigo" id="codigo" value="{if $orden.codigo}{$orden.codigo}{else}{$codgen}{/if}" maxlength="20" class="required" />
                 </p>
                 <p>
                 <label for="idproyecto">Proyecto:</label>
@@ -170,6 +170,7 @@
             <p class="submit">
                 <input type="submit" name="submit" id="submit" value="Guardar" />
                 <input type="hidden" name="idorden" id="idorden" value="{$orden.idorden}" />
+                <input type="hidden" name="idpadre" id="idpadre" value="{$padre.idorden}" />
             </p>
             </div>
         </form>

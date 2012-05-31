@@ -4,6 +4,7 @@ require_once('home.php');
 require_once('redirect.php');
 
 $idpadre = (isset($_REQUEST['idpadre'])) ? $_REQUEST['idpadre'] : 0;
+$idorden = (isset($_REQUEST['idorden'])) ? $_REQUEST['idorden'] : 0;
 
 $projs = get_projs();
 $provs = get_provs();
@@ -30,9 +31,10 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 			'fruc' => $_POST['fruc'],
 			'fecha' => fechita($_POST['fecha']),
 			'destino' => ($_POST['destino']),
-			'createdby' => $_SESSION['loginuser']['iduser']
+			'createdby' => $_SESSION['loginuser']['iduser'],
+                        'idpadre' => $_POST['idpadre'],
 		);
-		
+
 		$detalle_values = array();
 		if($_POST['especifica']) {
 			foreach($_POST['especifica'] as $k=>$v) {
@@ -59,11 +61,12 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 			}
 		}
 	} 
-	$idorden = 0;
+	//$idorden = 0;
+        
+        print '<script type="text/javascript">';
+        print 'window.opener.location.reload(); window.close();';
+        print '</script>';
 }
-
-$codgen = generate_code($bcdb->ordencompra);
-
 if($idpadre){ 
 	$padre = get_orden_comprapadre($idpadre);
 	
@@ -75,7 +78,9 @@ if($idpadre){
 	}
 	
 	$smarty->assign ('padre', $padre);
-
+        
+        $codgen = generate_code_hijo($padre);
+        $smarty->assign ('codgen', $codgen);
 }
 
 $smarty->assign ('atipos', $atipos);
@@ -83,7 +88,7 @@ $smarty->assign ('projs', $projs);
 $smarty->assign ('provs', $provs);
 $smarty->assign ('fuentes', $fuentes);
 $smarty->assign ('docs', $docs);
-$smarty->assign ('codgen', $codgen);
+
 $smarty->assign ('section_title', TITLE . ' - &Oacute;rdenes de Compra');
 
 $smarty->display ('orden-compra-hijo.html');

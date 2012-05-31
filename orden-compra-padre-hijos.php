@@ -17,6 +17,8 @@ if($idorden){
 	if($orden['status'] == ORDEN_CONGELADA) {
 		error();
 	}
+        
+        $orden = fill_comprapadre($orden);
 	
 	$smarty->assign ('orden', $orden);
 }
