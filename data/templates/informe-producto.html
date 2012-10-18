@@ -1,0 +1,31 @@
+<h2>Resultados de la búsqueda</h2>
+<table class="tabla">
+  <thead>
+    <tr>
+      <th>Descripción</th>
+      <th>Unidad de Medida</th>
+      <th>Orden de Compra</th>
+      <th>Fecha</th>
+      <th>Precio Unitario</th>
+      <th>Acciones</th>
+    </tr>  
+  </thead>
+  <tbody>
+    {if $productos}
+    {section name=n loop=$productos}
+    <tr class="{cycle values="even, odd"}">
+        <th>{$productos[n].descripcion}</td>
+        <td>{$productos[n].umedida}</td>
+        <td>{$productos[n].orden.codigo}</td>
+        <td>{$productos[n].orden.fecha}</td>
+        <td>{$productos[n].precio}</td>
+        <td><a href="orden-compra.php?idorden={$productos[n].idorden}">Ver</a></td>
+    </tr>
+    {/section}
+  </tbody>
+  {else}
+  <tr>
+    <td colspan="8">No existen datos.</td>
+  </tr>
+  {/if}
+</table>

@@ -4,7 +4,7 @@ body { font: .8em "Trebuchet MS", Verdana, Helvetica, sans-serif; color: #666;  
 a { color: #AF1515; cursor: pointer; }
 a:hover { color: #7D1919; }
 h1 { font-size: 2em; clear: both; margin: 0 0 5px; }
-h2 { font: normal 1.6em Arial; color: #14608a; margin: 0 0 15px; }
+h2 { font: normal 1.6em Arial; color: #14608a; margin: 0 0 15px; clear: both;}
 h2#slogan { font-size: 1.3em; color: #808080; }
 p  { margin: 0 0 15px; line-height: 1.7em; }
 fieldset {background: #f9fcfe; border: 1px solid #bdd9ea; padding: 5px 10px; margin: 8px 2px;}

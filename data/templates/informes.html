@@ -1,77 +1,102 @@
 <h2>Informes</h2>
 <script type="text/javascript" src="{$scriptsurl}common.php?param=inf"></script>
-<form name="frminforme" id="frminforme" action="{$self}" method="get">
-  <fieldset>
-    <legend>Criterios de búsqueda</legend>
-    <p>
-      <input type="radio" name="orden" id="corden" value="ordencompra" {if $orden!="ordenservicio"}checked="checked"{/if} />
-      <label for="corden" class="nolab">Órdenes de Compra</label>
-      <input type="radio" name="orden" id="sorden" value="ordenservicio" {if $orden=="ordenservicio"}checked="checked"{/if} />
-      <label for="sorden" class="nolab">Órdenes de Servicio</label>
-    </p>
-    <p>
-      <label for="idproyecto" class="nolab">Proyecto:</label>
-      <select id="idproyecto" name="idproyecto">
-        <option value="0">Cualquier proyecto</option>
-        
-                {section name=n loop=$projs}
-                
-        <option value="{$projs[n].idproyecto}" {if $projs[n].idproyecto==$idproyecto}selected="selected"{/if}>{$projs[n].descripcion}</option>
-        
-                {/section}
-            
-      </select>
-    </p>
-    <p>
-      <label for="iddoc" class="nolab">Tipo Documento:</label>
-      <select id="iddoc" name="iddoc">
-        <option value="0">Cualquier tipo</option>
-        
-                {section name=n loop=$docs}
-                
-        <option value="{$docs[n].iddoc}" {if $docs[n].iddoc==$iddoc}selected="selected"{/if}>{$docs[n].nombre}</option>
-        
-                {/section}
-            
-      </select>
-      <label for="idfuente" class="nolab">Fuente:</label>
-      <select id="idfuente" name="idfuente">
-        <option value="0">Cualquier fuente</option>
-        
-                {section name=n loop=$fuentes}
-                
-        <option value="{$fuentes[n].idfuente}" {if $fuentes[n].idfuente==$idfuente}selected="selected"{/if}>{$fuentes[n].nombre}</option>
-        
-                {/section}
-            
-      </select>
-      <label for="fecha1" class="nolab">De:</label>
-      <input type="text" name="fecha1" id="fecha1" size="11" value="{if $fecha1}{$fecha1}{else}{"01/01/2012"}{/if}" class="required" />
-      <label for="fecha2" class="nolab">Hasta:</label>
-      <input type="text" name="fecha2" id="fecha2" size="11" value="{if $fecha2}{$fecha2}{else}{$smarty.now|date_format:"%d/%m/%Y"}{/if}" class="required" />
-    </p>
-    <p>
-      <label for="ruc" class="nolab"><acronym title="Registro Único del Contribuyente">RUC</acronym> del Proveedor:</label>
-      <input type="text" name="ruc" id="ruc" size="20" maxlength="11" value="{if $ruc}{$ruc}{/if}" />
-    </p>  
-    <p>  
-      <label for="status" class="nolab">Estado de la Orden:</label>
-      <select id="status" name="status">
-        <option value="0" {if $status==0}selected="selected"{/if}>Cualquier estado</option>
-        <option value="1" {if $status==1}selected="selected"{/if}>Activo</option>
-        <option value="2" {if $status==2}selected="selected"{/if}>Cancelado</option>
-      </select>
-    </p>
-  </fieldset>
-  <p class="submit">
-    <input type="submit" name="submit" id="submit" value="Buscar" />
-  </p>
-</form>
+<script type="text/javascript" src="{$scriptsurl}acciones/informe-producto.js"></script>
+<ul class="i-tabs">
+  <li><a href="#i-main">Órdenes</a></li>
+  <li><a href="#i-prod">Productos</a></li>
+</ul>
+<div class="i-tab-container">
+  <div id="i-main" class="i-tab-content">
+    <form name="frminforme" id="frminforme" action="{$self}" method="get">
+      <fieldset>
+        <legend>Criterios de búsqueda</legend>
+        <p>
+          <input type="radio" name="orden" id="corden" value="ordencompra" {if $orden!="ordenservicio"}checked="checked"{/if} />
+          <label for="corden" class="nolab">Órdenes de Compra</label>
+          <input type="radio" name="orden" id="sorden" value="ordenservicio" {if $orden=="ordenservicio"}checked="checked"{/if} />
+          <label for="sorden" class="nolab">Órdenes de Servicio</label>
+        </p>
+        <p>
+          <label for="idproyecto" class="nolab">Proyecto:</label>
+          <select id="idproyecto" name="idproyecto">
+            <option value="0">Cualquier proyecto</option>
+
+                    {section name=n loop=$projs}
+
+            <option value="{$projs[n].idproyecto}" {if $projs[n].idproyecto==$idproyecto}selected="selected"{/if}>{$projs[n].descripcion}</option>
+
+                    {/section}
+
+          </select>
+        </p>
+        <p>
+          <label for="iddoc" class="nolab">Tipo Documento:</label>
+          <select id="iddoc" name="iddoc">
+            <option value="0">Cualquier tipo</option>
+
+                    {section name=n loop=$docs}
+
+            <option value="{$docs[n].iddoc}" {if $docs[n].iddoc==$iddoc}selected="selected"{/if}>{$docs[n].nombre}</option>
+
+                    {/section}
+
+          </select>
+          <label for="idfuente" class="nolab">Fuente:</label>
+          <select id="idfuente" name="idfuente">
+            <option value="0">Cualquier fuente</option>
+
+                    {section name=n loop=$fuentes}
+
+            <option value="{$fuentes[n].idfuente}" {if $fuentes[n].idfuente==$idfuente}selected="selected"{/if}>{$fuentes[n].nombre}</option>
+
+                    {/section}
+
+          </select>
+          <label for="fecha1" class="nolab">De:</label>
+          <input type="text" name="fecha1" id="fecha1" size="11" value="{if $fecha1}{$fecha1}{else}{"01/01/2012"}{/if}" class="required" />
+          <label for="fecha2" class="nolab">Hasta:</label>
+          <input type="text" name="fecha2" id="fecha2" size="11" value="{if $fecha2}{$fecha2}{else}{$smarty.now|date_format:"%d/%m/%Y"}{/if}" class="required" />
+        </p>
+        <p>
+          <label for="ruc" class="nolab"><acronym title="Registro Único del Contribuyente">RUC</acronym> del Proveedor:</label>
+          <input type="text" name="ruc" id="ruc" size="20" maxlength="11" value="{if $ruc}{$ruc}{/if}" />
+        </p>  
+        <p>  
+          <label for="status" class="nolab">Estado de la Orden:</label>
+          <select id="status" name="status">
+            <option value="0" {if $status==0}selected="selected"{/if}>Cualquier estado</option>
+            <option value="1" {if $status==1}selected="selected"{/if}>Activo</option>
+            <option value="2" {if $status==2}selected="selected"{/if}>Cancelado</option>
+          </select>
+        </p>
+      </fieldset>
+      <p class="submit">
+        <input type="submit" name="submit" id="submit" value="Buscar" />
+      </p>
+    </form>
+  </div>
+  <div id="i-prod" class="i-tab-content">
+    <form name="frminforme" id="frminforme" action="{$self}" method="get">
+      <fieldset>
+        <legend>Producto</legend>
+        <p>
+          <label for="producto" class="nolab">Producto:</label>
+          <input type="text" name="producto" id="producto" value="{if $producto}{$producto}{/if}" />
+        </p>  
+      </fieldset>
+      <p class="submit">
+        <input type="button" name="button" id="button" value="Buscar" />
+      </p>
+    </form>
+  </div>
+</div>
+<div id="results">
 {if $postback}
 <h2>Resultados de la búsqueda <span class="options">
         [<a href="{$self}?excel&amp;orden={$orden}&amp;idproyecto={$idproyecto}&amp;iddoc={$iddoc}&amp;idfuente={$idfuente}&amp;fecha1={$fecha1}&amp;fecha2={$fecha2}&amp;ruc={$ruc}&amp;status={$status}&amp;submit=Buscar">Exportar los resultados a Excel</a> |
         <a href="{$self}?excelproductos&amp;orden={$orden}&amp;idproyecto={$idproyecto}&amp;iddoc={$iddoc}&amp;idfuente={$idfuente}&amp;fecha1={$fecha1}&amp;fecha2={$fecha2}&amp;ruc={$ruc}&amp;status={$status}&amp;submit=Buscar">Exportar los productos a Excel</a>]
     </span></h2>
+
 <table class="tabla">
   <thead>
     <tr>
@@ -126,3 +151,4 @@
   {/if}
 </table>
 {/if}
+</div>
