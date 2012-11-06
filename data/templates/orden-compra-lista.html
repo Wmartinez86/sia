@@ -84,6 +84,11 @@
     </form>
   </div>
 </div>
+{if $op}
+<h2>Resultados de la búsqueda <span class="options">
+        [<a href="{$self}?excel&amp;{$querystring}">Exportar los resultados a Excel</a>]
+    </span></h2>
+{/if}
 <table class="tabla">
   <thead>
     <tr>
