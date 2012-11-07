@@ -38,6 +38,7 @@ if(isset($_GET['excel'])) {
   
   $ordenes = fill_compras($ordenes);
   
+  
   $atotal = 0;
   foreach($ordenes as $k=>$v) {
     $ordenes[$k]['stotal'] = supertotal($v['detalle'], 'total');
@@ -61,32 +62,34 @@ if(isset($_GET['excel'])) {
 
   // Add some data, resembling some different data types
   //Cabeceras
-  $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Código');
-  $objPHPExcel->getActiveSheet()->setCellValue('B1', 'Documento');
-  $objPHPExcel->getActiveSheet()->setCellValue('C1', 'Sec Func');
-  $objPHPExcel->getActiveSheet()->setCellValue('D1', 'Proyecto');
-  $objPHPExcel->getActiveSheet()->setCellValue('E1', 'Proveedor');
-  $objPHPExcel->getActiveSheet()->setCellValue('F1', 'RUC Proveedor');
-  $objPHPExcel->getActiveSheet()->setCellValue('G1', 'Facturado a');
-  $objPHPExcel->getActiveSheet()->setCellValue('H1', 'Fecha');
-  $objPHPExcel->getActiveSheet()->setCellValue('I1', 'Creado por');
-  $objPHPExcel->getActiveSheet()->setCellValue('J1', 'Total');
-
+  $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Código Orden');
+  $objPHPExcel->getActiveSheet()->setCellValue('B1', 'Cantidad');
+  $objPHPExcel->getActiveSheet()->setCellValue('C1', 'Und');
+  $objPHPExcel->getActiveSheet()->setCellValue('D1', 'Descripción');
+  $objPHPExcel->getActiveSheet()->setCellValue('E1', 'Precio Unitario');
+  $objPHPExcel->getActiveSheet()->setCellValue('F1', 'Total');
+  $objPHPExcel->getActiveSheet()->setCellValue('G1', 'Sec Func');
+  $objPHPExcel->getActiveSheet()->setCellValue('H1', 'Proyecto');
+  $objPHPExcel->getActiveSheet()->setCellValue('I1', 'Proveedor');
+  $objPHPExcel->getActiveSheet()->setCellValue('J1', 'RUC Proveedor');
+  
 
   $counter = 2;
   if($ordenes) {
       foreach($ordenes as $k => $orden) {
+        foreach($orden['detalle'] as $det => $detalle) {
           $objPHPExcel->getActiveSheet()->setCellValue(sprintf('A%s', $counter), $orden['codigo']);
-          $objPHPExcel->getActiveSheet()->setCellValue(sprintf('B%s', $counter), $orden['doc']['nombre'] . ": " . $orden['nrodoc']);
-          $objPHPExcel->getActiveSheet()->setCellValue(sprintf('C%s', $counter), sprintf("%s", $orden['proyecto']['sec_func']));
-          $objPHPExcel->getActiveSheet()->setCellValue(sprintf('D%s', $counter), $orden['proyecto']['descripcion']);
-          $objPHPExcel->getActiveSheet()->setCellValue(sprintf('E%s', $counter), $orden['proveedor']['razonsocial']);
-          $objPHPExcel->getActiveSheet()->setCellValue(sprintf('F%s', $counter), $orden['proveedor']['ruc']);
-          $objPHPExcel->getActiveSheet()->setCellValue(sprintf('G%s', $counter), $orden['facturarto']);
-          $objPHPExcel->getActiveSheet()->setCellValue(sprintf('H%s', $counter), $orden['fecha']);
-          $objPHPExcel->getActiveSheet()->setCellValue(sprintf('I%s', $counter), $orden['usuario']['username']);
-          $objPHPExcel->getActiveSheet()->setCellValue(sprintf('J%s', $counter), $orden['stotal']);
+          $objPHPExcel->getActiveSheet()->setCellValue(sprintf('B%s', $counter), $detalle['cantidad']);
+          $objPHPExcel->getActiveSheet()->setCellValue(sprintf('C%s', $counter), $detalle['umedida']);
+          $objPHPExcel->getActiveSheet()->setCellValue(sprintf('D%s', $counter), $detalle['descripcion']);
+          $objPHPExcel->getActiveSheet()->setCellValue(sprintf('E%s', $counter), $detalle['precio']);
+          $objPHPExcel->getActiveSheet()->setCellValue(sprintf('F%s', $counter), $detalle['total']);
+          $objPHPExcel->getActiveSheet()->setCellValue(sprintf('G%s', $counter), sprintf("%s", $orden['proyecto']['sec_func']));
+          $objPHPExcel->getActiveSheet()->setCellValue(sprintf('H%s', $counter), $orden['proyecto']['descripcion']);
+          $objPHPExcel->getActiveSheet()->setCellValue(sprintf('I%s', $counter), $orden['proveedor']['razonsocial']);
+          $objPHPExcel->getActiveSheet()->setCellValue(sprintf('J%s', $counter), $orden['proveedor']['ruc']);
           $counter++;
+        }
       }
   }
 
