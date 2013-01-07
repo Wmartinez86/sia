@@ -208,23 +208,6 @@ function generate_code($table, $userid = NULL) {
 	endif;
 }
 
-function generate_code_hijo ($padre) {
-    global $bcdb;
-    
-    $sql = sprintf("SELECT count(*) FROM %s WHERE idpadre = '%s'",
-            $bcdb->ordencompra,
-            $padre['idorden']);
-    
-    $total = (int)$bcdb->get_var($sql);
-    
-    $codigo = $padre['codigo'];
-    if($total == 0) {
-        return $codigo . " - Hijo 1";
-    } else {
-        return $codigo . " - Hijo " . (string)($total+1);
-    }
-}
-
 function search_ordenes($params, $table, $f1, $f2) {
 	global $bcdb;
 	$query = "SELECT * FROM $table WHERE ";

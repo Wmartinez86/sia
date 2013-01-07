@@ -71,9 +71,29 @@ function save_detalle_nea($idnea, $detalle_values) {
         $msg = "Se guardaron los detalles de la NEA.";
 }
 
-function remove_nea ($idnea) {
+function cancelar_nea ($idnea) {
 	global $bcdb;
-	$bcdb->query("DELETE FROM $bcdb->neas WHERE idnea = $idnea");
+
+	$nea = get_nea($idnea);
+
+	$nsql = sprintf("SELECT * FROM %s WHERE idnea = '%s';",
+	$bcdb->detallenea, $idnea);
+
+	$results = $bcdb->get_results($nsql);
+	
+	foreach($results as $k => $v) {
+		$dsql = sprintf("DELETE FROM %s WHERE idennea = '%s';",
+			$bcdb->detallealmacen, $v['iddetalle']);
+		$bcdb->query($dsql);
+	}
+
+	$bcdb->query(sprintf("DELETE FROM %s WHERE idnea = '%s';",
+			$bcdb->detallenea, $idnea));
+
+	$bcdb->query(sprintf("DELETE FROM %s WHERE idnea = '%s';",
+			$bcdb->neas, $idnea));
+
+	unfreeze_orden($nea['idorden']);
 }
 
 function fill_neas($neas) {
@@ -88,8 +108,23 @@ function fill_nea($nea) {
 	$nea['detalle'] = get_detalle_nea($nea['idnea']);
 	$nea['fecha'] = fechita2($nea['fecha']);
 	$nea['usuario'] = get_user($nea['createdby']);
+	$nea['hasalido'] = en_pecosa($nea['idnea']);
 	return $nea;
 }
+
+function en_pecosa($idnea) {
+	global $bcdb;
+	$sql = sprintf("SELECT iddetalle  FROM %s WHERE idnea = '%s';",
+	$bcdb->detallenea, $idnea);
+	$suma = 0;
+	$results = $bcdb->get_results($sql);
+	foreach ($results as $k => $v) {
+		$vsql = sprintf("SELECT SUM(cuantosalio) as suma FROM %s WHERE idennea = '%s';",
+			$bcdb->detallealmacen, $v['iddetalle']);
+		$suma += $bcdb->get_var($vsql);
+	}
+	return ($suma>0);
+} 
 
 function fill_nea_by_orden($orden) {
 	$orden['detalle'] = get_detalle_compra($orden['idorden']);

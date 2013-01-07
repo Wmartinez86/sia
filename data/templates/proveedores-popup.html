@@ -12,6 +12,12 @@
 </head>
 <body>
 <div class="wrap background">
+  <div id="loginbox"> {if !$loginuser || $file=="logout.html"} 
+    <script type="text/javascript">
+				window.close();
+            </script> 
+    {else}
+    Usuario: {$loginuser.username} | <a href="logout.php">Salir</a> {/if} </div>
   <ul id="menu">
   </ul>
   <div class="clear"></div>

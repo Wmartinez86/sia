@@ -65,7 +65,12 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST') {
 
 $codgen = generate_code($bcdb->neas);
 
-if($idnea) { 
+if($idnea) {
+	if (isset($_GET['cancel']) && !en_pecosa($idnea)) {
+		cancelar_nea($idnea);
+		header("Location: almacen-lista.php");
+	}
+
 	$nea = fill_nea(get_nea($idnea));
 	$smarty->assign ('nea', $nea);
 	if(count($nea['detalle'])==1) {

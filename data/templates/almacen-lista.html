@@ -1,4 +1,5 @@
 <script type="text/javascript" src="{$scriptsurl}acciones/lista-detalle.js"></script>
+<script type="text/javascript" src="{$scriptsurl}acciones/lista-nea.js"></script>
 <h2>Notas de Entrada de Almacén  <span class="options">[<a href="nea-orden.php">Ingresar productos por orden de compra</a> | <a href="almacen.php">Ingresar productos</a>]</span></h2>
 <ul class="i-tabs">
   <li><a href="#i-admin">Buscar por destino</a></li>
@@ -34,7 +35,7 @@
       <th>Procedencia</th>
       <th>Fecha</th>
       <th>Creado por</th>
-      <th colspan="2">Acciones</th>
+      <th colspan="3">Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -47,6 +48,11 @@
     <td>{$neas[n].fecha}</td>
     <td>{$neas[n].usuario.username}</td>
     <th><a href="almacen.php?idnea={$neas[n].idnea}">Modificar</a></th>
+    {if !$neas[n].hasalido}
+    <th><a href="almacen.php?cancel&amp;idnea={$neas[n].idnea}" class="cancel-nea">Cancelar</a></th>
+    {else}
+    <th>Tiene salidas</th>
+    {/if}
     <th><a href="nea-print.php?idnea={$neas[n].idnea}">Imprimir</a></th>
   </tr>
    <tr class="tabla-child">

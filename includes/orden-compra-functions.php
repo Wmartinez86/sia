@@ -157,70 +157,10 @@ function freeze_orden($idorden) {
 	return $bcdb->query("UPDATE $bcdb->ordencompra SET status = 3 WHERE idorden = $idorden");
 }
 
-
-/**
- * Funciones para órdenes padre
- *
- */
- 
-function save_orden_comprapadre($idorden, $orden_values) {
-	global $bcdb, $msg;
-
-	if ($bcdb->get_var("SELECT count(codigo) FROM $bcdb->ordencompra WHERE idorden != '$idorden' AND codigo = '$orden_values[codigo]'") ) {
-		$msg .= " Ya existe otra orden con el mismo c&oacute;digo.";
-		return false;
-	}
-	
-		$orden_values['idorden'] = $idorden;
-	
-	if ( ($query = insert_update_query($bcdb->ordencomprapadre, $orden_values)) &&
-		$bcdb->query($query) ) {
-		
-		if (empty($idorden))	
-			$idorden = $bcdb->insert_id;
-		
-		$msg = "Los datos han sido guardados satisfactoriamente.";
-		
-		return $idorden;
-	}else {
-		
-	}
-	$msg .= " No se hicieron cambios en los datos de la orden.";
-	return false;
-}
-
-function get_orden_comprapadre ($idorden) {
+function unfreeze_orden($idorden) {
 	global $bcdb;
-        $orden = $bcdb->get_row("SELECT * FROM $bcdb->ordencomprapadre WHERE idorden = '$idorden'");
-	return ($orden) ? $orden : false;
+	return $bcdb->query("UPDATE $bcdb->ordencompra SET status = 1 WHERE idorden = $idorden");
 }
 
-function get_ordenes_compra_hijos ($idpadre, $active = null) {
-	global $bcdb;
-	
-	$sql = "SELECT * FROM $bcdb->ordencompra WHERE idpadre = '$idpadre' ";
-        $sql .= (!is_null($active)) ? "AND status = 1" : "";
-        $sql .= " ORDER BY idorden DESC";
-        
-	$ordencompras = $bcdb->get_results($sql);
-        
-        if($ordencompras) {
-            foreach($ordencompras as $k => $orden) {
-                $ordencompras[$k] = fill_compra($orden);
-            }
-            
-            return $ordencompras;
-        }
-	return false;
-}
-
-function fill_comprapadre($padre) {
-	$padre['proveedor'] = get_prov($padre['idproveedor']);
-	$padre['detalle'] = get_detalle_compra($padre['idorden']);
-	$padre['fecha'] = fechita2($padre['fecha']);
-	$padre['usuario'] = get_user($padre['createdby']);
-        $padre['hijos'] = get_ordenes_compra_hijos($padre['idorden']);
-	return $padre;
-}
 
 ?>

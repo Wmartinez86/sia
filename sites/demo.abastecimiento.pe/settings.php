@@ -1,9 +1,9 @@
 <?php
 
 $db_params = array(
-    'db_host' => 'localhost',
-    'db_name' => 'sonccoc_ordenes',
-    'db_user' => 'sonccoc_ordenes',
-    'db_pass' => '$ordenes'
+    'db_host' => '127.0.0.1',
+    'db_name' => 'demo',
+    'db_user' => 'cdti',
+    'db_pass' => 'demodb$'
 );
 ?>
