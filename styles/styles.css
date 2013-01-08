@@ -163,3 +163,8 @@ html ul.i-tabs li.active-tab, html ul.i-tabs li.active-tab a:hover  {
 .nolab {
   float: none;
 }
+
+.msg {border: 1px solid #e2dcb9; background: #eef7d9; color: #7a7b52; padding: 4px 10px; overflow: hidden;}
+.error { border: 1px solid #b05164; background: #ecd3d8; color: #b05164; padding: 1px 10px; margin: 0 5px;}
+.nota {font-size: 90%;}
+.submit { margin: 10px;}
