@@ -63,7 +63,6 @@ function save_requerimiento($idreq, $req_values) {
 	}
 	
 	$req_values['idreq'] = $idreq;
-  print insert_update_query($bcdb->requerimientos, $req_values);
 	if ( ($query = insert_update_query($bcdb->requerimientos, $req_values)) &&
 		$bcdb->query($query) ) {
 		
