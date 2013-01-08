@@ -77,6 +77,10 @@
   clear: both;
 }
 
+#content a {
+  font-weight: bold;
+}
+
 #footer {
   clear: both;
   background: #404040;
