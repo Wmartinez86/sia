@@ -1,0 +1,91 @@
+#logo {
+  font-size: 18px;
+  margin: 0px !important;
+}
+
+#logo a {
+  text-decoration: none;
+  color: #000;
+  text-shadow:0 1px 0 rgba(0, 0, 0, 0.25);
+}
+
+#logo a:hover {
+  text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+#slogan {
+  font-size: 13px;
+  margin: 0px !important;
+  color: #797979;
+}
+
+#logo-section {
+  position: relative;
+  height: 60px;
+  -webkit-box-shadow:inset 0 -1px 0 rgba(0,0,0,.1), 0 1px 10px rgba(0,0,0,.1);
+  -moz-box-shadow:inset 0 -1px 0 rgba(0,0,0,.1), 0 1px 10px rgba(0,0,0,.1);
+  box-shadow:inset 0 -1px 0 rgba(0,0,0,.1), 0 1px 10px rgba(0,0,0,.1);
+}
+
+#main-nav {
+  position: absolute;
+  top: 4px;
+  left: 10px;
+}
+
+#user-info {
+  position: absolute;
+  top: 15px;
+  right: 10px;
+}
+
+#menu {
+  background:  #EEE;
+  height: 36px;
+  font-size: 15px;
+  -webkit-box-shadow:inset 0 -1px 0 rgba(0,0,0,.1), 0 1px 10px rgba(0,0,0,.1);
+  -moz-box-shadow:inset 0 -1px 0 rgba(0,0,0,.1), 0 1px 10px rgba(0,0,0,.1);
+  box-shadow:inset 0 -1px 0 rgba(0,0,0,.1), 0 1px 10px rgba(0,0,0,.1);
+}
+
+#menu ul,
+#menu li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+#menu li {
+  float: left;
+}
+
+#menu a {
+  display: block;
+  padding: 5px 15px;
+  text-decoration: none;
+  color: #000;
+  font-family: 'Open Sans', sans-serif;
+}
+
+#menu a:hover {
+  background: #404040;
+  color: #FFF;  
+}
+
+#content {
+  padding: 0 20px;
+  clear: both;
+}
+
+#footer {
+  clear: both;
+  background: #404040;
+  padding: 10px 20px;
+}
+
+#footer a {
+  color: #FFF;
+  text-decoration: none;
+  text-shadow: 1px 1px 5px rgba(255,255,255, 0.2);
+  border-bottom: 1px dotted #FFF;
+}

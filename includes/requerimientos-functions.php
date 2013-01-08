@@ -56,14 +56,14 @@ function save_requerimiento($idreq, $req_values) {
                             FROM $bcdb->requerimientos 
                             WHERE idreq != '$idreq' 
                             AND codigo = '$req_values[codigo]' 
-                            AND createdby = '$req_values[createdby]]'") ) {
+                            AND createdby = '$req_values[createdby]'") ) {
             
 		$msg .= " Ya existe otro requerimiento con el mismo c&oacute;digo.";
 		return false;
 	}
 	
 	$req_values['idreq'] = $idreq;
-
+  print insert_update_query($bcdb->requerimientos, $req_values);
 	if ( ($query = insert_update_query($bcdb->requerimientos, $req_values)) &&
 		$bcdb->query($query) ) {
 		

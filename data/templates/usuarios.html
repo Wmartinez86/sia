@@ -8,15 +8,15 @@
     <legend>Datos del usuario</legend>
     <p>
       <label for="nombres">Nombres:</label>
-      <input type="text" name="nombres" id="nombres" maxlength="255" size="60" value="{$user.nombres}" class="required" title="Ingresa los nombres" />
+      <input type="text" name="nombres" id="nombres" maxlength="255" size="60" value="{$user.nombres}" class="required" required="required" title="Ingresa los nombres" />
     </p>
     <p>
       <label for="email">Email:</label>
-      <input type="text" name="email" id="email" maxlength="100" size="40" value="{$user.email}" class="required email" title="Ingresa un email correcto" />
+      <input type="text" name="email" id="email" maxlength="100" size="40" value="{$user.email}" class="required email" required="required" title="Ingresa un email correcto" />
     </p>
     <p>
       <label for="username" title="Nombre de Usuario">Usuario:</label>
-      <input type="text" name="username" id="username" maxlength="100" size="40" value="{$user.username}" class="required" title="Ingresa el nombre de usuario" {if $user.username!=""}readonly="readonly"{/if} />
+      <input type="text" name="username" id="username" maxlength="100" size="40" value="{$user.username}" class="required" required="required" title="Ingresa el nombre de usuario" {if $user.username!=""}readonly="readonly"{/if} />
     </p>
     <p>
       <label for="pwd">Contraseña:</label>
@@ -29,7 +29,7 @@
       <span class="nota">Si no va a cambiar la contraseña, deje los campos en blanco.</span> </p>
     <p>
       <label for="idarea">Área:</label>
-      <select id="idarea" name="idarea">
+      <select id="idarea" name="idarea" required="required">
         
                             {section name=n loop=$areas}
                             
@@ -43,7 +43,7 @@
       <label for="idproyecto">Proyecto:</label>
       <!--input type="text" name="proyectos" id="proyectos" size="60" value="{$user.proyecto.descripcion}" />
                         <input type="hidden" name="idproyecto" id="idproyecto" value="{$user.proyecto.idproyecto}" /-->
-      <select id="idproyecto" name="idproyecto">
+      <select id="idproyecto" name="idproyecto" required="required">
         
                         {section name=n loop=$projs}
                         

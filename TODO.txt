@@ -1,3 +1,11 @@
+* Diseño
+* GLOSA
+* Validación de números correlativos AJAX
+* Precio Unitario 5 digitos
+* Precio error con 8/100 nue
+* Validador fecha y numero
+* Propia contraseña
+
 en requerimeinto
     * indicar si ya se realizo cotizacion (nro)
 en cotizacion
@@ -8,12 +16,10 @@ en Cuadro comparativo
 en orden de compra
     - imprimir mas de una orden
     * auto completar producto
-    x Ver detalle 
     * lista de productos por meta
     * lista de productos por fuente
 en orden de Servicio
     - imprimir mas de una orden
-    x Ver detalle
 en almacen
     - liberar orden de Compra
     - imprimir mas de una nea
@@ -27,7 +33,7 @@ Salidas
     * Seleccionar todos los productos
 Otros
     * Doble Meta
-    - Links a OSCE y a SEACE
+    - Links a OSCE y a , SUNAT Y RNP
 Cotización
     * Cotización por Mail
 

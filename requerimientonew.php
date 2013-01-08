@@ -9,9 +9,6 @@ if (isset($_REQUEST['idreq'])) {
     $idreq = '0';
 }
 
-
-//$idcot = ! empty($_GET['idcot']) ? (int)$idcot : 0;
-
 if(isset($_GET['cancel'])) {
 	cancel_req($idreq, "requerimientos");
 	header("Location: requerimiento-lista.php");
@@ -72,12 +69,6 @@ if($idreq){
 	}
 }
 	
-//$smarty->assign ('atipos', $atipos);
-//$smarty->assign ('projs', $projs);
-//$smarty->assign ('provs', $provs);
-//$smarty->assign ('fuentes', $fuentes);
-//$smarty->assign ('docs', $docs);
-//$smarty->assign ('especs', $especs);
 $smarty->assign ('codgen', $codgen);
 
 $smarty->assign ('section_title', TITLE . ' - Requerimientos');
