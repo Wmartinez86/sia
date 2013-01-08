@@ -159,3 +159,7 @@ html ul.i-tabs li.active-tab, html ul.i-tabs li.active-tab a:hover  {
   color: red;
   font-weight: bold;
 }
+
+.nolab {
+  float: none;
+}
