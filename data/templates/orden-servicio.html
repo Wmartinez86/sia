@@ -71,6 +71,10 @@
           <label for="fecha">Fecha:</label>
           <input type="text" name="fecha" id="fecha" size="11" value="{if $orden.fecha}{$orden.fecha}{else}{$smarty.now|date_format:"%d/%m/%Y"}{/if}" class="required" />
         </p>
+        <p>
+          <label for="glosa">Glosa</label>
+          <textarea cols="60" rows="5">{$orden.glosa}</textarea>
+        </p>
       </fieldset>
     </div>
     <div id="tabs-3">

@@ -63,6 +63,10 @@
           <label for="destino">Destino:</label>
           <input type="text" name="destino" id="destino" maxlength="150" size="80" class="required" value="{if $orden.destino}{$orden.destino|escape:"html"}{else}Almacén Central{/if}" />
         </p>
+        <p>
+          <label for="glosa">Glosa</label>
+          <textarea cols="60" rows="5">{$orden.glosa}</textarea>
+        </p>
       </fieldset>
     </div>
     <div id="tabs-3">

@@ -29,6 +29,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 		$req_values = array(
 			'codigo' => $_POST['codigo'],
 			'fecha' => fechita($_POST['fecha']),
+			'glosa' => $_POST['glosa'],
 			'createdby' => $_SESSION['loginuser']['iduser']
 		);
 		

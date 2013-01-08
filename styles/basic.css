@@ -48,6 +48,7 @@ fieldset {
     box-shadow: 2px 2px 10px #ccc;
     border: 1px solid #ddd;
     border-radius: 6px;
+    margin-bottom: 10px;
 }
 
 legend {

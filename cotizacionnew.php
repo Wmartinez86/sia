@@ -35,6 +35,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 		$cot_values = array(
 			'referencia' => $_POST['referencia'],
 			'codigo' => $_POST['codigo'],
+			'glosa' => $_POST['glosa'],
 			'fecha' => fechita($_POST['fecha']),
 			'createdby' => $_SESSION['loginuser']['iduser'],
 			'tipocontrata' => $_POST['tipocontrata'],

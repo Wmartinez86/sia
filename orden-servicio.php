@@ -49,6 +49,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 			'idproveedor' => get_idprov_by_ruc($_POST['oruc']),
 			'facturarto' => $_POST['facturarto'],
 			'fruc' => $_POST['fruc'],
+			'glosa' => $_POST['glosa'],
 			'fecha' => fechita($_POST['fecha']),
 			'createdby' => $_SESSION['loginuser']['iduser']
 		);

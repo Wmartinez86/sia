@@ -101,6 +101,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 			'facturarto' => $_POST['facturarto'],
 
 			'fruc' => $_POST['fruc'],
+			'glosa' => $_POST['glosa'],
 
 			'fecha' => fechita($_POST['fecha']),
 
