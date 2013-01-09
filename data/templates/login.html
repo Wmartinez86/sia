@@ -4,6 +4,7 @@
 		$("#username").focus();
 	{rdelim});
 </script>
+<script type="text/javascript" src="{$scriptsurl}login.js"></script>
 <h2>Iniciar su sesión</h2>
 {if $msg}
 <div class="msg">{$msg}</div>
@@ -18,6 +19,13 @@
     <p>
       <label for="pass" accesskey="c"><span class="accesskey">C</span>ontraseña:</label>
       <input type="password" name="pwd" id="pass" maxlength="100" class="required" required="required" title="Ingresa la contraseña" />
+    </p>
+    <p>
+      <label for="anio" accesskey="c"><span class="accesskey">Año Fiscal:</label>
+      <select id="anio">
+      <option value="2012">2012</option>
+      <option value="2013" selected="selected">2013</option>
+      </select>
     </p>
     <p>
       <input type="hidden" name="r" id="r" value="{$r}" />
