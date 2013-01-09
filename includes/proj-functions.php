@@ -14,7 +14,7 @@ function get_projs () {
 	global $bcdb, $bcrs, $pager;
 	$sql = "SELECT * 
 			FROM $bcdb->proyectos 
-			ORDER BY sec_func ASC";
+			ORDER BY CAST(sec_func as int) ASC";
 	$proyectos = ($pager) ? $bcrs->get_results($sql) : $bcdb->get_results($sql);
 	foreach($proyectos as $k => $v) {
             $proyectos[$k]['descripcion'] = "sec_func=" . $v['sec_func'] . " " . substr($v['descripcion'], 0, 90);
