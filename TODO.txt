@@ -1,5 +1,5 @@
-* Diseño
-* GLOSA
+x* Diseño
+x* GLOSA
 * Validación de números correlativos AJAX
 * Precio Unitario 5 digitos
 * Precio error con 8/100 nue

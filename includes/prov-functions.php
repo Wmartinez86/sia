@@ -25,7 +25,7 @@ function get_provs () {
 	
 	$sql = "SELECT * 
 			FROM $bcdb->proveedores 
-			ORDER BY idproveedor";
+			ORDER BY razonsocial";
 	$proveedores = ($pager) ? $bcrs->get_results($sql) : $bcdb->get_results($sql);
 	return $proveedores;
 }
