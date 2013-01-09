@@ -33,6 +33,8 @@ CREATE TABLE IF NOT EXISTS `o_areas` (
   PRIMARY KEY (`idarea`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+INSERT INTO o_areas(nombre, abreviatura) VALUES ('Oficina de Abastecimiento', 'OA');
+
 -- --------------------------------------------------------
 
 --
@@ -250,6 +252,13 @@ CREATE TABLE IF NOT EXISTS `o_opciones` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+INSERT INTO `o_opciones` (`id`, `nombre`, `descripcion`) VALUES
+(1, 'tipo_entidad', 'Municipalidad Distrital de'),
+(2, 'nombre_entidad', ''),
+(3, 'ubicacion', 'Cusco'),
+(4, 'ruc_entidad', ''),
+(5, 'logo', '1');
+
 -- --------------------------------------------------------
 
 --
@@ -382,6 +391,9 @@ CREATE TABLE IF NOT EXISTS `o_proyectos` (
   PRIMARY KEY (`idproyecto`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+INSERT INTO `o_proyectos` (`idproyecto`, `sec_func`, `programa`, `prod_pry`, `act_ai_obra`, `funcion`, `division_func`, `grupo_func`, `meta`, `finalidad`, `descripcion`) VALUES
+(1, '0', '0', '0', '0', '0', '0', '0', '0', '0', 'Genérico');
+
 -- --------------------------------------------------------
 
 --
@@ -415,6 +427,9 @@ CREATE TABLE IF NOT EXISTS `o_usuarios` (
   `idproyecto` int(4) NOT NULL,
   PRIMARY KEY (`iduser`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+INSERT INTO `o_usuarios` (`iduser`, `nombres`, `email`, `username`, `pwd`, `usertype`, `idarea`, `idproyecto`) VALUES
+(1, 'Administrador', 'admin@admin.com', 'admin', 'ea1602eced192386926dc117b95aa699', 1, 1, 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
