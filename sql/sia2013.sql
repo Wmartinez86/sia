@@ -434,3 +434,9 @@ INSERT INTO `o_usuarios` (`iduser`, `nombres`, `email`, `username`, `pwd`, `user
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+ALTER TABLE  `o_cuadrocomparativo` CHANGE  `monto`  `monto` NUMERIC( 19, 5 ) NOT NULL;
+ALTER TABLE  `o_preciocotizacion` CHANGE  `precio`  `precio` NUMERIC( 19, 5 ) NOT NULL;
+ALTER TABLE  `o_detalleordencompra` CHANGE  `precio`  `precio` DECIMAL( 19, 5 ) NOT NULL DEFAULT  '0.00';
+ALTER TABLE  `o_detalleordenservicio` CHANGE  `precio`  `precio` DECIMAL( 19, 5 ) NOT NULL DEFAULT  '0.00';
+ALTER TABLE  `o_detallenea` CHANGE  `precio`  `precio` DECIMAL( 19, 5 ) NOT NULL DEFAULT  '0.00';

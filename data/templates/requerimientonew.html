@@ -15,7 +15,7 @@
         </p>
         <p>
           <label for="fecha">Fecha:</label>
-          <input type="text" name="fecha" id="fecha" size="11" value="{if $req.fecha}{$req.fecha}{else}{$smarty.now|date_format:"%d/%m/%Y"}{/if}" class="required"  required="required" />
+          <input type="text" name="fecha" id="fecha" size="11" value="{if $req.fecha}{$req.fecha}{else}{$smarty.now|date_format:"%d/%m/%Y"}{/if}" class="required"   />
         </p>
         <p>
           <label for="glosa">Glosa</label>
@@ -42,9 +42,9 @@
           {if !$req.detalle}
           <tbody id="tbody">
             <tr id="firstr">
-              <td><input type="text" name="cantidad[]" size="10" maxlength="10" class="number required cantidad" title="*" required="required" /></td>
-              <td><input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" required="required" /></td>
-              <td><input type="text" name="descripcion[]" maxlength="255" size="97" class="required" title="*" required="required" /></td>
+              <td><input type="text" name="cantidad[]" size="10" maxlength="10" class="number required cantidad" title="*"  /></td>
+              <td><input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*"  /></td>
+              <td><input type="text" name="descripcion[]" maxlength="255" size="97" class="required" title="*"  /></td>
             </tr>
           </tbody>
         </table>
@@ -57,9 +57,9 @@
         {assign var="con" value=0}
         {section name=n loop=$req.detalle}
         <tr id="firstr">
-          <td><input type="text" name="cantidad[]" size="10" maxlength="10" class="number required cantidad" title="*" value="{$req.detalle[n].cantidad}" required="required" /></td>
-          <td><input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" value="{$req.detalle[n].umedida}" required="required" /></td>
-          <td><input type="text" name="descripcion[]" maxlength="255" size="50" class="required" title="*" value="{$req.detalle[n].descripcion|escape:"html"}" required="required" /></td>
+          <td><input type="text" name="cantidad[]" size="10" maxlength="10" class="number required cantidad" title="*" value="{$req.detalle[n].cantidad}"  /></td>
+          <td><input type="text" name="umedida[]" size="3" maxlength="3" class="required umedida" title="*" value="{$req.detalle[n].umedida}"  /></td>
+          <td><input type="text" name="descripcion[]" maxlength="255" size="50" class="required" title="*" value="{$req.detalle[n].descripcion|escape:"html"}"  /></td>
           <td> {if !$nodel}
             {if $req.status!=3} <a href="borrar-detalle-requerimiento.php?iddetalle={$req.detalle[n].iddetalle}&amp;idreq={$req.idreq}" class="ddetalle">Borrar</a> {else}con C.C.{/if}                                     
             {/if}

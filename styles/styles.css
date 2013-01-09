@@ -111,7 +111,7 @@ html ul.i-tabs li.active-tab, html ul.i-tabs li.active-tab a:hover  {
     width: 90%;  
     background: #fff;  
     margin-bottom: 10px;
-    padding-bottom: 20px;
+    padding-bottom: 0 20px;
 }
 
 .i-tab-content {  

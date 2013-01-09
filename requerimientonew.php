@@ -21,7 +21,6 @@ if(isset($_GET['activate'])) {
 	exit();
 }
 
-
 if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 	if ( validate_required(array(
 		'Nro. de Requerimiento' => $_POST['codigo']))) {

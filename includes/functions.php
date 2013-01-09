@@ -78,6 +78,7 @@ function insert_update_query ($table, $params) {
 			);
 		
 		if (!empty($query))
+      print $query;
 			return $query;
 	}
 	return false;
