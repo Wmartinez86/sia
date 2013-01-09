@@ -75,5 +75,12 @@ window.olark||(function(c){var f=window,d=document,l=f.location.protocol=="https
 /* custom configuration goes here (www.olark.com/documentation) */
 olark.identify('2782-671-10-7544');/*]]>{/literal}*/</script>
 <!-- end olark code -->
+{if $loginuser}
+<script type="text/javascript">
+  olark('api.chat.updateVisitorNickname', {ldelim}
+      snippet: "{$loginuser.nombres} ({$loginuser.username})"
+  {rdelim});
+</script>
+{/if}
 </body>
 </html>
