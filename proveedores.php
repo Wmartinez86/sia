@@ -72,8 +72,8 @@ if (!isset($_GET['print'])) :
 				'email' => $_POST['email'],
 				'ruc' => $_POST['ruc']
 			);
-			$prov_values['razonsocial']=ucwords(mb_strtolower($prov_values['razonsocial'], 'UTF-8'));
-			$prov_values['direccion']=ucwords(mb_strtolower($prov_values['direccion'], 'UTF-8'));
+			$prov_values['razonsocial']=$prov_values['razonsocial'];
+			$prov_values['direccion']=$prov_values['direccion'];
 			$prov_values = array_map('strip_tags', $prov_values);
 			
 			$id = save_prov($idproveedor, $prov_values);

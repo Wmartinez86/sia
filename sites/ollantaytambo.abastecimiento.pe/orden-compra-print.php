@@ -24,7 +24,7 @@ $cliente=($orden['proveedor']['razonsocial'])."  ";
 $ruc1=$orden['proveedor']['ruc'];
 $dir=substr(utf8_decode($orden['proveedor']['direccion']),0,70);
 $telefono=utf8_decode($orden['proveedor']['telefono']);
-$ref=ucwords(mb_strtolower(substr(utf8_decode($orden['doc']['nombre']."-".$orden['nrodoc']),0,92)));
+$ref=substr(utf8_decode($orden['doc']['nombre']."-".$orden['nrodoc']),0,92);
 $fact=utf8_decode($orden['facturarto']);
 $fatruc=$orden['fruc'];
 

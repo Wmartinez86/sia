@@ -125,7 +125,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 
 				$detalle_values[$k]['umedida'] = $_POST['umedida'][$k];
 
-				$detalle_values[$k]['descripcion'] = ucwords(mb_strtolower($_POST['descripcion'][$k], 'UTF-8'));
+				$detalle_values[$k]['descripcion'] = $_POST['descripcion'][$k];
 
 				$detalle_values[$k]['precio'] = $_POST['precio'][$k];
 
