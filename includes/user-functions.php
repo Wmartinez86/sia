@@ -71,7 +71,8 @@ function save_user($iduser, $user_values) {
 	}
 	
 	if ( $iduser && get_user($iduser) ) {
-		unset($user_values['username']); // We don't want someone 'accidentally' update username
+		//unset($user_values['username']);
+    //// We don't want someone 'accidentally' update username
 	}		
 	
 	$user_values['iduser'] = $iduser;
