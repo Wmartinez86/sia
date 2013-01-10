@@ -16,7 +16,7 @@
     </p>
     <p>
       <label for="username" title="Nombre de Usuario">Usuario:</label>
-      <input type="text" name="username" id="username" maxlength="100" size="40" value="{$user.username}" class="required" required="required" title="Ingresa el nombre de usuario" {if $user.username!=""}readonly="readonly"{/if} />
+      <input type="text" name="username" id="username" maxlength="100" size="40" value="{$user.username}" class="required" required="required" title="Ingresa el nombre de usuario" {if $user.username!=""}{/if} />
     </p>
     <p>
       <label for="pwd">Contraseña:</label>
