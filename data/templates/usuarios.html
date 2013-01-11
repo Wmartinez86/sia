@@ -77,7 +77,8 @@
     <tr>
       <th>Usuario</th>
       <th>Nombres</th>
-      <th>E-mail</th>
+      <th>Área</th>
+      <th>Proyecto</th>
       <th>Rango</th>
     </tr>
   </thead>
@@ -90,7 +91,8 @@
     <th>{$users[n].username}</th>
     {/if}
     <td>{$users[n].nombres}</td>
-    <td>{$users[n].email}</td>
+    <td>{$users[n].area.nombre}</td>
+    <td>sec_func: {$users[n].proyecto.sec_func} {$users[n].proyecto.descripcion}</td>
     <td>{$users[n].rango}</td>
   </tr>
   {sectionelse}
