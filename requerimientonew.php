@@ -48,6 +48,9 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 			foreach($_POST['iddetalle'] as $k=>$v) {
 				$detalle_values[$k]['iddetalle'] = $_POST['iddetalle'][$k];
 			}
+      if($idreq != 0) {
+        unset($req_values['createdby']);
+      }
 			save_requerimiento($idreq, $req_values);
 			save_detalle_req($idreq, $detalle_values);
 		}else{
