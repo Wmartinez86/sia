@@ -10,7 +10,7 @@ function get_cotizaciones () {
 	global $bcdb, $bcrs, $pager;	
 	$sql = "SELECT * 
 			FROM $bcdb->cotizacion
-			ORDER BY idcot DESC";
+			ORDER BY codigo * 1 DESC";
 	$cotizaciones = ($pager) ? $bcrs->get_results($sql) : $bcdb->get_results($sql);
 	return $cotizaciones;
 }
