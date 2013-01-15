@@ -11,7 +11,11 @@
         <legend>Datos de la Requerimiento</legend>
         <p>
           <label for="codigo">Nro. de Req:</label>
+          {if $loginuser.usertype==1}
+          <input type="text" name="codigo" id="codigo" value="{if $req.codigo}{$req.codigo|escape:"html"}{else}{$codgen}{/if}" maxlength="10" class="required" />
+          {else}
           <input type="text" name="codigo" id="codigo" value="{if $req.codigo}{$req.codigo|escape:"html"}{else}{$codgen}{/if}" maxlength="10" class="required" readonly="readonly" />
+          {/if}
         </p>
         <p>
           <label for="fecha">Fecha:</label>
