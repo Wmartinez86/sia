@@ -27,7 +27,8 @@
         <p>
           <label for="tipocontrata">Tipo de <abbr title="Contratación">Contrat.</abbr>:</label>
           <select name="tipocontrata" id="tipocontrata">
-            {html_options options=$aordenes}
+            <option value="c"{if}{$cot.tipocompra == "c"}selected="selected"{/if}>Orden de Compra</option>
+            <option value="o"{if}{$cot.tipocompra == "o"}selected="selected"{/if}>Orden de Servicio</option>
           </select>
         </p>
         <p>
