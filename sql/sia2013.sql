@@ -386,7 +386,7 @@ CREATE TABLE IF NOT EXISTS `o_proyectos` (
   `division_func` varchar(3) NOT NULL,
   `grupo_func` varchar(4) NOT NULL,
   `meta` varchar(5) NOT NULL,
-  `finalidad` varchar(5) NOT NULL,
+  `finalidad` varchar(7) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
   PRIMARY KEY (`idproyecto`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
