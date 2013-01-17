@@ -83,6 +83,7 @@ if($postback) {
             $objPHPExcel->getActiveSheet()->setCellValue('H1', 'Fecha');
             $objPHPExcel->getActiveSheet()->setCellValue('I1', 'Creado por');
             $objPHPExcel->getActiveSheet()->setCellValue('J1', 'Total');
+            $objPHPExcel->getActiveSheet()->setCellValue('F1', 'Total');
             
             
             $counter = 2;
@@ -98,6 +99,7 @@ if($postback) {
                     $objPHPExcel->getActiveSheet()->setCellValue(sprintf('H%s', $counter), $orden['fecha']);
                     $objPHPExcel->getActiveSheet()->setCellValue(sprintf('I%s', $counter), $orden['usuario']['username']);
                     $objPHPExcel->getActiveSheet()->setCellValue(sprintf('J%s', $counter), $orden['stotal']);
+                    $objPHPExcel->getActiveSheet()->setCellValue(sprintf('F%s', $counter), $orden['fecha']);
                     $counter++;
                 }
             }
@@ -113,8 +115,9 @@ if($postback) {
             $objPHPExcel->getActiveSheet()->getStyle('H1')->getFont()->setBold(true);
             $objPHPExcel->getActiveSheet()->getStyle('I1')->getFont()->setBold(true);
             $objPHPExcel->getActiveSheet()->getStyle('J1')->getFont()->setBold(true);
+            $objPHPExcel->getActiveSheet()->getStyle('K1')->getFont()->setBold(true);
             
-            $objPHPExcel->getActiveSheet()->setAutoFilter(sprintf('A1:J%s', $counter));	// Always include the complete filter range!
+            $objPHPExcel->getActiveSheet()->setAutoFilter(sprintf('A1:K%s', $counter));	// Always include the complete filter range!
 
             // Rename sheet
             $objPHPExcel->getActiveSheet()->setTitle('Ordenes');

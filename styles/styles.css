@@ -168,3 +168,11 @@ html ul.i-tabs li.active-tab, html ul.i-tabs li.active-tab a:hover  {
 .error { border: 1px solid #b05164; background: #ecd3d8; color: #b05164; padding: 1px 10px; margin: 0 5px;}
 .nota {font-size: 90%;}
 .submit { margin: 10px;}
+.clear {
+  clear: both;
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}

@@ -70,6 +70,7 @@ if(isset($_GET['excel'])) {
   $objPHPExcel->getActiveSheet()->setCellValue('H1', 'Proyecto');
   $objPHPExcel->getActiveSheet()->setCellValue('I1', 'Proveedor');
   $objPHPExcel->getActiveSheet()->setCellValue('J1', 'RUC Proveedor');
+  $objPHPExcel->getActiveSheet()->setCellValue('K1', 'Fecha');
 
 
   $counter = 2;
@@ -86,6 +87,7 @@ if(isset($_GET['excel'])) {
           $objPHPExcel->getActiveSheet()->setCellValue(sprintf('H%s', $counter), $orden['proyecto']['descripcion']);
           $objPHPExcel->getActiveSheet()->setCellValue(sprintf('I%s', $counter), $orden['proveedor']['razonsocial']);
           $objPHPExcel->getActiveSheet()->setCellValue(sprintf('J%s', $counter), $orden['proveedor']['ruc']);
+          $objPHPExcel->getActiveSheet()->setCellValue(sprintf('K%s', $counter), $orden['fecha']);
           $counter++;
         }
       }
@@ -102,8 +104,9 @@ if(isset($_GET['excel'])) {
   $objPHPExcel->getActiveSheet()->getStyle('H1')->getFont()->setBold(true);
   $objPHPExcel->getActiveSheet()->getStyle('I1')->getFont()->setBold(true);
   $objPHPExcel->getActiveSheet()->getStyle('J1')->getFont()->setBold(true);
+  $objPHPExcel->getActiveSheet()->getStyle('K1')->getFont()->setBold(true);
 
-  $objPHPExcel->getActiveSheet()->setAutoFilter(sprintf('A1:J%s', $counter));	// Always include the complete filter range!
+  $objPHPExcel->getActiveSheet()->setAutoFilter(sprintf('A1:K%s', $counter));	// Always include the complete filter range!
 
   // Rename sheet
   $objPHPExcel->getActiveSheet()->setTitle('Ordenes Servicio');
