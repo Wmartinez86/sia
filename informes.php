@@ -83,7 +83,7 @@ if($postback) {
             $objPHPExcel->getActiveSheet()->setCellValue('H1', 'Fecha');
             $objPHPExcel->getActiveSheet()->setCellValue('I1', 'Creado por');
             $objPHPExcel->getActiveSheet()->setCellValue('J1', 'Total');
-            $objPHPExcel->getActiveSheet()->setCellValue('F1', 'Total');
+            $objPHPExcel->getActiveSheet()->setCellValue('K1', 'Fecha');
             
             
             $counter = 2;
@@ -99,7 +99,7 @@ if($postback) {
                     $objPHPExcel->getActiveSheet()->setCellValue(sprintf('H%s', $counter), $orden['fecha']);
                     $objPHPExcel->getActiveSheet()->setCellValue(sprintf('I%s', $counter), $orden['usuario']['username']);
                     $objPHPExcel->getActiveSheet()->setCellValue(sprintf('J%s', $counter), $orden['stotal']);
-                    $objPHPExcel->getActiveSheet()->setCellValue(sprintf('F%s', $counter), $orden['fecha']);
+                    $objPHPExcel->getActiveSheet()->setCellValue(sprintf('K%s', $counter), $orden['fecha']);
                     $counter++;
                 }
             }
