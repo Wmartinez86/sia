@@ -1,0 +1,64 @@
+<script type="text/javascript" src="{$scriptsurl}acciones/lista-detalle.js"></script>
+<h2>Lista de Órdenes de Compra <span class="options">[<a href="orden-compra.php" class="goto">Añadir Orden de Compra</a> | <a href="orden-compra-lista.php" class="goto">Ver lista simple</a>]</span></h2>
+
+<table class="tabla" id="data-table">
+  <thead>
+    <tr>
+      <th class="codigo">Código</th>
+      <th>Referencia</th>
+      <th>Proyecto</th>
+      <th>Proveedor</th>
+      <th>Monto S/.</th>
+      <th>Fecha</th>
+      <th>Creado por</th>
+      <th class="no_sort">Acciones</th>
+      <th class="no_sort">Acciones</th>
+      <th class="no_sort">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  {section name=n loop=$ordenes}
+  <tr class="{cycle values="even, odd"}{if $ordenes[n].status==2} cancelled{/if}">
+    <th class="codigo"><abbr title="Orden de Compra">O/C</abbr>{$ordenes[n].codigo}</th>
+    <td>{$ordenes[n].doc.nombre}: {$ordenes[n].nrodoc}</td>
+    <td>{$ordenes[n].proyecto.descripcion}</td>
+    <td>{$ordenes[n].proveedor.razonsocial}<br />RUC: {$ordenes[n].proveedor.ruc}</td>
+    <td>{$ordenes[n].stotal|number_format:2:",":"."}</td>
+    <td>{$ordenes[n].fecha}</td>
+    <td>{$ordenes[n].usuario.username}</td>
+    {if $ordenes[n].status == 3}
+    <th>Ingresado a Almacén</th>
+    <th>Ingresado a Almacén</th>
+    {else}
+    <th><a href="orden-compra.php?idorden={$ordenes[n].idorden}">Modificar</a></th>
+    {/if}
+    {if $loginuser.usertype==1}
+    {if $ordenes[n].status==1}
+    <th><a href="orden-compra.php?cancel&amp;idorden={$ordenes[n].idorden}" class="cancelorder">Cancelar Orden</a></th>
+    {elseif $ordenes[n].status == 3}
+    {else}
+    <th><a href="orden-compra.php?activate&amp;idorden={$ordenes[n].idorden}" class="activateorder">Activar Orden</a></th>
+    {/if}
+    {/if}
+    <th>
+        <a href="orden-compra-print.php?idorden={$ordenes[n].idorden}">Imprimir</a>
+        {if $memo}
+        | <a href="memo-compra-print.php?idorden={$ordenes[n].idorden}" title="Imprimir Memorandum">Imp. Mem.</a>
+        {/if}
+    </th>
+  </tr>
+  {sectionelse}
+  <tr>
+    <td colspan="8">No existen datos.</td>
+  </tr>
+  {/section}
+  </tbody>
+  
+</table>
+<div class="clear"></div>
+<p class="msg">Las ordenes <span class="cancelmsg">tachadas y con rojo</span> son órdenes canceladas.</p>
+{include file="paginator.html"} 
+<script type="text/javascript" src="{$scriptsurl}datatables/media/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="{$scriptsurl}acciones/datatables.js"></script>
+<link rel="stylesheet" type="text/css" href="{$scriptsurl}datatables/media/css/sia.css" />

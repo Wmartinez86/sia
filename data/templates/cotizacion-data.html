@@ -1,0 +1,80 @@
+<script type="text/javascript" src="{$scriptsurl}acciones/lista-cotizacion.js"></script>
+<script type="text/javascript" src="{$scriptsurl}acciones/lista-detalle.js"></script>
+<h2>Lista de Cotizaciones <span class="options">[<a href="cotizacionnew.php" class="goto">Añadir Cotización</a> | <a href="cotizacion-lista.php">Ver lista simple</a>]</span></h2>
+<table class="tabla" id="data-table">
+  <thead>
+    <tr>
+      <th class="codigo">Nro</th>
+      <th>Tipo</th>
+      <th>Referencia</th>
+      <th>Fecha</th>
+      <th>Autor</th>
+      <th class="no_sort">Ver</th>
+      <th class="no_sort">Ver</th>
+      <th class="no_sort">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  {section name=n loop=$cotizaciones}
+    <tr class="{cycle values="even, odd"}{if $cotizaciones[n].status==2} cancelled{/if}{if $cotizaciones[n].status == 3} crea-orden{/if}">
+      <th class="codigo">{$cotizaciones[n].codigo}</th>
+      <td>{if $cotizaciones[n].tipocontrata == 'o'}
+        Servicios
+        {else}
+        Bienes
+        {/if}</td>
+      <td>{$cotizaciones[n].referencia} </td>
+      <td>{$cotizaciones[n].fecha}</td>
+      <td>{$cotizaciones[n].usuario.username}</td>
+      <th><a href="cotizacionnew.php?idcot={$cotizaciones[n].idcot}">Modificar</a></th>
+      <th><a href="cotizacion-print.php?idcot={$cotizaciones[n].idcot}">Imprimir</a></th>
+      <th> <select name="action[]" class="actions" id="action-{$cotizaciones[n].idcot}">
+          <option value="--">Escoja una opción</option>
+          <option value="ecc">Elaborar Cuadro Comparativo</option>
+          
+              {if $cotizaciones[n].status==1}
+              
+          <option value="cancelar">Cancelar</option>
+          
+              {else}{if $cotizaciones[n].status==2}
+              
+          <option value="activar">Activar</option>
+          
+              {else}
+              
+          <option value="imprimir">Imprimir Cuadro Comparativo</option>
+          
+              {if $cotizaciones[n].tipocontrata == 'o'}
+              
+          <option value="os">Elaborar Orden</option>
+          
+              {else}
+              
+          <option value="oc">Elaborar Orden</option>
+          
+              {/if}
+              {/if}
+  		    {/if}
+          
+        </select>
+      </th>
+  </tr>
+  {sectionelse}
+  <tr>
+    <td colspan="10">No existen datos.</td>
+  </tr>
+  {/section}
+    </tbody>
+  
+</table>
+<div class="clear"></div>
+<div class="msg">
+  <ul>
+    <li>Las cotizaciones <span class="crea-orden">naranjas</span> son cotizaciones que ya tienen cuadro comparativo.</li>
+    <li>Las cotizaciones <span class="cancelmsg">tachadas y con rojo</span> son cotizaciones canceladas.</li>
+  </ul>
+</div>
+<script type="text/javascript" src="{$scriptsurl}datatables/media/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="{$scriptsurl}acciones/datatables.js"></script>
+<link rel="stylesheet" type="text/css" href="{$scriptsurl}datatables/media/css/sia.css" />

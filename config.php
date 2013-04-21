@@ -23,6 +23,7 @@ define('ORDEN_ACTIVA', 1);
 define('ORDEN_CANCELADA', 2);
 define('ORDEN_CONGELADA', 3);
 
+ini_set('display_errors', 'On');
 error_reporting(E_ALL);
 
 setlocale(LC_TIME, 'esp_PER');

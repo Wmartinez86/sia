@@ -1,0 +1,53 @@
+<script type="text/javascript" src="{$scriptsurl}acciones/lista-detalle.js"></script>
+<h2>Lista de Órdenes de Servicio <span class="options">[<a href="orden-servicio.php" class="goto">Añadir Orden de Servicio</a> | <a href="orden-servicio-lista.php" class="goto">Ver lista normal</a>]</span></h2>
+<table class="tabla" id="data-table">
+  <thead>
+    <tr>
+      <th class="codigo">Código</th>
+      <th>Referencia</th>
+      <th>Proyecto</th>
+      <th>Proveedor</th>
+      <th>Fecha</th>
+      <th>Creado por</th>
+      <th class="no_sort">Acciones</th>
+      <th class="no_sort">Acciones</th>
+      <th class="no_sort">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  {section name=n loop=$ordenes}
+  <tr class="{cycle values="even, odd"}{if $ordenes[n].status==2} cancelled{/if}">
+    <th class="codigo"><abbr title="Orden de Servicio">O/S</abbr> {$ordenes[n].codigo}</th>
+    <td>{$ordenes[n].doc.nombre}: {$ordenes[n].nrodoc}</td>
+    <td>{$ordenes[n].proyecto.descripcion}</td>
+    <td>{$ordenes[n].proveedor.razonsocial}<br />RUC: {$ordenes[n].proveedor.ruc}</td>
+    <td>{$ordenes[n].fecha}</td>
+    <td>{$ordenes[n].usuario.username}</td>
+    <th><a href="orden-servicio.php?idorden={$ordenes[n].idorden}">Modificar</a></th>
+    {if $loginuser.usertype==1}
+    {if $ordenes[n].status==1}
+    <th><a href="orden-servicio.php?cancel&amp;idorden={$ordenes[n].idorden}" class="cancelorder">Cancelar Orden</a></th>
+    {else}
+    <th><a href="orden-servicio.php?activate&amp;idorden={$ordenes[n].idorden}" class="activateorder">Activar Orden</a></th>
+    {/if}
+    {/if}
+    <th>
+        <a href="orden-servicio-print.php?idorden={$ordenes[n].idorden}">Imprimir</a>
+        {if $memo}
+        | <a href="memo-servicio-print.php?idorden={$ordenes[n].idorden}" title="Imprimir Memorandum">Imp. Mem.</a>
+        {/if}
+    </th>
+  </tr>
+  {sectionelse}
+  <tr>
+    <td colspan="8">No existen datos.</td>
+  </tr>
+  {/section}
+  </tbody>
+  
+</table>
+<p class="msg">Las ordenes <span class="cancelmsg">tachadas y con rojo</span> son órdenes canceladas.</p>
+<script type="text/javascript" src="{$scriptsurl}datatables/media/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="{$scriptsurl}acciones/datatables.js"></script>
+<link rel="stylesheet" type="text/css" href="{$scriptsurl}datatables/media/css/sia.css" />

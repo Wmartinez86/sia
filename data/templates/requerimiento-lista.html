@@ -1,5 +1,5 @@
 <script type="text/javascript" src="{$scriptsurl}acciones/lista-detalle.js"></script>
-<h2>Lista de Requerimientos <span class="options">[<a href="requerimientonew.php" class="goto">Añadir Requerimiento</a>{if $buscado=="buscado" } | <a href="requerimiento-lista.php" class="goto">Ver Todos</a>{/if}]</span></h2>
+<h2>Lista de Requerimientos <span class="options">[<a href="requerimientonew.php" class="goto">Añadir Requerimiento</a>{if $buscado=="buscado" } | <a href="requerimiento-lista.php" class="goto">Ver Todos</a>{/if} | <a href="requerimiento-data.php" class="new">Ver lista avanzada</a> <sup>!Nuevo¡</sup>]</span></h2>
 <ul class="i-tabs">
   {if $loginuser.usertype==1}
   <li><a href="#i-admin">Buscar por datos</a></li>
@@ -86,7 +86,7 @@
     <td>{$requerimientos[n].usuario.nombres}</td>
     <td>{$requerimientos[n].usuario.area.nombre}</td>
     <td>sec_fun={$requerimientos[n].usuario.proyecto.sec_func} | {$requerimientos[n].usuario.proyecto.descripcion}</td>
-    <th><a href="requerimientonew.php?idreq={$requerimientos[n].idreq}">Modificar</a></th>
+    <th><a href="requerimientonew.php?idreq={$requerimientos[n].idreq}">Ver/Modificar</a></th>
     <th><a href="requerimiento-print.php?idreq={$requerimientos[n].idreq}">Imprimir</a></th>
     {if $loginuser.usertype==1}
     <th><a href="cotizacionnew.php?create&amp;idreq={$requerimientos[n].idreq}">Crear Cotización</a></th>

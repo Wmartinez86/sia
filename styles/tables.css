@@ -1,7 +1,7 @@
 table.tabla  {
 	padding: 0;
 	margin: 0;
-        width: 90%;
+    width: 90%;
 }
 
 .tabla thead th {
@@ -79,4 +79,8 @@ table.tabla  {
 }
 .tabla tbody tr:hover th.show-branch {
     background: url(../images/icon-more.png) no-repeat center !important;
+}
+
+.tabla .codigo {
+	width: 70px !important;
 }

@@ -1,0 +1,37 @@
+<script type="text/javascript" src="{$scriptsurl}scripts/common.php?param=lista"></script>
+<h2>Lista de Órdenes de Compra  <span class="options">[<a href="nea-orden.php" class="goto">Ver lista simple</a>]</span></h2>
+<table class="tabla" id="data-table">
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th>Referencia</th>
+      <th>Proyecto</th>
+      <th>Fecha</th>
+      <th class="no_sort">Acciones</th>
+      <th class="no_sort">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  {section name=n loop=$ordenes}
+  <tr class="{cycle values="even, odd"}{if $ordenes[n].status==2} cancelled{/if}">
+    <th><abbr title="Orden de Compra">O/C</abbr>{$ordenes[n].codigo}</th>
+    <td>{$ordenes[n].doc.nombre}: {$ordenes[n].nrodoc}</td>
+    <td>{$ordenes[n].proyecto.descripcion}</td>
+    <td>{$ordenes[n].fecha}</td>
+    <th style="text-wrap: avoid;"><a href="orden-compra-print.php?idorden={$ordenes[n].idorden}">Imprimir</a></th>
+    <th style="text-wrap: avoid;"><a href="almacen.php?idorden={$ordenes[n].idorden}">Ingresar al almacén</a></th>
+  </tr>
+  {sectionelse}
+  <tr>
+    <td colspan="5">No existen datos.</td>
+  </tr>
+  {/section}
+  </tbody>
+  
+</table>
+<div class="clear"></div>
+<p class="msg">Las ordenes <span class="cancelmsg">tachadas y con rojo</span> son órdenes canceladas.</p>
+<script type="text/javascript" src="{$scriptsurl}datatables/media/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="{$scriptsurl}acciones/datatables.js"></script>
+<link rel="stylesheet" type="text/css" href="{$scriptsurl}datatables/media/css/sia.css" />

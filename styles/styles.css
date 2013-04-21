@@ -5,6 +5,11 @@
   font-size: 70%;
 }
 
+.options sup {
+    font-size: 11px;
+    color: red;
+}
+
 input[readonly="readonly"] {
 	border: 0;
 }

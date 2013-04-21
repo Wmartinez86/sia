@@ -1,0 +1,42 @@
+<script type="text/javascript" src="{$scriptsurl}acciones/lista-detalle.js"></script>
+<script type="text/javascript" src="{$scriptsurl}acciones/lista-nea.js"></script>
+<h2>Notas de Entrada de Almacén  <span class="options">[<a href="nea-orden.php">Ingresar productos por orden de compra</a> | <a href="almacen.php">Ingresar productos</a> | <a href="almacen-lista.php" class="new">Ver lista simple</a>]</span></h2>
+<table class="tabla" id="data-table">
+  <thead>
+    <tr>
+      <th class="codigo">Código</th>
+      <th>Procedencia</th>
+      <th>Fecha</th>
+      <th>Creado por</th>
+      <th class="no_sort">Acciones</th>
+      <th class="no_sort">Acciones</th>
+      <th class="no_sort">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  {section name=n loop=$neas}
+  <tr class="{cycle values="even, odd"}">
+    <th class="codigo">{$neas[n].codigo}</th>
+    <td>{$neas[n].procedencia}</td>
+    <td>{$neas[n].fecha}</td>
+    <td>{$neas[n].usuario.username}</td>
+    <th><a href="almacen.php?idnea={$neas[n].idnea}">Modificar</a></th>
+    {if !$neas[n].hasalido}
+    <th><a href="almacen.php?cancel&amp;idnea={$neas[n].idnea}" class="cancel-nea">Cancelar</a></th>
+    {else}
+    <th>Tiene salidas</th>
+    {/if}
+    <th><a href="nea-print.php?idnea={$neas[n].idnea}">Imprimir</a></th>
+  </tr>
+  {sectionelse}
+  <tr>
+    <td colspan="6">No existen datos.</td>
+  </tr>
+  {/section}
+  </tbody>
+  
+</table>
+<script type="text/javascript" src="{$scriptsurl}datatables/media/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="{$scriptsurl}acciones/datatables.js"></script>
+<link rel="stylesheet" type="text/css" href="{$scriptsurl}datatables/media/css/sia.css" />
