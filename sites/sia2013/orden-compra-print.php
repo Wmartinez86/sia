@@ -233,7 +233,7 @@ $noty=36;
 $notz=8;
 $notw=9;
 $pdf->addText($notx,$noty+$notw*8,$notz,"<b>NOTA :</b> Esta orden es NULA sin la firma del ");
-$pdf->addText($notx,$noty+$notw*7,$notz,"Jefe de Abastecimiento");
+$pdf->addText($notx,$noty+$notw*7,$notz,"Gerente y Jefe de Abastecimiento");
 $pdf->addText($notx,$noty+$notw*5,$notz,"Cada Orden de compra se debe facturar por ");
 $pdf->addText($notx,$noty+$notw*4,$notz,"separado en Original y tres (3) copias y ");
 $pdf->addText($notx,$noty+$notw*3,$notz,utf8_decode("remitirlas a la Dirección de Presupuestos."));
@@ -257,7 +257,7 @@ $pdf->addText($prex,$prey+60,$prez,"<b>Sec_Func :</b><i>".$sec_func."</i>");
 $pdf->addText($prex,$prey+48,$prez,"<b>Fte_Fto :</b><i>".$fte."</i>");
 $pdf->addText($prex,$prey+36,$prez,"<b>Cad_Func :</b><i>".$cad_fun."</i>");
 $pdf->addText($prex,$prey+24,$prez,"<b>Destino :</b><i>".$destino."</i>");
-$pdf->addText($prex,$prey+12,$prez,"<b>Meta :</b><i>".substr($descripcion,0,50)."-</i>");
+$pdf->addText($prex,$prey+12,$prez,"<b>Finalidad :</b><i>".substr($descripcion,0,50)."-</i>");
 $pdf->addText($prex,$prey,$prez,"".substr($descripcion,50,65).".</i>");
 // SIAF expediente
 $pez=9;
@@ -338,6 +338,7 @@ $xi=$xi+1;
 $pdf->ezSetDy(-200);
 
 }
+
 $pdf->ezStream();
 }else{
 $smarty->display ('error.html');

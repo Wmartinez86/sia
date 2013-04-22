@@ -113,22 +113,18 @@ $yi=0;
 				}
 			}
 			$inde=$inde+1;			
-			
 			$datadet[$xi][] = array('items'=>$items,'cant'=>$cant,'und'=>$und,'detalle'=>utf8_decode($detalle),
 					'punit1'=>$punit1,'ptotal1'=>$ptotal1,
 					'punit2'=>$punit2,'ptotal2'=>$ptotal2,
 					'punit3'=>$punit3,'ptotal3'=>$ptotal3);
 		}
-			if ($inde>$rowsdif-1){
-					$total1=number_format($total1, 2, ".", ",");
-					$total2=number_format($total2, 2, ".", ",");
-					$total3=number_format($total3, 2, ".", ",");
-				$datadet[$xi][] = array('items'=>"",'cant'=>"",'und'=>"",'detalle'=>"",
-					'punit1'=>"<b>TOTAL</b>",'ptotal1'=>$total1,
-					'punit2'=>"<b>TOTAL</b>",'ptotal2'=>$total2,
-					'punit3'=>"<b>TOTAL</b>",'ptotal3'=>$total3);
-		}
-		$newdata = $datadet[$xi];
+                        if ($inde>$rowsdif-1){
+                                $datadet[$xi][] = array('items'=>"",'cant'=>"",'und'=>"",'detalle'=>"",
+                                        'punit1'=>"<b>TOTAL</b>",'ptotal1'=>number_format($total1,2, ".", ","),
+                                        'punit2'=>"<b>TOTAL</b>",'ptotal2'=>number_format($total2,2, ".", ","),
+                                        'punit3'=>"<b>TOTAL</b>",'ptotal3'=>number_format($total3,2, ".", ","));
+                }
+                $newdata = $datadet[$xi];
 	//HOJAS	
 	$clix=256;
 	$cliy=548;
@@ -165,11 +161,11 @@ $yi=0;
 	$ty=109;
 	$tf=9;
 	$pdf->addText($tx+6,$ty+355,$tf,"<b>Fecha: </b><i>".$cuadro['fecha']."</i>");
-	$pdf->addText($tx+6,$ty+340,$tf,utf8_decode("<b>Cotizaci贸n Nro: </b><i>".$cot['codigo']."</i>"));
+	$pdf->addText($tx+6,$ty+340,$tf,utf8_decode("<b>Cotizaci髇 Nro: </b><i>".$cot['codigo']."</i>"));
 	$pdf->addText($tx+6,$ty+325,$tf,"<b>Referencia: </b><i>".substr(utf8_decode($cot['referencia']),0,40)."</i>");
-	$pdf->addText($tx+6,$ty+310,$tf,utf8_decode("<b>Cotizaci贸n elaborada el: </b><i>".$cot['fecha']."</i>"));
+	$pdf->addText($tx+6,$ty+310,$tf,utf8_decode("<b>Cotizaci髇 elaborada el: </b><i>".$cot['fecha']."</i>"));
 	
-	$pdf->addText($tx+256,$ty+358,$tf,utf8_decode("<b>Nombre o Raz贸n Social:</b>"));
+	$pdf->addText($tx+256,$ty+358,$tf,utf8_decode("<b>Nombre o Raz髇 Social:</b>"));
 	$pdf->addText($tx+286,$ty+325,$tf,"<b>Plazo de Entrega:</b>");
 	$pdf->addText($tx+322,$ty+309,$tf,"<b>Nro de RUC:</b>");
 
@@ -183,7 +179,7 @@ $yi=0;
 	$pdf->addText(19,$dy,$df,"<b>Items</b>");
 	$pdf->addText(65,$dy,$df,"<b>Cant.</b>");
 	$pdf->addText(110,$dy,$df,"<b>U.Med</b>");
-	$pdf->addText(240,$dy,$df,utf8_decode("<b>Descripci贸n</b>"));
+	$pdf->addText(240,$dy,$df,utf8_decode("<b>Descripci髇</b>"));
 	
 	$pdf->addText(695,$dy,$df,"<b>Unit.</b>");
 	$pdf->addText(760,$dy,$df,"<b>Total</b>");
@@ -266,13 +262,16 @@ $yi=0;
 	$pdf->addText($dpx+276,$dpy+39,$df,$p3[0]);
 	$pdf->addText($dpx+276,$dpy+27,$df,$p3[1]);
 	$pdf->addText($dpx+276,$dpy+15,$df,$p3[2]);
-	
 		$pdf->ezSetDy(-212);
 		$pdf->ezTable($newdata,$tdet,'',$opdet);	
-	$pdf->setStrokeColor(0,0,0);
-	$pdf->setLineStyle(0.5);
 
-
+	$clix=140;
+	$cliy=130;
+	$cliz=9;
+	$pdf->addText($clix+20,$cliy-120,$cliz,"Firma de Abastecimiento");
+	$pdf->line($clix+10,$cliy-110,$clix+128,$cliy-110);
+	$pdf->addText($clix+245,$cliy-120,$cliz,"Firma de Cotizador");
+	$pdf->line($clix+240,$cliy-110,$clix+345,$cliy-110);
 	if ($inde>$rowsdif-1){
 		$bandera=false;
 		}
@@ -339,15 +338,15 @@ $yi=0;
 */
 	
 $cadenasa = <<<EOD
-En la $entidad, siendo el d铆a $fecha se reunieron $firmara para la apertura de sobres, evaluacion de propuestas y otorgamiento de la buena Pro, del estudio de Mercado segun la cotizacion nro. $cotizacion. teniendo como referencia el Requerimiento $ref . 
+En la $entidad, siendo el d韆 $fecha se reunieron $firmara para la apertura de sobres, evaluacion de propuestas y otorgamiento de la buena Pro, del estudio de Mercado segun la cotizacion nro. $cotizacion. teniendo como referencia el Requerimiento $ref . 
 
-Acto seguido se procede a la apertura de propuestas de las empresas a quienes se les hizo la invitaci贸n correspondiente, y quienes remitieron en sobres cerrados:
+Acto seguido se procede a la apertura de propuestas de las empresas a quienes se les hizo la invitaci髇 correspondiente, y quienes remitieron en sobres cerrados:
 
-1.- $prov1[1] con N煤mero de RUC $prov1[2]
-2.- $prov1[4] con N煤mero de RUC $prov1[5]
-3.- $prov1[7] con N煤mero de RUC $prov1[8]
+1.- $prov1[1] con N鷐ero de RUC $prov1[2]
+2.- $prov1[4] con N鷐ero de RUC $prov1[5]
+3.- $prov1[7] con N鷐ero de RUC $prov1[8]
  
-Seguidamente se realiza la verificaci贸n de la documentaci贸n presentada, obteniendo el cuadro comparativo adjunto a la presente acta.
+Seguidamente se realiza la verificaci髇 de la documentaci髇 presentada, obteniendo el cuadro comparativo adjunto a la presente acta.
 
 Teniendo las propuestas como sigue:
 
@@ -355,9 +354,9 @@ Teniendo las propuestas como sigue:
 2.- $prov1[4] con una propuesta Total de $Parcial[2] y un plazo de $plazo1[2]
 3.- $prov1[7] con una propuesta Total de $Parcial[3] y un plazo de $plazo1[3]
 
-De lo expuesto. Se resuelve otorgar la Buena Pro al Postor $prov1[10],  con RUC : $prov1[11] domiciliado en $prov1[12], cuyo monto total propuesto asciende a la cantidad de $TOTAL. Para la contrataci贸n de los bienes/servicios detallados en el cuadro comparativo antes mencionado, monto que incluye IGV  y demas gastos que puedan incidir sobre el costo del bien  a contratar, y un plazo de ejecuci贸n de $plazo contados a partir de la generacion de La Orden de Compra y/o Servicio.	
+De lo expuesto. Se resuelve otorgar la Buena Pro al Postor $prov1[10],  con RUC : $prov1[11] domiciliado en $prov1[12], cuyo monto total propuesto asciende a la cantidad de $TOTAL. Para la contrataci髇 de los bienes/servicios detallados en el cuadro comparativo antes mencionado, monto que incluye IGV  y demas gastos que puedan incidir sobre el costo del bien  a contratar, y un plazo de ejecuci髇 de $plazo contados a partir de la generacion de La Orden de Compra y/o Servicio.	
 
-Teniendo como Justificaci贸n:
+Teniendo como Justificaci髇:
 
 $jutificacion
 
@@ -365,7 +364,7 @@ Y teniendo las siguientes observaciones:
 
 $observaciones
 
-Se da por terminada la reunion, firmando en se帽al de conformidad los presentes.
+Se da por terminada la reunion, firmando en se馻l de conformidad los presentes.
 EOD;
 
 $pdf->ezText(utf8_decode($cadenasa));

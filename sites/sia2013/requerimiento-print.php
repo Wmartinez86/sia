@@ -12,11 +12,15 @@ if($idreq){
 
 $req = fill_req(get_requerimiento($idreq));
 $req['fecha'] = fechita($req['fecha']);
+$glosa=$req['glosa'];
 $rowsdif = count($req['detalle']);
 
 $pdf = new Cezpdf("A4");
 $pdf->ezSetMargins(0,10,22,22);
 $pdf->selectFont(FONTS_URL.'Helvetica.afm');
+$x=489;$y=800;
+$nreq=" ".$req['codigo'];
+$pg=$pdf->ezStartPageNumbers(569,805,11,'','Nro:'.$nreq.' - Pg. {PAGENUM} de {TOTALPAGENUM}',1);
 $pdf->ezSetDy(30);
 $datacreator = array (
 'Title'=>'Requerimiento Nro :'.$req['codigo'],
@@ -31,10 +35,21 @@ $fecha=strtotime($req['fecha']);
 $day=strftime('%d',$fecha);
 $mes=strftime('%m',$fecha);
 $anio=strftime('%Y',$fecha);
-$act_proy=substr(utf8_decode($req['usuario']['proyecto']['descripcion']),0,90);
+$act_proy=substr(($req['usuario']['proyecto']['descripcion']),0,90);
+$sec_func= $req['usuario']['proyecto']['sec_func'];
+$programa= $req['usuario']['proyecto']['programa'];
+$prod_pry= $req['usuario']['proyecto']['prod_pry'];
+$act_ai_obra= $req['usuario']['proyecto']['act_ai_obra'];
+$funcion= $req['usuario']['proyecto']['funcion'];
+$division_func= $req['usuario']['proyecto']['division_func'];
+$grupo_func= $req['usuario']['proyecto']['grupo_func'];
+$meta= $req['usuario']['proyecto']['meta'];
+$finalidad= $req['usuario']['proyecto']['finalidad'];
+$descripcion=utf8_decode($req['usuario']['proyecto']['descripcion']);
+
 $area=substr(utf8_decode($req['usuario']['area']['nombre']),0,90);
-$nreq=" ".$req['codigo'];
-$nreq2=" 000".$req['codigo']." - 2012 - ".$req['usuario']['area']['abreviatura'];
+
+$nreq2=" 000".$req['codigo']." - ".$anio." - ".$req['usuario']['area']['abreviatura'];
 $solicitante=utf8_decode($req['usuario']['nombres']);
 $tdet = array('cant'=>'','und'=>'','detalle'=>'');
 $opdet = array('showHeadings'=>0,'shaded'=>0,'showLines'=>2,'xPos'=>25,'xOrientation' =>'right','width'=>569,'fontSize'=>9,'cols' => array(
@@ -47,7 +62,6 @@ $opdet = array('showHeadings'=>0,'shaded'=>0,'showLines'=>2,'xPos'=>25,'xOrienta
 
 
 $Req=$req['detalle'];
-$xi=1;
 $inde=0;
 $count=1;
 $bandera=true;
@@ -55,7 +69,7 @@ while ($bandera){
 $yi=0;
 unset($datadet);
 $datadet = array();
-while ($rowsdif>$inde and ($yi < 32))
+while ($rowsdif>$inde and ($yi < 25))
 {
 if($rowsdif>=$inde){
 $yi=$yi+1;
@@ -80,6 +94,8 @@ $yi=$yi+(int)($tm/100);
 $inde=$inde+1;
 $datadet[$yi] = array('cant'=>$cant,'und'=>$und,'detalle'=>$detalle);
 }
+
+
 
 $newdata = $datadet;
 //lineas
@@ -109,8 +125,7 @@ $pdf->line($x+15,$y+15,$x2+15,$y2+15);//H1
 $pdf->line($x1+15,$y1-15,$x3+15,$y3-15);//H1
 //Nro de Cotizacion
 $x=489;$y=800;
-$pdf->rectangle($x-10,$y,90,20);
-$pdf->addText($x-8,$y+6,11,"Nro:".$nreq." - Pg. ".$xi);
+
 //FECHA
 $x=$x-15;
 $pdf->rectangle($x,$y-35,95,30);
@@ -140,8 +155,14 @@ $pdf->addText($clix,$cliy-14,$cliz,"Nro. de Requerimiento : <i><b>".$nreq2."</b>
 $pdf->addText($clix,$cliy-28,$cliz,"Nombre del Solicitante : <i>".$solicitante."</i>");
 $pdf->addText($clix,$cliy-42,$cliz,"Actividad Proyecto : <i>" .$act_proy."</i>");
 $pdf->addText($clix,$cliy-56,$cliz,"Oficina Solicitante : <i>" .$area."</i>");
-$pdf->addText($clix,$cliy-70,$cliz,"Sirva(n) se atender los articulos y/o Servicios que se detallan mas abajo: ");
-
+$pdf->rectangle(50,670,490,25);
+$pdf->line(50,682,540,682);
+$pdf->line(107,670,107,695);$pdf->line(162,670,162,695);$pdf->line(236,670,236,695);$pdf->line(278,670,278,695);$pdf->line(365,670,365,695);$pdf->line(448,670,448,695);$pdf->line(494,670,494,695);
+$pdf->addText(57,685,7,"PROGRAMA");$pdf->addText(113,685,7,"PROYECTO");$pdf->addText(169,685,7,"OBRA/ACTIVIDAD");$pdf->addText(240,685,7,"FUNCION");$pdf->addText(285,685,7,"DIVISION FUNCIONAL");$pdf->addText(372,685,7,"GRUPO FUNCIONAL");$pdf->addText(452,685,7,"FINALIDAD");$pdf->addText(506,685,7,"META");
+$pdf->addText(69,674,8,$programa);$pdf->addText(120,674,8,$prod_pry);$pdf->addText(186,674,8,$act_ai_obra);$pdf->addText(253,674,8,$funcion);$pdf->addText(308,674,8,$division_func);$pdf->addText(396,674,8,$grupo_func);$pdf->addText(458,674,8,$finalidad);$pdf->addText(507,674,8,$sec_func);
+$pdf->addText($clix,$cliy-94,$cliz,"Sirva(n) se atender los articulos y/o Servicios que se detallan a continuacion: ");
+$cad_fun=$programa.".".$prod_pry.".".$act_ai_obra.".".$funcion.".".$division_func.".".$grupo_func.".".$meta.".".$finalidad;
+//$pdf->addText($clix,$cliy-70,$cliz,"cadena Funcional: ".$cad_fun);
 // Firmas
 $clix=40;
 $cliy=150;
@@ -160,49 +181,55 @@ $pdf->addText($clix+450,$cliy-50,$cliz,"<b>VoBo Presupuesto</b>");
 
 $pdf->addText($clix+40,$cliy-50,$cliz,"VoBo Gerencia");
 $pdf->line($clix+10,$cliy-40,$clix+128,$cliy-40);
-$pdf->addText($clix+20,$cliy-120,$cliz,"Firma de Abastecimiento");
+$pdf->addText($clix+35,$cliy-120,$cliz,"VoBo Abastecimiento");
 $pdf->line($clix+10,$cliy-110,$clix+128,$cliy-110);
 $pdf->addText($clix+225,$cliy-120,$cliz,"Jefe Inmediato");
 $pdf->line($clix+200,$cliy-110,$clix+305,$cliy-110);
-$pdf->addText($clix+410,$cliy-120,$cliz,"Solicitante");
+$pdf->addText($clix+380,$cliy-120,$cliz,"Firma y Sello del Solicitante");
 $pdf->line($clix+350,$cliy-110,$clix+493,$cliy-110);
 
 
 //Curvas - Cuerpo
-$y=660;$x=20;$pdf->curve($x,$y,$x,$y+15,$x,$y+15,$x+15,$y+15);
-$y1=180;$x1=20;$pdf->curve($x1,$y1,$x1,$y1-15,$x1,$y1-15,$x1+15,$y1-15);
-$y2=660;$x2=545;$pdf->curve($x2+15,$y2+15,$x2+30,$y2+15,$x2+30,$y2+15,$x2+30,$y2);
-$y3=180;$x3=545;$pdf->curve($x3+15,$y3-15,$x3+30,$y3-15,$x3+30,$y3-15,$x3+30,$y3);
-$pdf->line($x,$y,$x1,$y1);//V1
-$pdf->line($x2+30,$y2,$x3+30,$y3);//V1
-$pdf->line($x+15,$y+15,$x2+15,$y2+15);//H1
-$pdf->line($x1+15,$y1-15,$x3+15,$y3-15);//H1
+//$pdf->line(20,660,20,180);//V1
 
 $y=644;
 $x=30;
 $z=9;
-$pdf->addText($x+225,$y+17,$z,"<b>ARTICULOS</b>");
+$pdf->rectangle(20,640,555,15);
+//$pdf->addText($x+225,$y+17,$z,"<b>ARTICULOS</b>");
 $pdf->addText($x+9,$y,$z,"<b>CANT.</b>");
 $pdf->addText($x+70,$y,$z,"<b>U.MED.</b>");
 $pdf->addText($x+230,$y,$z,"<b>DESCRIPCION</b>");
+$pdf->addText(20,230,8,"<b>art. 11 RLCE.- </b>El area usuaria es el responsable de la definicion y presicion de la caracteristica, calidad y cantidad de los bienes, servicios u obras que");
+$pdf->addText(20,220,$cliz,"requiera para el cumplimiento de sus funciones, debiendo desarrollar esta actividad de acuerdo a lo indicado  en el Articulo 13 de LCE. ");
+$pdf->addText(20,210,8,"<b>art 19 LCE.- </b>Queda prohibido fraccionar la contratacion de bienes, de servicios y la ejecucion de obras con el objeto de modificar el tipo de proceso de ");
+$pdf->addText(20,200,$cliz,"seleccion que corresponda, segun la necesidad anual. ");
+$pdf->addText(20,190,8,"<b>Declaracion Jurada: </b>El solicitante declara bajo juramento que el presente Requerimiento cumple con lo establecido en el Articulo 11 del RLCE  y no estar ");
+$pdf->addText(20,180,$cliz,"inmerso en la prohibiciones establecidas en el Articulo 19 de LCE, bajo responsabilidad del mismo ");
 
-$pdf->line(20,655,575,655);//H1
-$pdf->line(20,640,575,640);//H1
-$pdf->line(79,655,79,165);//V1
-$pdf->line(153,655,153,165);//V1
+$pdf->addText(250,5,7,"abastecimiento.pe");
+$pdf->addText(20,5,7,"creado por: ".$req['usuario']['username']);
+$pdf->addText(500,5,7,"impreso por: ".$_SESSION['loginuser']['username']);
 
+//$pdf->line(20,655,575,655);//H1
+//$pdf->line(20,640,575,640);//H1
+$pdf->line(79,655,79,640);//V1
+$pdf->line(153,655,153,640);//V1
 
 $pdf->ezSetDy(-200);
-$pdf->ezTable($newdata,$tdet,'',$opdet);
 //$pdf->addText(395,800,15,$inde." ".$rowsdif);
 if ($inde>$rowsdif-1){
+$inde=$inde+1;
+$newdata[] = array('cant'=>'','und'=>'','detalle'=>$glosa);
+$pdf->ezTable($newdata,$tdet,'',$opdet);
 $bandera=false;
 }
 else{
+$pdf->ezTable($newdata,$tdet,'',$opdet);
 $pdf->ezNewPage();
-$xi=$xi+1;
 }
 }
+$pdf->ezStopPageNumbers(1,1,$pg);
 $pdf->ezStream();
 }else{
 $smarty->display ('error.html');
